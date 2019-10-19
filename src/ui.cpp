@@ -7,22 +7,21 @@ UI::UI(Config *config)
     gtk_init (nullptr, nullptr);
 
     /* Init styles */
-    // int res = initStyles();
+    int res = initStyles();
 
-    // if(res == -1) {
-    //     cerr << "Cannot get styles" << endl;
-    //     return 0;
-    // }
+    if(res == -1) {
+        cerr << "Failed to get styles" << endl;
+    }
 
     /* Init windows */
     menuBuilder = nullptr;
-    menuWindow = windowInit(&menuBuilder, "menu.glade");
+    menuWindow = windowInit(&menuBuilder, "ui/menu.glade", "menu");
     playerBuilder = nullptr;
-    playerWindow = windowInit(&playerBuilder, "player.glade");
+    playerWindow = windowInit(&playerBuilder, "ui/player.glade", "player");
 
     if(menuWindow == nullptr || menuBuilder == nullptr
     || playerWindow == nullptr || playerBuilder == nullptr) {
-        cerr << "Cannot init builder" << endl;
+        cerr << "Failed to init builder" << endl;
         exit(0);
     }
 
@@ -46,42 +45,48 @@ UI::~UI()
 }
 
 
-// static int initStyles() {
-//     GFile* css = g_file_new_for_path("styles.css");
-//     if(css == nullptr) {
-//       std::cout << "File not found" << std::endl;
-//       return -1;
-//     }
-//     GError* err = nullptr;
-//     GtkCssProvider *css_provider =  gtk_css_provider_new();
-//     gtk_css_provider_load_from_file(css_provider, css, &err);
-//     if(err != nullptr) {
-//       g_printerr("Err: ", err->message);
-//       g_error_free(err);
-//       return -1;
-//     }
-//     gtk_style_context_add_provider_for_screen(gdk_screen_get_default(), (GtkStyleProvider*) css_provider, GTK_STYLE_PROVIDER_PRIORITY_USER);
-//     return 0;
-// }
+int UI::initStyles() {
+    GFile* css = g_file_new_for_path("ui/styles.css");
+    if(css == nullptr) {
+      std::cout << "File not found" << std::endl;
+      return -1;
+    }
+    GError* err = nullptr;
+    GtkCssProvider *css_provider =  gtk_css_provider_new();
+    gtk_css_provider_load_from_file(css_provider, css, &err);
+    if(err != nullptr) {
+      cerr << "Error occured while loading styles: " <<  err->message;
+      g_error_free(err);
+      return -1;
+    }
+    gtk_style_context_add_provider_for_screen(gdk_screen_get_default(), (GtkStyleProvider*) css_provider, GTK_STYLE_PROVIDER_PRIORITY_USER);
+    return 0;
+}
 
-GtkWidget* UI::windowInit(GtkBuilder** builder, string gladeFile) {
+GtkWidget* UI::windowInit(GtkBuilder** builder, string gladeFile, string windowName) {
+    ifstream f(gladeFile.c_str());
+    if (!f.good())
+    {
+        cerr << "Could not find " << gladeFile << endl;
+        return nullptr;
+    }
+
     *builder = gtk_builder_new();
 
     if (builder == nullptr) {
-        cout << "No builder" << endl;
+        cerr << "No builder for " << gladeFile << endl;
         return nullptr;
     }
 
     if(gtk_builder_add_from_file(*builder, gladeFile.c_str(), nullptr) == 0) {
-        printf("build failed\n");
+        printf("Build failed\n");
         return nullptr;
     }
 
-    GtkWidget* window = GTK_WIDGET (gtk_builder_get_object(*builder, 
-        gladeFile.substr(0, gladeFile.find(".")).c_str()));
+    GtkWidget* window = GTK_WIDGET (gtk_builder_get_object(*builder, windowName.c_str()));
 
     if(window == nullptr) {
-        cout << "No window" << endl;
+        cerr << "No window for " << gladeFile << endl;
         return nullptr;
     }
 
@@ -114,38 +119,48 @@ void UI::initPlayerWidgets()
 
 void UI::initMenuWidgets()
 {
-    // GtkWidget* grid = gtk_bin_get_child((GtkBin*)menuWindow);
-    // GList* overlays = gtk_container_get_children((GtkContainer*)grid);
-    // GList* o;
-    // for (o = overlays; o != NULL; o = o->next)
-    // {
-    //     GList* menuWidgets = gtk_container_get_children((GtkContainer*)o->data);
-    //     GList* w;
-    //     for (w = menuWidgets; w != NULL; w = w->next);
-    //     {
-    //         if (w->data) cout << "widget" << endl;
-    //         GtkWidget *widget = (GtkWidget*)w->data;
-    //         if (GTK_IS_BUTTON(widget))
-    //         {
-    //             cout << gtk_widget_get_name(widget) << endl;
-    //         }
-    //         if (GTK_IS_IMAGE(widget))
-    //         {
-    //             cout << gtk_widget_get_name(widget) << endl;
-    //         }
-    //     }
-    // }
-
-    /* Find out how many cameras are used */
-
-    for (int i = 0; i < 9; i++)
+    /* Find out how many cameras are known */
+    int camCount = config->getCamCount();
+    if (camCount > 9)
     {
-        /* Find button object */
-        string name = "b" + to_string(i);
+        cout << "Too many cameras to display" << endl;
+    }
+
+    map<string, string> cams = config->getCams();
+
+    /*  Setting buttons for each camera. Remember not to run out of 9 buttons */
+    int n = 0;
+    for (auto &cam : cams)
+    {   
+        if (n == 9) break;
+
+        /* Find the button object */
+        string name = "b" + to_string(n);
         GtkWidget *button = (GtkWidget*) gtk_builder_get_object(menuBuilder, name.c_str());
+        
         if (button == nullptr)
         {
-            cerr << "Cannot get name";
+            cerr << "Cannot get button " << n << endl;
+            continue;
         }
+
+        gtk_widget_show(button);
+        gtk_button_set_label(GTK_BUTTON(button), cam.first.c_str());
+
+        /* Find the rec image object */
+        name = "i" + to_string(n);
+        GtkWidget *recImage = (GtkWidget*) gtk_builder_get_object(menuBuilder, name.c_str());
+        if (recImage == nullptr)
+        {
+            cerr << "Cannot get rec image " << n << endl;
+            continue;
+        }
+
+        /* Assign cam ids to elements */
+        buttons[cam.first] = button;
+        recImages[cam.first] = recImage;
+
+        n++;
+
     }
 }

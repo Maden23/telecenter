@@ -10,7 +10,7 @@ using namespace std;
 int main()
 {
 	freopen("recorder.log","w", stdout);
-	freopen("recorder.log","w", stderr);
+	freopen("recorder_err.log","w", stderr);
 
 	Config *config = &Config::get();
 	config->parseFile("recorder.conf");

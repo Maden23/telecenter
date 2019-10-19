@@ -29,8 +29,8 @@ private:
 	map<string, GtkWidget*> buttons;  
 	map<string, GtkWidget*> recImages;
 
-	// static int initStyles();
-	GtkWidget* windowInit(GtkBuilder** builder, string gladeFile);
+	int initStyles();
+	GtkWidget* windowInit(GtkBuilder** builder, string gladeFile, string windowName);
 	void initPlayerWidgets();
 	void initMenuWidgets();
 };
