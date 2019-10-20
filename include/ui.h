@@ -11,6 +11,13 @@
 
 using namespace std;
 
+struct button_cb_data
+{
+	GtkWidget* menuWindow;
+	Player *player;
+	string cam_id;
+};
+
 class UI
 {
 public:
@@ -33,6 +40,9 @@ private:
 	GtkWidget* windowInit(GtkBuilder** builder, string gladeFile, string windowName);
 	void initPlayerWidgets();
 	void initMenuWidgets();
+
 };
+
+	void displayPlayer(GtkWidget* widget, gpointer *data);
 
 #endif

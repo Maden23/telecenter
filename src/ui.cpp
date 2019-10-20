@@ -31,8 +31,11 @@ UI::UI(Config *config)
     gtk_widget_set_size_request(playerWindow, stoi(config->getParam("windowWidth")),
             stoi(config->getParam("windowHight")));
 
+    g_signal_connect(menuWindow, "destroy", G_CALLBACK (gtk_main_quit), NULL);
+
     /* Find elements to control*/
     initPlayerWidgets();
+    player = new Player(playerWindow, playerWidget, playerLabel, config);
     initMenuWidgets();
 
     gtk_widget_show(menuWindow);
@@ -41,7 +44,7 @@ UI::UI(Config *config)
 
 UI::~UI()
 {
-
+    delete player;
 }
 
 
@@ -103,12 +106,14 @@ GtkWidget* UI::windowInit(GtkBuilder** builder, string gladeFile, string windowN
 
 void UI::initPlayerWidgets()
 {
+    /* Find drawing area*/
     playerWidget = (GtkWidget*)gtk_builder_get_object(playerBuilder, "playerWidget");
     if (!playerWidget)
     {
         cerr << "Player widget not found." << endl;
     }
 
+    /* Find cam label */
     playerLabel = (GtkWidget*)gtk_builder_get_object(playerBuilder, "playerLabel");
     if (!playerLabel)
     {
@@ -143,9 +148,17 @@ void UI::initMenuWidgets()
             cerr << "Cannot get button " << n << endl;
             continue;
         }
-
+        /* Show button and assign cam label */
         gtk_widget_show(button);
         gtk_button_set_label(GTK_BUTTON(button), cam.first.c_str());
+
+        /* Pass player and cam_id to callback function */
+        struct button_cb_data *data = new struct button_cb_data;
+        data->menuWindow = menuWindow;
+        data->player = player;
+        data->cam_id = cam.first;
+
+        g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(displayPlayer), data);
 
         /* Find the rec image object */
         name = "i" + to_string(n);
@@ -163,4 +176,19 @@ void UI::initMenuWidgets()
         n++;
 
     }
+}
+
+
+
+void displayPlayer(GtkWidget* widget, gpointer *data)
+{
+    // g_widget_hide(GTK_WIDGET(menuWindow));
+    auto button_data = (struct button_cb_data*) data;
+    gtk_widget_hide(GTK_WIDGET(button_data->menuWindow));
+
+
+    // player->playStream(cam_id);
+    button_data->player->playStream(button_data->cam_id);
+    delete data;
+
 }
