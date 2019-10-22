@@ -46,11 +46,11 @@ void Player::buildPipeline()
 	sink = gst_element_factory_make("nveglglessink", "sink");
 
 	pipeline = gst_pipeline_new("pipeline");
-	if (!pipeline ||  !src || !depay || !parse || !dec || !SINK)
+	if (!pipeline ||  !src || !depay || !parse || !dec || !sink)
 	{
 		cerr << "Not all pipeline elements could not be created" << endl;
 	} 
-	
+
 	gst_bin_add_many(GST_BIN(pipeline), src, depay, parse, dec, sink, NULL);
 
 }
