@@ -15,19 +15,20 @@
 class Player
 {
 public:
-	Player(GtkWidget* window, GtkWidget* videoWindow, GtkWidget* camLabel, Config *config);
+	Player(GtkWidget* videoWindow, GtkWidget* camLabel, Config *config);
 	~Player();
 	void playStream(string cam_id);
+	void stopStream();
 
 
 private:
 	Config *config;
 
-	GtkWidget *window, *videoWindow, *camLabel;
+	GtkWidget *videoWindow, *camLabel;
 	GstElement *pipeline, *src, *sink;
 	GstBus *bus;
 
-	
+	void buildPipeline();
 
 };
 
@@ -46,7 +47,7 @@ static GstBusSyncReply busSyncHandler (GstBus *bus, GstMessage *message, gpointe
       // GST_MESSAGE_SRC (message) will be the video sink element
       overlay = GST_VIDEO_OVERLAY (GST_MESSAGE_SRC (message));
       gst_video_overlay_set_window_handle (overlay, videoWindowHandle);
-      cout << "Set video handle" << endl;
+      // cout << "Set video handle" << endl;
     }
   else
     {

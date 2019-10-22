@@ -15,12 +15,9 @@ UI::UI(Config *config)
 
     /* Init windows */
     menuBuilder = nullptr;
-    menuWindow = windowInit(&menuBuilder, "ui/menu.glade", "menu");
-    playerBuilder = nullptr;
-    playerWindow = windowInit(&playerBuilder, "ui/player.glade", "player");
-
-    if(menuWindow == nullptr || menuBuilder == nullptr
-    || playerWindow == nullptr || playerBuilder == nullptr) {
+    menuWindow = windowInit(&menuBuilder, "ui/menu_player.glade", "menu");
+    
+    if(menuWindow == nullptr || menuBuilder == nullptr) {
         cerr << "Failed to init builder" << endl;
         exit(0);
     }
@@ -28,21 +25,14 @@ UI::UI(Config *config)
     /* Set window size */
     gtk_widget_set_size_request(menuWindow, stoi(config->getParam("windowWidth")),
             stoi(config->getParam("windowHight")));
-    gtk_widget_set_size_request(playerWindow, stoi(config->getParam("windowWidth")),
-            stoi(config->getParam("windowHight")));
 
 
 
     /* Find elements to control*/
     initPlayerWidgets();
-    player = new Player(playerWindow, playerWidget, playerLabel, config);
+    player = new Player(playerWidget, playerLabel, config);
     initMenuWidgets();
 
-    /* Gettinng back to menu when player closes*/
-    struct menu_cb_data *data = new struct menu_cb_data;
-    data->playerWindow = playerWindow;
-    data->menuWindow = menuWindow;
-    g_signal_connect(playerWindow, "delete_event", G_CALLBACK(displayMenu), data);
 
     g_signal_connect(menuWindow, "destroy", G_CALLBACK (gtk_main_quit), NULL);
 
@@ -116,18 +106,25 @@ GtkWidget* UI::windowInit(GtkBuilder** builder, string gladeFile, string windowN
 void UI::initPlayerWidgets()
 {
     /* Find drawing area*/
-    playerWidget = (GtkWidget*)gtk_builder_get_object(playerBuilder, "playerWidget");
+    playerWidget = (GtkWidget*)gtk_builder_get_object(menuBuilder, "playerWidget");
     if (!playerWidget)
     {
         cerr << "Player widget not found." << endl;
     }
 
+
+
     /* Find cam label */
-    playerLabel = (GtkWidget*)gtk_builder_get_object(playerBuilder, "playerLabel");
+    playerLabel = (GtkWidget*)gtk_builder_get_object(menuBuilder, "playerLabel");
     if (!playerLabel)
     {
         cerr << "Player label not found." << endl;
     }
+    /* If clicked on cam button */
+    struct hide_player_data* data = new struct hide_player_data;
+    data->playerWidget = playerWidget;
+    data->playerLabel = playerLabel;
+    g_signal_connect(G_OBJECT(playerLabel), "clicked", G_CALLBACK(hidePlayer), data);
 }
 
 
@@ -162,8 +159,9 @@ void UI::initMenuWidgets()
         gtk_button_set_label(GTK_BUTTON(button), cam.first.c_str());
 
         /* Pass player and cam_id to callback function */
-        struct player_cb_data *data = new struct player_cb_data;
-        data->menuWindow = menuWindow;
+        struct display_player_data *data = new struct display_player_data;
+        data->playerWidget = playerWidget;
+        data->playerLabel = playerLabel;
         data->player = player;
         data->cam_id = cam.first;
 
@@ -190,24 +188,20 @@ void UI::initMenuWidgets()
 
 void displayPlayer(GtkWidget* widget, gpointer *data)
 {
-    auto context = (struct player_cb_data*) data;
+    auto context = (struct display_player_data*) data;
     // gtk_widget_hide(GTK_WIDGET(context->menuWindow));
-
+    gtk_widget_show(context->playerWidget);
+    gtk_widget_show(context->playerLabel);
     context->player->playStream(context->cam_id);
     // delete data;
 
 }
 
-void displayMenu(GtkWidget* widget, gpointer *data)
+
+void hidePlayer(GtkWidget* widget, gpointer *data)
 {
-    auto context = (struct menu_cb_data*) data;
-    // if (!context->menuWindow)
-    // {
-    //     cerr << "Menu Window not found";
-    // }
-    gtk_window_iconify(GTK_WINDOW(context->playerWindow));
+    auto context = (struct hide_player_data*) data;
+    gtk_widget_hide(context->playerWidget);
+    gtk_widget_hide(context->playerLabel);
 
-    // gtk_window_present(GTK_WINDOW(context->menuWindow));
-
-    // delete data;
 }

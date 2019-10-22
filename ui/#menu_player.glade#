@@ -9,9 +9,10 @@
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
-          <object class="GtkGrid">
+          <object class="GtkGrid" id="grid">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="is_focus">True</property>
             <property name="row_homogeneous">True</property>
             <property name="column_homogeneous">True</property>
             <child>
@@ -294,8 +295,7 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
-              <object class="GtkDrawingArea">
-                <property name="visible">True</property>
+              <object class="GtkDrawingArea" id="playerWidget">
                 <property name="can_focus">False</property>
               </object>
               <packing>
@@ -303,17 +303,18 @@
               </packing>
             </child>
             <child type="overlay">
-              <object class="GtkLabel">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
+              <object class="GtkButton" id="playerLabel">
+                <property name="label" translatable="yes">cam</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
                 <property name="halign">start</property>
                 <property name="valign">start</property>
-                <property name="margin_left">5</property>
-                <property name="margin_top">5</property>
-                <property name="label" translatable="yes">label</property>
               </object>
             </child>
           </object>
+          <packing>
+            <property name="pass_through">True</property>
+          </packing>
         </child>
       </object>
     </child>
