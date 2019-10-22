@@ -11,11 +11,17 @@
 
 using namespace std;
 
-struct button_cb_data
+struct player_cb_data
 {
 	GtkWidget* menuWindow;
 	Player *player;
 	string cam_id;
+};
+
+struct menu_cb_data
+{
+	GtkWidget* menuWindow;
+	GtkWidget* playerWindow;
 };
 
 class UI
@@ -44,5 +50,7 @@ private:
 };
 
 	void displayPlayer(GtkWidget* widget, gpointer *data);
+	void displayMenu(GtkWidget* widget, gpointer *data);
+
 
 #endif

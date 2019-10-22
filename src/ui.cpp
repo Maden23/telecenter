@@ -31,14 +31,23 @@ UI::UI(Config *config)
     gtk_widget_set_size_request(playerWindow, stoi(config->getParam("windowWidth")),
             stoi(config->getParam("windowHight")));
 
-    g_signal_connect(menuWindow, "destroy", G_CALLBACK (gtk_main_quit), NULL);
+
 
     /* Find elements to control*/
     initPlayerWidgets();
     player = new Player(playerWindow, playerWidget, playerLabel, config);
     initMenuWidgets();
 
-    gtk_widget_show(menuWindow);
+    /* Gettinng back to menu when player closes*/
+    struct menu_cb_data *data = new struct menu_cb_data;
+    data->playerWindow = playerWindow;
+    data->menuWindow = menuWindow;
+    g_signal_connect(playerWindow, "delete_event", G_CALLBACK(displayMenu), data);
+
+    g_signal_connect(menuWindow, "destroy", G_CALLBACK (gtk_main_quit), NULL);
+
+    gtk_window_present(GTK_WINDOW(menuWindow));
+    // gtk_widget_show(menuWindow);
     gtk_main();
 }
 
@@ -153,7 +162,7 @@ void UI::initMenuWidgets()
         gtk_button_set_label(GTK_BUTTON(button), cam.first.c_str());
 
         /* Pass player and cam_id to callback function */
-        struct button_cb_data *data = new struct button_cb_data;
+        struct player_cb_data *data = new struct player_cb_data;
         data->menuWindow = menuWindow;
         data->player = player;
         data->cam_id = cam.first;
@@ -179,16 +188,26 @@ void UI::initMenuWidgets()
 }
 
 
-
 void displayPlayer(GtkWidget* widget, gpointer *data)
 {
-    // g_widget_hide(GTK_WIDGET(menuWindow));
-    auto button_data = (struct button_cb_data*) data;
-    gtk_widget_hide(GTK_WIDGET(button_data->menuWindow));
+    auto context = (struct player_cb_data*) data;
+    // gtk_widget_hide(GTK_WIDGET(context->menuWindow));
 
+    context->player->playStream(context->cam_id);
+    // delete data;
 
-    // player->playStream(cam_id);
-    button_data->player->playStream(button_data->cam_id);
-    delete data;
+}
 
+void displayMenu(GtkWidget* widget, gpointer *data)
+{
+    auto context = (struct menu_cb_data*) data;
+    // if (!context->menuWindow)
+    // {
+    //     cerr << "Menu Window not found";
+    // }
+    gtk_window_iconify(GTK_WINDOW(context->playerWindow));
+
+    // gtk_window_present(GTK_WINDOW(context->menuWindow));
+
+    // delete data;
 }
