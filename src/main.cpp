@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <cstdio>
-#include "recorder.h"
 #include "ui.h"
 #include "config.h"
 

@@ -47,8 +47,7 @@ void Player::buildPipeline()
 
 	pipeline = gst_pipeline_new("pipeline");
 	gst_bin_add_many(GST_BIN(pipeline), src, depay, parse, dec, sink, NULL);
-	if (!gst_element_link_many(src, depay, parse, dec, sink, NULL))
-		cerr << "Linking error" << endl;
+
 
 }
 
@@ -62,6 +61,8 @@ void Player::playStream(string cam_id)
 	// g_object_set (G_OBJECT (pipeline), "uri", config->getCamUri(cam_id).c_str(), NULL);
 	g_object_set (G_OBJECT (src), "location", config->getCamUri(cam_id).c_str(), NULL);
 
+	if (!gst_element_link_many(src, depay, parse, dec, sink, NULL))
+		cerr << "Linking error" << endl;
 	gst_element_set_state (pipeline, GST_STATE_PLAYING);
 
 }
