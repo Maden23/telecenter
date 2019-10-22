@@ -25,7 +25,7 @@ private:
 	Config *config;
 
 	GtkWidget *videoWindow, *camLabel;
-	GstElement *pipeline, *src, *sink;
+	GstElement *pipeline, *src, *depay, *parse, *dec, *sink;
 	GstBus *bus;
 
 	void buildPipeline();

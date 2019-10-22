@@ -23,7 +23,8 @@ Player::Player (GtkWidget* videoWindow, GtkWidget* camLabel, Config *config)
     g_assert (videoWindowHandle != 0);
 
 	/* Build pipeline */
-	pipeline = gst_element_factory_make ("playbin", "play");
+	// pipeline = gst_element_factory_make ("playbin", "play");
+	buildPipeline();
 	bus = gst_pipeline_get_bus (GST_PIPELINE (pipeline));
 
 	// set up sync handler for setting the xid once the pipeline is started
@@ -33,7 +34,22 @@ Player::Player (GtkWidget* videoWindow, GtkWidget* camLabel, Config *config)
 
 Player::~Player() 
 {
-	
+
+}
+
+void Player::buildPipeline()
+{
+	src = gst_element_factory_make("rtspsrc", "src");
+	depay = gst_element_factory_make("rtph264depay", "depay");	
+	parse = gst_element_factory_make("h264parse", "parse");
+	dec = gst_element_factory_make("omxh264dec", "dec");
+	sink = gst_element_factory_make("nveglglessink", "sink");
+
+	pipeline = gst_pipeline_new("pipeline");
+	gst_bin_add_many(GST_BIN(pipeline), src, depay, parse, dec, sink, NULL);
+	if (!gst_element_link_many(src, depay, parse, dec, sink, NULL))
+		cerr << "Linking error" << endl;
+
 }
 
 void Player::playStream(string cam_id)
@@ -43,7 +59,8 @@ void Player::playStream(string cam_id)
 
 	gst_element_set_state (pipeline, GST_STATE_READY);
 	cout << "Playing " << config->getCamUri(cam_id).c_str() << endl;
-	g_object_set (G_OBJECT (pipeline), "uri", config->getCamUri(cam_id).c_str(), NULL);
+	// g_object_set (G_OBJECT (pipeline), "uri", config->getCamUri(cam_id).c_str(), NULL);
+	g_object_set (G_OBJECT (src), "location", config->getCamUri(cam_id).c_str(), NULL);
 
 	gst_element_set_state (pipeline, GST_STATE_PLAYING);
 

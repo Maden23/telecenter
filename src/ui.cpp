@@ -26,9 +26,14 @@ UI::UI(Config *config)
     gtk_widget_set_size_request(menuWindow, stoi(config->getParam("windowWidth")),
             stoi(config->getParam("windowHight")));
 
+    /* Start/stop recording on key press */
+    recorder = new Recorder(config);
+    gtk_widget_add_events(menuWindow, GDK_KEY_PRESS_MASK);
+    g_signal_connect(G_OBJECT(menuWindow), "key_press_event", G_CALLBACK(keyPress), this);
 
 
-    /* Find elements to control*/
+
+    /* Find player and window elements to control*/
     initPlayerWidgets();
     player = new Player(playerWidget, playerLabel, config);
     initMenuWidgets();
@@ -44,6 +49,7 @@ UI::UI(Config *config)
 UI::~UI()
 {
     delete player;
+    delete recorder;
 }
 
 
@@ -124,6 +130,8 @@ void UI::initPlayerWidgets()
     struct hide_player_data* data = new struct hide_player_data;
     data->playerWidget = playerWidget;
     data->playerLabel = playerLabel;
+    data->playingCam = &playingCam;
+
     g_signal_connect(G_OBJECT(playerLabel), "clicked", G_CALLBACK(hidePlayer), data);
 }
 
@@ -164,6 +172,7 @@ void UI::initMenuWidgets()
         data->playerLabel = playerLabel;
         data->player = player;
         data->cam_id = cam.first;
+        data->playingCam = &playingCam;
 
         g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(displayPlayer), data);
 
@@ -189,19 +198,57 @@ void UI::initMenuWidgets()
 void displayPlayer(GtkWidget* widget, gpointer *data)
 {
     auto context = (struct display_player_data*) data;
-    // gtk_widget_hide(GTK_WIDGET(context->menuWindow));
     gtk_widget_show(context->playerWidget);
     gtk_widget_show(context->playerLabel);
     context->player->playStream(context->cam_id);
-    // delete data;
-
+    *context->playingCam = context->cam_id;
 }
-
 
 void hidePlayer(GtkWidget* widget, gpointer *data)
 {
     auto context = (struct hide_player_data*) data;
     gtk_widget_hide(context->playerWidget);
     gtk_widget_hide(context->playerLabel);
+    *context->playingCam = "";
+}
 
+gboolean keyPress(GtkWidget* widget, GdkEventKey *event, UI *ui)
+{
+    if (event->keyval == GDK_KEY_R || event->keyval == GDK_KEY_r)
+    {
+        /* If no stream is playing, record all */
+        if (ui->playingCam == "")
+        {
+            for (auto &rec : ui->recImages)
+            {
+                ui->recorder->startRecording(ui->config->getCamUri(rec.first));
+                gtk_widget_show(rec.second);
+            }
+        }
+        /* or record the playing stream */   
+        else
+        {
+            ui->recorder->startRecording(ui->config->getCamUri(ui->playingCam));
+            gtk_widget_show(ui->recImages[ui->playingCam]);
+        }
+    }
+
+    if (event->keyval == GDK_KEY_S || event->keyval == GDK_KEY_s)
+    {
+        /* If no stream is playing, stop recording all */
+        if (ui->playingCam == "")
+        {
+            for (auto &rec : ui->recImages)
+            {
+                ui->recorder->stopRecording(ui->config->getCamUri(rec.first));
+                gtk_widget_hide(rec.second);
+            }
+        }
+        /* or stop recording the playing stream */   
+        else
+        {
+            ui->recorder->startRecording(ui->config->getCamUri(ui->playingCam));
+            gtk_widget_hide(ui->recImages[ui->playingCam]);
+        }
+    }
 }
