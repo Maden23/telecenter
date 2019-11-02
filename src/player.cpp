@@ -42,16 +42,32 @@ void Player::buildPipeline()
 	src = gst_element_factory_make("rtspsrc", "src");
 	depay = gst_element_factory_make("rtph264depay", "depay");	
 	parse = gst_element_factory_make("h264parse", "parse");
-	dec = gst_element_factory_make("omxh264dec", "dec");
-	sink = gst_element_factory_make("nveglglessink", "sink");
+	#ifdef ON_JETSON
+		cout << "JETSON" << endl;
+		dec = gst_element_factory_make("omxh264dec", "dec");
+		sink = gst_element_factory_make("nveglglessink", "sink");
+	#else
+		cout << "Not JETSON" << endl;
+		dec = gst_element_factory_make("decodebin", "dec");
+		sink = gst_element_factory_make("autovideosink", "sink");
+	#endif
 
 	pipeline = gst_pipeline_new("pipeline");
 	if (!pipeline ||  !src || !depay || !parse || !dec || !sink)
 	{
-		cerr << "Not all pipeline elements could not be created" << endl;
+		cerr << "Not all pipeline elements could be created" << endl;
 	} 
 
 	gst_bin_add_many(GST_BIN(pipeline), src, depay, parse, dec, sink, NULL);
+
+	if (!gst_element_link_many(depay, parse, dec, sink, NULL))
+		cerr << "Pipeline linking error" << endl;
+
+	/* Set latency */
+	g_object_set (src, "latency", 100, NULL);
+
+	/* Signal to handle new source pad*/
+	g_signal_connect(src, "pad-added", G_CALLBACK(pad_added_handler), this);
 
 }
 
@@ -61,12 +77,11 @@ void Player::playStream(string cam_id)
 	gtk_button_set_label(GTK_BUTTON(camLabel), cam_id.c_str());
 
 	gst_element_set_state (pipeline, GST_STATE_READY);
+
 	cout << "Playing " << config->getCamUri(cam_id).c_str() << endl;
 	// g_object_set (G_OBJECT (pipeline), "uri", config->getCamUri(cam_id).c_str(), NULL);
-	g_object_set (G_OBJECT (src), "location", config->getCamUri(cam_id).c_str(), NULL);
+	g_object_set (src, "location", config->getCamUri(cam_id).c_str(), NULL);
 
-	if (!gst_element_link_many(src, depay, parse, dec, sink, NULL))
-		cerr << "Linking error" << endl;
 	gst_element_set_state (pipeline, GST_STATE_PLAYING);
 
 }

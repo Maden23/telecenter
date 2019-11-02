@@ -32,7 +32,6 @@ UI::UI(Config *config)
     g_signal_connect(G_OBJECT(menuWindow), "key_press_event", G_CALLBACK(keyPress), this);
 
 
-
     /* Find player and window elements to control*/
     initPlayerWidgets();
     player = new Player(playerWidget, playerLabel, config);
@@ -40,7 +39,8 @@ UI::UI(Config *config)
 
 
     g_signal_connect(menuWindow, "destroy", G_CALLBACK (gtk_main_quit), NULL);
-
+    initStyles();
+    gtk_window_fullscreen(GTK_WINDOW(menuWindow));
     gtk_window_present(GTK_WINDOW(menuWindow));
     // gtk_widget_show(menuWindow);
     gtk_main();
