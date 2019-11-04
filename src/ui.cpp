@@ -15,15 +15,19 @@ UI::UI(Config *config)
 
     /* Init windows */
     menuBuilder = nullptr;
-    menuWindow = windowInit(&menuBuilder, "ui/menu_player.glade", "menu");
+    menuWindow = windowInit(&menuBuilder, "ui/menu.glade", "menu");
+    playerBuilder = nullptr;
+    playerWindow = windowInit(&playerBuilder, "ui/player.glade", "player");
     
-    if(menuWindow == nullptr || menuBuilder == nullptr) {
+    if(menuWindow == nullptr || menuBuilder == nullptr || playerWindow == nullptr || playerBuilder == nullptr) {
         cerr << "Failed to init builder" << endl;
         exit(0);
     }
 
     /* Set window size */
     gtk_widget_set_size_request(menuWindow, stoi(config->getParam("windowWidth")),
+            stoi(config->getParam("windowHight")));
+    gtk_widget_set_size_request(playerWindow, stoi(config->getParam("windowWidth")),
             stoi(config->getParam("windowHight")));
 
     /* Start/stop recording on key press */
@@ -40,8 +44,9 @@ UI::UI(Config *config)
 
     g_signal_connect(menuWindow, "destroy", G_CALLBACK (gtk_main_quit), NULL);
     initStyles();
-    gtk_window_fullscreen(GTK_WINDOW(menuWindow));
+    //gtk_window_fullscreen(GTK_WINDOW(menuWindow));
     gtk_window_present(GTK_WINDOW(menuWindow));
+    gtk_window_present(GTK_WINDOW(playerWindow));
     // gtk_widget_show(menuWindow);
     gtk_main();
 }
@@ -112,7 +117,7 @@ GtkWidget* UI::windowInit(GtkBuilder** builder, string gladeFile, string windowN
 void UI::initPlayerWidgets()
 {
     /* Find drawing area*/
-    playerWidget = (GtkWidget*)gtk_builder_get_object(menuBuilder, "playerWidget");
+    playerWidget = (GtkWidget*)gtk_builder_get_object(playerBuilder, "playerWidget");
     if (!playerWidget)
     {
         cerr << "Player widget not found." << endl;
@@ -121,18 +126,11 @@ void UI::initPlayerWidgets()
 
 
     /* Find cam label */
-    playerLabel = (GtkWidget*)gtk_builder_get_object(menuBuilder, "playerLabel");
+    playerLabel = (GtkWidget*)gtk_builder_get_object(playerBuilder, "playerLabel");
     if (!playerLabel)
     {
         cerr << "Player label not found." << endl;
     }
-    /* If clicked on cam button */
-    struct hide_player_data* data = new struct hide_player_data;
-    data->playerWidget = playerWidget;
-    data->playerLabel = playerLabel;
-    data->playingCam = &playingCam;
-
-    g_signal_connect(G_OBJECT(playerLabel), "clicked", G_CALLBACK(hidePlayer), data);
 }
 
 
@@ -198,8 +196,8 @@ void UI::initMenuWidgets()
 void displayPlayer(GtkWidget* widget, gpointer *data)
 {
     auto context = (struct display_player_data*) data;
-    gtk_widget_show(context->playerWidget);
-    gtk_widget_show(context->playerLabel);
+    // gtk_widget_show(context->playerWidget);
+    // gtk_widget_show(context->playerLabel);
     context->player->playStream(context->cam_id);
     *context->playingCam = context->cam_id;
 }
@@ -207,8 +205,8 @@ void displayPlayer(GtkWidget* widget, gpointer *data)
 void hidePlayer(GtkWidget* widget, gpointer *data)
 {
     auto context = (struct hide_player_data*) data;
-    gtk_widget_hide(context->playerWidget);
-    gtk_widget_hide(context->playerLabel);
+    // gtk_widget_hide(context->playerWidget);
+    // gtk_widget_hide(context->playerLabel);
     *context->playingCam = "";
 }
 

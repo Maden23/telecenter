@@ -74,7 +74,8 @@ void Player::buildPipeline()
 void Player::playStream(string cam_id)
 {
 	/* Update label */
-	gtk_button_set_label(GTK_BUTTON(camLabel), cam_id.c_str());
+	// gtk_button_set_label(GTK_BUTTON(camLabel), cam_id.c_str());
+	gtk_label_set_text(GTK_LABEL(camLabel), cam_id.c_str());
 
 	gst_element_set_state (pipeline, GST_STATE_READY);
 
