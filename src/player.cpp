@@ -42,27 +42,41 @@ void Player::buildPipeline()
 	src = gst_element_factory_make("rtspsrc", "src");
 	depay = gst_element_factory_make("rtph264depay", "depay");	
 	parse = gst_element_factory_make("h264parse", "parse");
+
+	pipeline = gst_pipeline_new("pipeline");
+
 	#ifdef ON_JETSON
 		cout << "JETSON" << endl;
 		dec = gst_element_factory_make("omxh264dec", "dec");
 		sink = gst_element_factory_make("nveglglessink", "sink");
+
+		if (!pipeline ||  !src || !depay || !parse || !dec || !sink)
+		{
+			cerr << "Not all pipeline elements could be created" << endl;
+		} 
+
+		gst_bin_add_many(GST_BIN(pipeline), src, depay, parse, dec, sink, NULL);
+
+		if (!gst_element_link_many(depay, parse, dec, sink, NULL))
+			cerr << "Pipeline linking error" << endl;
+
 	#else
 		cout << "Not JETSON" << endl;
-		dec = gst_element_factory_make("decodebin", "dec");
+		dec = gst_element_factory_make("avdec_h264", "dec");
+		scale = gst_element_factory_make("videoscale", "scale");
 		sink = gst_element_factory_make("autovideosink", "sink");
+		if (!pipeline ||  !src || !depay || !parse || !dec || !scale || !sink)
+		{
+			cerr << "Not all pipeline elements could be created" << endl;
+		} 
+
+		gst_bin_add_many(GST_BIN(pipeline), src, depay, parse, dec, scale, sink, NULL);
+
+		if (!gst_element_link_many(depay, parse, dec, scale, sink, NULL))
+			cerr << "Pipeline linking error" << endl;
 	#endif
 
-	pipeline = gst_pipeline_new("pipeline");
-	if (!pipeline ||  !src || !depay || !parse || !dec || !sink)
-	{
-		cerr << "Not all pipeline elements could be created" << endl;
-	} 
-
-	gst_bin_add_many(GST_BIN(pipeline), src, depay, parse, dec, sink, NULL);
-
-	if (!gst_element_link_many(depay, parse, dec, sink, NULL))
-		cerr << "Pipeline linking error" << endl;
-
+	
 	/* Set latency */
 	g_object_set (src, "latency", 100, NULL);
 

@@ -27,7 +27,7 @@ public:
 	~Player();
 	void playStream(string cam_id);
 	void stopStream();
-	GstElement *pipeline, *src, *depay, *parse, *dec, *sink;
+	GstElement *pipeline, *src, *depay, *parse, *dec, *scale, *sink;
 
 
 private:
