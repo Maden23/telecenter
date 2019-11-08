@@ -23,8 +23,6 @@
             <property name="can_focus">False</property>
             <property name="halign">start</property>
             <property name="valign">start</property>
-            <property name="hexpand">True</property>
-            <property name="vexpand">True</property>
             <attributes>
               <attribute name="background" value="#d3d3d7d7cfcf"/>
             </attributes>

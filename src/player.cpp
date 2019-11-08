@@ -8,27 +8,31 @@ Player::Player (GtkWidget* videoWindow, GtkWidget* camLabel, Config *config)
 	this->camLabel = camLabel;
 	this->config = config;
 	
-
+	/* Initiallizing Gstreamer*/
 	gst_init(nullptr, nullptr);
 
-	// g_signal_connect (videoWindow, "realize", G_CALLBACK (videoWidgetRealize_cb), NULL);
+	/* Prepare videoWindow for rendering*/
 	gtk_widget_set_double_buffered (videoWindow, FALSE);
 	g_signal_connect (videoWindow, "realize", G_CALLBACK (videoWidgetRealize_cb), NULL);
-
 	// realize window now so that the video window gets created and we can
-    // obtain its XID/HWND before the pipeline is started up and the videosink
-    // asks for the XID/HWND of the window to render onto
+	// obtain its XID/HWND before the pipeline is started up and the videosink
+	// asks for the XID/HWND of the window to render onto
 	gtk_widget_realize (videoWindow);
 	// we should have the XID/HWND now
-    g_assert (videoWindowHandle != 0);
+	g_assert (videoWindowHandle != 0);
 
 	/* Build pipeline */
-	// pipeline = gst_element_factory_make ("playbin", "play");
 	buildPipeline();
-	bus = gst_pipeline_get_bus (GST_PIPELINE (pipeline));
 
+	/* Initialize elements for freeze check */
+	clock = gst_pipeline_get_clock(GST_PIPELINE(pipeline));
+	lastBufferTime = -1; 
+	g_timeout_add (500, freeze_check, this); // run freeze check every x milliseconds
+
+	/* Get bus to handle messages*/
+	bus = gst_pipeline_get_bus (GST_PIPELINE (pipeline));
 	// set up sync handler for setting the xid once the pipeline is started
-	gst_bus_set_sync_handler (bus, (GstBusSyncHandler) busSyncHandler, NULL, NULL);
+	gst_bus_set_sync_handler (bus, (GstBusSyncHandler) busSyncHandler, this, NULL);
 	gst_object_unref (bus);
 }
 
@@ -40,7 +44,7 @@ Player::~Player()
 void Player::buildPipeline()
 {
 	src = gst_element_factory_make("rtspsrc", "src");
-	depay = gst_element_factory_make("rtph264depay", "depay");	
+	depay = gst_element_factory_make("rtph264depay", "depay");  
 	parse = gst_element_factory_make("h264parse", "parse");
 
 	pipeline = gst_pipeline_new("pipeline");
@@ -78,7 +82,10 @@ void Player::buildPipeline()
 
 	
 	/* Set latency */
-	g_object_set (src, "latency", 100, NULL);
+	g_object_set (src, "latency", 0, NULL);
+	g_object_set (src, "tcp-timeout", 200000, NULL);
+	g_object_set (src, "timeout", 200000 , NULL);
+
 
 	/* Signal to handle new source pad*/
 	g_signal_connect(src, "pad-added", G_CALLBACK(pad_added_handler), this);
@@ -104,6 +111,137 @@ void Player::playStream(string cam_id)
 void Player::stopStream()
 {
 	cout << "Paused";
- 	gst_element_set_state (pipeline, GST_STATE_PAUSED);
+	gst_element_set_state (pipeline, GST_STATE_PAUSED);
 }
 
+/* Not in class bacause of g_signal_connect */
+// video window handle
+// static guintptr videoWindowHandle = 0;
+
+static GstBusSyncReply busSyncHandler (GstBus *bus, GstMessage *message, Player *player)
+{
+	switch (GST_MESSAGE_TYPE(message))
+	{
+		case GST_MESSAGE_ERROR:
+		{
+			GError *err;
+			gchar *debug;
+
+			gst_message_parse_error (message, &err, &debug);
+			cerr << "Bus: " << err->message << endl;
+			break;
+		}
+		case GST_MESSAGE_ELEMENT:
+		{
+			const GstStructure *s = gst_message_get_structure (message);
+			const gchar *name = gst_structure_get_name (s);
+			cerr << "Bus: " << name << endl;
+			// gst_element_set_state(player->pipeline, GST_STATE_PAUSED);
+			// gst_element_set_state(player->pipeline, GST_STATE_PLAYING);
+			break;
+		}
+		case GST_MESSAGE_EOS:
+		{
+			cerr << "Bus: EOS" << endl;
+			break;
+		}
+		default:
+			break;
+	}
+
+	// ignore anything but 'prepare-window-handle' element messages
+	if (!gst_is_video_overlay_prepare_window_handle_message (message))
+		return GST_BUS_PASS;
+	if (videoWindowHandle != 0)
+	{
+	  GstVideoOverlay *overlay;
+	  // GST_MESSAGE_SRC (message) will be the video sink element
+	  overlay = GST_VIDEO_OVERLAY (GST_MESSAGE_SRC (message));
+	  gst_video_overlay_set_window_handle (overlay, videoWindowHandle);
+	  // cout << "Set video handle" << endl;
+	}
+	else
+	{
+	  g_warning ("Should have obtained videoWindowHandle by now!");
+	}
+}
+
+static void videoWidgetRealize_cb (GtkWidget *widget,gpointer *data)
+{
+	#ifdef GDK_WINDOWING_X11
+	  {
+		gulong xid = GDK_WINDOW_XID (gtk_widget_get_window (widget));
+		videoWindowHandle = xid;
+	  }
+	#endif
+
+	 #ifdef GDK_WINDOWING_WIN32
+	{
+	 HWND wnd = GDK_WINDOW_HWND (gtk_widget_get_window (widget));
+	 videoWindowHandle = (guintptr) wnd;
+	}
+	#endif
+}
+
+static void pad_added_handler (GstElement * src, GstPad * new_pad, Player *player)
+{
+	GstPad *sink_pad = gst_element_get_static_pad (player->depay, "sink");
+	GstPadLinkReturn ret;
+	GstCaps *new_pad_caps = NULL;
+	GstStructure *new_pad_struct = NULL;
+	const gchar *new_pad_type = NULL;
+
+	/* If our converter is already linked, we have nothing to do here */
+	if (gst_pad_is_linked (sink_pad))
+	{
+		return;
+	}
+	/* Check the new pad's type */
+	new_pad_caps = gst_pad_get_current_caps (new_pad);
+	new_pad_struct = gst_caps_get_structure (new_pad_caps, 0);
+	new_pad_type = gst_structure_get_name (new_pad_struct);
+	if (!g_str_has_prefix (new_pad_type, "application/x-rtp"))
+	{
+		cerr << "Wrong prefix" << endl;
+		return;
+	}
+
+	/* Attempt the link */
+	ret = gst_pad_link (new_pad, sink_pad);
+	if (GST_PAD_LINK_FAILED (ret)) {
+		cerr << "Source link failed" << endl;
+	}
+	else 
+	{       
+		cerr << "Linked source" << endl;
+		// Add data probe to remember the last received video buffer time
+		gst_pad_add_probe(new_pad, GST_PAD_PROBE_TYPE_BUFFER, data_probe, player, NULL);
+	}
+}
+
+GstPadProbeReturn data_probe (GstPad *pad, GstPadProbeInfo *info, gpointer user_data)
+{
+	Player* player = (Player*) user_data;
+	player->lastBufferTime = gst_clock_get_time(player->clock);
+
+	return GST_PAD_PROBE_OK;
+}
+
+
+gboolean freeze_check(gpointer user_data)
+{	
+	Player* player = (Player*) user_data;
+
+	if (player->lastBufferTime == -1) return true; // No need to check if no stream is playing
+
+	GstClockTime current = gst_clock_get_time(player->clock);
+
+	GstClockTimeDiff diff = GST_CLOCK_DIFF(player->lastBufferTime, current);
+	int timeout = player->config->getParamInt("videoTimeout") * 1000000; // from ms to ns
+
+	if (diff > timeout)
+	{
+		cout << "Showing testsrc" << endl;
+	}
+	return true; // to contionue checking regularly
+}
