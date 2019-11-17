@@ -8,6 +8,12 @@
 #include "config.h"
 #include <ctime>
 
+#include <cstring>
+#include <stdlib.h>
+#include <stdio.h>
+#include <cstdlib>
+#include <bits/stdc++.h>
+
 using namespace std; 
 
 /* Forks gstreamer pipelines for each recording
@@ -27,6 +33,8 @@ public:
     bool stopRecording(string uri);
    
 private:
-    map<string, pid_t> runningRecorders; //stream id, pid
+    map<string, pid_t> runningRecorders; //stream uri, pid
+    map<string, string> fileNames; //stream uri, filename
     Config *config;
+    bool uploadVideo(string uri);
 };

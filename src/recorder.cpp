@@ -44,6 +44,7 @@ pid_t Recorder::startRecording(string uri, string fileName)
             strftime(datetime, sizeof(datetime), "%d-%m-%Y_%H:%M", localtime(&t));
             fileName = config->getParam("saveToFolder") + stream + "_" + string(datetime) + ".mp4"; 
         }
+	fileNames[uri] = fileName;
         cout << fileName << endl;
 
         execlp("gst-launch-1.0", "-e", "rtspsrc", ("location=" + uri).c_str(),
@@ -70,5 +71,20 @@ bool Recorder::stopRecording(string uri)
     kill(runningRecorders[uri], SIGINT);
     waitpid(runningRecorders[uri], nullptr, 0);
     cout << "Recording of " << uri << " stopped." << endl;
+
+    if (!uploadVideo(uri))
+	cout << "Failed to upload " << fileNames[uri] << " to Google Drive." << endl;
+
     return true;
+}
+
+bool Recorder::uploadVideo(string uri)
+{
+    string command = "python3 src/video-upload.py";
+    command += " " + fileNames[uri];
+    command += " " + config->getParam("saveToFolder");
+    if (system(command.c_str()))
+	return true;
+    else
+	return false;
 }
