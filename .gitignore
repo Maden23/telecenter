@@ -1,0 +1,10 @@
+# Binary files
+obj/
+Build/
+recorder
+
+# Temp files
+*~*
+
+# Logs
+*.log
