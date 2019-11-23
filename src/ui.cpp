@@ -245,7 +245,7 @@ gboolean keyPress(GtkWidget* widget, GdkEventKey *event, UI *ui)
         /* or stop recording the playing stream */   
         else
         {
-            ui->recorder->startRecording(ui->config->getCamUri(ui->playingCam));
+            ui->recorder->stopRecording(ui->config->getCamUri(ui->playingCam));
             gtk_widget_hide(ui->recImages[ui->playingCam]);
         }
     }

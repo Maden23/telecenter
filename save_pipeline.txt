@@ -1,2 +1,0 @@
-gst-launch-1.0 -e rtspsrc location=rtsp://admin:Supervisor@172.18.200.51:554 protocols=tcp ! rtph264depay name = vdepay ! mpegtsmux name = mux ! filesink location=/home/petr/controlroom/videos/rec.mp4 \
-rtspsrc location=rtsp://admin:Supervisor@192.168.15.52:554/live/av1 protocols=tcp ! rtpmp4gdepay ! mux.

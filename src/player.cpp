@@ -115,8 +115,6 @@ void Player::stopStream()
 }
 
 /* Not in class bacause of g_signal_connect */
-// video window handle
-// static guintptr videoWindowHandle = 0;
 
 static GstBusSyncReply busSyncHandler (GstBus *bus, GstMessage *message, Player *player)
 {
@@ -128,7 +126,7 @@ static GstBusSyncReply busSyncHandler (GstBus *bus, GstMessage *message, Player 
 			gchar *debug;
 
 			gst_message_parse_error (message, &err, &debug);
-			cerr << "Bus: " << err->message << endl;
+			// cerr << "Bus: " << err->message << endl;
 			break;
 		}
 		case GST_MESSAGE_ELEMENT:
@@ -234,8 +232,10 @@ gboolean freeze_check(gpointer user_data)
 
 	if (player->lastBufferTime == -1) return true; // No need to check if no stream is playing
 
+	// current time
 	GstClockTime current = gst_clock_get_time(player->clock);
 
+	// check difference between current time and last time data was received
 	GstClockTimeDiff diff = GST_CLOCK_DIFF(player->lastBufferTime, current);
 	int timeout = player->config->getParamInt("videoTimeout") * 1000000; // from ms to ns
 
