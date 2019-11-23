@@ -31,27 +31,27 @@ pid_t Recorder::startRecording(string uri, string fileName)
             char datetime[18];
             time_t t = time(nullptr);
             strftime(datetime, sizeof(datetime), "%d-%m-%Y_%H:%M", localtime(&t));
-            fileName = config->getParam("saveToFolder") + stream + "_" + string(datetime) + ".mp4"; 
+            fileName = stream + "_" + string(datetime) + ".mp4"; 
         }
     fileNames[uri] = fileName;
     cout << fileName << endl;
 
 
     if (pid == 0) {
-        string logsFile = config->getParam("saveToFolder") + "logs/" + to_string(getpid()) + ".logs";
+        // string logsFile = config->getParam("saveToFolder") + "logs/" + to_string(getpid()) + ".logs";
 
-        int fd = open(logsFile.c_str(), O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
+        // int fd = open(logsFile.c_str(), O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
 
-        if(fd == -1) {
-            perror("logs");
-        }
+        // if(fd == -1) {
+        //     perror("logs");
+        // }
 
-        dup2(fd, 1);
-        dup2(fd, 2);
+        // dup2(fd, 1);
+        // dup2(fd, 2);
 
         execlp("gst-launch-1.0", "-e", "rtspsrc", ("location=" + uri).c_str(),
        "protocols=tcp", "!", "rtph264depay", "name=vdepay", "!", "mpegtsmux", "name=mux", 
-       "!", "filesink", ("location=" + fileName).c_str(), nullptr);
+       "!", "filesink", ("location=" + config->getParam("saveToFolder") + fileName).c_str(), nullptr);
 
     }
     else

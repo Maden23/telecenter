@@ -8,3 +8,7 @@ recorder
 
 # Logs
 *.log
+
+# Credentials
+client_secret.json
+storage.json
