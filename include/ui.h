@@ -5,6 +5,7 @@
 #include <string>
 #include <unistd.h>
 #include <gtk/gtk.h>
+#include <gdk/gdk.h>
 #include "config.h"
 #include "player.h"
 #include "recorder.h"
