@@ -24,10 +24,8 @@ Player::Player (GtkWidget* videoWindow, GtkWidget* camLabel, Config *config)
 	/* Build pipeline */
 	buildPipeline();
 
-	/* Initialize elements for freeze check */
+	/* Initialize clock for freeze check */
 	clock = gst_pipeline_get_clock(GST_PIPELINE(pipeline));
-	lastBufferTime = -1; 
-	g_timeout_add (500, freeze_check, this); // run freeze check every x milliseconds
 
 	/* Get bus to handle messages*/
 	bus = gst_pipeline_get_bus (GST_PIPELINE (pipeline));
@@ -44,6 +42,7 @@ Player::~Player()
 void Player::buildPipeline()
 {
 	src = gst_element_factory_make("rtspsrc", "src");
+	testsrc = gst_element_factory_make("videotestsrc", "testsrc");
 	depay = gst_element_factory_make("rtph264depay", "depay");  
 	parse = gst_element_factory_make("h264parse", "parse");
 
@@ -54,12 +53,12 @@ void Player::buildPipeline()
 		dec = gst_element_factory_make("omxh264dec", "dec");
 		sink = gst_element_factory_make("nveglglessink", "sink");
 
-		if (!pipeline ||  !src || !depay || !parse || !dec || !sink)
+		if (!pipeline ||  !src || !testsrc || !depay || !parse || !dec || !sink)
 		{
 			cerr << "Not all pipeline elements could be created" << endl;
 		} 
 
-		gst_bin_add_many(GST_BIN(pipeline), src, depay, parse, dec, sink, NULL);
+		gst_bin_add_many(GST_BIN(pipeline), src, testsrc, depay, parse, dec, sink, NULL);
 
 		if (!gst_element_link_many(depay, parse, dec, sink, NULL))
 			cerr << "Pipeline linking error" << endl;
@@ -69,12 +68,12 @@ void Player::buildPipeline()
 		dec = gst_element_factory_make("avdec_h264", "dec");
 		scale = gst_element_factory_make("videoscale", "scale");
 		sink = gst_element_factory_make("autovideosink", "sink");
-		if (!pipeline ||  !src || !depay || !parse || !dec || !scale || !sink)
+		if (!pipeline ||  !src || !testsrc || !depay || !parse || !dec || !scale || !sink)
 		{
 			cerr << "Not all pipeline elements could be created" << endl;
 		} 
 
-		gst_bin_add_many(GST_BIN(pipeline), src, depay, parse, dec, scale, sink, NULL);
+		gst_bin_add_many(GST_BIN(pipeline), src, testsrc, depay, parse, dec, scale, sink, NULL);
 
 		if (!gst_element_link_many(depay, parse, dec, scale, sink, NULL))
 			cerr << "Pipeline linking error" << endl;
@@ -114,6 +113,25 @@ void Player::stopStream()
 	gst_element_set_state (pipeline, GST_STATE_PAUSED);
 }
 
+bool Player::showTest()
+{
+	cout << "Showing test" << endl;
+	gst_element_set_state(pipeline, GST_STATE_READY);
+	gst_element_unlink(dec, scale);
+	
+	// gst_element_set_state(src, GST_STATE_READY);
+	// gst_element_set_state(src, GST_STATE_PLAYING);
+
+	if (!gst_element_link(testsrc, scale))
+	{
+		cerr << "Failed to link testsrc" << endl;
+		return false;
+	}
+	gst_element_set_state(pipeline, GST_STATE_PLAYING);
+	return true;
+
+}
+
 /* Not in class bacause of g_signal_connect */
 
 static GstBusSyncReply busSyncHandler (GstBus *bus, GstMessage *message, Player *player)
@@ -133,9 +151,6 @@ static GstBusSyncReply busSyncHandler (GstBus *bus, GstMessage *message, Player 
 		{
 			const GstStructure *s = gst_message_get_structure (message);
 			const gchar *name = gst_structure_get_name (s);
-			cerr << "Bus: " << name << endl;
-			// gst_element_set_state(player->pipeline, GST_STATE_PAUSED);
-			// gst_element_set_state(player->pipeline, GST_STATE_PLAYING);
 			break;
 		}
 		case GST_MESSAGE_EOS:
@@ -200,7 +215,7 @@ static void pad_added_handler (GstElement * src, GstPad * new_pad, Player *playe
 	new_pad_type = gst_structure_get_name (new_pad_struct);
 	if (!g_str_has_prefix (new_pad_type, "application/x-rtp"))
 	{
-		cerr << "Wrong prefix" << endl;
+		cerr << "Wrong stream prefix" << endl;
 		return;
 	}
 
@@ -213,7 +228,10 @@ static void pad_added_handler (GstElement * src, GstPad * new_pad, Player *playe
 	{       
 		cerr << "Linked source" << endl;
 		// Add data probe to remember the last received video buffer time
+		player->lastBufferTime = -1; 
 		gst_pad_add_probe(new_pad, GST_PAD_PROBE_TYPE_BUFFER, data_probe, player, NULL);
+		g_timeout_add (500, freeze_check, player); // run freeze check every x milliseconds
+
 	}
 }
 
@@ -221,6 +239,7 @@ GstPadProbeReturn data_probe (GstPad *pad, GstPadProbeInfo *info, gpointer user_
 {
 	Player* player = (Player*) user_data;
 	player->lastBufferTime = gst_clock_get_time(player->clock);
+	cout << player->lastBufferTime << endl;
 
 	return GST_PAD_PROBE_OK;
 }
@@ -241,7 +260,11 @@ gboolean freeze_check(gpointer user_data)
 
 	if (diff > timeout)
 	{
-		cout << "Showing testsrc" << endl;
+		// cout << "Showing testsrc" << endl;
+		if (!player->showTest())
+			cout << "Failed to show test." << endl;
+		else 
+			return false; // Freeze caught, test is showing - stopping regular check
 	}
 	return true; // to contionue checking regularly
 }
