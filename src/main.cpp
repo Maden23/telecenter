@@ -3,35 +3,28 @@
 #include <cstdio>
 #include "ui.h"
 #include "config.h"
+#include <signal.h>
 
 using namespace std;
 
+UI ui;
+
+void intHandler (int dummy)
+{
+	cout << "Got SIGINT" << endl;
+	ui.stop();
+	exit(0);
+}
+
 int main()
 {
+	signal(SIGINT, intHandler);
+
 	freopen("recorder.log","w", stdout);
 	freopen("recorder_err.log","w", stderr);
 
 	Config *config = &Config::get();
 	config->parseFile("recorder.conf");
 
-	UI ui(config);
-
-
-	// Recorder recorder(config);
-
-	// recorder.startRecording(config->getParam("cam51"));
-	// recorder.startRecording(config->getParam("cam52"));
-	// recorder.startRecording(config->getParam("cam53"));
-	// recorder.startRecording(config->getParam("cam54"));
-
-
-	// Player player;
-	// player.playStream(config->getParam("cam51"));
-
-
-	// for (auto &rec : recorder.getRunningRecorders())
-	// {
-	// 	int status;
-	// 	while(waitpid(rec.second, &status, 0) == -1);
-	// }
+	ui.init(config);
 }

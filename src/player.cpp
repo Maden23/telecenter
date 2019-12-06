@@ -8,6 +8,9 @@ Player::Player (GtkWidget* videoWindow, GtkWidget* camLabel, Config *config)
 	this->camLabel = camLabel;
 	this->config = config;
 	
+	/* Starting Snowmix in a separate thread */
+	snowmixPid = startSnowmix();
+
 	/* Initiallizing Gstreamer*/
 	gst_init(nullptr, nullptr);
 
@@ -24,10 +27,6 @@ Player::Player (GtkWidget* videoWindow, GtkWidget* camLabel, Config *config)
 	/* Build pipeline */
 	buildPipeline();
 
-	/* Initialize elements for freeze check */
-	clock = gst_pipeline_get_clock(GST_PIPELINE(pipeline));
-	lastBufferTime = -1; 
-	g_timeout_add (500, freeze_check, this); // run freeze check every x milliseconds
 
 	/* Get bus to handle messages*/
 	bus = gst_pipeline_get_bus (GST_PIPELINE (pipeline));
@@ -37,8 +36,9 @@ Player::Player (GtkWidget* videoWindow, GtkWidget* camLabel, Config *config)
 }
 
 Player::~Player() 
-{
-
+{	
+	stopStream();
+	stopSnowmix();
 }
 
 void Player::buildPipeline()
@@ -92,6 +92,35 @@ void Player::buildPipeline()
 
 }
 
+pid_t Player::startSnowmix()
+{
+	pid_t pid = fork();
+
+	if (pid == -1)
+	{
+		cerr << "Failed to fork for Snowmix start" << endl;
+		perror("fork");
+		return -1;
+	}
+	else if (pid == 0)
+	{
+		cout << "Starting snowmix." << endl;
+		system("snowmix src/snowmix/player.ini");
+		exit(0);
+	}
+	else
+	{
+		return pid;
+	}
+}
+
+void Player::stopSnowmix()
+{
+	kill(snowmixPid, SIGINT);
+    waitpid(snowmixPid, nullptr, 0);
+    cout << "Snowmix in player stopped." << endl;
+}
+
 void Player::playStream(string cam_id)
 {
 	/* Update label */
@@ -110,8 +139,9 @@ void Player::playStream(string cam_id)
 
 void Player::stopStream()
 {
-	cout << "Paused";
-	gst_element_set_state (pipeline, GST_STATE_PAUSED);
+    gst_element_set_state (pipeline, GST_STATE_NULL);
+    gst_object_unref (pipeline);
+	cout << "Streaming in player stopped" << endl;
 }
 
 /* Not in class bacause of g_signal_connect */
@@ -212,36 +242,6 @@ static void pad_added_handler (GstElement * src, GstPad * new_pad, Player *playe
 	else 
 	{       
 		cerr << "Linked source" << endl;
-		// Add data probe to remember the last received video buffer time
-		gst_pad_add_probe(new_pad, GST_PAD_PROBE_TYPE_BUFFER, data_probe, player, NULL);
 	}
 }
 
-GstPadProbeReturn data_probe (GstPad *pad, GstPadProbeInfo *info, gpointer user_data)
-{
-	Player* player = (Player*) user_data;
-	player->lastBufferTime = gst_clock_get_time(player->clock);
-
-	return GST_PAD_PROBE_OK;
-}
-
-
-gboolean freeze_check(gpointer user_data)
-{	
-	Player* player = (Player*) user_data;
-
-	if (player->lastBufferTime == -1) return true; // No need to check if no stream is playing
-
-	// current time
-	GstClockTime current = gst_clock_get_time(player->clock);
-
-	// check difference between current time and last time data was received
-	GstClockTimeDiff diff = GST_CLOCK_DIFF(player->lastBufferTime, current);
-	int timeout = player->config->getParamInt("videoTimeout") * 1000000; // from ms to ns
-
-	if (diff > timeout)
-	{
-		cout << "Showing testsrc" << endl;
-	}
-	return true; // to contionue checking regularly
-}

@@ -13,6 +13,8 @@
 #include <gst/video/videooverlay.h>
 
 #include "config.h"
+#include <wait.h>
+
 
 struct PadData
 {
@@ -30,8 +32,6 @@ public:
 	void stopStream();
 
 	GstElement *pipeline, *src, *depay, *parse, *dec, *scale, *sink;
-	GstClock *clock;
-	GstClockTime lastBufferTime; // time of last played data buffer in nanoseconds
 
 	Config *config;
 
@@ -42,6 +42,10 @@ private:
 	GstBus *bus;
 
 	void buildPipeline();
+
+	pid_t snowmixPid;
+	pid_t startSnowmix();
+	void stopSnowmix();
 };
 
 
@@ -54,7 +58,3 @@ static GstBusSyncReply busSyncHandler (GstBus *bus, GstMessage *message, Player 
 
 // Dynamic source linking
 static void pad_added_handler (GstElement * src, GstPad * new_pad, Player *player);
-
-// Functions to catch a freeze
-GstPadProbeReturn data_probe (GstPad *pad, GstPadProbeInfo *info,  gpointer user_data);
-gboolean freeze_check(gpointer user_data);

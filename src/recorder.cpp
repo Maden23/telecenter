@@ -20,7 +20,7 @@ pid_t Recorder::startRecording(string uri, string fileName)
     pid_t pid = fork();
     
     if (pid == -1) {
-        cerr << "Couldn't fork" << endl;
+        cerr << "Couldn't fork recorder" << endl;
         perror("fork");
     }
 

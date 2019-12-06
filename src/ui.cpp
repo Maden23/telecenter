@@ -1,6 +1,15 @@
 #include "ui.h"
 
-UI::UI(Config *config)
+UI::UI()
+{
+
+}
+
+UI::~UI()
+{
+}
+
+void UI::init(Config *config)
 {
     this->config = config;
 
@@ -41,29 +50,28 @@ UI::UI(Config *config)
     player = new Player(playerWidget, playerLabel, config);
     initMenuWidgets();
 
-	
+    
     g_signal_connect(menuWindow, "destroy", G_CALLBACK (gtk_main_quit), NULL);
     initStyles();
     /* Place windows */
-    GdkScreen *screen = gdk_screen_get_default();
-    gtk_window_fullscreen_on_monitor(GTK_WINDOW(menuWindow), screen, 0);
-    gtk_widget_show(menuWindow);
-    gtk_window_fullscreen_on_monitor(GTK_WINDOW(playerWindow), screen, 1);
-    gtk_widget_show(playerWindow);
+    // GdkScreen *screen = gdk_screen_get_default();
+    // gtk_window_fullscreen_on_monitor(GTK_WINDOW(menuWindow), screen, 0);
+    // gtk_widget_show(menuWindow);
+    // gtk_window_fullscreen_on_monitor(GTK_WINDOW(playerWindow), screen, 1);
+    // gtk_widget_show(playerWindow);
     
     /* For one screen */
-    //gtk_window_present(GTK_WINDOW(menuWindow));
-    //gtk_window_present(GTK_WINDOW(playerWindow));
+    gtk_window_present(GTK_WINDOW(menuWindow));
+    gtk_window_present(GTK_WINDOW(playerWindow));
 
     gtk_main();
 }
 
-UI::~UI()
+void UI::stop() 
 {
     delete player;
     delete recorder;
 }
-
 
 int UI::initStyles() {
     GFile* css = g_file_new_for_path("ui/styles.css");

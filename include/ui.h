@@ -33,8 +33,10 @@ struct hide_player_data
 class UI
 {
 public:
-	UI(Config *config);
+	UI();
 	~UI();
+	void init(Config *config);
+	void stop();
 	void displayRecordingStatus(string cam_id, bool status);
 	Config *config;
 	Recorder *recorder;
