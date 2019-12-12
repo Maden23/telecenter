@@ -31,7 +31,8 @@ public:
 	void playStream(string cam_id);
 	void stopStream();
 
-	GstElement *pipeline, *src, *depay, *parse, *dec, *scale, *sink;
+	GstElement *out_pipeline, *out_src, *out_queue, *out_scale, *out_convert, *out_sink;
+	GstElement *in_pipeline, *in_src, *in_depay, *in_parse, *in_dec, *in_convert, *in_scale, *in_caps, *in_sink;
 
 	Config *config;
 
@@ -39,9 +40,10 @@ public:
 private:
 
 	GtkWidget *videoWindow, *camLabel;
-	GstBus *bus;
+	GstBus *out_bus;
 
-	void buildPipeline();
+	void buildInputPipeline();
+	void buildOutputPipeline();
 
 	pid_t snowmixPid;
 	pid_t startSnowmix();

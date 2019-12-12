@@ -35,9 +35,9 @@ void UI::init(Config *config)
 
     /* Set window size */
     gtk_widget_set_size_request(menuWindow, stoi(config->getParam("windowWidth")),
-            stoi(config->getParam("windowHight")));
+            stoi(config->getParam("windowHeight")));
     gtk_widget_set_size_request(playerWindow, stoi(config->getParam("windowWidth")),
-            stoi(config->getParam("windowHight")));
+            stoi(config->getParam("windowHeight")));
 
     /* Start/stop recording on key press */
     recorder = new Recorder(config);

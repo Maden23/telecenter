@@ -24,15 +24,18 @@ Player::Player (GtkWidget* videoWindow, GtkWidget* camLabel, Config *config)
 	// we should have the XID/HWND now
 	g_assert (videoWindowHandle != 0);
 
-	/* Build pipeline */
-	buildPipeline();
+	/* Build pipelines */
+	buildInputPipeline();
+	buildOutputPipeline();
 
+	/* Get bus to handle messages */
+	out_bus = gst_pipeline_get_bus (GST_PIPELINE (out_pipeline));
 
-	/* Get bus to handle messages*/
-	bus = gst_pipeline_get_bus (GST_PIPELINE (pipeline));
 	// set up sync handler for setting the xid once the pipeline is started
-	gst_bus_set_sync_handler (bus, (GstBusSyncHandler) busSyncHandler, this, NULL);
-	gst_object_unref (bus);
+	gst_bus_set_sync_handler (out_bus, (GstBusSyncHandler) busSyncHandler, this, NULL);
+	gst_object_unref (out_bus);
+
+	gst_element_set_state (out_pipeline, GST_STATE_PLAYING);
 }
 
 Player::~Player() 
@@ -41,55 +44,152 @@ Player::~Player()
 	stopSnowmix();
 }
 
-void Player::buildPipeline()
+void Player::buildInputPipeline()
 {
-	src = gst_element_factory_make("rtspsrc", "src");
-	depay = gst_element_factory_make("rtph264depay", "depay");  
-	parse = gst_element_factory_make("h264parse", "parse");
+	in_src = gst_element_factory_make("rtspsrc", "in_src");
+	in_depay = gst_element_factory_make("rtph264depay", "in_depay");  
+	in_parse = gst_element_factory_make("h264parse", "in_parse");
 
-	pipeline = gst_pipeline_new("pipeline");
+	in_pipeline = gst_pipeline_new("in_pipeline");
 
 	#ifdef ON_JETSON
 		cout << "JETSON" << endl;
-		dec = gst_element_factory_make("omxh264dec", "dec");
-		sink = gst_element_factory_make("nveglglessink", "sink");
-
-		if (!pipeline ||  !src || !depay || !parse || !dec || !sink)
-		{
-			cerr << "Not all pipeline elements could be created" << endl;
-		} 
-
-		gst_bin_add_many(GST_BIN(pipeline), src, depay, parse, dec, sink, NULL);
-
-		if (!gst_element_link_many(depay, parse, dec, sink, NULL))
-			cerr << "Pipeline linking error" << endl;
-
+		in_dec = gst_element_factory_make("omxh264dec", "in_dec");
+		
 	#else
 		cout << "Not JETSON" << endl;
-		dec = gst_element_factory_make("avdec_h264", "dec");
-		scale = gst_element_factory_make("videoscale", "scale");
-		sink = gst_element_factory_make("autovideosink", "sink");
-		if (!pipeline ||  !src || !depay || !parse || !dec || !scale || !sink)
-		{
-			cerr << "Not all pipeline elements could be created" << endl;
-		} 
-
-		gst_bin_add_many(GST_BIN(pipeline), src, depay, parse, dec, scale, sink, NULL);
-
-		if (!gst_element_link_many(depay, parse, dec, scale, sink, NULL))
-			cerr << "Pipeline linking error" << endl;
+		in_dec = gst_element_factory_make("avdec_h264", "in_dec");
+		
 	#endif
 
+	in_convert = gst_element_factory_make("videoconvert", "in_convert");
+	in_scale = gst_element_factory_make("videoscale", "in_scale");
+	in_caps = gst_element_factory_make("capsfilter", "in_caps");
+	in_sink = gst_element_factory_make("shmsink", "in_sink");
+
+	if (!in_pipeline ||  !in_src || !in_depay || !in_parse || !in_dec || !in_convert || !in_scale || !in_caps || !in_sink)
+	{
+		cerr << "Not all input pipeline elements could be created" << endl;
+	} 
+
+	gst_bin_add_many(GST_BIN(in_pipeline), in_src, in_depay, in_parse, in_dec, in_convert, in_scale, in_caps, in_sink, NULL);
+
+	// string scaps =  "video/x-raw, format=BGRA, pixel-aspect-ratio=1/1, interlace-mode=progressive, framerate=25/1, width="
+	//  + config->getParam("windowWidth") + ", height=" + config->getParam("windowHeight");
+	// g_object_set(in_caps, "caps", caps.c_str(), NULL);
+	// cout << scaps << endl;
+	
+	/* Linking the rest of the pipeline */
+	if (!gst_element_link_many(in_depay, in_parse, in_dec, in_convert, in_scale, NULL))
+		cerr << "Input pipeline linking error" << endl;
+
+	/* Linking to sink with caps*/
+	GstCaps *caps;
+	caps = gst_caps_new_simple ("video/x-raw",
+	      "format", G_TYPE_STRING, "BGRA",
+	      "pixel-aspect-ratio", GST_TYPE_FRACTION, 1, 1,
+	      "interlace-mode", G_TYPE_STRING, "progressive",
+	      "framerate", GST_TYPE_FRACTION, 25, 1,
+	      "width", G_TYPE_INT, stoi(config->getParam("windowWidth")),
+	      "height", G_TYPE_INT, stoi(config->getParam("windowHeight")),
+	      NULL);
+	// g_object_set(in_caps, "caps", caps, NULL);
+	gboolean link_ok = gst_element_link_filtered (in_scale, in_sink, caps);
+	gst_caps_unref(caps);
+	if (!link_ok)
+		cerr << "Input pipeline: caps linking error" << endl;
+
+	/* Set socket properties */
+	int size = stoi(config->getParam("windowWidth")) * stoi(config->getParam("windowHeight")) * 4 * 20;
+	g_object_set(in_sink, "socket-path", "/tmp/feed1-control-pipe", "shm-size", size, NULL);
 	
 	/* Set latency */
-	g_object_set (src, "latency", 0, NULL);
-	g_object_set (src, "tcp-timeout", 200000, NULL);
-	g_object_set (src, "timeout", 200000 , NULL);
+	g_object_set (in_src, "latency", 0, NULL);
+	g_object_set (in_src, "tcp-timeout", 200000, NULL);
+	g_object_set (in_src, "timeout", 200000 , NULL);
 
 
 	/* Signal to handle new source pad*/
-	g_signal_connect(src, "pad-added", G_CALLBACK(pad_added_handler), this);
+	g_signal_connect(in_src, "pad-added", G_CALLBACK(pad_added_handler), this);
+}
 
+void Player::buildOutputPipeline()
+{
+	// #ifdef ON_JETSON
+	// 	out_pipeline = gst_parse_launch("gst-launch-1.0 shmin_src \
+	// 		socket-path=/tmp/mixer1 do-timestamp=true is-live=true ! queue leaky=2 max-size-buffers=2 \
+	// 		! video/x-raw,format=BGRA,pixel-aspect-ratio=1/1,interlace-mode=progressive, width=1280, height=720, framerate=25/1 \
+	// 		! videoscale \
+	// 		! video/x-raw,format=BGRA,pixel-aspect-ratio=1/1,interlace-mode=progressive, width=1280, height=720   \
+	// 		! videoconvert  ! nveglglessink", NULL);
+	// #else
+	// 	out_pipeline = gst_parse_launch("gst-launch-1.0 shmin_src \
+	// 		socket-path=/tmp/mixer1 do-timestamp=true is-live=true ! queue leaky=2 max-size-buffers=2 \
+	// 		! video/x-raw,format=BGRA,pixel-aspect-ratio=1/1,interlace-mode=progressive, width=1280, height=720, framerate=25/1 \
+	// 		! videoscale \
+	// 		! video/x-raw,format=BGRA,pixel-aspect-ratio=1/1,interlace-mode=progressive, width=1280, height=720   \
+	// 		! videoconvert  ! autovideosink", NULL);
+
+	// #endif
+
+	out_pipeline = gst_pipeline_new("out_pipeline");
+	out_src = gst_element_factory_make("shmsrc", "in_src");
+	out_queue = gst_element_factory_make("queue", "out_queue");
+	out_scale = gst_element_factory_make("videoscale", "out_scale");
+	out_convert = gst_element_factory_make("videoconvert", "out_convert");
+
+	#ifdef ON_JETSON
+		out_sink = gst_element_factory_make("nveglglessink", "out_sink");
+	#else
+		out_sink = gst_element_factory_make("autovideosink", "out_sink");
+	#endif
+
+	if (!out_pipeline || !out_src || !out_queue || !out_scale || !out_convert || !out_sink)
+		cerr << "Not all output pipeline elements could be created." << endl;
+
+	gst_bin_add_many(GST_BIN(out_pipeline), out_src, out_queue, out_scale, out_convert, out_sink, NULL);
+
+	/* Set properties  */
+	g_object_set(out_src, 
+		"socket-path", "/tmp/mixer1",
+		"do-timestamp", true,
+		"is-live", true,
+		NULL);
+	g_object_set(out_queue,
+		"leaky", 2,
+		"max-size-buffers", 2,
+		NULL);
+
+	/* Lining */
+	if (!gst_element_link(out_src, out_queue))
+		cerr << "Output pipeline: source linking error" << endl;
+
+	GstCaps *caps;
+	caps = gst_caps_new_simple ("video/x-raw",
+	      "format", G_TYPE_STRING, "BGRA",
+	      "pixel-aspect-ratio", GST_TYPE_FRACTION, 1, 1,
+	      "interlace-mode", G_TYPE_STRING, "progressive",
+	      "framerate", GST_TYPE_FRACTION, 25, 1,
+	      "width", G_TYPE_INT, stoi(config->getParam("windowWidth")),
+	      "height", G_TYPE_INT, stoi(config->getParam("windowHeight")),
+	      NULL);
+	if (!gst_element_link_filtered(out_queue, out_scale, caps))
+		cerr << "Output pipeline: queue + scale linking error" << endl;
+	gst_caps_unref(caps);
+
+	caps = gst_caps_new_simple ("video/x-raw",
+	      "format", G_TYPE_STRING, "BGRA",
+	      "pixel-aspect-ratio", GST_TYPE_FRACTION, 1, 1,
+	      "interlace-mode", G_TYPE_STRING, "progressive",
+	      "width", G_TYPE_INT, stoi(config->getParam("windowWidth")),
+	      "height", G_TYPE_INT, stoi(config->getParam("windowHeight")),
+	      NULL);
+	if (!gst_element_link_filtered(out_scale, out_convert, caps))
+		cerr << "Output pipeline: scale + convert linking error" << endl;
+	gst_caps_unref(caps);
+
+	if (!gst_element_link(out_convert, out_sink))
+		cerr << "Output pipeline: sink linking error" << endl;
 }
 
 pid_t Player::startSnowmix()
@@ -127,24 +227,22 @@ void Player::playStream(string cam_id)
 	// gtk_button_set_label(GTK_BUTTON(camLabel), cam_id.c_str());
 	gtk_label_set_text(GTK_LABEL(camLabel), cam_id.c_str());
 
-	gst_element_set_state (pipeline, GST_STATE_READY);
+	gst_element_set_state (in_pipeline, GST_STATE_READY);
 
 	cout << "Playing " << config->getCamUri(cam_id).c_str() << endl;
-	// g_object_set (G_OBJECT (pipeline), "uri", config->getCamUri(cam_id).c_str(), NULL);
-	g_object_set (src, "location", config->getCamUri(cam_id).c_str(), NULL);
+	g_object_set (in_src, "location", config->getCamUri(cam_id).c_str(), NULL);
 
-	gst_element_set_state (pipeline, GST_STATE_PLAYING);
-
+	gst_element_set_state (in_pipeline, GST_STATE_PLAYING);
 }
 
 void Player::stopStream()
 {
-    gst_element_set_state (pipeline, GST_STATE_NULL);
-    gst_object_unref (pipeline);
+    gst_element_set_state (in_pipeline, GST_STATE_NULL);
+    gst_object_unref (in_pipeline);
 	cout << "Streaming in player stopped" << endl;
 }
 
-/* Not in class bacause of g_signal_connect */
+/* Not in class bacause g_signal_connect does not accept in-class functions */
 
 static GstBusSyncReply busSyncHandler (GstBus *bus, GstMessage *message, Player *player)
 {
@@ -161,11 +259,9 @@ static GstBusSyncReply busSyncHandler (GstBus *bus, GstMessage *message, Player 
 		}
 		case GST_MESSAGE_ELEMENT:
 		{
-			const GstStructure *s = gst_message_get_structure (message);
-			const gchar *name = gst_structure_get_name (s);
-			cerr << "Bus: " << name << endl;
-			// gst_element_set_state(player->pipeline, GST_STATE_PAUSED);
-			// gst_element_set_state(player->pipeline, GST_STATE_PLAYING);
+			// const GstStructure *s = gst_message_get_structure (message);
+			// const gchar *name = gst_structure_get_name (s);
+			//cerr << "Bus: " << name << endl;
 			break;
 		}
 		case GST_MESSAGE_EOS:
@@ -183,7 +279,7 @@ static GstBusSyncReply busSyncHandler (GstBus *bus, GstMessage *message, Player 
 	if (videoWindowHandle != 0)
 	{
 	  GstVideoOverlay *overlay;
-	  // GST_MESSAGE_SRC (message) will be the video sink element
+	  // GST_MESSAGE_in_SRC (message) will be the video sink element
 	  overlay = GST_VIDEO_OVERLAY (GST_MESSAGE_SRC (message));
 	  gst_video_overlay_set_window_handle (overlay, videoWindowHandle);
 	  // cout << "Set video handle" << endl;
@@ -192,6 +288,7 @@ static GstBusSyncReply busSyncHandler (GstBus *bus, GstMessage *message, Player 
 	{
 	  g_warning ("Should have obtained videoWindowHandle by now!");
 	}
+	return GST_BUS_PASS;
 }
 
 static void videoWidgetRealize_cb (GtkWidget *widget,gpointer *data)
@@ -211,9 +308,9 @@ static void videoWidgetRealize_cb (GtkWidget *widget,gpointer *data)
 	#endif
 }
 
-static void pad_added_handler (GstElement * src, GstPad * new_pad, Player *player)
+static void pad_added_handler (GstElement * in_src, GstPad * new_pad, Player *player)
 {
-	GstPad *sink_pad = gst_element_get_static_pad (player->depay, "sink");
+	GstPad *sink_pad = gst_element_get_static_pad (player->in_depay, "sink");
 	GstPadLinkReturn ret;
 	GstCaps *new_pad_caps = NULL;
 	GstStructure *new_pad_struct = NULL;
