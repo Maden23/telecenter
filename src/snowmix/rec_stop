@@ -1,0 +1,5 @@
+#/bin/bash
+
+. /tmp/rec_env.sh
+
+echo $pid

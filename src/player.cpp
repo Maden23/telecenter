@@ -115,23 +115,6 @@ void Player::buildInputPipeline()
 
 void Player::buildOutputPipeline()
 {
-	// #ifdef ON_JETSON
-	// 	out_pipeline = gst_parse_launch("gst-launch-1.0 shmin_src \
-	// 		socket-path=/tmp/mixer1 do-timestamp=true is-live=true ! queue leaky=2 max-size-buffers=2 \
-	// 		! video/x-raw,format=BGRA,pixel-aspect-ratio=1/1,interlace-mode=progressive, width=1280, height=720, framerate=25/1 \
-	// 		! videoscale \
-	// 		! video/x-raw,format=BGRA,pixel-aspect-ratio=1/1,interlace-mode=progressive, width=1280, height=720   \
-	// 		! videoconvert  ! nveglglessink", NULL);
-	// #else
-	// 	out_pipeline = gst_parse_launch("gst-launch-1.0 shmin_src \
-	// 		socket-path=/tmp/mixer1 do-timestamp=true is-live=true ! queue leaky=2 max-size-buffers=2 \
-	// 		! video/x-raw,format=BGRA,pixel-aspect-ratio=1/1,interlace-mode=progressive, width=1280, height=720, framerate=25/1 \
-	// 		! videoscale \
-	// 		! video/x-raw,format=BGRA,pixel-aspect-ratio=1/1,interlace-mode=progressive, width=1280, height=720   \
-	// 		! videoconvert  ! autovideosink", NULL);
-
-	// #endif
-
 	out_pipeline = gst_pipeline_new("out_pipeline");
 	out_src = gst_element_factory_make("shmsrc", "in_src");
 	out_queue = gst_element_factory_make("queue", "out_queue");

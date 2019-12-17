@@ -38,17 +38,6 @@ pid_t Recorder::startRecording(string uri, string fileName)
 
 
     if (pid == 0) {
-        // string logsFile = config->getParam("saveToFolder") + "logs/" + to_string(getpid()) + ".logs";
-
-        // int fd = open(logsFile.c_str(), O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
-
-        // if(fd == -1) {
-        //     perror("logs");
-        // }
-
-        // dup2(fd, 1);
-        // dup2(fd, 2);
-
         execlp("gst-launch-1.0", "-e", "rtspsrc", ("location=" + uri).c_str(),
        "protocols=tcp", "!", "rtph264depay", "name=vdepay", "!", "mpegtsmux", "name=mux", 
        "!", "filesink", ("location=" + config->getParam("saveToFolder") + fileName).c_str(), nullptr);

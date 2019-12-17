@@ -1,0 +1,74 @@
+#!/bin/bash
+
+#  Запустить snowmix на очередном порту (сокеты с номерами порта)
+#  Запустить пайплайн на получение потока (сокет = feed<snowmix_port>)
+# 
+
+# Параметры: порт, имя файла, 
+
+# File with running recorders 
+REC_FILE=/tmp/rec_env.sh
+
+# Load recorder variables
+if test -f "$REC_FILE" ; then
+	for var in `cat $REC_FILE`; do
+	 	export $var
+	 done 
+fi
+
+# Check arguments
+if [[ $# -lt 3 ]]; then
+	echo rec_start: Wrong arguments. Usage:
+	echo "./rec_start <snowmix_port> <stream> <save_folder>"
+fi
+
+snowmix_port=$1
+stream=$2
+save_folder=$3
+
+control_pipe="/tmp/feed$snowmix_port-control-pipe" 
+output_pipe=/tmp/mixer$snowmix_port
+
+# Create config file
+config="/tmp/$snowmix_port.ini"
+printf "system control port $snowmix_port
+system geometry 1280 720 BGRA 
+system frame rate 25 
+system socket $output_pipe
+feed idle 0 1 
+feed add 1 Camera 1 
+feed geometry 1 1280 720 
+feed live 1 
+feed idle 1 25 frames/dead-1280x720.bgra 
+feed socket 1 $control_pipe 
+feed cutout 1 0 0 1280 720 
+stack  0 1 \n" > $config
+
+# Start snowmix
+snowmix $config &
+# Save snowmix pid
+export rec_snowmix_$snowmix_port=$!
+
+# Make input pipeline
+decoder=avdec_h264
+# decoder=omxh264dec
+gst-launch-1.0 rtspsrc location=$stream latency=0 tcp-timeput=200000 timeout=200000\
+! rtph264depay ! h264parse ! $decoder \
+! videoconvert ! videoscale  \
+! video/x-raw, format=BGRA, pixel-aspect-ratio=1/1, interlace-mode=progressive, \
+framerate=25/1, width=1280, height=720  \
+! shmsink socket-path=$control_pipe shm-size=23040000
+# Save output pipeline pid
+export rec_input_$snowmix_port=$!
+
+# Make output pipeline
+encoder=avenc_h264
+gst-launch-1.0 shmsrc socket-path=$output_pipe do-timestamp=true is-live=true ! queue leaky=2 max-size-buffers=2 \
+! video/x-raw,format=BGRA,pixel-aspect-ratio=1/1,interlace-mode=progressive, width=1280, height=720, framerate=25/1 \
+! videoscale \
+! video/x-raw,format=BGRA,pixel-aspect-ratio=1/1,interlace-mode=progressive, width=1280, height=720   \
+! videoconvert  ! $encoder
+
+
+# Save all recorder variables to file
+printenv | grep rec_ > $REC_FILE
