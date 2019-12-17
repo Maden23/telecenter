@@ -27,9 +27,12 @@ public:
 	~Player();
 
 	void playStream(string cam_id);
-	void stopStream();
 
 	bool showTest();
+	bool showStream();
+	bool elementSrcLinked(GstElement *elem);
+	bool relinkElements(GstElement *wrong_src, GstElement *right_src, GstElement* sink);
+
 
 	GstElement *pipeline, *src, *testsrc, *depay, *parse, *dec, *scale, *sink;
 	GstClock *clock;
@@ -44,6 +47,7 @@ private:
 	GstBus *bus;
 
 	void buildPipeline();
+
 };
 
 

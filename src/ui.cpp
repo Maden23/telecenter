@@ -26,9 +26,9 @@ UI::UI(Config *config)
 
     /* Set window size */
     gtk_widget_set_size_request(menuWindow, stoi(config->getParam("windowWidth")),
-            stoi(config->getParam("windowHight")));
+            stoi(config->getParam("windowHeight")));
     gtk_widget_set_size_request(playerWindow, stoi(config->getParam("windowWidth")),
-            stoi(config->getParam("windowHight")));
+            stoi(config->getParam("windowHeight")));
 
     /* Start/stop recording on key press */
     recorder = new Recorder(config);
@@ -45,16 +45,15 @@ UI::UI(Config *config)
     g_signal_connect(menuWindow, "destroy", G_CALLBACK (gtk_main_quit), NULL);
     initStyles();
     /* Place windows */
-    GdkScreen *screen = gdk_screen_get_default();
-    gtk_window_fullscreen_on_monitor(GTK_WINDOW(menuWindow), screen, 0);
-    gtk_widget_show(menuWindow);
-    gtk_window_fullscreen_on_monitor(GTK_WINDOW(playerWindow), screen, 1);
-    gtk_widget_show(playerWindow);
+    // GdkScreen *screen = gdk_screen_get_default();
+    // gtk_window_fullscreen_on_monitor(GTK_WINDOW(menuWindow), screen, 0);
+    // gtk_widget_show(menuWindow);
+    // gtk_window_fullscreen_on_monitor(GTK_WINDOW(playerWindow), screen, 1);
+    // gtk_widget_show(playerWindow);
     
     /* For one screen */
-    //gtk_window_present(GTK_WINDOW(menuWindow));
-    //gtk_window_present(GTK_WINDOW(playerWindow));
-
+    gtk_window_present(GTK_WINDOW(menuWindow));
+    gtk_window_present(GTK_WINDOW(playerWindow));
     gtk_main();
 }
 

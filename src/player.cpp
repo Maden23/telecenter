@@ -94,11 +94,19 @@ void Player::buildPipeline()
 void Player::playStream(string cam_id)
 {
 	/* Update label */
-	// gtk_button_set_label(GTK_BUTTON(camLabel), cam_id.c_str());
 	gtk_label_set_text(GTK_LABEL(camLabel), cam_id.c_str());
 
 	gst_element_set_state (pipeline, GST_STATE_READY);
 
+	/* Check if decoder - the last element of stream pipeline - is linked to sink part (testsrc might be playing) */
+	if (!elementSrcLinked(dec))
+	{
+		if (!relinkElements(testsrc, dec, scale))
+		{
+			cerr << "Failed to relink stream in player" << endl;
+			return;
+		}
+	}
 	cout << "Playing " << config->getCamUri(cam_id).c_str() << endl;
 	// g_object_set (G_OBJECT (pipeline), "uri", config->getCamUri(cam_id).c_str(), NULL);
 	g_object_set (src, "location", config->getCamUri(cam_id).c_str(), NULL);
@@ -107,29 +115,81 @@ void Player::playStream(string cam_id)
 
 }
 
-void Player::stopStream()
-{
-	cout << "Paused";
-	gst_element_set_state (pipeline, GST_STATE_PAUSED);
-}
 
 bool Player::showTest()
 {
-	cout << "Showing test" << endl;
-	gst_element_set_state(pipeline, GST_STATE_READY);
-	gst_element_unlink(dec, scale);
-	
-	// gst_element_set_state(src, GST_STATE_READY);
-	// gst_element_set_state(src, GST_STATE_PLAYING);
+	/* Check if test is already linked */
+	if (elementSrcLinked(testsrc))
+		return true;
 
-	if (!gst_element_link(testsrc, scale))
+	gst_element_set_state (pipeline, GST_STATE_READY);
+	/* Link testsrc */
+	if (relinkElements(dec, testsrc, scale))
 	{
-		cerr << "Failed to link testsrc" << endl;
+		// cerr << "Linked test in player" << endl;
+	}
+	else
+	{
+		cerr << "Failed to link test in player" << endl;
 		return false;
+	}
+
+
+	/* Unlink stream processing part */
+	// gst_element_unlink(dec, scale);
+	
+
+	// GstPad *test_pad = gst_element_get_static_pad (testsrc, "src");
+	// if (gst_pad_is_linked(test_pad))
+	// {
+	// 	return true;
+	// }
+
+	// // Trying to link
+	// if (!gst_element_link(testsrc, scale))
+	// {
+	// 	cerr << "Failed to link testsrc" << endl;
+	// 	return false;
+	// }
+
+	gst_element_set_state(pipeline, GST_STATE_PLAYING);
+	return true;
+
+}
+
+bool Player::showStream()
+{
+	/* Check if stream is already linked */
+	if (elementSrcLinked(dec))
+		return true;
+	
+	/* Relinling */
+	gst_element_set_state (pipeline, GST_STATE_READY);
+	
+	if (relinkElements(testsrc, dec, scale))
+	{
+		// cerr << "Relinked stream in player" << endl;
+	}
+	else
+	{
+		cerr << "Failed to relink stream in player" << endl;
 	}
 	gst_element_set_state(pipeline, GST_STATE_PLAYING);
 	return true;
 
+}
+
+bool Player::elementSrcLinked(GstElement *elem)
+{
+	GstPad *pad = gst_element_get_static_pad (elem, "src");
+	return gst_pad_is_linked(pad);
+}
+
+bool Player::relinkElements(GstElement *wrong_src, GstElement *right_src, GstElement* sink)
+{
+	/* Relinking pipeline */
+	gst_element_unlink(wrong_src, sink);
+	return gst_element_link(right_src, sink);
 }
 
 /* Not in class bacause of g_signal_connect */
@@ -239,7 +299,6 @@ GstPadProbeReturn data_probe (GstPad *pad, GstPadProbeInfo *info, gpointer user_
 {
 	Player* player = (Player*) user_data;
 	player->lastBufferTime = gst_clock_get_time(player->clock);
-	cout << player->lastBufferTime << endl;
 
 	return GST_PAD_PROBE_OK;
 }
@@ -257,14 +316,19 @@ gboolean freeze_check(gpointer user_data)
 	// check difference between current time and last time data was received
 	GstClockTimeDiff diff = GST_CLOCK_DIFF(player->lastBufferTime, current);
 	int timeout = player->config->getParamInt("videoTimeout") * 1000000; // from ms to ns
-
+	// cerr << "diff: " << diff << endl; 
 	if (diff > timeout)
 	{
 		// cout << "Showing testsrc" << endl;
 		if (!player->showTest())
-			cout << "Failed to show test." << endl;
-		else 
-			return false; // Freeze caught, test is showing - stopping regular check
+			cerr << "Failed to show test in player" << endl;
+		// else 
+		// 	return false; // Freeze caught, test is showing - stopping regular check. It will start again with new source
+	}
+	else 
+	{
+		if (!player->showStream())
+			cerr << "Failed to show stream in player" << endl;
 	}
 	return true; // to contionue checking regularly
 }
