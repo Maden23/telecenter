@@ -13,7 +13,7 @@ Player::Player (GtkWidget* videoWindow, GtkWidget* camLabel, Config *config)
 
 	/* Prepare videoWindow for rendering*/
 	gtk_widget_set_double_buffered (videoWindow, FALSE);
-	g_signal_connect (videoWindow, "realize", G_CALLBACK (videoWidgetRealize_cb), NULL);
+	g_signal_connect (videoWindow, "realize", G_CALLBACK (videoWidgetRealize_cb), this);
 	// realize window now so that the video window gets created and we can
 	// obtain its XID/HWND before the pipeline is started up and the videosink
 	// asks for the XID/HWND of the window to render onto
@@ -32,6 +32,11 @@ Player::Player (GtkWidget* videoWindow, GtkWidget* camLabel, Config *config)
 	// set up sync handler for setting the xid once the pipeline is started
 	gst_bus_set_sync_handler (bus, (GstBusSyncHandler) busSyncHandler, this, NULL);
 	gst_object_unref (bus);
+
+	g_timeout_add (500, freeze_check, this); // run freeze check every x milliseconds	
+
+
+
 }
 
 Player::~Player() 
@@ -93,6 +98,7 @@ void Player::buildPipeline()
 
 void Player::playStream(string cam_id)
 {
+	lastBufferTime = gst_clock_get_time(clock);
 	/* Update label */
 	gtk_label_set_text(GTK_LABEL(camLabel), cam_id.c_str());
 
@@ -106,12 +112,22 @@ void Player::playStream(string cam_id)
 			cerr << "Failed to relink stream in player" << endl;
 			return;
 		}
+		else
+			cerr << "playStream: relinked" << endl;
 	}
+	else
+		cerr << "playStream: stream linked" << endl;
+
+	// lastBufferTime = -1; 
+
 	cout << "Playing " << config->getCamUri(cam_id).c_str() << endl;
 	// g_object_set (G_OBJECT (pipeline), "uri", config->getCamUri(cam_id).c_str(), NULL);
 	g_object_set (src, "location", config->getCamUri(cam_id).c_str(), NULL);
 
 	gst_element_set_state (pipeline, GST_STATE_PLAYING);
+
+
+
 
 }
 
@@ -126,31 +142,13 @@ bool Player::showTest()
 	/* Link testsrc */
 	if (relinkElements(dec, testsrc, scale))
 	{
-		// cerr << "Linked test in player" << endl;
+		cerr << "Linked test in player" << endl;
 	}
 	else
 	{
 		cerr << "Failed to link test in player" << endl;
 		return false;
 	}
-
-
-	/* Unlink stream processing part */
-	// gst_element_unlink(dec, scale);
-	
-
-	// GstPad *test_pad = gst_element_get_static_pad (testsrc, "src");
-	// if (gst_pad_is_linked(test_pad))
-	// {
-	// 	return true;
-	// }
-
-	// // Trying to link
-	// if (!gst_element_link(testsrc, scale))
-	// {
-	// 	cerr << "Failed to link testsrc" << endl;
-	// 	return false;
-	// }
 
 	gst_element_set_state(pipeline, GST_STATE_PLAYING);
 	return true;
@@ -161,14 +159,16 @@ bool Player::showStream()
 {
 	/* Check if stream is already linked */
 	if (elementSrcLinked(dec))
+	{
 		return true;
+	}
 	
 	/* Relinling */
 	gst_element_set_state (pipeline, GST_STATE_READY);
 	
 	if (relinkElements(testsrc, dec, scale))
 	{
-		// cerr << "Relinked stream in player" << endl;
+		cerr << "Relinked stream in player" << endl;
 	}
 	else
 	{
@@ -192,9 +192,7 @@ bool Player::relinkElements(GstElement *wrong_src, GstElement *right_src, GstEle
 	return gst_element_link(right_src, sink);
 }
 
-/* Not in class bacause of g_signal_connect */
-
-static GstBusSyncReply busSyncHandler (GstBus *bus, GstMessage *message, Player *player)
+GstBusSyncReply Player::busSyncHandler (GstBus *bus, GstMessage *message, Player *player)
 {
 	switch (GST_MESSAGE_TYPE(message))
 	{
@@ -225,12 +223,12 @@ static GstBusSyncReply busSyncHandler (GstBus *bus, GstMessage *message, Player 
 	// ignore anything but 'prepare-window-handle' element messages
 	if (!gst_is_video_overlay_prepare_window_handle_message (message))
 		return GST_BUS_PASS;
-	if (videoWindowHandle != 0)
+	if (player->videoWindowHandle != 0)
 	{
 	  GstVideoOverlay *overlay;
 	  // GST_MESSAGE_SRC (message) will be the video sink element
 	  overlay = GST_VIDEO_OVERLAY (GST_MESSAGE_SRC (message));
-	  gst_video_overlay_set_window_handle (overlay, videoWindowHandle);
+	  gst_video_overlay_set_window_handle (overlay, player->videoWindowHandle);
 	  // cout << "Set video handle" << endl;
 	}
 	else
@@ -239,24 +237,26 @@ static GstBusSyncReply busSyncHandler (GstBus *bus, GstMessage *message, Player 
 	}
 }
 
-static void videoWidgetRealize_cb (GtkWidget *widget,gpointer *data)
+void Player::videoWidgetRealize_cb (GtkWidget *widget, Player *player)
 {
+	// Player* player = (Player*) data;
+
 	#ifdef GDK_WINDOWING_X11
 	  {
 		gulong xid = GDK_WINDOW_XID (gtk_widget_get_window (widget));
-		videoWindowHandle = xid;
+		player->videoWindowHandle = xid;
 	  }
 	#endif
 
 	 #ifdef GDK_WINDOWING_WIN32
 	{
 	 HWND wnd = GDK_WINDOW_HWND (gtk_widget_get_window (widget));
-	 videoWindowHandle = (guintptr) wnd;
+	 player->videoWindowHandle = (guintptr) wnd;
 	}
 	#endif
 }
 
-static void pad_added_handler (GstElement * src, GstPad * new_pad, Player *player)
+void Player::pad_added_handler (GstElement * src, GstPad * new_pad, Player *player)
 {
 	GstPad *sink_pad = gst_element_get_static_pad (player->depay, "sink");
 	GstPadLinkReturn ret;
@@ -267,6 +267,7 @@ static void pad_added_handler (GstElement * src, GstPad * new_pad, Player *playe
 	/* If our converter is already linked, we have nothing to do here */
 	if (gst_pad_is_linked (sink_pad))
 	{
+		cerr << "Pad is already linked" << endl;
 		return;
 	}
 	/* Check the new pad's type */
@@ -288,14 +289,11 @@ static void pad_added_handler (GstElement * src, GstPad * new_pad, Player *playe
 	{       
 		cerr << "Linked source" << endl;
 		// Add data probe to remember the last received video buffer time
-		player->lastBufferTime = -1; 
 		gst_pad_add_probe(new_pad, GST_PAD_PROBE_TYPE_BUFFER, data_probe, player, NULL);
-		g_timeout_add (500, freeze_check, player); // run freeze check every x milliseconds
-
 	}
 }
 
-GstPadProbeReturn data_probe (GstPad *pad, GstPadProbeInfo *info, gpointer user_data)
+GstPadProbeReturn Player::data_probe (GstPad *pad, GstPadProbeInfo *info, gpointer user_data)
 {
 	Player* player = (Player*) user_data;
 	player->lastBufferTime = gst_clock_get_time(player->clock);
@@ -304,7 +302,7 @@ GstPadProbeReturn data_probe (GstPad *pad, GstPadProbeInfo *info, gpointer user_
 }
 
 
-gboolean freeze_check(gpointer user_data)
+gboolean Player::freeze_check(gpointer user_data)
 {	
 	Player* player = (Player*) user_data;
 
@@ -315,8 +313,8 @@ gboolean freeze_check(gpointer user_data)
 
 	// check difference between current time and last time data was received
 	GstClockTimeDiff diff = GST_CLOCK_DIFF(player->lastBufferTime, current);
-	int timeout = player->config->getParamInt("videoTimeout") * 1000000; // from ms to ns
-	// cerr << "diff: " << diff << endl; 
+	long timeout = (long)player->config->getParamInt("videoTimeout") * 1000000; // from ms to ns
+	// cerr << "diff: " << diff  << endl; 
 	if (diff > timeout)
 	{
 		// cout << "Showing testsrc" << endl;
