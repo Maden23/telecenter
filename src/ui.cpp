@@ -34,6 +34,7 @@ UI::UI(Config *config)
     recorder = new Recorder(config);
     gtk_widget_add_events(menuWindow, GDK_KEY_PRESS_MASK);
     g_signal_connect(G_OBJECT(menuWindow), "key_press_event", G_CALLBACK(keyPress), this);
+    g_timeout_add(500, checkRecordings, recorder);
 
 
     /* Find player and window elements to control*/
@@ -221,18 +222,21 @@ gboolean keyPress(GtkWidget* widget, GdkEventKey *event, UI *ui)
     if (event->keyval == GDK_KEY_R || event->keyval == GDK_KEY_r)
     {
         /* If no stream is playing, record all */
-        if (ui->playingCam == "")
+        // if (ui->playingCam == "")
+        // {
+        //     for (auto &rec : ui->recImages)
+        //     {
+        //         ui->recorder->startRecording(ui->config->getCamUri(rec.first));
+        //         gtk_widget_show(rec.second);
+        //     }
+        // }
+        // /* or record the playing stream */   
+        // else
+
+        if (ui->playingCam != "")
         {
-            for (auto &rec : ui->recImages)
-            {
-                ui->recorder->startRecording(ui->config->getCamUri(rec.first));
-                gtk_widget_show(rec.second);
-            }
-        }
-        /* or record the playing stream */   
-        else
-        {
-            ui->recorder->startRecording(ui->config->getCamUri(ui->playingCam));
+            if (!ui->recorder->startRecording(ui->config->getCamUri(ui->playingCam)))
+                return false;
             gtk_widget_show(ui->recImages[ui->playingCam]);
         }
     }
@@ -240,19 +244,36 @@ gboolean keyPress(GtkWidget* widget, GdkEventKey *event, UI *ui)
     if (event->keyval == GDK_KEY_S || event->keyval == GDK_KEY_s)
     {
         /* If no stream is playing, stop recording all */
-        if (ui->playingCam == "")
+        cerr << "Stop key pressed" << endl << endl;
+        // if (ui->playingCam == "")
+        // {
+        //     for (auto &rec : ui->recImages)
+        //     {
+        //         ui->recorder->stopRecording(ui->config->getCamUri(rec.first));
+        //         gtk_widget_hide(rec.second);
+        //     }
+        // }
+        // /* or stop recording the playing stream */   
+        // else
+
+        if (ui->playingCam != "")
         {
-            for (auto &rec : ui->recImages)
-            {
-                ui->recorder->stopRecording(ui->config->getCamUri(rec.first));
-                gtk_widget_hide(rec.second);
-            }
+            if(ui->recorder->stopRecording(ui->config->getCamUri(ui->playingCam)))
+                gtk_widget_hide(ui->recImages[ui->playingCam]);
         }
-        /* or stop recording the playing stream */   
         else
         {
-            ui->recorder->stopRecording(ui->config->getCamUri(ui->playingCam));
-            gtk_widget_hide(ui->recImages[ui->playingCam]);
+            cerr << "No playing cam" << endl << endl;
+            return false;
         }
     }
+    return true;
+}
+
+gboolean UI::checkRecordings(gpointer user_data)
+{
+    Recorder *recorder = (Recorder*)user_data;
+
+    recorder->checkIfRecStopped();
+    return true;
 }

@@ -8,7 +8,10 @@ Player::Player (GtkWidget* videoWindow, GtkWidget* camLabel, Config *config)
 	this->camLabel = camLabel;
 	this->config = config;
 	
+	streamLinked = false;
+
 	/* Initiallizing Gstreamer*/
+	setenv("GST_DEBUG", "*:5", 1);
 	gst_init(nullptr, nullptr);
 
 	/* Prepare videoWindow for rendering*/
@@ -34,9 +37,6 @@ Player::Player (GtkWidget* videoWindow, GtkWidget* camLabel, Config *config)
 	gst_object_unref (bus);
 
 	g_timeout_add (500, freeze_check, this); // run freeze check every x milliseconds	
-
-
-
 }
 
 Player::~Player() 
@@ -54,34 +54,34 @@ void Player::buildPipeline()
 	pipeline = gst_pipeline_new("pipeline");
 
 	#ifdef ON_JETSON
-		cout << "JETSON" << endl;
+		cout << "JETSON" << endl << endl;
 		dec = gst_element_factory_make("omxh264dec", "dec");
 		sink = gst_element_factory_make("nveglglessink", "sink");
 
 		if (!pipeline ||  !src || !testsrc || !depay || !parse || !dec || !sink)
 		{
-			cerr << "Not all pipeline elements could be created" << endl;
+			cerr << "Not all pipeline elements could be created" << endl << endl;
 		} 
 
 		gst_bin_add_many(GST_BIN(pipeline), src, testsrc, depay, parse, dec, sink, NULL);
 
 		if (!gst_element_link_many(depay, parse, dec, sink, NULL))
-			cerr << "Pipeline linking error" << endl;
+			cerr << "Pipeline linking error" << endl << endl;
 
 	#else
-		cout << "Not JETSON" << endl;
+		cout << "Not JETSON" << endl << endl;
 		dec = gst_element_factory_make("avdec_h264", "dec");
 		scale = gst_element_factory_make("videoscale", "scale");
 		sink = gst_element_factory_make("autovideosink", "sink");
 		if (!pipeline ||  !src || !testsrc || !depay || !parse || !dec || !scale || !sink)
 		{
-			cerr << "Not all pipeline elements could be created" << endl;
+			cerr << "Not all pipeline elements could be created" << endl << endl;
 		} 
 
 		gst_bin_add_many(GST_BIN(pipeline), src, testsrc, depay, parse, dec, scale, sink, NULL);
 
 		if (!gst_element_link_many(depay, parse, dec, scale, sink, NULL))
-			cerr << "Pipeline linking error" << endl;
+			cerr << "Pipeline linking error" << endl << endl;
 	#endif
 
 	
@@ -89,6 +89,11 @@ void Player::buildPipeline()
 	g_object_set (src, "latency", 0, NULL);
 	g_object_set (src, "tcp-timeout", 200000, NULL);
 	g_object_set (src, "timeout", 200000 , NULL);
+
+	 g_object_set(testsrc, 
+	// "do-timestamp", true,
+	"pattern", 13,
+	 NULL);
 
 
 	/* Signal to handle new source pad*/
@@ -109,44 +114,42 @@ void Player::playStream(string cam_id)
 	{
 		if (!relinkElements(testsrc, dec, scale))
 		{
-			cerr << "Failed to relink stream in player" << endl;
+			cerr << "Failed to relink stream in player" << endl << endl;
 			return;
 		}
-		else
-			cerr << "playStream: relinked" << endl;
 	}
-	else
-		cerr << "playStream: stream linked" << endl;
 
 	// lastBufferTime = -1; 
 
-	cout << "Playing " << config->getCamUri(cam_id).c_str() << endl;
+	cout << "Playing " << config->getCamUri(cam_id).c_str() << endl << endl;
 	// g_object_set (G_OBJECT (pipeline), "uri", config->getCamUri(cam_id).c_str(), NULL);
 	g_object_set (src, "location", config->getCamUri(cam_id).c_str(), NULL);
 
 	gst_element_set_state (pipeline, GST_STATE_PLAYING);
+	gst_element_set_state(testsrc, GST_STATE_READY);
 
-
-
-
+	streamLinked = true;
 }
 
 
 bool Player::showTest()
 {
 	/* Check if test is already linked */
-	if (elementSrcLinked(testsrc))
+	// if (elementSrcLinked(testsrc))
+	// 	return true;
+	if (streamLinked == false)
 		return true;
 
 	gst_element_set_state (pipeline, GST_STATE_READY);
 	/* Link testsrc */
 	if (relinkElements(dec, testsrc, scale))
 	{
-		cerr << "Linked test in player" << endl;
+		cerr << "Linked test in player" << endl << endl;
+		streamLinked = false;
 	}
 	else
 	{
-		cerr << "Failed to link test in player" << endl;
+		cerr << "Failed to link test in player" << endl << endl;
 		return false;
 	}
 
@@ -158,23 +161,28 @@ bool Player::showTest()
 bool Player::showStream()
 {
 	/* Check if stream is already linked */
-	if (elementSrcLinked(dec))
-	{
+	// if (elementSrcLinked(dec))
+	// {
+	// 	return true;
+	// }
+	if (streamLinked)
 		return true;
-	}
 	
 	/* Relinling */
 	gst_element_set_state (pipeline, GST_STATE_READY);
 	
 	if (relinkElements(testsrc, dec, scale))
 	{
-		cerr << "Relinked stream in player" << endl;
+		cerr << "Relinked stream in player" << endl << endl;
+		streamLinked = true;
 	}
 	else
 	{
-		cerr << "Failed to relink stream in player" << endl;
+		cerr << "Failed to relink stream in player" << endl << endl;
 	}
 	gst_element_set_state(pipeline, GST_STATE_PLAYING);
+	gst_element_set_state(testsrc, GST_STATE_READY);
+
 	return true;
 
 }
@@ -202,7 +210,9 @@ GstBusSyncReply Player::busSyncHandler (GstBus *bus, GstMessage *message, Player
 			gchar *debug;
 
 			gst_message_parse_error (message, &err, &debug);
-			// cerr << "Bus: " << err->message << endl;
+			cerr << "Player bus:" <<endl;
+			cerr << err->message << endl;
+			cerr << debug << endl << endl;
 			break;
 		}
 		case GST_MESSAGE_ELEMENT:
@@ -213,7 +223,7 @@ GstBusSyncReply Player::busSyncHandler (GstBus *bus, GstMessage *message, Player
 		}
 		case GST_MESSAGE_EOS:
 		{
-			cerr << "Bus: EOS" << endl;
+			cerr << "Player bus: EOS" << endl << endl;
 			break;
 		}
 		default:
@@ -287,7 +297,7 @@ void Player::pad_added_handler (GstElement * src, GstPad * new_pad, Player *play
 	}
 	else 
 	{       
-		cerr << "Linked source" << endl;
+		// cerr << "Linked source" << endl;
 		// Add data probe to remember the last received video buffer time
 		gst_pad_add_probe(new_pad, GST_PAD_PROBE_TYPE_BUFFER, data_probe, player, NULL);
 	}

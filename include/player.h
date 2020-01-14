@@ -46,6 +46,8 @@ private:
 	GtkWidget *videoWindow, *camLabel;
 	GstBus *bus;
 
+	bool streamLinked;
+
 	void buildPipeline();
 
 	// Video rendering using GTK
@@ -59,7 +61,7 @@ private:
 	static void pad_added_handler (GstElement * src, GstPad * new_pad, Player *player);
 
 	// Functions to catch a freeze
-	static GstPadProbeReturn data_probe (GstPad *pad, GstPadProbeInfo *info,   gpointer user_data);
+	static GstPadProbeReturn data_probe (GstPad *pad, GstPadProbeInfo *info, gpointer user_data);
 	static gboolean freeze_check(gpointer user_data);
 };
 

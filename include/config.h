@@ -24,12 +24,12 @@ public:
     }
     void parseFile(string configPath);
 
-    string getParam(string name){ return configuration[name]; }
-    int getParamInt(string name) { return stoi(configuration[name]); }
-    string getCamUri(string cam) { return cameras[cam]; }
-    int getCamCount() { return cameras.size(); }
-    map<string, string> getCams() { return cameras; }
-
+    string getParam(string name);
+    int getParamInt(string name);
+    string getCamUri(string cam);
+    int getCamCount();
+    map<string, string> getCams();
+    
 private:
     Config(){};
     Config(const Config&);

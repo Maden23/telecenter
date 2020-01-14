@@ -57,6 +57,9 @@ private:
 	void initPlayerWidgets();
 	void initMenuWidgets();
 
+	/* Initiate check on running recordings status*/
+	static gboolean checkRecordings(gpointer user_data); 
+
 };
 
 void displayPlayer(GtkWidget* widget, gpointer *data);
