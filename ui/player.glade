@@ -5,7 +5,8 @@
   <object class="GtkWindow" id="player">
     <property name="can_focus">False</property>
     <child>
-      <object class="GtkOverlay">
+      <object class="GtkOverlay" id="playerOverlay">
+        <property name="name">playerOverlay</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <child>
@@ -18,14 +19,24 @@
           </packing>
         </child>
         <child type="overlay">
-          <object class="GtkLabel" id="playerLabel">
+          <object class="GtkFrame">
+            <property name="name">playerLabelFrame</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="halign">start</property>
             <property name="valign">start</property>
-            <attributes>
-              <attribute name="background" value="#d3d3d7d7cfcf"/>
-            </attributes>
+            <property name="label_xalign">0</property>
+            <property name="shadow_type">none</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child type="label">
+              <object class="GtkLabel" id="playerLabel">
+                <property name="name">playerLabel</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+              </object>
+            </child>
           </object>
         </child>
       </object>

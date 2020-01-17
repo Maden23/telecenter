@@ -126,21 +126,21 @@ static GstBusSyncReply busSyncHandler (GstBus *bus, GstMessage *message, Player 
 			gchar *debug;
 
 			gst_message_parse_error (message, &err, &debug);
-			// cerr << "Bus: " << err->message << endl;
+			cerr << "Player error: " << err->message << endl;
 			break;
 		}
 		case GST_MESSAGE_ELEMENT:
 		{
 			const GstStructure *s = gst_message_get_structure (message);
 			const gchar *name = gst_structure_get_name (s);
-			cerr << "Bus: " << name << endl;
+			// cerr << "Bus: " << name << endl;
 			// gst_element_set_state(player->pipeline, GST_STATE_PAUSED);
 			// gst_element_set_state(player->pipeline, GST_STATE_PLAYING);
 			break;
 		}
 		case GST_MESSAGE_EOS:
 		{
-			cerr << "Bus: EOS" << endl;
+			cerr << "Player bus: EOS" << endl;
 			break;
 		}
 		default:

@@ -77,8 +77,7 @@ bool Recorder::stopRecording(string uri)
     waitpid(runningRecorders[uri], nullptr, 0);
     cout << "Recording of " << uri << " stopped." << endl;
 
-    if (!uploadVideo(uri))
-	cout << "Failed to upload " << fileNames[uri] << " to Google Drive." << endl;
+    uploadVideo(uri);
     return true;
 }
 
@@ -86,10 +85,8 @@ bool Recorder::uploadVideo(string uri)
 {
     string command = "python3 src/video-upload.py";
     command += " " + fileNames[uri];
-    command += " " + config->getParam("saveToFolder");
+    command += " " + config->getParam("saveToFolder"); 
+    command += " &";
     cout << "Running " << command << endl;
-    if (system(command.c_str()))
-	return true;
-    else
-	return false;
+    system(command.c_str());
 }

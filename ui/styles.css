@@ -1,20 +1,26 @@
-label {
-	font-size: 2em;
-	font-family: Quicksand;
-	margin-top: 33px;
-	margin-bottom: 33px;	
+window#menu {
+	background-color: #444444;
 }
 
-button > label {
-	font-size: 2em;
-	font-family: Quicksand;
-	margin-left: 100px;
-	margin-right: 100px;
+button {
+	background-color: #444444;
+	background-image: none;
+	color: white;
+	-GtkWidget-focus-line-width: 5px;
 }
 
-check {
-	min-width: 30px;
-	min-height: 30px;
-	margin-left: 10px;
-	margin-right: 5px;
+button label {
+	font-size: 2em;
+	font-family: Quicksand;
+	color: white;
+}
+
+label#playerLabel {
+	color: white;
+	font-size: 2em;
+	font-family: Quicksand;
+}
+
+#playerLabelFrame {
+	background-color: black;
 }

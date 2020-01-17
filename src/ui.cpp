@@ -5,19 +5,12 @@ UI::UI(Config *config)
     this->config = config;
 
     gtk_init (nullptr, nullptr);
-
-    /* Init styles */
-    int res = initStyles();
-
-    if(res == -1) {
-        cerr << "Failed to get styles" << endl;
-    }
-
+    
     /* Init windows */
-    menuBuilder = nullptr;
-    menuWindow = windowInit(&menuBuilder, "ui/menu.glade", "menu");
     playerBuilder = nullptr;
     playerWindow = windowInit(&playerBuilder, "ui/player.glade", "player");
+    menuBuilder = nullptr;
+    menuWindow = windowInit(&menuBuilder, "ui/menu.glade", "menu");
     
     if(menuWindow == nullptr || menuBuilder == nullptr || playerWindow == nullptr || playerBuilder == nullptr) {
         cerr << "Failed to init builder" << endl;
@@ -25,9 +18,9 @@ UI::UI(Config *config)
     }
 
     /* Set window size */
-    gtk_widget_set_size_request(menuWindow, stoi(config->getParam("windowWidth")),
-            stoi(config->getParam("windowHight")));
     gtk_widget_set_size_request(playerWindow, stoi(config->getParam("windowWidth")),
+            stoi(config->getParam("windowHight")));
+    gtk_widget_set_size_request(menuWindow, stoi(config->getParam("windowWidth")),
             stoi(config->getParam("windowHight")));
 
     /* Start/stop recording on key press */
@@ -41,19 +34,23 @@ UI::UI(Config *config)
     player = new Player(playerWidget, playerLabel, config);
     initMenuWidgets();
 
-	
+	/* Init styles */
+    int res = initStyles();
+    if(res == -1) {
+        cerr << "Failed to get styles" << endl;
+    }
+
     g_signal_connect(menuWindow, "destroy", G_CALLBACK (gtk_main_quit), NULL);
-    initStyles();
     /* Place windows */
-    GdkScreen *screen = gdk_screen_get_default();
-    gtk_window_fullscreen_on_monitor(GTK_WINDOW(menuWindow), screen, 0);
-    gtk_widget_show(menuWindow);
-    gtk_window_fullscreen_on_monitor(GTK_WINDOW(playerWindow), screen, 1);
-    gtk_widget_show(playerWindow);
+    // GdkScreen *screen = gdk_screen_get_default();
+    // gtk_window_fullscreen_on_monitor(GTK_WINDOW(menuWindow), screen, 0);
+    // gtk_widget_show(menuWindow);
+    // gtk_window_fullscreen_on_monitor(GTK_WINDOW(playerWindow), screen, 1);
+    // gtk_widget_show(playerWindow);
     
     /* For one screen */
-    //gtk_window_present(GTK_WINDOW(menuWindow));
-    //gtk_window_present(GTK_WINDOW(playerWindow));
+    gtk_window_present(GTK_WINDOW(playerWindow));
+    gtk_window_present(GTK_WINDOW(menuWindow));
 
     gtk_main();
 }
@@ -79,7 +76,8 @@ int UI::initStyles() {
       g_error_free(err);
       return -1;
     }
-    gtk_style_context_add_provider_for_screen(gdk_screen_get_default(), (GtkStyleProvider*) css_provider, GTK_STYLE_PROVIDER_PRIORITY_USER);
+
+    // gtk_style_context_add_provider_for_screen(gdk_screen_get_default(), (GtkStyleProvider*) css_provider, GTK_STYLE_PROVIDER_PRIORITY_USER);
     return 0;
 }
 
@@ -112,14 +110,12 @@ GtkWidget* UI::windowInit(GtkBuilder** builder, string gladeFile, string windowN
 
     gtk_widget_set_size_request (GTK_WIDGET(window), 1920, 550);
 
-
     gtk_builder_connect_signals(*builder,nullptr);
 
     g_signal_connect (G_OBJECT (window), "destroy", gtk_main_quit, nullptr);
 
     return window;
 }
-
 
 void UI::initPlayerWidgets()
 {
@@ -130,8 +126,6 @@ void UI::initPlayerWidgets()
         cerr << "Player widget not found." << endl;
     }
 
-
-
     /* Find cam label */
     playerLabel = (GtkWidget*)gtk_builder_get_object(playerBuilder, "playerLabel");
     if (!playerLabel)
@@ -139,7 +133,6 @@ void UI::initPlayerWidgets()
         cerr << "Player label not found." << endl;
     }
 }
-
 
 void UI::initMenuWidgets()
 {
