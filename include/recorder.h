@@ -36,5 +36,5 @@ private:
     map<string, pid_t> runningRecorders; //stream uri, pid
     map<string, string> fileNames; //stream uri, filename
     Config *config;
-    bool uploadVideo(string uri);
+    void uploadVideo(string uri);
 };

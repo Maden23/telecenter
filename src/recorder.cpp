@@ -17,6 +17,11 @@ Recorder::~Recorder()
 
 pid_t Recorder::startRecording(string uri, string fileName)
 {
+    if (runningRecorders.find(uri) != runningRecorders.end())
+    {
+        cout << uri << " is already recording. PID: " << runningRecorders[uri] << endl << endl;;
+        return false;
+    }
     pid_t pid = fork();
     
     if (pid == -1) {
@@ -34,8 +39,6 @@ pid_t Recorder::startRecording(string uri, string fileName)
             fileName = stream + "_" + string(datetime) + ".mp4"; 
         }
     fileNames[uri] = fileName;
-    cout << fileName << endl;
-
 
     if (pid == 0) {
         // string logsFile = config->getParam("saveToFolder") + "logs/" + to_string(getpid()) + ".logs";
@@ -49,7 +52,7 @@ pid_t Recorder::startRecording(string uri, string fileName)
         // dup2(fd, 1);
         // dup2(fd, 2);
 
-        execlp("gst-launch-1.0", "-e", "rtspsrc", ("location=" + uri).c_str(),
+        execlp("gst-launch-1.0", "-e", "--quiet", "rtspsrc", ("location=" + uri).c_str(),
        "protocols=tcp", "!", "rtph264depay", "name=vdepay", "!", "mpegtsmux", "name=mux", 
        "!", "filesink", ("location=" + config->getParam("saveToFolder") + fileName).c_str(), nullptr);
 
@@ -57,7 +60,7 @@ pid_t Recorder::startRecording(string uri, string fileName)
     else
     {
         runningRecorders[uri] = pid;
-        cout << "Recording of " << uri << " started. Proccess id: " << pid << endl;
+        cout << "Recording of " << uri << " started. Proccess id: " << pid << endl << endl;
     }
 
     return pid;
@@ -66,27 +69,32 @@ pid_t Recorder::startRecording(string uri, string fileName)
 bool Recorder::stopRecording(string uri)
 {
     cout << "Trying to stop recording of " << uri << endl;
-    cout << "File name: " << fileNames[uri] << endl;
     if (runningRecorders.find(uri) == runningRecorders.end())
     {
-        cout << "Failed" << endl;
-        cerr << "No running recording process found for " << uri << endl;;
+        cout << "No recording found" << endl << endl;
+        cerr << "No running recording process found for " << uri << endl << endl;
         return false;
     }
     kill(runningRecorders[uri], SIGINT);
     waitpid(runningRecorders[uri], nullptr, 0);
     cout << "Recording of " << uri << " stopped." << endl;
+    cout << "File name: " << fileNames[uri] << endl << endl;
+
+    runningRecorders.erase(uri);
 
     uploadVideo(uri);
     return true;
 }
 
-bool Recorder::uploadVideo(string uri)
+void Recorder::uploadVideo(string uri)
 {
     string command = "python3 src/video-upload.py";
     command += " " + fileNames[uri];
     command += " " + config->getParam("saveToFolder"); 
     command += " &";
-    cout << "Running " << command << endl;
+
+    fileNames.erase(uri);
+
+    cout << "Running " << command << endl << endl;
     system(command.c_str());
 }

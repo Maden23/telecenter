@@ -229,8 +229,7 @@ gboolean keyPress(GtkWidget* widget, GdkEventKey *event, UI *ui)
 
         if (ui->playingCam != "")
         {
-            if (!ui->recorder->startRecording(ui->config->getCamUri(ui->playingCam)))
-                return false;
+            ui->recorder->startRecording(ui->config->getCamUri(ui->playingCam));
             gtk_widget_show(ui->recImages[ui->playingCam]);
         }
     }
