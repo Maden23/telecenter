@@ -43,8 +43,6 @@ public:
 	
 private:
 	Player *player;
-
-
 	GtkBuilder *menuBuilder, *playerBuilder;
 	GtkWidget *menuWindow, *playerWindow;
 	GtkWidget *playerWidget, *playerLabel;

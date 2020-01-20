@@ -35,3 +35,33 @@ void Config::parseFile(string configPath)
         cout << cam.first << " : " << cam.second << endl;
     }
 }
+string Config::getParam(string name)
+{ 
+    if (configuration.find(name) == configuration.end())
+        return "";
+    return configuration[name]; 
+}
+
+int Config::getParamInt(string name)
+{
+    if (configuration.find(name) == configuration.end())
+        return -1;
+    return stoi(configuration[name]); 
+}
+
+
+
+string Config::getCamUri(string cam)
+{
+    return cameras[cam];
+}
+
+int Config::getCamCount() 
+{
+    return cameras.size(); 
+}
+
+map<string, string> Config::getCams() 
+{ 
+    return cameras; 
+}
