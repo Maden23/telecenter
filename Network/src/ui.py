@@ -15,12 +15,18 @@ class UIGraph(QtWidgets.QWidget):
         uic.loadUi('../ui/graph.ui', self) # Load the .ui file
         self.show() # Show the GUI
 
+
 app = QtWidgets.QApplication([])
 
+# Init menu window and apply styles
 menu = UIMenu()
+stylesheet = open("../ui/stylesheet.css", "r")
+menu.setStyleSheet(stylesheet.read())
 menu.resize(540, 360)
 
+# Init graph window and apply styles
 graph = UIGraph()
+graph.setStyleSheet(stylesheet.read())
 graph.resize(540, 360)
 
 sys.exit(app.exec())

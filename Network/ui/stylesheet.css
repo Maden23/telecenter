@@ -1,0 +1,10 @@
+QMainWindow {
+	background-color: #444444;
+}
+
+QPushButton {
+	background-color: #444444;
+	color: white;
+	font-family: Quicksand;
+	font-size: 2em;
+}

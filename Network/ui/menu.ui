@@ -15,6 +15,15 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
+    <property name="sizeConstraint">
+     <enum>QLayout::SetDefaultConstraint</enum>
+    </property>
+    <property name="bottomMargin">
+     <number>0</number>
+    </property>
+    <property name="spacing">
+     <number>0</number>
+    </property>
     <item row="0" column="0">
      <widget class="QFrame" name="frame">
       <property name="enabled">
@@ -27,8 +36,23 @@
        <enum>QFrame::Raised</enum>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
+       <property name="spacing">
+        <number>3</number>
+       </property>
+       <property name="leftMargin">
+        <number>2</number>
+       </property>
+       <property name="topMargin">
+        <number>2</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>5</number>
+       </property>
        <item>
-        <widget class="QPushButton" name="b1">
+        <widget class="QPushButton" name="b0">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -36,7 +60,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>PushButton</string>
+          <string>Cam</string>
          </property>
          <property name="flat">
           <bool>false</bool>
@@ -44,9 +68,9 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="l1">
+        <widget class="QLabel" name="l0">
          <property name="text">
-          <string>TextLabel</string>
+          <string>ping ms</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -65,8 +89,23 @@
        <enum>QFrame::Raised</enum>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
+       <property name="spacing">
+        <number>3</number>
+       </property>
+       <property name="leftMargin">
+        <number>2</number>
+       </property>
+       <property name="topMargin">
+        <number>2</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>5</number>
+       </property>
        <item>
-        <widget class="QPushButton" name="b2">
+        <widget class="QPushButton" name="b1">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -74,7 +113,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>PushButton</string>
+          <string>Cam</string>
          </property>
          <property name="flat">
           <bool>false</bool>
@@ -82,9 +121,9 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="l2">
+        <widget class="QLabel" name="l1">
          <property name="text">
-          <string>TextLabel</string>
+          <string>ping ms</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -103,8 +142,23 @@
        <enum>QFrame::Raised</enum>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
+       <property name="spacing">
+        <number>3</number>
+       </property>
+       <property name="leftMargin">
+        <number>2</number>
+       </property>
+       <property name="topMargin">
+        <number>2</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>5</number>
+       </property>
        <item>
-        <widget class="QPushButton" name="b3">
+        <widget class="QPushButton" name="b2">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -112,7 +166,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>PushButton</string>
+          <string>Cam</string>
          </property>
          <property name="flat">
           <bool>false</bool>
@@ -120,9 +174,9 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="l3">
+        <widget class="QLabel" name="l2">
          <property name="text">
-          <string>TextLabel</string>
+          <string>ping ms</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -141,8 +195,23 @@
        <enum>QFrame::Raised</enum>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_4">
+       <property name="spacing">
+        <number>3</number>
+       </property>
+       <property name="leftMargin">
+        <number>2</number>
+       </property>
+       <property name="topMargin">
+        <number>2</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>5</number>
+       </property>
        <item>
-        <widget class="QPushButton" name="b4">
+        <widget class="QPushButton" name="b3">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -150,7 +219,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>PushButton</string>
+          <string>Cam</string>
          </property>
          <property name="flat">
           <bool>false</bool>
@@ -158,9 +227,9 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="l4">
+        <widget class="QLabel" name="l3">
          <property name="text">
-          <string>TextLabel</string>
+          <string>ping ms</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -179,8 +248,23 @@
        <enum>QFrame::Raised</enum>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_5">
+       <property name="spacing">
+        <number>3</number>
+       </property>
+       <property name="leftMargin">
+        <number>2</number>
+       </property>
+       <property name="topMargin">
+        <number>2</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>5</number>
+       </property>
        <item>
-        <widget class="QPushButton" name="b5">
+        <widget class="QPushButton" name="b4">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -188,7 +272,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>PushButton</string>
+          <string>Cam</string>
          </property>
          <property name="flat">
           <bool>false</bool>
@@ -196,9 +280,9 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="l5">
+        <widget class="QLabel" name="l4">
          <property name="text">
-          <string>TextLabel</string>
+          <string>ping ms</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -217,8 +301,23 @@
        <enum>QFrame::Raised</enum>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_6">
+       <property name="spacing">
+        <number>3</number>
+       </property>
+       <property name="leftMargin">
+        <number>2</number>
+       </property>
+       <property name="topMargin">
+        <number>2</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>5</number>
+       </property>
        <item>
-        <widget class="QPushButton" name="b6">
+        <widget class="QPushButton" name="b5">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -226,7 +325,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>PushButton</string>
+          <string>Cam</string>
          </property>
          <property name="flat">
           <bool>false</bool>
@@ -234,9 +333,9 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="l6">
+        <widget class="QLabel" name="l5">
          <property name="text">
-          <string>TextLabel</string>
+          <string>ping ms</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -255,8 +354,23 @@
        <enum>QFrame::Raised</enum>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_7">
+       <property name="spacing">
+        <number>3</number>
+       </property>
+       <property name="leftMargin">
+        <number>2</number>
+       </property>
+       <property name="topMargin">
+        <number>2</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>5</number>
+       </property>
        <item>
-        <widget class="QPushButton" name="b7">
+        <widget class="QPushButton" name="b6">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -264,7 +378,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>PushButton</string>
+          <string>Cam</string>
          </property>
          <property name="flat">
           <bool>false</bool>
@@ -272,9 +386,9 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="l7">
+        <widget class="QLabel" name="l6">
          <property name="text">
-          <string>TextLabel</string>
+          <string>ping ms</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -293,8 +407,23 @@
        <enum>QFrame::Raised</enum>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_8">
+       <property name="spacing">
+        <number>3</number>
+       </property>
+       <property name="leftMargin">
+        <number>2</number>
+       </property>
+       <property name="topMargin">
+        <number>2</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>5</number>
+       </property>
        <item>
-        <widget class="QPushButton" name="b8">
+        <widget class="QPushButton" name="b7">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -302,7 +431,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>PushButton</string>
+          <string>Cam</string>
          </property>
          <property name="flat">
           <bool>false</bool>
@@ -310,9 +439,9 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="l8">
+        <widget class="QLabel" name="l7">
          <property name="text">
-          <string>TextLabel</string>
+          <string>ping ms</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
@@ -331,8 +460,23 @@
        <enum>QFrame::Raised</enum>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_9">
+       <property name="spacing">
+        <number>3</number>
+       </property>
+       <property name="leftMargin">
+        <number>2</number>
+       </property>
+       <property name="topMargin">
+        <number>2</number>
+       </property>
+       <property name="rightMargin">
+        <number>0</number>
+       </property>
+       <property name="bottomMargin">
+        <number>5</number>
+       </property>
        <item>
-        <widget class="QPushButton" name="b9">
+        <widget class="QPushButton" name="b8">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
            <horstretch>0</horstretch>
@@ -340,7 +484,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>PushButton</string>
+          <string>Cam</string>
          </property>
          <property name="flat">
           <bool>false</bool>
@@ -348,9 +492,9 @@
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="l9">
+        <widget class="QLabel" name="l8">
          <property name="text">
-          <string>TextLabel</string>
+          <string>ping ms</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignCenter</set>
