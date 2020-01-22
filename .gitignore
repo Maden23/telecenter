@@ -1,6 +1,7 @@
 # Binary files
 obj/
 recorder
+__pycache__
 
 # Temp files
 *~*
