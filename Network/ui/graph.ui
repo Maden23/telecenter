@@ -30,7 +30,7 @@
     <number>0</number>
    </property>
    <item>
-    <widget class="PlotWidget" name="graphicsView"/>
+    <widget class="PlotWidget" name="plotwidget"/>
    </item>
   </layout>
  </widget>

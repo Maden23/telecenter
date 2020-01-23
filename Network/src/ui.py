@@ -1,8 +1,9 @@
 from PyQt5 import QtWidgets, uic
 from PyQt5.QtCore import QTimer, QRunnable, QThreadPool, pyqtSlot
-import pyqtgraph as pg
 import sys
 
+import pyqtgraph as pg
+import numpy as np
 from pythonping import ping
 
 
@@ -20,46 +21,93 @@ class UIGraph(QtWidgets.QWidget):
 
 class Pinger(QRunnable):
     """ Updates ping information """
-    def __init__(self, ip, button, label):
+    def __init__(self, cam):
         super(Pinger, self).__init__()
-        self.ip = ip
-        self.button = button
-        self.label = label
-    
+        self.cam = cam
+
     # Function for QThreadPool to run in separate thread
     @pyqtSlot()
     def run(self):
-        responseList = ping(self.ip, verbose = False, count = 1)
+        responseList = ping(self.cam.ip, verbose = False, count = 1)
+        # print(cam.ip, responseList)
         for r in responseList:
             response = r
+            if response.error_message:
+                time = 0
+            else:
+                time = response.time_elapsed_ms
+
+            self.cam.setPing(response.error_message, time)
             
-        if response.error_message:
-            self.label.setText(response.error_message)
+
+
+class Grapher():
+    """Draws a graph on PlotWidget"""
+    def __init__(self, plot):
+        self.plot = plot
+
+        self.curve = None
+        self.activeCam = None      
+        self.data = None  
+
+
+    def setData(self, cam, data):
+        # Data is accepted only from active cam
+        if cam != self.activeCam:
+            return
+        self.data = data
+        self.curve.setData(data)
+
+
+    def changeCam(self, cam):
+        """Set name or ip of camera, which data should be drawn"""
+        self.activeCam = cam
+        # Add plot line with title according to camera name
+        self.plot.clear()  
+        self.plot.setTitle(cam)
+        self.curve = plot.plot()
+
+
+
+class Camera():
+    """Containes all camera information and ui objects"""
+    def __init__(self, threadpool, ip, button, label, grapher):
+        self.threadpool = threadpool
+        self.ip = ip
+        self.button = button
+        self.label = label
+
+        self.grapher = grapher
+        self.pingHistory = np.zeros(50)
+
+    def setPing(self, error, time):
+        print(self.ip)
+        if error:
+            self.label.setText(error)
             self.label.setStyleSheet("color: white;")
-            # print(response.error_message)
         else:
-            time = response.time_elapsed_ms
             self.label.setText(str(time) + " ms")
+            # Set style for labels
             if time < 50:
                 self.label.setStyleSheet("color: green;")
             elif time >= 50 and time < 200:
                 self.label.setStyleSheet("color: yellow;")
             elif time >= 200:
                 self.label.setStyleSheet("color: red;")
-            # print(response.time_elapsed_ms)
 
+        # Update history (add new ping to array front)
+        self.pingHistory = np.roll(self.pingHistory, 1)
+        self.pingHistory[0] = time
+        # Reverse passed array (old - first, new - last)
+        self.grapher.setData(self.ip, np.flip(self.pingHistory))
 
-class Camera():
-    """Containes all camera information and ui objects"""
-    def __init__(self, threadpool, ip, button, label):
-        self.threadpool = threadpool
-        self.ip = ip
-        self.button = button
-        self.label = label
-
-    def update(self):
-        pinger = Pinger(self.ip, self.button, self.label)
+    def updatePing(self):
+        pinger = Pinger(self)
         threadpool.start(pinger)
+
+    # @pyqtSlot()
+    def drawMe(self):
+        grapher.changeCam(self.ip)
 
          
 camList = {
@@ -89,24 +137,33 @@ graph = UIGraph()
 graph.setStyleSheet(stylesheet.read())
 graph.resize(540, 360)
 
+# Add graph drawer 
+widget = graph.findChild(pg.PlotWidget, "plotwidget")
+plot = widget.getPlotItem()
+grapher = Grapher(plot)
+
 # Create threadpool to update ping values in a separate thread
 threadpool = QThreadPool()
 
 # Attach buttons and ping labels to cameras
 cams = []
 i = 0
-for cam in camList:
+for c in camList:
     button = menu.findChild(QtWidgets.QPushButton, "b" + str(i))
-    button.setText(cam)
+    button.setText(c)
     label = menu.findChild(QtWidgets.QLabel, "l" + str(i))
-    # Pass threadpool, ip and ui objects
-    cams.append(Camera(threadpool, camList[cam], button, label))
+    # Pass threadpool, ip and ui controls
+    camera = Camera(threadpool, camList[c], button, label, grapher)
+    cams.append(camera)
+    # Draw graph of this camera on click
+    button.clicked.connect(camera.drawMe)
+
     i+=1
 
 # Update cam information periodically in separate thread
 pingTimer = QTimer()
 for cam in cams:
-    pingTimer.timeout.connect(cam.update)
+    pingTimer.timeout.connect(cam.updatePing)
 pingTimer.start(1000)
 
 # Start Qt app
