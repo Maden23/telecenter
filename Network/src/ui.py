@@ -81,12 +81,13 @@ class Camera():
         self.pingHistory = np.zeros(50)
 
     def setPing(self, error, time):
-        print(self.ip)
         if error:
             self.label.setText(error)
             self.label.setStyleSheet("color: white;")
-        else:
+        elif time and self.label:
             self.label.setText(str(time) + " ms")
+            # print(self.ip)
+
             # Set style for labels
             if time < 50:
                 self.label.setStyleSheet("color: green;")
@@ -130,12 +131,20 @@ app = QtWidgets.QApplication([])
 menu = UIMenu()
 stylesheet = open("../ui/stylesheet.css", "r")
 menu.setStyleSheet(stylesheet.read())
-menu.resize(540, 360)
+# Move to the first screen
+# menu.resize(540, 360)
+display0 = QtWidgets.QDesktopWidget().screenGeometry(0)
+menu.move(display0.left(), display0.top())
+menu.showFullScreen()
 
 # Init graph window and apply styles
 graph = UIGraph()
 graph.setStyleSheet(stylesheet.read())
-graph.resize(540, 360)
+# Move to the second screen
+# graph.resize(540, 360)
+display1 = QtWidgets.QDesktopWidget().screenGeometry(1)
+graph.move(display1.left(), display1.top())
+graph.showFullScreen()
 
 # Add graph drawer 
 widget = graph.findChild(pg.PlotWidget, "plotwidget")
