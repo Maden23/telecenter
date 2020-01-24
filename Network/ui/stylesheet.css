@@ -6,10 +6,10 @@ QPushButton {
 	background-color: #444444;
 	color: white;
 	font-family: Quicksand;
-	font-size: 26pt;
+	font-size: 40pt;
 }
 
 QLabel {
 	font-family: Quicksand;
-	font-size: 18pt;
+	font-size: 30pt;
 }

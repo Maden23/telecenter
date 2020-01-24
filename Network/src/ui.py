@@ -1,4 +1,5 @@
 from PyQt5 import QtWidgets, uic
+from PyQt5.QtGui import QFont
 from PyQt5.QtCore import QTimer, QRunnable, QThreadPool, pyqtSlot
 import sys
 
@@ -64,8 +65,12 @@ class Grapher():
         self.activeCam = cam
         # Add plot line with title according to camera name
         self.plot.clear()  
-        self.plot.setTitle(cam)
+        # Format graph title
+        self.plot.setTitle(cam, size='25pt', color='w')
+        
+        # Format graph line
         self.curve = plot.plot()
+        self.curve.setPen('w', width=3)
 
 
 
@@ -146,9 +151,24 @@ display1 = QtWidgets.QDesktopWidget().screenGeometry(1)
 graph.move(display1.left(), display1.top())
 graph.showFullScreen()
 
-# Add graph drawer 
+# Get pyqtgraph PlotItem and pass it to Grapher
 widget = graph.findChild(pg.PlotWidget, "plotwidget")
 plot = widget.getPlotItem()
+# Format axis
+plot.showAxis('right', True)
+rightAxis = plot.getAxis('right')
+leftAxis = plot.getAxis('left')
+labelStyle = {'color': '#FFF', 'font-size': '20pt'}
+leftAxis.setLabel('ping', units='ms', **labelStyle)
+font = QFont()
+font.setPixelSize(20)
+rightAxis.tickFont = font
+leftAxis.tickFont = font
+leftAxis.setPen('w')
+rightAxis.setPen('w')
+
+# Add grid
+plot.showGrid(x=True, y=True, alpha=1.0)
 grapher = Grapher(plot)
 
 # Create threadpool to update ping values in a separate thread
