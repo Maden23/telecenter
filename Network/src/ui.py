@@ -5,7 +5,8 @@ import sys
 
 import pyqtgraph as pg
 import numpy as np
-from pythonping import ping
+import shlex  
+from subprocess import Popen, PIPE, STDOUT
 
 
 class UIMenu(QtWidgets.QMainWindow):
@@ -26,21 +27,25 @@ class Pinger(QRunnable):
         super(Pinger, self).__init__()
         self.cam = cam
 
-    # Function for QThreadPool to run in separate thread
+    def _runCmd(self, cmd, stderr=STDOUT):
+        """ Run commend and get output """
+        args = shlex.split(cmd)
+        return Popen(args, stdout=PIPE, stderr=stderr, encoding='utf8').communicate()[0]
+
     @pyqtSlot()
     def run(self):
-        responseList = ping(self.cam.ip, verbose = False, count = 1)
-        # print(cam.ip, responseList)
-        for r in responseList:
-            response = r
-            if response.error_message:
-                time = 0
-            else:
-                time = response.time_elapsed_ms
-
-            self.cam.setPing(response.error_message, time)
+        """ Function for QThreadPool to run in separate thread """
+        cmd = "fping {host} -C 1".format(host=self.cam.ip)
+        # Command output: "<ip> : <time>" OR "<ip> : - " if no response was received
+        response = self._runCmd(cmd).split(" : ")[-1].strip()
+        if (response == '-'):
+            error = 'No response'
+            time = 0
+        else:
+            error = None
+            time = float(response)
+        self.cam.setPing(error, time)
             
-
 
 class Grapher():
     """Draws a graph on PlotWidget"""
@@ -73,7 +78,6 @@ class Grapher():
         self.curve.setPen('w', width=3)
 
 
-
 class Camera():
     """Containes all camera information and ui objects"""
     def __init__(self, threadpool, ip, button, label, grapher):
@@ -84,6 +88,7 @@ class Camera():
 
         self.grapher = grapher
         self.pingHistory = np.zeros(50)
+
 
     def setPing(self, error, time):
         if error:
@@ -107,9 +112,11 @@ class Camera():
         # Reverse passed array (old - first, new - last)
         self.grapher.setData(self.ip, np.flip(self.pingHistory))
 
+
     def updatePing(self):
         pinger = Pinger(self)
         threadpool.start(pinger)
+
 
     # @pyqtSlot()
     def drawMe(self):
@@ -127,7 +134,6 @@ camList = {
     '32': '172.18.199.32',
     '42': '192.168.15.42',   
 }
-
 
 
 app = QtWidgets.QApplication([])
@@ -193,7 +199,7 @@ for c in camList:
 pingTimer = QTimer()
 for cam in cams:
     pingTimer.timeout.connect(cam.updatePing)
-pingTimer.start(1000)
+pingTimer.start(500)
 
 # Start Qt app
 sys.exit(app.exec())
