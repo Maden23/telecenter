@@ -43,6 +43,8 @@ private:
 	// Video rendering using GTK
 	guintptr videoWindowHandle = 0;
 	static void videoWidgetRealize_cb (GtkWidget *widget, Player *player);
+	static gboolean videoWidgetDraw_cb (GtkWidget *widget, cairo_t *cr, gpointer user_data);
+
 
 	// Handelling bus messages (incuding 'prepare-window-handle' for rendering video)
 	static GstBusSyncReply busSyncHandler (GstBus *bus, GstMessage *message, Player *player);
