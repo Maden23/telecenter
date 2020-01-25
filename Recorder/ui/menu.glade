@@ -35,7 +35,7 @@
                 <property name="margin_right">5</property>
                 <property name="margin_bottom">5</property>
                 <property name="stock">gtk-media-record</property>
-                <property name="icon_size">1</property>
+                <property name="icon_size">6</property>
               </object>
             </child>
           </object>
@@ -66,7 +66,7 @@
                 <property name="margin_right">5</property>
                 <property name="margin_bottom">5</property>
                 <property name="stock">gtk-media-record</property>
-                <property name="icon_size">1</property>
+                <property name="icon_size">6</property>
               </object>
             </child>
           </object>
@@ -97,7 +97,7 @@
                 <property name="margin_right">5</property>
                 <property name="margin_bottom">5</property>
                 <property name="stock">gtk-media-record</property>
-                <property name="icon_size">1</property>
+                <property name="icon_size">6</property>
               </object>
             </child>
           </object>
@@ -128,7 +128,7 @@
                 <property name="margin_right">5</property>
                 <property name="margin_bottom">5</property>
                 <property name="stock">gtk-media-record</property>
-                <property name="icon_size">1</property>
+                <property name="icon_size">6</property>
               </object>
             </child>
           </object>
@@ -159,7 +159,7 @@
                 <property name="margin_right">5</property>
                 <property name="margin_bottom">5</property>
                 <property name="stock">gtk-media-record</property>
-                <property name="icon_size">1</property>
+                <property name="icon_size">6</property>
               </object>
             </child>
           </object>
@@ -190,7 +190,7 @@
                 <property name="margin_right">5</property>
                 <property name="margin_bottom">5</property>
                 <property name="stock">gtk-media-record</property>
-                <property name="icon_size">1</property>
+                <property name="icon_size">6</property>
               </object>
             </child>
           </object>
@@ -221,7 +221,7 @@
                 <property name="margin_right">5</property>
                 <property name="margin_bottom">5</property>
                 <property name="stock">gtk-media-record</property>
-                <property name="icon_size">1</property>
+                <property name="icon_size">6</property>
               </object>
             </child>
           </object>
@@ -252,7 +252,7 @@
                 <property name="margin_right">5</property>
                 <property name="margin_bottom">5</property>
                 <property name="stock">gtk-media-record</property>
-                <property name="icon_size">1</property>
+                <property name="icon_size">6</property>
               </object>
             </child>
           </object>
@@ -283,7 +283,7 @@
                 <property name="margin_right">5</property>
                 <property name="margin_bottom">5</property>
                 <property name="stock">gtk-media-record</property>
-                <property name="icon_size">1</property>
+                <property name="icon_size">6</property>
               </object>
             </child>
           </object>
