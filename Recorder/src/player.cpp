@@ -49,7 +49,8 @@ void Player::buildPipeline()
 
 	pipeline = gst_pipeline_new("pipeline");
 
-	#ifdef ON_JETSON
+	if (config->getParam("platform") == "jetson")
+	{
 		cout << "JETSON" << endl << endl;
 		dec = gst_element_factory_make("omxh264dec", "dec");
 		sink = gst_element_factory_make("nveglglessink", "sink");
@@ -63,8 +64,10 @@ void Player::buildPipeline()
 
 		if (!gst_element_link_many(depay, parse, dec, sink, NULL))
 			cerr << "Pipeline linking error" << endl << endl;
+	}
 
-	#else
+	else if (config->getParam("platform") == "other")
+	{
 		cout << "Not JETSON" << endl << endl;
 		dec = gst_element_factory_make("avdec_h264", "dec");
 		scale = gst_element_factory_make("videoscale", "scale");
@@ -78,8 +81,9 @@ void Player::buildPipeline()
 
 		if (!gst_element_link_many(depay, parse, dec, scale, sink, NULL))
 			cerr << "Pipeline linking error" << endl << endl;
-	#endif
-
+	}
+	else
+		cout << "Platform not specified in config file" << endl << endl;
 	
 	/* Set latency */
 	g_object_set (src, "latency", 0, NULL);

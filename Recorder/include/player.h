@@ -1,7 +1,5 @@
 #include <gtk/gtk.h>
 
-#define ON_JETSON
-
 #if defined (GDK_WINDOWING_X11)  // for GDK_WINDOW_XID
 #include <gdk/gdkx.h>
 #endif

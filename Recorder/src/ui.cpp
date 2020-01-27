@@ -38,20 +38,31 @@ UI::UI(Config *config)
 	/* Init styles */
     int res = initStyles();
     if(res == -1) {
-        cerr << "Failed to get styles" << endl;
+        cerr << "Failed to get styles" << endl << endl;
     }
 
     g_signal_connect(menuWindow, "destroy", G_CALLBACK (gtk_main_quit), NULL);
+
     /* Place windows */
-    GdkScreen *screen = gdk_screen_get_default();
-    gtk_window_fullscreen_on_monitor(GTK_WINDOW(menuWindow), screen, 0);
-    gtk_widget_show(menuWindow);
-    gtk_window_fullscreen_on_monitor(GTK_WINDOW(playerWindow), screen, 1);
-    gtk_widget_show(playerWindow);
+    if (config->getParamInt("screens") == 2)
+    {
+        cout << "Showing GUI on 2 screens" << endl << endl;
+        GdkScreen *screen = gdk_screen_get_default();
+        gtk_window_fullscreen_on_monitor(GTK_WINDOW(menuWindow), screen, 0);
+        gtk_widget_show(menuWindow);
+        gtk_window_fullscreen_on_monitor(GTK_WINDOW(playerWindow), screen, 1);
+        gtk_widget_show(playerWindow);
+    }
+    else
+    {
+        /* For one screen */
+        cout << "Showing GUI on 1 screen" << endl << endl;
+        gtk_window_move(GTK_WINDOW(menuWindow), 0, 100);
+        gtk_window_move(GTK_WINDOW(playerWindow), config->getParamInt("windowWidth") + 70, 100);
+        gtk_window_present(GTK_WINDOW(playerWindow));
+        gtk_window_present(GTK_WINDOW(menuWindow));
+    }
     
-    /* For one screen */
-    // gtk_window_present(GTK_WINDOW(playerWindow));
-    // gtk_window_present(GTK_WINDOW(menuWindow));
 
     gtk_main();
 }
