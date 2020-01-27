@@ -18,6 +18,7 @@ void Config::parseFile(string configPath)
             if (name.find("cam") == 0)
             {
                 string camName = name.substr(3); // delete "cam"
+                replace(camName.begin(), camName.end(), '_', ' ');
                 cameras[camName] = value;
             }
             else
