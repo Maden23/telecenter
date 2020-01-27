@@ -23,9 +23,9 @@ class UIGraph(QtWidgets.QWidget):
 
 class Pinger(QRunnable):
     """ Updates ping information """
-    def __init__(self, cam):
+    def __init__(self, camList):
         super(Pinger, self).__init__()
-        self.cam = cam
+        self.camList = camList
 
     def _runCmd(self, cmd, stderr=STDOUT):
         """ Run commend and get output """
@@ -35,16 +35,27 @@ class Pinger(QRunnable):
     @pyqtSlot()
     def run(self):
         """ Function for QThreadPool to run in separate thread """
-        cmd = "fping {host} -C 1".format(host=self.cam.ip)
+        cmd = "fping "
+        for cam in self.camList:
+            cmd += cam.ip + " "
+        cmd += "-C 1 -q"
+
         # Command output: "<ip> : <time>" OR "<ip> : - " if no response was received
-        response = self._runCmd(cmd).split(" : ")[-1].strip()
-        if (response == '-'):
-            error = 'No response'
-            time = 0
-        else:
-            error = None
-            time = float(response)
-        self.cam.setPing(error, time)
+        responseList = self._runCmd(cmd).strip().split('\n')
+        for response in responseList:
+            # Parse results for each camera
+            ip, response = response.strip().split(" : ")
+            if (response == '-'):
+                error = 'No response'
+                time = 0
+            else:
+                error = None
+                time = float(response)
+            # Save results in Camera object
+            for cam in self.camList:
+                if cam.ip == ip:
+                    cam.setPing(error, time)
+                    break
             
 
 class Grapher():
@@ -80,8 +91,7 @@ class Grapher():
 
 class Camera():
     """Containes all camera information and ui objects"""
-    def __init__(self, threadpool, ip, button, label, grapher):
-        self.threadpool = threadpool
+    def __init__(self, ip, button, label, grapher):
         self.ip = ip
         self.button = button
         self.label = label
@@ -113,17 +123,12 @@ class Camera():
         self.grapher.setData(self.ip, np.flip(self.pingHistory))
 
 
-    def updatePing(self):
-        pinger = Pinger(self)
-        threadpool.start(pinger)
-
-
     # @pyqtSlot()
     def drawMe(self):
         grapher.changeCam(self.ip)
 
          
-camList = {
+adresses = {
     '51': '172.18.200.51',
     '52': '172.18.200.52',
     '53': '172.18.200.53',
@@ -177,29 +182,33 @@ rightAxis.setPen('w')
 plot.showGrid(x=True, y=True, alpha=1.0)
 grapher = Grapher(plot)
 
-# Create threadpool to update ping values in a separate thread
-threadpool = QThreadPool()
 
 # Attach buttons and ping labels to cameras
 cams = []
 i = 0
-for c in camList:
+for c in adresses:
     button = menu.findChild(QtWidgets.QPushButton, "b" + str(i))
     button.setText(c)
     label = menu.findChild(QtWidgets.QLabel, "l" + str(i))
     # Pass threadpool, ip and ui controls
-    camera = Camera(threadpool, camList[c], button, label, grapher)
+    camera = Camera(adresses[c], button, label, grapher)
     cams.append(camera)
     # Draw graph of this camera on click
     button.clicked.connect(camera.drawMe)
 
     i+=1
 
-# Update cam information periodically in separate thread
+# Create threadpool to update ping values in a separate thread
+threadpool = QThreadPool()
+
+# Check ping regularly
 pingTimer = QTimer()
-for cam in cams:
-    pingTimer.timeout.connect(cam.updatePing)
-pingTimer.start(500)
+pinger = Pinger(cams)
+def runPing():
+    threadpool.start(pinger)
+
+pingTimer.timeout.connect(runPing)
+pingTimer.start(1000)
 
 # Start Qt app
 sys.exit(app.exec())
