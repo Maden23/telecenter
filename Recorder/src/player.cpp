@@ -100,7 +100,7 @@ void Player::playStream(string cam_id)
 	/* Update label */
 	gtk_label_set_text(GTK_LABEL(camLabel), cam_id.c_str());
 
-	gst_element_set_state (pipeline, GST_STATE_READY);
+	gst_element_set_state (pipeline, GST_STATE_NULL);
 
 	cout << "Playing " << config->getCamUri(cam_id).c_str() << endl << endl;
 	// g_object_set (G_OBJECT (pipeline), "uri", config->getCamUri(cam_id).c_str(), NULL);
