@@ -2,10 +2,9 @@
 
 // Player::videoWindowHandle = 0;
 
-Player::Player (GtkWidget* videoWindow, GtkWidget* camLabel, Config *config)
+Player::Player (GtkWidget* videoWindow, Config *config)
 {
 	this->videoWindow = videoWindow;
-	this->camLabel = camLabel;
 	this->config = config;
 	
 	/* Initiallizing Gstreamer*/
@@ -95,16 +94,12 @@ void Player::buildPipeline()
 
 }
 
-void Player::playStream(string cam_id)
+void Player::playStream(string uri)
 {
-	/* Update label */
-	gtk_label_set_text(GTK_LABEL(camLabel), cam_id.c_str());
-
 	gst_element_set_state (pipeline, GST_STATE_NULL);
 
-	cout << "Playing " << config->getCamUri(cam_id).c_str() << endl << endl;
-	// g_object_set (G_OBJECT (pipeline), "uri", config->getCamUri(cam_id).c_str(), NULL);
-	g_object_set (src, "location", config->getCamUri(cam_id).c_str(), NULL);
+	cout << "Playing " << uri << endl << endl;
+	g_object_set (src, "location", uri.c_str(), NULL);
 
 	gst_element_set_state (pipeline, GST_STATE_PLAYING);
 }
@@ -161,8 +156,6 @@ GstBusSyncReply Player::busSyncHandler (GstBus *bus, GstMessage *message, Player
 
 void Player::videoWidgetRealize_cb (GtkWidget *widget, Player *player)
 {
-	// Player* player = (Player*) data;
-
 	#ifdef GDK_WINDOWING_X11
 	  {
 		gulong xid = GDK_WINDOW_XID (gtk_widget_get_window (widget));

@@ -1,6 +1,6 @@
 #include "config.h"
 
-void Config::parseFile(string configPath)
+void Config::setFile(string configPath)
 {
     ifstream file(configPath);
     if (file.is_open())
@@ -30,12 +30,11 @@ void Config::parseFile(string configPath)
         cerr << "Couldn't open config file for reading.\n";
     }
     
-    cout << "Known cameras: " << endl;
-    for (auto &cam : cameras)
-    {
-        cout << cam.first << " : " << cam.second << endl;
-    }
+    
+
+    getGSuiteRooms();
 }
+
 string Config::getParam(string name)
 { 
     if (configuration.find(name) == configuration.end())
@@ -65,4 +64,35 @@ int Config::getCamCount()
 map<string, string> Config::getCams() 
 { 
     return cameras; 
+}
+
+map<string, map<string, string>> Config::getRooms()
+{
+    return rooms;
+}
+
+
+void Config::getGSuiteRooms()
+{
+    map<string, string> room1 = {
+        {"51", "rtsp://admin:Supervisor@172.18.200.51:554"},
+        {"52", "rtsp://admin:Supervisor@172.18.200.52:554"},
+        {"53", "rtsp://admin:Supervisor@172.18.200.53:554"},
+        {"54", "rtsp://admin:Supervisor@172.18.200.54:554"},
+        {"55", "rtsp://admin:Supervisor@172.18.200.55:554"},
+        {"56", "rtsp://admin:Supervisor@172.18.200.56:554"}
+    };
+    rooms.insert({"", cameras}); // add custom cameras
+    rooms.insert({"Зал", room1});
+    this->rooms = rooms;
+    cout << "Known cameras: " << endl;
+    for (auto room : rooms)
+    {
+        for (auto &cam : room.second)
+        {
+            cout << cam.first << " : " << cam.second << endl;
+        }
+
+    }
+
 }

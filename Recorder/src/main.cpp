@@ -12,7 +12,7 @@ int main()
 	freopen("recorder_err.log","w", stderr);
 
 	Config *config = &Config::get();
-	config->parseFile("recorder.conf");
+	config->setFile("recorder.conf");
 
 	UI ui(config);
 

@@ -21,10 +21,10 @@ struct PadData
 class Player
 {
 public:
-	Player(GtkWidget* videoWindow, GtkWidget* camLabel, Config *config);
+	Player(GtkWidget* videoWindow, Config *config);
 	~Player();
 
-	void playStream(string cam_id);
+	void playStream(string uri);
 
 	GstElement *pipeline, *src, *depay, *parse, *dec, *scale, *sink;
 
@@ -33,7 +33,7 @@ public:
 
 private:
 
-	GtkWidget *videoWindow, *camLabel;
+	GtkWidget *videoWindow;
 	GstBus *bus;
 
 	void buildPipeline();

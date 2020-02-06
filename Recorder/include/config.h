@@ -13,7 +13,9 @@ using namespace std;
 /* Singleton class to store configuration. 
 *  Init with:
 *       Config *config = &Config::get();
-*       config->parseFile("config.txt"); */
+*       config->setFile("recorder.conf");
+*       config->parseCamsFile("cams.conf") 
+*       config->getRooms() */
 
 class Config
 {
@@ -23,20 +25,28 @@ public:
         static Config instance;
         return instance;
     }
-    void parseFile(string configPath);
+    void setFile(string configPath);
 
     string getParam(string name);
     int getParamInt(string name);
+
     string getCamUri(string cam);
     int getCamCount();
     map<string, string> getCams();
+
+    map<string, map<string, string>> getRooms();
     
 private:
     Config(){};
     Config(const Config&);
     Config& operator=(const Config&);   
+
+    void getGSuiteRooms();
+
     map<string, string> configuration;
+    map<string, map<string, string>> rooms;
     map<string, string> cameras;
+
 
 };
 

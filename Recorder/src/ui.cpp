@@ -32,7 +32,7 @@ UI::UI(Config *config)
 
     /* Find player and window elements to control*/
     initPlayerWidgets();
-    player = new Player(playerWidget, playerLabel, config);
+    player = new Player(playerWidget, config);
     initMenuWidgets();
 
 	/* Init styles */
@@ -148,59 +148,100 @@ void UI::initPlayerWidgets()
 
 void UI::initMenuWidgets()
 {
-    /* Find out how many cameras are known */
-    int camCount = config->getCamCount();
-    if (camCount > 9)
+    auto rooms = config->getRooms();
+
+    int room_n = 0;
+    for (auto room : rooms)
     {
-        cout << "Too many cameras to display" << endl;
-    }
-
-    map<string, string> cams = config->getCams();
-
-    /*  Setting buttons for each camera. Remember not to run out of 9 buttons */
-    int n = 0;
-    for (auto &cam : cams)
-    {   
-        if (n == 9) break;
-
-        /* Find the button object */
-        string name = "b" + to_string(n);
-        GtkWidget *button = (GtkWidget*) gtk_builder_get_object(menuBuilder, name.c_str());
-        
-        if (button == nullptr)
+        /* Show page */
+        string name = "grid" + to_string(room_n);
+        GtkWidget *pageGrid = (GtkWidget*) gtk_builder_get_object(menuBuilder, name.c_str());
+        if (!pageGrid)
         {
-            cerr << "Cannot get button " << n << endl;
+            cerr << "Cannot get " << name << endl << endl;
+            room_n++;
             continue;
         }
-        /* Show button and assign cam label */
-        gtk_widget_show(button);
-        gtk_button_set_label(GTK_BUTTON(button), cam.first.c_str());
+        gtk_widget_show(pageGrid);
 
-        /* Pass player and cam_id to callback function */
-        struct display_player_data *data = new struct display_player_data;
-        data->playerWidget = playerWidget;
-        data->playerLabel = playerLabel;
-        data->player = player;
-        data->cam_id = cam.first;
-        data->playingCam = &playingCam;
-
-        g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(displayPlayer), data);
-
-        /* Find the rec image object */
-        name = "i" + to_string(n);
-        GtkWidget *recImage = (GtkWidget*) gtk_builder_get_object(menuBuilder, name.c_str());
-        if (recImage == nullptr)
+        /* Assign tab title as the name of the room */
+        GtkWidget *stack = (GtkWidget*) gtk_builder_get_object(menuBuilder, "stack1");
+        if (!stack)
         {
-            cerr << "Cannot get rec image " << n << endl;
+            cerr << "Cannot get stack1" << endl << endl;
+            room_n++;
             continue;
         }
+        GValue a = G_VALUE_INIT;
+        g_value_init (&a, G_TYPE_STRING);
+        g_value_set_string (&a, room.first.c_str());
+        gtk_container_child_set_property (GTK_CONTAINER(stack), pageGrid, "title", &a);
+        g_value_unset (&a);
 
-        /* Assign cam ids to elements */
-        buttons[cam.first] = button;
-        recImages[cam.first] = recImage;
+        /* Find out how many cameras are known */
+        if (room.second.size() > 9)
+        {
+            cout << "Too many cameras to display in room " << room.first << endl << endl;
+        }
 
-        n++;
+        /*  Setting buttons for each camera. Remember not to run out of 9 buttons */
+        auto cams = room.second;
+        int n = 0;
+        for (auto &cam : cams)
+        {   
+            if (n == 9) break;
 
+            /* Create struct object for storing data and ui objects for the camera */
+            struct Camera camData;
+            camData.name = cam.first;
+            camData.uri = cam.second;
+
+            /* Find the button object */
+            name = "b" + to_string(n) + "_" + to_string(room_n);
+            GtkWidget *button = (GtkWidget*) gtk_builder_get_object(menuBuilder, name.c_str());
+            
+            if (button == nullptr)
+            {
+                cerr << "Cannot get button " << name << endl << endl;
+                continue;
+            }
+
+            /* Show button and assign cam label */
+            gtk_widget_show(button);
+            gtk_button_set_label(GTK_BUTTON(button), cam.first.c_str());
+
+            /* Pass player and camName to callback function */
+            struct display_player_data *data = new struct display_player_data;
+            data->player = player;
+            data->camName = cam.first;
+            data->uri = cam.second;
+            data->playerLabel = playerLabel;
+            data->playingCamName = &playingCamName;
+
+            g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(displayPlayer), data);
+
+            /* Add button to Camera struct */
+            camData.button = button;
+
+            /* Find the rec image object */
+            name = "i" + to_string(n) + "_" + to_string(room_n);
+            GtkWidget *recImage = (GtkWidget*) gtk_builder_get_object(menuBuilder, name.c_str());
+            if (recImage == nullptr)
+            {
+                cerr << "Cannot get rec image " << name << endl << endl;
+                continue;
+            }
+
+            /* Add image to Camera struct */
+            camData.recImage = recImage;
+
+            /* Add cemera data to vector */
+            camDataV.push_back(camData);
+
+            n++;
+
+        }
+        room_n++;
     }
 }
 
@@ -210,24 +251,30 @@ void displayPlayer(GtkWidget* widget, gpointer *data)
     auto context = (struct display_player_data*) data;
     // gtk_widget_show(context->playerWidget);
     // gtk_widget_show(context->playerLabel);
-    context->player->playStream(context->cam_id);
-    *context->playingCam = context->cam_id;
-}
+    context->player->playStream(context->uri);
+    *context->playingCamName = context->camName;
+    gtk_label_set_text(GTK_LABEL(context->playerLabel), context->camName.c_str());
 
-void hidePlayer(GtkWidget* widget, gpointer *data)
-{
-    auto context = (struct hide_player_data*) data;
-    // gtk_widget_hide(context->playerWidget);
-    // gtk_widget_hide(context->playerLabel);
-    *context->playingCam = "";
 }
 
 gboolean keyPress(GtkWidget* widget, GdkEventKey *event, UI *ui)
 {
+    struct Camera *cam = nullptr;
+    /* Find data struct for playing camera */
+    for (auto camData : ui->camDataV)
+    {
+        if (camData.name == ui->playingCamName)
+        {
+            cam = &camData;
+            break;
+        }
+    }
+    if (!cam) return false;
+
     if (event->keyval == GDK_KEY_R || event->keyval == GDK_KEY_r)
     {
         /* If no stream is playing, record all */
-        // if (ui->playingCam == "")
+        // if (ui->playingCamName == "")
         // {
         //     for (auto &rec : ui->recImages)
         //     {
@@ -238,10 +285,10 @@ gboolean keyPress(GtkWidget* widget, GdkEventKey *event, UI *ui)
         // /* or record the playing stream */   
         // else
 
-        if (ui->playingCam != "")
+        if (ui->playingCamName != "")
         {
-            ui->recorder->startRecording(ui->config->getCamUri(ui->playingCam));
-            gtk_widget_show(ui->recImages[ui->playingCam]);
+            ui->recorder->startRecording(cam->uri);
+            gtk_widget_show(cam->recImage);
         }
     }
 
@@ -249,7 +296,7 @@ gboolean keyPress(GtkWidget* widget, GdkEventKey *event, UI *ui)
     {
         /* If no stream is playing, stop recording all */
         cerr << "Stop key pressed" << endl << endl;
-        // if (ui->playingCam == "")
+        // if (ui->playingCamName == "")
         // {
         //     for (auto &rec : ui->recImages)
         //     {
@@ -260,10 +307,10 @@ gboolean keyPress(GtkWidget* widget, GdkEventKey *event, UI *ui)
         // /* or stop recording the playing stream */   
         // else
 
-        if (ui->playingCam != "")
+        if (ui->playingCamName != "")
         {
-            if(ui->recorder->stopRecording(ui->config->getCamUri(ui->playingCam)))
-                gtk_widget_hide(ui->recImages[ui->playingCam]);
+            if(ui->recorder->stopRecording(cam->uri))
+                gtk_widget_hide(cam->recImage);
         }
         else
         {

@@ -15,20 +15,21 @@ using namespace std;
 
 struct display_player_data
 {
-	GtkWidget* playerWidget;
-	GtkWidget* playerLabel;
-	GtkWidget* grid;
+	string camName;
+	string uri;
+	GtkWidget *playerLabel;
 	Player *player;
-	string cam_id;
-	string *playingCam;
+	string *playingCamName;
 };
 
-struct hide_player_data
+struct Camera
 {
-	GtkWidget* playerWidget;
-	GtkWidget* playerLabel;
-	string *playingCam;
+	string name;
+	string uri;
+	GtkWidget *button;
+	GtkWidget *recImage;
 };
+
 
 class UI
 {
@@ -38,8 +39,9 @@ public:
 	void displayRecordingStatus(string cam_id, bool status);
 	Config *config;
 	Recorder *recorder;
-	string playingCam = ""; // empty if none playing
-	map<string, GtkWidget*> recImages;
+	string playingCamName = ""; // empty if none playing
+	// map<string, GtkWidget*> recImages;
+	vector<struct Camera> camDataV;
 	
 private:
 	Player *player;
@@ -48,7 +50,8 @@ private:
 	GtkWidget *playerWidget, *playerLabel;
 
 	// Pairs <cam_id, widget>
-	map<string, GtkWidget*> buttons;  
+	// map<string, GtkWidget*> buttons;  
+
 
 	int initStyles();
 	GtkWidget* windowInit(GtkBuilder** builder, string gladeFile, string windowName);
@@ -58,7 +61,6 @@ private:
 };
 
 void displayPlayer(GtkWidget* widget, gpointer *data);
-void hidePlayer(GtkWidget* widget, gpointer *data);
 gboolean keyPress(GtkWidget* widget, GdkEventKey *event, UI *ui);
 
 #endif
