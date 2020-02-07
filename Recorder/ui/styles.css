@@ -6,7 +6,6 @@ button {
 	background-color: #444444;
 	background-image: none;
 	color: white;
-	-GtkWidget-focus-line-width: 5px;
 }
 
 button label {
@@ -27,3 +26,13 @@ label#playerLabel {
 	background-color: black;
 }
 
+.switchGridBackground { 
+	background-color: black;
+	opacity: 0.5;
+}
+switch {
+	margin-left: 50px;
+	margin-right: 50px;
+	margin-bottom: 20px;
+	min-height: 50px;
+}

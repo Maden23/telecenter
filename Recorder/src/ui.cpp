@@ -154,7 +154,7 @@ void UI::initMenuWidgets()
     for (auto room : rooms)
     {
         /* Show page */
-        string name = "grid" + to_string(room_n);
+        string name = "page" + to_string(room_n);
         GtkWidget *pageGrid = (GtkWidget*) gtk_builder_get_object(menuBuilder, name.c_str());
         if (!pageGrid)
         {
@@ -178,12 +178,25 @@ void UI::initMenuWidgets()
         gtk_container_child_set_property (GTK_CONTAINER(stack), pageGrid, "title", &a);
         g_value_unset (&a);
 
+
+        /* Find grid with switches for edit mode */
+        name = "switchGrid" + to_string(room_n);
+        GtkWidget* switchGrid = (GtkWidget*) gtk_builder_get_object(menuBuilder, name.c_str());
+        if (!pageGrid)
+        {
+            cerr << "Cannot get " << name << endl << endl;
+        }
+        else
+        {
+            // Store switchGrid in a vector to turn it on/off on edit button click
+            switchGridV.push_back(switchGrid); 
+        }
+
         /* Find out how many cameras are known */
         if (room.second.size() > 9)
         {
             cout << "Too many cameras to display in room " << room.first << endl << endl;
         }
-
         /*  Setting buttons for each camera. Remember not to run out of 9 buttons */
         auto cams = room.second;
         int n = 0;
@@ -196,13 +209,14 @@ void UI::initMenuWidgets()
             camData.name = cam.first;
             camData.uri = cam.second;
 
-            /* Find the button object */
+            /* Find the camera button object */
             name = "b" + to_string(n) + "_" + to_string(room_n);
             GtkWidget *button = (GtkWidget*) gtk_builder_get_object(menuBuilder, name.c_str());
             
             if (button == nullptr)
             {
                 cerr << "Cannot get button " << name << endl << endl;
+                n++;
                 continue;
             }
 
@@ -210,7 +224,7 @@ void UI::initMenuWidgets()
             gtk_widget_show(button);
             gtk_button_set_label(GTK_BUTTON(button), cam.first.c_str());
 
-            /* Pass player and camName to callback function */
+            /* Pass player and camName to click handler */
             struct display_player_data *data = new struct display_player_data;
             data->player = player;
             data->camName = cam.first;
@@ -229,6 +243,7 @@ void UI::initMenuWidgets()
             if (recImage == nullptr)
             {
                 cerr << "Cannot get rec image " << name << endl << endl;
+                n++;
                 continue;
             }
 
@@ -238,10 +253,40 @@ void UI::initMenuWidgets()
             /* Add cemera data to vector */
             camDataV.push_back(camData);
 
+            /* Find a switch for this camera */
+            if (switchGrid)
+            {
+                name = "s" + to_string(n) + "_" + to_string(room_n);
+                GtkWidget *sw = (GtkWidget*) gtk_builder_get_object(menuBuilder, name.c_str());
+                if (!sw)
+                {
+                    cerr << "Cannot get switch " << name << endl << endl;
+                }
+                else
+                {
+                    // Make the switch visible and set it to ON state
+                    gtk_widget_show(sw);
+                    gtk_switch_set_active(GTK_SWITCH(sw), true);
+                }
+            }
+
             n++;
 
-        }
+        }   // for cams
         room_n++;
+    }  // for rooms
+
+    /* Edit mode */
+    // Find edit button 
+    editButton = (GtkWidget*) gtk_builder_get_object(menuBuilder, "editButton");
+    if (!editButton)
+    {
+        cerr << "Cannot get editButton" << endl << endl;
+    }
+    else
+    {
+        // Assign handler for click event and pass switch pages to it
+        g_signal_connect(G_OBJECT(editButton), "clicked", G_CALLBACK(editButtonClicked), &switchGridV);
     }
 }
 
@@ -319,4 +364,14 @@ gboolean keyPress(GtkWidget* widget, GdkEventKey *event, UI *ui)
         }
     }
     return true;
+}
+
+void editButtonClicked(GtkWidget* widget, vector<GtkWidget*> *switchGridV)
+{
+    /* Turns on or off switches when edit button is clicked */
+    // vector <GtkWidget*> *switchGridV = (vector <GtkWidget*>*) data;
+    for (auto switchGrid : *switchGridV)
+    {
+        gtk_widget_set_visible(switchGrid, !gtk_widget_get_visible(switchGrid));
+    }
 }
