@@ -150,129 +150,22 @@ void UI::initMenuWidgets()
 {
     auto rooms = config->getRooms();
 
-    int room_n = 0;
+    /* Make custom cameras the tab #0 */
+    auto custom = rooms.find("custom");
+    if (custom != rooms.end())
+    {
+        initRoomTab(0, custom->first);
+        initCamWidgets(0, custom->second);
+        rooms.erase(custom);
+    }
+    /* Stip tab with custom cameras if there isn't any */
+    int room_n = 1;
+
     for (auto room : rooms)
     {
-        /* Show page */
-        string name = "page" + to_string(room_n);
-        GtkWidget *pageGrid = (GtkWidget*) gtk_builder_get_object(menuBuilder, name.c_str());
-        if (!pageGrid)
-        {
-            cerr << "Cannot get " << name << endl << endl;
-            room_n++;
-            continue;
-        }
-        gtk_widget_show(pageGrid);
 
-        /* Assign tab title as the name of the room */
-        GtkWidget *stack = (GtkWidget*) gtk_builder_get_object(menuBuilder, "stack1");
-        if (!stack)
-        {
-            cerr << "Cannot get stack1" << endl << endl;
-            room_n++;
-            continue;
-        }
-        GValue a = G_VALUE_INIT;
-        g_value_init (&a, G_TYPE_STRING);
-        g_value_set_string (&a, room.first.c_str());
-        gtk_container_child_set_property (GTK_CONTAINER(stack), pageGrid, "title", &a);
-        g_value_unset (&a);
-
-
-        /* Find grid with switches for edit mode */
-        name = "switchGrid" + to_string(room_n);
-        GtkWidget* switchGrid = (GtkWidget*) gtk_builder_get_object(menuBuilder, name.c_str());
-        if (!pageGrid)
-        {
-            cerr << "Cannot get " << name << endl << endl;
-        }
-        else
-        {
-            // Store switchGrid in a vector to turn it on/off on edit button click
-            switchGridV.push_back(switchGrid); 
-        }
-
-        /* Find out how many cameras are known */
-        if (room.second.size() > 9)
-        {
-            cout << "Too many cameras to display in room " << room.first << endl << endl;
-        }
-        /*  Setting buttons for each camera. Remember not to run out of 9 buttons */
-        auto cams = room.second;
-        int n = 0;
-        for (auto &cam : cams)
-        {   
-            if (n == 9) break;
-
-            /* Create struct object for storing data and ui objects for the camera */
-            struct Camera camData;
-            camData.name = cam.first;
-            camData.uri = cam.second;
-
-            /* Find the camera button object */
-            name = "b" + to_string(n) + "_" + to_string(room_n);
-            GtkWidget *button = (GtkWidget*) gtk_builder_get_object(menuBuilder, name.c_str());
-            
-            if (button == nullptr)
-            {
-                cerr << "Cannot get button " << name << endl << endl;
-                n++;
-                continue;
-            }
-
-            /* Show button and assign cam label */
-            gtk_widget_show(button);
-            gtk_button_set_label(GTK_BUTTON(button), cam.first.c_str());
-
-            /* Pass player and camName to click handler */
-            struct display_player_data *data = new struct display_player_data;
-            data->player = player;
-            data->camName = cam.first;
-            data->uri = cam.second;
-            data->playerLabel = playerLabel;
-            data->playingCamName = &playingCamName;
-
-            g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(displayPlayer), data);
-
-            /* Add button to Camera struct */
-            camData.button = button;
-
-            /* Find the rec image object */
-            name = "i" + to_string(n) + "_" + to_string(room_n);
-            GtkWidget *recImage = (GtkWidget*) gtk_builder_get_object(menuBuilder, name.c_str());
-            if (recImage == nullptr)
-            {
-                cerr << "Cannot get rec image " << name << endl << endl;
-                n++;
-                continue;
-            }
-
-            /* Add image to Camera struct */
-            camData.recImage = recImage;
-
-            /* Add cemera data to vector */
-            camDataV.push_back(camData);
-
-            /* Find a switch for this camera */
-            if (switchGrid)
-            {
-                name = "s" + to_string(n) + "_" + to_string(room_n);
-                GtkWidget *sw = (GtkWidget*) gtk_builder_get_object(menuBuilder, name.c_str());
-                if (!sw)
-                {
-                    cerr << "Cannot get switch " << name << endl << endl;
-                }
-                else
-                {
-                    // Make the switch visible and set it to ON state
-                    gtk_widget_show(sw);
-                    gtk_switch_set_active(GTK_SWITCH(sw), true);
-                }
-            }
-
-            n++;
-
-        }   // for cams
+        initRoomTab(room_n, room.first);
+        initCamWidgets(room_n, room.second);
         room_n++;
     }  // for rooms
 
@@ -290,6 +183,133 @@ void UI::initMenuWidgets()
     }
 }
 
+void UI::initCamWidgets(int room_n, map<string, string> cams)
+{
+    /* Find out how many cameras are known */
+    if (cams.size() > 9)
+    {
+        cout << "Too many cameras to display in room " << room_n << endl << endl;
+    }
+
+    /*  Setting buttons for each camera. Remember not to run out of 9 buttons */
+    int n = 0;  
+    for (auto &cam : cams)
+    {   
+        if (n == 9) break;
+
+        /* Create struct object for storing data and ui objects for the camera */
+        struct Camera camData;
+        camData.name = cam.first;
+        camData.uri = cam.second;
+
+        /* Find the camera button object */
+        string name = "b" + to_string(n) + "_" + to_string(room_n);
+        GtkWidget *button = (GtkWidget*) gtk_builder_get_object(menuBuilder, name.c_str());
+        
+        if (button == nullptr)
+        {
+            cerr << "Cannot get button " << name << endl << endl;
+            n++;
+            continue;
+        }
+
+        /* Show button and assign cam label */
+        gtk_widget_show(button);
+        gtk_button_set_label(GTK_BUTTON(button), cam.first.c_str());
+
+        /* Pass player and camName to click handler */
+        struct display_player_data *data = new struct display_player_data;
+        data->player = player;
+        data->camName = cam.first;
+        data->uri = cam.second;
+        data->playerLabel = playerLabel;
+        data->playingCamName = &playingCamName;
+
+        g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(displayPlayer), data);
+
+        /* Add button to Camera struct */
+        camData.button = button;
+
+        /* Find the rec image object */
+        name = "i" + to_string(n) + "_" + to_string(room_n);
+        GtkWidget *recImage = (GtkWidget*) gtk_builder_get_object(menuBuilder, name.c_str());
+        if (recImage == nullptr)
+        {
+            cerr << "Cannot get rec image " << name << endl << endl;
+            n++;
+            continue;
+        }
+
+        /* Add image to Camera struct */
+        camData.recImage = recImage;
+
+        /* Add cemera data to vector */
+        camDataV.push_back(camData);
+
+        /* Find a switch for this camera */
+        // if (switchGrid)
+        // {
+            name = "s" + to_string(n) + "_" + to_string(room_n);
+            GtkWidget *sw = (GtkWidget*) gtk_builder_get_object(menuBuilder, name.c_str());
+            if (!sw)
+            {
+                cerr << "Cannot get switch " << name << endl << endl;
+            }
+            else
+            {
+                // Make the switch visible and set it to ON state
+                gtk_widget_show(sw);
+                gtk_switch_set_active(GTK_SWITCH(sw), true);
+            }
+        // }
+
+        n++;
+
+    }   // for cams
+}
+
+void UI::initRoomTab(int room_n, string room_name)
+{
+    /* Show page */
+    string name = "page" + to_string(room_n);
+    GtkWidget *pageGrid = (GtkWidget*) gtk_builder_get_object(menuBuilder, name.c_str());
+    if (!pageGrid)
+    {
+        cerr << "Cannot get " << name << endl << endl;
+        room_n++;
+        return;
+    }
+    gtk_widget_show(pageGrid);
+
+    /* Assign tab title as the name of the room */
+    GtkWidget *stack = (GtkWidget*) gtk_builder_get_object(menuBuilder, "stack1");
+    if (!stack)
+    {
+        cerr << "Cannot get stack1" << endl << endl;
+        room_n++;
+        return;
+    }
+    GValue a = G_VALUE_INIT;
+    g_value_init (&a, G_TYPE_STRING);
+    g_value_set_string (&a, room_name.c_str());
+    gtk_container_child_set_property (GTK_CONTAINER(stack), pageGrid, "title", &a);
+    g_value_unset (&a);
+
+
+    /* Find grid with switches for edit mode */
+    name = "switchGrid" + to_string(room_n);
+    GtkWidget* switchGrid = (GtkWidget*) gtk_builder_get_object(menuBuilder, name.c_str());
+    if (!pageGrid)
+    {
+        cerr << "Cannot get " << name << endl << endl;
+    }
+    else
+    {
+        // Store switchGrid in a vector to turn it on/off on edit button click
+        switchGridV.push_back(switchGrid); 
+    }
+
+}
 
 void displayPlayer(GtkWidget* widget, gpointer *data)
 {

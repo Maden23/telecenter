@@ -7,6 +7,8 @@
 #include <fstream>
 #include <iostream>
 #include <algorithm>
+#include <cstdlib>
+#include "rapidjson/document.h"
 
 using namespace std;
 
@@ -31,22 +33,22 @@ public:
     int getParamInt(string name);
 
     string getCamUri(string cam);
-    int getCamCount();
-    map<string, string> getCams();
 
     map<string, map<string, string>> getRooms();
     
 private:
-    Config(){};
+    Config();
     Config(const Config&);
     Config& operator=(const Config&);   
 
     void getGSuiteRooms();
+    void getCustomRooms();
+
+    string makeGSuiteRequest();
+    map<string, map<string, string>> readRoomsFromFile(string fileName);
 
     map<string, string> configuration;
     map<string, map<string, string>> rooms;
-    map<string, string> cameras;
-
 
 };
 
