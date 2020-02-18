@@ -46,12 +46,14 @@ def main():
         if item['resourceType'] == "ONVIF-camera":
             if not item['floorSection'] in rooms:
                 rooms[item['floorSection']] = []
-            name = item['resourceName']
+            name = item['userVisibleDescription'] if item['userVisibleDescription'] != "" else item['resourceName']
             # Make RTSP address
             info = json.loads(item['resourceDescription'])
             rtsp = "rtsp://" 
             if 'login' in info and 'password' in info:
                 rtsp += info['login'] + ":" + info['password'] + "@"
+            else:
+                rtsp += "admin:Supervisor@"
             rtsp += info['ip']
 
             rooms[item['floorSection']].append((name, rtsp))
