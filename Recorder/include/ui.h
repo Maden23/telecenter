@@ -10,6 +10,17 @@
 #include "player.h"
 #include "recorder.h"
 
+/* For finding IP */
+#include <cstdlib>
+#include <netdb.h>
+#include <sys/types.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <arpa/inet.h>
+
+/* For disk space monitoring */
+#include <sys/statvfs.h>
+#include <iomanip>
 
 using namespace std;
 
@@ -54,6 +65,14 @@ private:
 	void initCamWidgets(int room_n, map<string, string> cams);
 	void initRoomTab(int room_n, string room_name);
 
+	/* For status bar information */
+	string findIP();
+	struct gdrive_status_data
+	{
+		Recorder *recorder;
+		GtkWidget *GDriveIcon;
+	};
+	static gboolean updateGDriveStatus(gpointer user_data);
 };
 
 struct display_player_data

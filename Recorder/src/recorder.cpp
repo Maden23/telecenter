@@ -88,6 +88,7 @@ bool Recorder::stopRecording(string uri)
 
 void Recorder::uploadVideo(string uri)
 {
+    runningGDriveUploads++;
     string command = "python3 src/video-upload.py";
     command += " " + fileNames[uri];
     command += " " + config->getParam("saveToFolder"); 
@@ -97,4 +98,5 @@ void Recorder::uploadVideo(string uri)
 
     cout << "Running " << command << endl << endl;
     system(command.c_str());
+    runningGDriveUploads--;
 }

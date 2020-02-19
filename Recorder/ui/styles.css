@@ -36,3 +36,9 @@ switch {
 	margin-bottom: 20px;
 	min-height: 50px;
 }
+
+statusbar label{
+	color: white;
+	font-size: 20px;
+	color: #808080
+}

@@ -32,9 +32,11 @@ public:
     pid_t startRecording(string uri, string fileName = "");
     bool stopRecording(string uri);
    
+    bool isGDriveUploadActive() {return runningGDriveUploads > 0; } 
 private:
     map<string, pid_t> runningRecorders; //stream uri, pid
     map<string, string> fileNames; //stream uri, filename
     Config *config;
     void uploadVideo(string uri);
+    int runningGDriveUploads = 0;
 };
