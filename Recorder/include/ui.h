@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
+#include "camera.h"
 #include "config.h"
 #include "player.h"
 #include "recorder.h"
@@ -24,16 +25,6 @@
 
 using namespace std;
 
-
-struct Camera
-{
-	string name;
-	string uri;
-	GtkWidget *button;
-	GtkWidget *recImage;
-};
-
-
 class UI
 {
 public:
@@ -44,7 +35,7 @@ public:
 	Recorder *recorder;
 	string playingCamName = ""; // empty if none playing
 	// map<string, GtkWidget*> recImages;
-	vector<struct Camera> camDataV; // stores data and ui objects assigned to cameras 
+	vector<struct Camera*> camDataV; // stores data and ui objects assigned to cameras 
 	vector<GtkWidget*> switchGridV;  // stores grid objects with switches for edit mode on them
 	
 private:
@@ -53,10 +44,6 @@ private:
 	GtkWidget *menuWindow, *playerWindow;
 	GtkWidget *playerWidget, *playerLabel;
 	GtkWidget *editButton;
-
-	// Pairs <cam_id, widget>
-	// map<string, GtkWidget*> buttons;  
-
 
 	int initStyles();
 	GtkWidget* windowInit(GtkBuilder** builder, string gladeFile, string windowName);
@@ -73,19 +60,28 @@ private:
 		GtkWidget *GDriveIcon;
 	};
 	static gboolean updateGDriveStatus(gpointer user_data);
+
+	struct display_player_data
+	{
+		string camName;
+		string uri;
+		GtkWidget *playerLabel;
+		Player *player;
+		string *playingCamName;
+	};
+	static void displayPlayer(GtkWidget* widget, gpointer data);
+
+	static gboolean keyPress(GtkWidget* widget, GdkEventKey *event, UI *ui);
+
+	struct switch_state_changed_data
+	{
+		Camera *camData;
+		Recorder *recorder;
+	};
+    static void switchStateChanged(GtkWidget* widget, gboolean state, gpointer user_data);
+
+	static void editButtonClicked(GtkWidget* widget, vector<GtkWidget*> *switchGridV);
 };
 
-struct display_player_data
-{
-	string camName;
-	string uri;
-	GtkWidget *playerLabel;
-	Player *player;
-	string *playingCamName;
-};
-void displayPlayer(GtkWidget* widget, gpointer *data);
-
-gboolean keyPress(GtkWidget* widget, GdkEventKey *event, UI *ui);
-void editButtonClicked(GtkWidget* widget, vector<GtkWidget*> *switchGridV);
 
 #endif

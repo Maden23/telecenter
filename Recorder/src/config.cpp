@@ -97,7 +97,6 @@ void Config::getCustomRooms()
 {
     auto cameras = readRoomsFromFile("custom_cams.json");
     rooms.insert(cameras.begin(), cameras.end()); // add custom cameras
-
 }
 
 map<string, map<string, string>> Config::readRoomsFromFile(string fileName)
@@ -122,7 +121,7 @@ map<string, map<string, string>> Config::readRoomsFromFile(string fileName)
     {
         string roomName = val.name.GetString();
         map <string, string> roomCams;
-        // Iterating through array of camera Objects in the room 
+        // Iterating through array of camera Objects in the room
         for (auto &camItem : val.value.GetArray())
         {
             // for (auto &mem : camItem.GetObject())

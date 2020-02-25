@@ -221,9 +221,10 @@ void UI::initCamWidgets(int room_n, map<string, string> cams)
         if (n == 9) break;
 
         /* Create struct object for storing data and ui objects for the camera */
-        struct Camera camData;
-        camData.name = cam.first;
-        camData.uri = cam.second;
+        struct Camera *camData = new struct Camera;
+        camData->name = cam.first;
+        camData->uri = cam.second;
+        camData->record = false;
 
         /* Find the camera button object */
         string name = "b" + to_string(n) + "_" + to_string(room_n);
@@ -242,16 +243,11 @@ void UI::initCamWidgets(int room_n, map<string, string> cams)
 
         /* Pass player and camName to click handler */
         struct display_player_data *data = new struct display_player_data;
-        data->player = player;
-        data->camName = cam.first;
-        data->uri = cam.second;
-        data->playerLabel = playerLabel;
-        data->playingCamName = &playingCamName;
-
+        *data = {camData->name, camData->uri, playerLabel, player, &playingCamName};
         g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(displayPlayer), data);
 
         /* Add button to Camera struct */
-        camData.button = button;
+        camData->button = button;
 
         /* Find the rec image object */
         name = "i" + to_string(n) + "_" + to_string(room_n);
@@ -264,27 +260,27 @@ void UI::initCamWidgets(int room_n, map<string, string> cams)
         }
 
         /* Add image to Camera struct */
-        camData.recImage = recImage;
+        camData->recImage = recImage;
 
         /* Add cemera data to vector */
         camDataV.push_back(camData);
 
         /* Find a switch for this camera */
-        // if (switchGrid)
-        // {
-            name = "s" + to_string(n) + "_" + to_string(room_n);
-            GtkWidget *sw = (GtkWidget*) gtk_builder_get_object(menuBuilder, name.c_str());
-            if (!sw)
-            {
-                cerr << "Cannot get switch " << name << endl << endl;
-            }
-            else
-            {
-                // Make the switch visible and set it to ON state
-                gtk_widget_show(sw);
-                gtk_switch_set_active(GTK_SWITCH(sw), true);
-            }
-        // }
+        name = "s" + to_string(n) + "_" + to_string(room_n);
+        GtkWidget *sw = (GtkWidget*) gtk_builder_get_object(menuBuilder, name.c_str());
+        switch_state_changed_data *sw_data = new switch_state_changed_data;
+        *sw_data = {camData, recorder};
+        if (!sw)
+        {
+            cerr << "Cannot get switch " << name << endl << endl;
+        }
+        else
+        {
+            // Make the switch visible and set it to OFF state
+            gtk_widget_show(sw);
+            gtk_switch_set_active(GTK_SWITCH(sw), false);
+            g_signal_connect(G_OBJECT(sw), "state-set", G_CALLBACK(switchStateChanged), sw_data);
+         }
 
         n++;
 
@@ -334,9 +330,9 @@ void UI::initRoomTab(int room_n, string room_name)
 
 }
 
-void displayPlayer(GtkWidget* widget, gpointer *data)
+void UI::displayPlayer(GtkWidget* widget, gpointer data)
 {
-    auto context = (struct display_player_data*) data;
+    auto *context = (display_player_data*) data;
     // gtk_widget_show(context->playerWidget);
     // gtk_widget_show(context->playerLabel);
     context->player->playStream(context->uri);
@@ -345,38 +341,30 @@ void displayPlayer(GtkWidget* widget, gpointer *data)
 
 }
 
-gboolean keyPress(GtkWidget* widget, GdkEventKey *event, UI *ui)
+gboolean UI::keyPress(GtkWidget* widget, GdkEventKey *event, UI *ui)
 {
-    struct Camera *cam = nullptr;
-    /* Find data struct for playing camera */
-    for (auto camData : ui->camDataV)
-    {
-        if (camData.name == ui->playingCamName)
-        {
-            cam = &camData;
-            break;
-        }
-    }
-    if (!cam) return false;
-
     if (event->keyval == GDK_KEY_R || event->keyval == GDK_KEY_r)
     {
-        /* If no stream is playing, record all */
-        // if (ui->playingCamName == "")
-        // {
-        //     for (auto &rec : ui->recImages)
-        //     {
-        //         ui->recorder->startRecording(ui->config->getCamUri(rec.first));
-        //         gtk_widget_show(rec.second);
-        //     }
-        // }
-        // /* or record the playing stream */   
-        // else
-
-        if (ui->playingCamName != "")
+        // Check if any cameras are picked for recording
+        bool picked;
+        for (auto cam : ui->camDataV)
         {
-            ui->recorder->startRecording(cam->uri);
-            gtk_widget_show(cam->recImage);
+            if (cam->record)
+            {
+                picked = true;
+                break;
+            }
+        }
+        if (!picked) return false;
+
+        // Record all cameras that were picked
+        for (auto cam : ui->camDataV)
+        {
+            if(cam->record)
+            {
+                ui->recorder->startRecording(cam);
+                gtk_widget_show(cam->recImage);
+            }
         }
     }
 
@@ -384,35 +372,19 @@ gboolean keyPress(GtkWidget* widget, GdkEventKey *event, UI *ui)
     {
         /* If no stream is playing, stop recording all */
         cerr << "Stop key pressed" << endl << endl;
-        // if (ui->playingCamName == "")
-        // {
-        //     for (auto &rec : ui->recImages)
-        //     {
-        //         ui->recorder->stopRecording(ui->config->getCamUri(rec.first));
-        //         gtk_widget_hide(rec.second);
-        //     }
-        // }
-        // /* or stop recording the playing stream */   
-        // else
-
-        if (ui->playingCamName != "")
+        for (auto rec : ui->recorder->getRunningRecordings())
         {
-            if(ui->recorder->stopRecording(cam->uri))
-                gtk_widget_hide(cam->recImage);
-        }
-        else
-        {
-            cerr << "No playing cam" << endl << endl;
-            return false;
+            ui->recorder->stopRecording(rec.first);
+//                gtk_widget_hide(cam->recImage);
+            // TODO: turn off physical button here
         }
     }
     return true;
 }
 
-void editButtonClicked(GtkWidget* widget, vector<GtkWidget*> *switchGridV)
+void UI::editButtonClicked(GtkWidget* widget, vector<GtkWidget*> *switchGridV)
 {
     /* Turns on or off switches when edit button is clicked */
-    // vector <GtkWidget*> *switchGridV = (vector <GtkWidget*>*) data;
     for (auto switchGrid : *switchGridV)
     {
         gtk_widget_set_visible(switchGrid, !gtk_widget_get_visible(switchGrid));
@@ -436,7 +408,8 @@ string UI::findIP()
 
 gboolean UI::updateGDriveStatus(gpointer user_data)
 {
-    struct gdrive_status_data *data = (gdrive_status_data*)user_data;
+    gdrive_status_data *data = (gdrive_status_data*)user_data;
+
     if (data->recorder->isGDriveUploadActive())
     {
         gtk_image_set_from_icon_name(GTK_IMAGE(data->GDriveIcon), "gnome-netstatus-tx", (GtkIconSize)35);
@@ -446,4 +419,23 @@ gboolean UI::updateGDriveStatus(gpointer user_data)
         gtk_image_set_from_icon_name(GTK_IMAGE(data->GDriveIcon), "account-logged-in", (GtkIconSize)35);
     }
     return true;
+}
+
+void UI::switchStateChanged(GtkWidget* widget, gboolean state, gpointer user_data)
+{
+    auto *data = (switch_state_changed_data*)user_data;
+    /* If we are in recording state add this camera to recordings or stop, depending on the switch state */
+    if (!data->recorder->getRunningRecordings().empty())
+    {
+        if (state)
+        {
+            gtk_widget_show(GTK_WIDGET(data->camData->recImage));
+            data->recorder->startRecording(data->camData);
+        }
+        else
+        {
+            data->recorder->stopRecording(data->camData);
+        }
+    }
+    data->camData->record = state;
 }

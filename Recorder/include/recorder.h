@@ -14,6 +14,9 @@
 #include <cstdlib>
 #include <bits/stdc++.h>
 
+#include "recording.h"
+#include "camera.h"
+
 using namespace std; 
 
 /* Forks gstreamer pipelines for each recording
@@ -27,16 +30,23 @@ public:
     Recorder(Config *config);
     ~Recorder();
 
-    map<string, pid_t> getRunningRecorders() { return runningRecorders; }
+    // map<string, pid_t> getRunningRecorders() { return runningRecorders; }
 
-    pid_t startRecording(string uri, string fileName = "");
-    bool stopRecording(string uri);
+    // pid_t startRecording(string uri, string fileName = "");
+    map<Camera*, Recording*> getRunningRecordings() { return runningRecordings; }
+    bool startRecording(Camera* cam, string fileName = "");
+    bool stopRecording(Camera* cam);
    
+
     bool isGDriveUploadActive() {return runningGDriveUploads > 0; } 
+   
 private:
-    map<string, pid_t> runningRecorders; //stream uri, pid
-    map<string, string> fileNames; //stream uri, filename
+    // map<string, pid_t> runningRecorders; //stream uri, pid
+    // map<string, string> fileNames; //stream uri, filename
+    map<Camera*, Recording*> runningRecordings;
     Config *config;
-    void uploadVideo(string uri);
+
     int runningGDriveUploads = 0;
+    void uploadVideo(string uri, string fileName);
+    static gboolean checkIfRecStopped(gpointer data);
 };

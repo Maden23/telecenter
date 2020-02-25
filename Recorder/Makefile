@@ -18,10 +18,10 @@ LDFLAGS = `pkg-config --libs gstreamer-video-1.0 gstreamer-1.0 gtk+-3.0`
 all: $(TARGET)
 
 $(TARGET): $(OBJ)
-	$(CC) $^ -o $@ $(LDFLAGS)
+	$(CC) $^ -g -o $@ $(LDFLAGS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -o $@
+	$(CC) $(CPPFLAGS) $(CFLAGS) -c $< -g -o $@
 
 clean:
 	$(RM) $(OBJ)
