@@ -29,8 +29,12 @@ def main():
         # Save the credentials for the next run
         with open('token.pickle', 'wb') as token:
             pickle.dump(creds, token)
-
-    service = build('admin', 'directory_v1', credentials=creds)
+            
+    try:
+        service = build('admin', 'directory_v1', credentials=creds)
+    except socket.gaierror:
+        print ("No connection to GSuite\n")
+        exit(1)
 
     # Call the Admin SDK Directory API
     results = service.resources().calendars().list(customer='my_customer').execute()
