@@ -11,7 +11,7 @@ Recorder::~Recorder()
     // for (auto &rec : runningRecorders)
     for (auto &rec : runningRecordings)
     {
-        cout << "Stopping recording of " << rec.first << endl;
+        cerr << "Stopping recording of " << rec.first << endl;
         // kill(rec.second, SIGINT);
         // waitpid(rec.second, nullptr, 0);
         rec.second->stop();
@@ -99,22 +99,22 @@ bool Recorder::startRecording(Camera *cam, string fileName)
     Recording *recording = new Recording(cam->uri, config->getParam("saveToFolder"), fileName, timeout_ns);
     if (!recording->start())
     {
-        cout << "Failed to start recording of " << cam->uri << endl << endl;
+        cerr << "Failed to start recording of " << cam->uri << endl << endl;
         return false;
     }
     runningRecordings[cam] = recording;
-    cout << "Started recording of " << cam->uri << endl << endl;
+    cerr << "Started recording of " << cam->uri << endl << endl;
     return true;
 }
 
 bool Recorder::stopRecording(Camera *cam)
 {
-    cout << "Trying to stop recording of " << cam->uri << "...";
+    cerr << "Trying to stop recording of " << cam->uri << "." << endl << endl;
 
     if (runningRecordings.find(cam) == runningRecordings.end())
     {
-        cout << "failed" << endl;
-        cout << "No recording found" << endl << endl;
+        cerr << "failed" << endl;
+        cerr << "No recording found" << endl << endl;
         return false;
     }
 
@@ -136,7 +136,7 @@ void Recorder::uploadVideo(string uri, string fileName)
 
     // fileNames.erase(uri);
 
-    cout << "Running " << command << endl << endl;
+    cerr << "Running " << command << endl << endl;
     system(command.c_str());
     runningGDriveUploads--;
 }
@@ -150,15 +150,16 @@ gboolean Recorder::checkIfRecStopped(gpointer data)
         /* If any recording has this status, it needs to be deleted, and it's video -- uploaded*/
         if (it->second->getStatus() == STOPPED)
         {
+            cerr << "Recording of " << it->second->uri << " stopped." << endl;
             string fileName = it->second->getFileName();
+            cerr << "File name: " << fileName << endl << endl;
+
             // Turn off recImage widget
             gtk_widget_hide(it->first->recImage);
 
             delete it->second;
             it = runningRecordings->erase(it);
 
-            cout << "stopped." << endl;
-            cout << "File name: " << fileName << endl << endl;
             // pid_t pid = fork();
             // if (pid == -1)   
             // {

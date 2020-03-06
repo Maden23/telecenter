@@ -10,10 +10,10 @@ Recording::Recording(string uri, string folder, string fileName, long timeout)
 
 Recording::~Recording()
 {
-	gst_element_set_state(pipeline, GST_STATE_NULL);
-	g_source_remove(freeze_check_id);
-	gst_object_unref(clock);
-	gst_object_unref(pipeline);
+//	gst_element_set_state(pipeline, GST_STATE_NULL);
+//    g_source_remove(freeze_check_id);
+    gst_object_unref(clock);
+    gst_object_unref(pipeline);
 }
 
 bool Recording::start()
@@ -31,7 +31,7 @@ bool Recording::start()
 	}
 
 	/* Initialize clock for freeze check */
-	clock = gst_pipeline_get_clock(GST_PIPELINE(pipeline));
+    clock = gst_pipeline_get_clock(GST_PIPELINE(pipeline));
 
 	/* Get bus to handle messages*/
 	GstBus *bus = gst_pipeline_get_bus (GST_PIPELINE (pipeline));
@@ -39,19 +39,21 @@ bool Recording::start()
 	gst_bus_set_sync_handler (bus, (GstBusSyncHandler) busSyncHandler, this, NULL);
 	g_object_unref (bus);
 
-	lastBufferTime = gst_clock_get_time(clock);
-
+    lastBufferTime = gst_clock_get_time(clock);
 	gst_element_set_state (pipeline, GST_STATE_PLAYING);
 
-	// freeze_check_id = g_timeout_add (500, freeze_check, this); // run freeze check every x milliseconds	
+    // run freeze check every 200 milliseconds
+//    freeze_check_id = g_timeout_add (200, freeze_check, this);
 
 	return true;
 }
 
 bool Recording::stop()
 {
+    if (status == STOPPING) return false;
+
 	/* Stop checking for freezes */
-	g_source_remove(freeze_check_id);
+//    g_source_remove(freeze_check_id);
 
 	// send EOS
 	status = STOPPING;
@@ -61,26 +63,14 @@ bool Recording::stop()
 	// GstPad* pad = gst_element_get_static_pad(testsrc, "src");
 	// gst_pad_add_probe(pad, GstPadProbeType(GST_PAD_PROBE_TYPE_BLOCK | GST_PAD_PROBE_TYPE_EVENT_DOWNSTREAM),eos_drop_probe, NULL, NULL);
 
-	if (elementSrcLinked(parse))
-	{
-		cerr << "Stream is linked" << endl;
+    if (streamLinked)
+    {
 		gst_element_send_event(src, gst_event_new_eos());
 	}
-	else
-	{
-		cerr << "Stream is not linked" << endl;
-	}
-
-	// if (enc && elementSinkLinked(enc))
-	// {
-	// 	cerr << "Test is linked" << endl;
-	// 	gst_element_send_event(testsrc, gst_event_new_eos());
-	// }
-	// else
-	// {
-	// 	cerr << "Test is not linked" << endl;
-	// }
-
+    else
+    {
+        gst_element_send_event(testsrc, gst_event_new_eos());
+    }
 
 	return true;
 }
@@ -88,56 +78,89 @@ bool Recording::stop()
 
 bool Recording::buildPipeline()
 {
-
+    /* For RTSP stream */
     src = gst_element_factory_make("rtspsrc", ("src " + fileName).c_str());
     depay = gst_element_factory_make("rtph264depay", ("depay " + fileName).c_str());  
     parse = gst_element_factory_make("h264parse", ("parse " + fileName).c_str());
+    streamcapsfilter = gst_element_factory_make("capsfilter", ("streamcaps " + fileName).c_str());
+
+
+    /* For test */
+    testsrc = gst_element_factory_make("videotestsrc", ("test " + fileName).c_str());
+    testcapsfilter = gst_element_factory_make("capsfilter", ("testcaps " + fileName).c_str());
+    enc = gst_element_factory_make("x264enc", ("enc " + fileName).c_str());
+
+    /* Sinks */
     mux = gst_element_factory_make("mpegtsmux", ("mux  " + fileName).c_str());
     sink = gst_element_factory_make("filesink", ("sink " + fileName).c_str());
-
+    fakesink = gst_element_factory_make("fakesink", ("fakesink " + fileName).c_str());
 
     pipeline = gst_pipeline_new(("pipeline " + fileName).c_str());
 
-    if (!pipeline || !src || !depay || !parse || !mux || !sink)
+    if (!pipeline || !src || !depay || !parse || !streamcapsfilter || !mux || !sink || !fakesink || !testsrc || !testcapsfilter || !enc)
     {
         cerr << uri << "Not all pipeline elements could be created" << endl << endl;
         return false;
     } 
 
+//    gst_bin_add_many(GST_BIN(pipeline), src, depay, parse, streamcapsfilter, mux, sink, fakesink, testsrc, testcapsfilter, enc, NULL);
     gst_bin_add_many(GST_BIN(pipeline), src, depay, parse, mux, sink, NULL);
-    // gst_bin_add_many(GST_BIN(pipeline), src, depay, parse, mux, sink, NULL);
 
-   
+    // Caps for videotestsrc
+    GstCaps* streamcaps = gst_caps_new_simple("video/x-h264",
+                 "width", G_TYPE_INT, 1920,
+                 "height", G_TYPE_INT, 1080,
+                 "framerate", GST_TYPE_FRACTION, 30, 1, NULL);
+    g_object_set(streamcapsfilter, "caps", streamcaps, NULL);
+
+    /* Link stream to fake sink (src will be linked in playing state) */
+//    if (!gst_element_link_many(depay, parse, streamcapsfilter, fakesink, NULL))
+//    {
+//        cerr << "Stream linking error" << endl << endl;
+//        return false;
+//    }
+    /* Link stream to real sink */
     if (!gst_element_link_many(depay, parse, mux, sink, NULL))
     {
-        cerr << "Pipeline linking error" << endl << endl;
-        return false;
+        cerr << "Stream linking error" << endl << endl;
     }
-    
-    /* Set properties */
-    // g_object_set (src, "tcp-timeout", 200000,	
-    // 		"timeout", 200000,
-    // 		"location", uri.c_str(),
-    // 		NULL);
-
+    // Set properties for stream source
     g_object_set (src,
-    		"location", uri.c_str(),
-    		"protocols", (1 << 2), // TCP,
-    		"timeout", 1000,
-    		NULL);
-
-    g_object_set(sink, "location", (folder+fileName).c_str(), NULL);
-
-    /* Signal to handle new source pad*/
+            "location", uri.c_str(),
+            "protocols", (1 << 2), // TCP,
+            "timeout", 1000,
+            NULL);
+    // Signal to handle new source pad
     g_signal_connect(src, "pad-added", G_CALLBACK(pad_added_handler), this);
 
+    /* Link test to normal sink */
+    // Caps for videotestsrc
+//    GstCaps* caps = gst_caps_new_simple("video/x-raw",
+//                 "width", G_TYPE_INT, 1920,
+//                 "height", G_TYPE_INT, 1080,
+//                 "framerate", GST_TYPE_FRACTION, 30, 1, NULL);
+//    g_object_set(testcapsfilter, "caps", caps, NULL);
+//    g_object_set(testsrc,
+//    // "do-timestamp", true,
+//    "pattern", 13,
+//    "is-live", true,
+//     NULL);
+
+//    if (!gst_element_link_many(testsrc, testcapsfilter, enc, mux, sink, NULL))
+//    {
+//        cerr << "Test pipeline linking error" << endl << endl;
+//        return false;
+//    }
+    // Set name for file
+    g_object_set(sink, "location", (folder+fileName).c_str(), NULL);
+
+//    streamLinked = false;
     streamLinked = true;
     return true;
 }
 
 void Recording::pad_added_handler (GstElement * src, GstPad * new_pad, Recording *recording)
 {
-
 	GstPad *sink_pad = gst_element_get_static_pad (recording->depay, "sink");
 	GstPadLinkReturn ret;
 	GstCaps *new_pad_caps = NULL;
@@ -168,46 +191,104 @@ void Recording::pad_added_handler (GstElement * src, GstPad * new_pad, Recording
 	{       
 		cerr << recording->uri << ": Linked source pad" << endl << endl;
 		// Add data probe to remember the last received video buffer time
-		gst_pad_add_probe(new_pad, GST_PAD_PROBE_TYPE_BUFFER, data_probe, recording, NULL);
+         gst_pad_add_probe(new_pad, GST_PAD_PROBE_TYPE_BUFFER, data_probe, recording, NULL);
 	}
+
 }
 
 GstPadProbeReturn Recording::data_probe (GstPad *pad, GstPadProbeInfo *info, gpointer user_data)
 {
-	/* Updating the time last buffer eas sent */
+    /* Updating the time last buffer was sent */
 	Recording* recording = (Recording*) user_data;
 	recording->lastBufferTime = gst_clock_get_time(recording->clock);
+//    cout << recording->lastBufferTime << endl;
 	return GST_PAD_PROBE_OK;
 }
 
-/* This is called when new data is available on the pad, which was blocked */
-GstPadProbeReturn Recording::block_and_show_stream_probe(GstPad *pad, GstPadProbeInfo *info, gpointer user_data)
+GstPadProbeReturn Recording::probe_block_stream(GstPad *pad, GstPadProbeInfo *info, gpointer user_data)
 {
-	Recording* recording = (Recording*) user_data;
-	cerr << recording->uri << ": New data in stream" << endl << endl;
-	/* Relinking source */
-	if (!recording->showStream())
-		cerr << recording->uri << ": Failed to show stream" << endl << endl;
-	else
-		gst_pad_remove_probe(pad, GST_PAD_PROBE_INFO_ID (info));
+    auto recording = (Recording*)user_data;
+    /* remove the probe first */
+    gst_pad_remove_probe (pad, GST_PAD_PROBE_INFO_ID (info));
 
+//    /* Prevent calling this repeatedly */
+//    if (recording->status == RELINKING)
+//    {
+//        cerr << "Relinking" << endl;
+//        return GST_PAD_PROBE_OK;
+//    }
+//    else
+//        recording->status = RELINKING;
 
-	return GST_PAD_PROBE_REMOVE; // removing the blocking probe
+    /* Attach handler to src pad of parse for cathing EOS */
+    GstPad* parse_src = gst_element_get_static_pad(recording->parse, "src");
+    gst_pad_add_probe(parse_src, GstPadProbeType(GST_PAD_PROBE_TYPE_BLOCK | GST_PAD_PROBE_TYPE_EVENT_DOWNSTREAM),
+                         probe_eos_in_stream, recording, NULL);
+
+    cerr << recording->uri << ": EOS probe assigned to parse" << endl << endl;
+
+    /* Send EOS to sink pad of parse  */
+//    GstPad* parse_sink = gst_element_get_static_pad(recording->parse, "sink");
+    gst_element_send_event(recording->parse, gst_event_new_eos());
+    cerr << recording->uri << ": EOS sent to rtspsrc" << endl << endl;
+    return GST_PAD_PROBE_OK;
 }
 
-GstPadProbeReturn Recording::block_probe(GstPad *pad, GstPadProbeInfo *info, gpointer user_data)
+GstPadProbeReturn Recording::probe_eos_in_stream(GstPad *pad, GstPadProbeInfo *info, gpointer user_data)
 {
-
-}
-
-
-GstPadProbeReturn Recording::eos_drop_probe (GstPad *pad, GstPadProbeInfo *info, gpointer user_data)
-{
+    auto recording = (Recording*)user_data;
 	cerr << "EOS dropped by probe" << endl << endl;
 	/* Removing this probe */
 	gst_pad_remove_probe(pad, GST_PAD_PROBE_INFO_ID (info));
+
+    /* Add idle probe on test pipeline (encoder) */
+    recording->in_idle_probe = FALSE;
+    GstPad* enc_src = gst_element_get_static_pad(recording->enc, "src");
+    gst_pad_add_probe (enc_src, GST_PAD_PROBE_TYPE_IDLE, probe_idle_relink, recording, NULL);
 	/* Preventing EOS from moving further */
 	return GST_PAD_PROBE_DROP;
+}
+
+GstPadProbeReturn Recording::probe_idle_relink(GstPad *pad, GstPadProbeInfo *info, gpointer user_data)
+{
+    auto recording = (Recording*)user_data;
+
+    // Prevent calling this from multiple threads
+    if (!g_atomic_int_compare_and_exchange (&recording->in_idle_probe, FALSE, TRUE))
+        return GST_PAD_PROBE_OK;
+
+    /* Relinling */
+    if (recording->streamLinked)
+    {
+        // Link test to real sink
+        //if (relinkElements(recording->parse, recording->enc, recording->mux))
+        if (relinkElements(recording->streamcapsfilter, recording->enc, recording->mux))
+        {
+            cerr << recording->uri << ": Test linked successfully" << endl << endl;
+            recording->streamLinked = false;
+            recording->lastBufferTime = gst_clock_get_time(recording->clock);
+        }
+        else
+        {
+            cerr << recording->uri << ": Failed to link test" << endl << endl;
+        }
+    }
+    else
+    {
+        // Link stream to real sink
+        if (relinkElements(recording->enc, recording->streamcapsfilter, recording->mux))
+        {
+            cerr << recording->uri << ": Stream relinked successfully" << endl << endl;
+            recording->streamLinked = true;
+            recording->lastBufferTime = gst_clock_get_time(recording->clock);
+        }
+        else
+        {
+            cerr << recording->uri << ": Failed to relink stream" << endl << endl;
+        }
+//        cerr << "Dot droped" << endl;
+//        GST_DEBUG_BIN_TO_DOT_FILE(GST_BIN(recording->pipeline), GST_DEBUG_GRAPH_SHOW_ALL, "pipeline");
+    }
 }
 
 gboolean Recording::freeze_check(gpointer user_data)
@@ -223,145 +304,41 @@ gboolean Recording::freeze_check(gpointer user_data)
 	// check difference between current time and last time data was received
 	GstClockTimeDiff diff = GST_CLOCK_DIFF(recording->lastBufferTime, current);
 	// cout << diff << " " << recording->timeout << endl;
-	if (diff > recording->timeout)
-	{
-		if (!recording->showTest())
-			cerr << recording->uri << ": Failed to show test" << endl << endl;
-		// else 
-		// 	return false; // Freeze caught, test is showing - stopping regular check. It will start again with new source
-	}
-	else 
-	{
-		if (!recording->showStream())
-			cerr << recording->uri << ": Failed to show stream" << endl << endl;
-	}
-	return true; // to contionue checking regularly
-}
 
-
-bool Recording::showTest()
-{
-	if (streamLinked == false)
-		return true;
-
-	cerr << uri << ": Preparing to link test" << endl << endl;
-
-	/* Attach handler to src pad of parse for cathing EOS */
-	GstPad* parse_src = gst_element_get_static_pad(parse, "src");
-	gst_pad_add_probe(parse_src, GstPadProbeType(GST_PAD_PROBE_TYPE_BLOCK | GST_PAD_PROBE_TYPE_EVENT_DOWNSTREAM), eos_drop_probe, NULL, NULL);
-	cerr << uri << ": EOS probe assigned to parse" << endl << endl;
-
-	/* Send EOS to src */
-	gst_element_send_event(src, gst_event_new_eos());
-	cerr << uri << ": EOS sent to rtspsrc" << endl << endl;
-
-	/* Block stream pad */
-	gst_pad_add_probe(parse_src, GstPadProbeType(GST_PAD_PROBE_TYPE_BLOCK | GST_PAD_PROBE_TYPE_BUFFER), block_probe, this, NULL);
-	gst_object_unref(parse_src);
-	cerr << uri << ": Stream pad blocked" << endl << endl;
-
-	/* Create elements for testsrc */
-	testsrc = gst_element_factory_make("videotestsrc", ("test " + fileName).c_str());
-	capsfilter = gst_element_factory_make("capsfilter", ("caps " + fileName).c_str());
-    enc = gst_element_factory_make("x264enc", ("enc " + fileName).c_str());
-    if (!testsrc || !capsfilter || !enc)
+    /* Prevent relinking repeatedly */
+    if (recording->status == RELINKING)
     {
-        cerr << uri << "Not all pipeline elements could be created" << endl << endl;
-        return false;
-    } 
-    gst_bin_add_many(GST_BIN(pipeline), testsrc, capsfilter, enc,  NULL);
-
-    /* Caps for videotestsrc */
-    GstCaps* caps = gst_caps_new_simple("video/x-raw",
-                 "width", G_TYPE_INT, 1280,
-                 "height", G_TYPE_INT, 720,
-                 "framerate", GST_TYPE_FRACTION, 25, 1, NULL);
-    g_object_set(capsfilter, "caps", caps, NULL);
-
-    g_object_set(testsrc, 
-	// "do-timestamp", true,
-	"pattern", 13,
-	"is-live", true,
-	 NULL);
-
-    if (!gst_element_link_many(testsrc, capsfilter, enc, NULL))
-    {
-		cerr << "Test pipeline linking error" << endl << endl;;
-    	return false;
+//        cerr << "Relinking" << endl;
+        return true;
     }
 
-	// Link test to pipeline
-	if (relinkElements(parse, enc, mux))
+    /* Linking test if timeout is exceeded */
+	if (diff > recording->timeout)
 	{
-		cerr << uri << ": Test linked successfully" << endl << endl;
-		streamLinked = false;
+        // Needs relinking if stream is linked now
+        if (recording->streamLinked)
+        {
+            cerr << recording->uri << ": Preparing to link test" << endl << endl;
+            /* Add blocking pad on parse src pad */
+            GstPad* parse_src = gst_element_get_static_pad(recording->parse, "src");
+            gst_pad_add_probe (parse_src, GST_PAD_PROBE_TYPE_BLOCK_DOWNSTREAM, probe_block_stream, recording, NULL);
+            recording->status = RELINKING;
+        }
 	}
-	else
+	else 
+    /* Linking stream if timeout is NOT exceeded */
 	{
-		cerr << uri << ": Failed to link test" << endl << endl;
-		return false;
+        // Needs relinking if test is linked now
+        if (!recording->streamLinked)
+        {
+            cerr << recording->uri << ": Preparing to link source" << endl << endl;
+            /* Add blocking pad on parse src pad */
+            GstPad* parse_src = gst_element_get_static_pad(recording->parse, "src");
+            gst_pad_add_probe (parse_src, GST_PAD_PROBE_TYPE_BLOCK_DOWNSTREAM, probe_block_stream, recording, NULL);
+            recording->status = RELINKING;
+        }
 	}
-
-	/* Set states for new elements */
-	gst_element_set_state(enc, GST_STATE_PLAYING);
-	gst_element_set_state(capsfilter, GST_STATE_PLAYING);
-	gst_element_set_state(testsrc, GST_STATE_PLAYING);
-
-	GST_DEBUG_BIN_TO_DOT_FILE(GST_BIN(pipeline), GST_DEBUG_GRAPH_SHOW_ALL, "pipeline");
-
-
-	return true;
-
-}
-
-bool Recording::showStream()
-{
-	/* Check if stream is already linked */
-	if (streamLinked)
-		return true;
-
-	cerr << uri << ": Preparing to link stream" << endl << endl;
-
-	/* Attach handler to enc src pad for cathing EOS */
-	// GstPad* enc_src = gst_element_get_static_pad(enc, "src");
-	// gst_pad_add_probe(enc_src, GstPadProbeType(GST_PAD_PROBE_TYPE_BLOCK | GST_PAD_PROBE_TYPE_EVENT_DOWNSTREAM), eos_drop_probe, NULL, NULL);
-	// cerr << uri << ": EOS probe assigned to encoder" << endl << endl;
-
-	// /* Send EOS to testsrc */
-	// gst_element_send_event(testsrc, gst_event_new_eos());
-	// cerr << uri << ": EOS sent to videotestsrc" << endl << endl;
-
-	/* Relinling */
-	// Block dataflow
-	gst_element_set_state(pipeline, GST_STATE_PAUSED);
-	gst_element_set_state (testsrc, GST_STATE_NULL);
-	gst_element_set_state(capsfilter, GST_STATE_NULL);
-	gst_element_set_state(enc, GST_STATE_NULL);
-
-	// Stream to real sink
-	if (relinkElements(enc, parse, mux))
-	{
-		cerr << uri << ": Stream relinked successfully" << endl << endl;
-		streamLinked = true;
-		lastBufferTime = gst_clock_get_time(clock);
-	}
-	else
-	{
-		cerr << uri << ": Failed to relink stream" << endl << endl;
-		return false;
-	}
-
-	// Delete test 
-	gst_bin_remove_many(GST_BIN(pipeline), testsrc, capsfilter, enc, NULL);
-	g_object_unref(testsrc);
-	g_object_unref(capsfilter);
-	g_object_unref(enc);
-
-	gst_element_set_state(pipeline, GST_STATE_PLAYING);
-	GST_DEBUG_BIN_TO_DOT_FILE(GST_BIN(pipeline), GST_DEBUG_GRAPH_SHOW_ALL, "pipeline_stream");
-
-	return true;
-
+	return true; // to contionue checking regularly
 }
 
 bool Recording::elementSrcLinked(GstElement *elem)
@@ -383,8 +360,8 @@ bool Recording::relinkElements(GstElement *wrong_src, GstElement *right_src, Gst
 	gst_element_unlink(wrong_src, sink);
 	if(gst_element_link(right_src, sink))
 		return true;
-	else
-	{
+    else
+    {
 		// return to previous link state if new link didn't work
 		gst_element_link(wrong_src, sink);
 		return false;
@@ -405,15 +382,15 @@ GstBusSyncReply Recording::busSyncHandler (GstBus *bus, GstMessage *message, Rec
 			cerr << "Recording " << recording->uri << endl 
 				 << "Bus: " << err->message  << endl 
 				 << debug << endl << endl;
+            recording->status = STOPPED;
 
 			g_error_free (err);
      		g_free (debug);
-			recording->status = STOPPED;
 			/* Free pipeline resourses */
-			gst_element_set_state(recording->pipeline, GST_STATE_NULL);
-			g_source_remove(recording->freeze_check_id);
-			gst_object_unref(recording->clock);
-			gst_object_unref(recording->pipeline);
+//            gst_element_set_state(recording->pipeline, GST_STATE_NULL);
+//            g_source_remove(recording->freeze_check_id);
+            gst_object_unref(recording->clock);
+            gst_object_unref(recording->pipeline);
 
 			/* If error occured with linked rtspsrc, linking test */
 			// if (recording->streamLinked)
@@ -426,7 +403,7 @@ GstBusSyncReply Recording::busSyncHandler (GstBus *bus, GstMessage *message, Rec
 		{
 			const GstStructure *s = gst_message_get_structure (message);
 			const gchar *name = gst_structure_get_name (s);
-			// cout << name << endl << endl;
+			cout << name << endl << endl;
 			break;
 		}
 		case GST_MESSAGE_EOS:

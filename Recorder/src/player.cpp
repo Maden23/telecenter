@@ -8,7 +8,7 @@ Player::Player (GtkWidget* videoWindow, Config *config)
 	this->config = config;
 	
 	/* Initiallizing Gstreamer*/
-	// setenv("GST_DEBUG", "*:5", 1);
+//     setenv("GST_DEBUG", "*:4", 1);
 	gst_init(nullptr, nullptr);
 
 	/* Prepare videoWindow for rendering*/
