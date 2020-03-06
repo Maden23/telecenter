@@ -70,33 +70,32 @@ Recorder::~Recorder()
 //     return pid;
 // }
 
-bool Recorder::startRecording(Camera *cam, string fileName)
+bool Recorder::startRecording(Camera *cam)
 {
     /* Check if recording is already running */
     if (runningRecordings.find(cam) != runningRecordings.end())
     {
         return true;
     }
-
-        /* Create file name if not specified */
-    if (fileName == "")
-    {
-        string stream = cam->uri.substr(cam->uri.find("@") + 1);
-        char datetime[18];
-        time_t t = time(nullptr);
-        strftime(datetime, sizeof(datetime), "%d-%m-%Y_%H:%M", localtime(&t));
-        fileName = stream + "_" + string(datetime) + ".mp4"; 
-    }
-
+    /* Get timeout for test showing */
     long timeout_ms = config->getParamInt("videoTimeout");
     if (timeout_ms == -1)
     {
         cerr << "Timeout not found" << endl << endl;
         return false;
     }
-
     long timeout_ns = timeout_ms * 1000000;
-    Recording *recording = new Recording(cam->uri, config->getParam("saveToFolder"), fileName, timeout_ns);
+
+    /* Get video time limit */
+    long videolimit_s = config->getParamInt("videoTimeLimitSeconds");
+    if (videolimit_s == -1)
+    {
+        cerr << "videoTimeLimitSeconds not found. Default = 0" << endl << endl;
+        videolimit_s = 0;
+    }
+    long videolimit_ns = videolimit_s * 1000000000;
+
+    Recording *recording = new Recording(cam->uri, config->getParam("saveToFolder"), cam->name, timeout_ns, videolimit_ns);
     if (!recording->start())
     {
         cerr << "Failed to start recording of " << cam->uri << endl << endl;

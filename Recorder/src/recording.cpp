@@ -1,11 +1,23 @@
 #include "recording.h"
 
-Recording::Recording(string uri, string folder, string fileName, long timeout)
+Recording::Recording(string uri, string folder, string camName, long timeout, long videoTimeLimit)
 {
 	this->uri = uri;
 	this->folder = folder;
-	this->fileName = fileName;
+    this->camName = camName;
 	this->timeout = timeout;
+    this->videoTimeLimit = videoTimeLimit;
+    /* Create file name */
+    if (fileName == "")
+    {
+//        string stream = cam->uri.substr(cam->uri.find("@") + 1);
+        char datetime[18];
+        time_t t = time(nullptr);
+        strftime(datetime, sizeof(datetime), "%d-%m-%Y_%H:%M", localtime(&t));
+        fileName = camName + "_" + string(datetime)+ "_%02d.mp4";
+//        fileName = stream + "_" + string(datetime) + ".mp4";
+    }
+
 }
 
 Recording::~Recording()
@@ -58,7 +70,7 @@ bool Recording::stop()
 	// send EOS
 	status = STOPPING;
 	gst_element_send_event(src, gst_event_new_eos());
-	cerr << uri << ": Sent EOS to stream" << endl;
+    cerr << camName << ": Sent EOS to stream" << endl;
 
 	// GstPad* pad = gst_element_get_static_pad(testsrc, "src");
 	// gst_pad_add_probe(pad, GstPadProbeType(GST_PAD_PROBE_TYPE_BLOCK | GST_PAD_PROBE_TYPE_EVENT_DOWNSTREAM),eos_drop_probe, NULL, NULL);
@@ -79,32 +91,34 @@ bool Recording::stop()
 bool Recording::buildPipeline()
 {
     /* For RTSP stream */
-    src = gst_element_factory_make("rtspsrc", ("src " + fileName).c_str());
-    depay = gst_element_factory_make("rtph264depay", ("depay " + fileName).c_str());  
-    parse = gst_element_factory_make("h264parse", ("parse " + fileName).c_str());
-    streamcapsfilter = gst_element_factory_make("capsfilter", ("streamcaps " + fileName).c_str());
+    src = gst_element_factory_make("rtspsrc", ("src " + camName).c_str());
+    depay = gst_element_factory_make("rtph264depay", ("depay " + camName).c_str());
+    parse = gst_element_factory_make("h264parse", ("parse " + camName).c_str());
+    streamcapsfilter = gst_element_factory_make("capsfilter", ("streamcaps " + camName).c_str());
 
 
     /* For test */
-    testsrc = gst_element_factory_make("videotestsrc", ("test " + fileName).c_str());
-    testcapsfilter = gst_element_factory_make("capsfilter", ("testcaps " + fileName).c_str());
-    enc = gst_element_factory_make("x264enc", ("enc " + fileName).c_str());
+    testsrc = gst_element_factory_make("videotestsrc", ("test " + camName).c_str());
+    testcapsfilter = gst_element_factory_make("capsfilter", ("testcaps " + camName).c_str());
+    enc = gst_element_factory_make("x264enc", ("enc " + camName).c_str());
 
     /* Sinks */
-    mux = gst_element_factory_make("mpegtsmux", ("mux  " + fileName).c_str());
-    sink = gst_element_factory_make("filesink", ("sink " + fileName).c_str());
-    fakesink = gst_element_factory_make("fakesink", ("fakesink " + fileName).c_str());
+//    mux = gst_element_factory_make("mpegtsmux", ("mux  " + camName).c_str());
+//    sink = gst_element_factory_make("filesink", ("sink " + camName).c_str());
+    sink = gst_element_factory_make("splitmuxsink", ("sink " + camName).c_str());
+    fakesink = gst_element_factory_make("fakesink", ("fakesink " + camName).c_str());
 
-    pipeline = gst_pipeline_new(("pipeline " + fileName).c_str());
+    pipeline = gst_pipeline_new(("pipeline " + camName).c_str());
 
-    if (!pipeline || !src || !depay || !parse || !streamcapsfilter || !mux || !sink || !fakesink || !testsrc || !testcapsfilter || !enc)
+//    if (!pipeline || !src || !depay || !parse || !streamcapsfilter || !mux || !sink || !fakesink || !testsrc || !testcapsfilter || !enc)
+    if (!pipeline || !src || !depay || !parse ||  !sink )
     {
-        cerr << uri << "Not all pipeline elements could be created" << endl << endl;
+        cerr << camName << "Not all pipeline elements could be created" << endl << endl;
         return false;
     } 
 
 //    gst_bin_add_many(GST_BIN(pipeline), src, depay, parse, streamcapsfilter, mux, sink, fakesink, testsrc, testcapsfilter, enc, NULL);
-    gst_bin_add_many(GST_BIN(pipeline), src, depay, parse, mux, sink, NULL);
+    gst_bin_add_many(GST_BIN(pipeline), src, depay, parse, sink, NULL);
 
     // Caps for videotestsrc
     GstCaps* streamcaps = gst_caps_new_simple("video/x-h264",
@@ -120,7 +134,7 @@ bool Recording::buildPipeline()
 //        return false;
 //    }
     /* Link stream to real sink */
-    if (!gst_element_link_many(depay, parse, mux, sink, NULL))
+    if (!gst_element_link_many(depay, parse, sink, NULL))
     {
         cerr << "Stream linking error" << endl << endl;
     }
@@ -128,8 +142,15 @@ bool Recording::buildPipeline()
     g_object_set (src,
             "location", uri.c_str(),
             "protocols", (1 << 2), // TCP,
-            "timeout", 1000,
+//            "timeout", 1000,
             NULL);
+    // Set properties for streaming time limit
+    g_object_set(sink,
+                 "location", (folder+fileName).c_str(),
+                 "max-size-time", videoTimeLimit,
+                 "muxer-factory", "mpegtsmux",
+                 NULL);
+
     // Signal to handle new source pad
     g_signal_connect(src, "pad-added", G_CALLBACK(pad_added_handler), this);
 
@@ -151,8 +172,7 @@ bool Recording::buildPipeline()
 //        cerr << "Test pipeline linking error" << endl << endl;
 //        return false;
 //    }
-    // Set name for file
-    g_object_set(sink, "location", (folder+fileName).c_str(), NULL);
+
 
 //    streamLinked = false;
     streamLinked = true;
@@ -178,18 +198,18 @@ void Recording::pad_added_handler (GstElement * src, GstPad * new_pad, Recording
 	new_pad_type = gst_structure_get_name (new_pad_struct);
 	if (!g_str_has_prefix (new_pad_type, "application/x-rtp"))
 	{
-		cerr << recording->uri << ": Wrong stream prefix" << endl << endl;;
+        cerr << recording->camName << ": Wrong stream prefix" << endl << endl;;
 		return;
 	}
 
 	/* Attempt the link */
 	ret = gst_pad_link (new_pad, sink_pad);
 	if (GST_PAD_LINK_FAILED (ret)) {
-		cerr << recording->uri << ": Source pad link failed" << endl << endl;
+        cerr << recording->camName << ": Source pad link failed" << endl << endl;
 	}
 	else 
 	{       
-		cerr << recording->uri << ": Linked source pad" << endl << endl;
+        cerr << recording->camName << ": Linked source pad" << endl << endl;
 		// Add data probe to remember the last received video buffer time
          gst_pad_add_probe(new_pad, GST_PAD_PROBE_TYPE_BUFFER, data_probe, recording, NULL);
 	}
@@ -225,12 +245,12 @@ GstPadProbeReturn Recording::probe_block_stream(GstPad *pad, GstPadProbeInfo *in
     gst_pad_add_probe(parse_src, GstPadProbeType(GST_PAD_PROBE_TYPE_BLOCK | GST_PAD_PROBE_TYPE_EVENT_DOWNSTREAM),
                          probe_eos_in_stream, recording, NULL);
 
-    cerr << recording->uri << ": EOS probe assigned to parse" << endl << endl;
+    cerr << recording->camName << ": EOS probe assigned to parse" << endl << endl;
 
     /* Send EOS to sink pad of parse  */
 //    GstPad* parse_sink = gst_element_get_static_pad(recording->parse, "sink");
     gst_element_send_event(recording->parse, gst_event_new_eos());
-    cerr << recording->uri << ": EOS sent to rtspsrc" << endl << endl;
+    cerr << recording->camName << ": EOS sent to rtspsrc" << endl << endl;
     return GST_PAD_PROBE_OK;
 }
 
@@ -264,13 +284,13 @@ GstPadProbeReturn Recording::probe_idle_relink(GstPad *pad, GstPadProbeInfo *inf
         //if (relinkElements(recording->parse, recording->enc, recording->mux))
         if (relinkElements(recording->streamcapsfilter, recording->enc, recording->mux))
         {
-            cerr << recording->uri << ": Test linked successfully" << endl << endl;
+            cerr << recording->camName << ": Test linked successfully" << endl << endl;
             recording->streamLinked = false;
             recording->lastBufferTime = gst_clock_get_time(recording->clock);
         }
         else
         {
-            cerr << recording->uri << ": Failed to link test" << endl << endl;
+            cerr << recording->camName << ": Failed to link test" << endl << endl;
         }
     }
     else
@@ -278,13 +298,13 @@ GstPadProbeReturn Recording::probe_idle_relink(GstPad *pad, GstPadProbeInfo *inf
         // Link stream to real sink
         if (relinkElements(recording->enc, recording->streamcapsfilter, recording->mux))
         {
-            cerr << recording->uri << ": Stream relinked successfully" << endl << endl;
+            cerr << recording->camName << ": Stream relinked successfully" << endl << endl;
             recording->streamLinked = true;
             recording->lastBufferTime = gst_clock_get_time(recording->clock);
         }
         else
         {
-            cerr << recording->uri << ": Failed to relink stream" << endl << endl;
+            cerr << recording->camName << ": Failed to relink stream" << endl << endl;
         }
 //        cerr << "Dot droped" << endl;
 //        GST_DEBUG_BIN_TO_DOT_FILE(GST_BIN(recording->pipeline), GST_DEBUG_GRAPH_SHOW_ALL, "pipeline");
@@ -318,7 +338,7 @@ gboolean Recording::freeze_check(gpointer user_data)
         // Needs relinking if stream is linked now
         if (recording->streamLinked)
         {
-            cerr << recording->uri << ": Preparing to link test" << endl << endl;
+            cerr << recording->camName << ": Preparing to link test" << endl << endl;
             /* Add blocking pad on parse src pad */
             GstPad* parse_src = gst_element_get_static_pad(recording->parse, "src");
             gst_pad_add_probe (parse_src, GST_PAD_PROBE_TYPE_BLOCK_DOWNSTREAM, probe_block_stream, recording, NULL);
@@ -331,7 +351,7 @@ gboolean Recording::freeze_check(gpointer user_data)
         // Needs relinking if test is linked now
         if (!recording->streamLinked)
         {
-            cerr << recording->uri << ": Preparing to link source" << endl << endl;
+            cerr << recording->camName << ": Preparing to link source" << endl << endl;
             /* Add blocking pad on parse src pad */
             GstPad* parse_src = gst_element_get_static_pad(recording->parse, "src");
             gst_pad_add_probe (parse_src, GST_PAD_PROBE_TYPE_BLOCK_DOWNSTREAM, probe_block_stream, recording, NULL);
@@ -379,7 +399,7 @@ GstBusSyncReply Recording::busSyncHandler (GstBus *bus, GstMessage *message, Rec
 			gchar *debug;
 
 			gst_message_parse_error (message, &err, &debug);
-			cerr << "Recording " << recording->uri << endl 
+            cerr << "Recording " << recording->camName << endl
 				 << "Bus: " << err->message  << endl 
 				 << debug << endl << endl;
             recording->status = STOPPED;
@@ -408,8 +428,10 @@ GstBusSyncReply Recording::busSyncHandler (GstBus *bus, GstMessage *message, Rec
 		}
 		case GST_MESSAGE_EOS:
 		{
-			cerr << recording->uri << ": EOS in bus" << endl << endl;
-			recording->status = STOPPED;
+            cerr << recording->camName << ": EOS in bus" << endl << endl;
+            // This recording is finished if stop was initiated by user, not by splitmuxsink
+            if (recording->status == STOPPING)
+                recording->status = STOPPED;
 			break;
 		}
 		default:

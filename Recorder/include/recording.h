@@ -12,7 +12,7 @@ enum status_t
 class Recording
 {
 public:
-	Recording(string uri, string folder, string fileName, long timeout);
+    Recording(string uri, string folder, string camName, long timeout, long videoTimeLimit);
 	~Recording();
 
 	string getFileName() { return fileName; }
@@ -23,9 +23,9 @@ public:
 
 	status_t status;
 	
-	string uri, fileName, folder;
+    string uri, camName, fileName, folder;
 private:
-	long timeout;
+    long timeout, videoTimeLimit;
 	int freeze_check_id;
 	bool streamLinked;
 

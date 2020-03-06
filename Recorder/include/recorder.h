@@ -34,7 +34,7 @@ public:
 
     // pid_t startRecording(string uri, string fileName = "");
     map<Camera*, Recording*> getRunningRecordings() { return runningRecordings; }
-    bool startRecording(Camera* cam, string fileName = "");
+    bool startRecording(Camera* cam);
     bool stopRecording(Camera* cam);
    
 
