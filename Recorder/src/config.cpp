@@ -7,11 +7,14 @@ Config::Config()
     cout << "Known cameras: " << endl;
     for (auto room : rooms)
     {
-        cout << "\t" << room.first << endl;
-        for (auto &cam : room.second)
+        cout << "\t" << room->getName() << endl;
+        for (auto &cam : *room->getCameras())
         {
-            cout << cam.first << " : " << cam.second << endl;
+            cout << cam.fullName << " (" << cam.name << ") " << " : " << cam.uri << endl;
         }
+        cout << "Sound: " << endl
+             << room->getAudioSource().name << " : "
+             << room->getAudioSource().uri << endl;
     }
     cout << endl;
 } 
@@ -45,8 +48,6 @@ void Config::setFile(string configPath)
     else {
         cerr << "Couldn't open config file for reading.\n";
     }
-    
-    getGSuiteRooms();
 }
 
 string Config::getParam(string name)
@@ -65,19 +66,19 @@ int Config::getParamInt(string name)
 
 
 
-string Config::getCamUri(string cam)
-{
-    for (auto room : rooms)
-    {
-        if (room.second.find(cam) != room.second.end())
-            return room.second[cam];
-    }
-    return "";
-}
+//string Config::getCamUri(string cam)
+//{
+//    for (auto room : rooms)
+//    {
+//        if (room.second.find(cam) != room.second.end())
+//            return room.second[cam];
+//    }
+//    return "";
+//}
 
-map<string, map<string, string>> Config::getRooms()
+vector<Room *>* Config::getRooms()
 {
-    return rooms;
+    return &rooms;
 }
 
 void Config::getGSuiteRooms()
@@ -90,16 +91,24 @@ void Config::getGSuiteRooms()
     }
 
     auto GSuiteRooms = readRoomsFromFile("gsuite_rooms.json");
-    rooms.insert(GSuiteRooms.begin(), GSuiteRooms.end());
+    for (auto &room : GSuiteRooms)
+    {
+        room->type = GSUITE;
+    }
+    rooms.insert(rooms.begin(), GSuiteRooms.begin(), GSuiteRooms.end());
 }
 
 void Config::getCustomRooms()
 {
-    auto cameras = readRoomsFromFile("custom_cams.json");
-    rooms.insert(cameras.begin(), cameras.end()); // add custom cameras
+    auto customRooms = readRoomsFromFile("custom_cams.json");
+    for (auto &room : customRooms)
+    {
+        room->type = CUSTOM;
+    }
+    rooms.insert(rooms.begin(), customRooms.begin(), customRooms.end()); // add custom cameras
 }
 
-map<string, map<string, string>> Config::readRoomsFromFile(string fileName)
+vector<Room*> Config::readRoomsFromFile(string fileName)
 {
     /* Check if file with rooms exists */
     ifstream file(fileName);
@@ -109,30 +118,43 @@ map<string, map<string, string>> Config::readRoomsFromFile(string fileName)
         return {};
     }
     
-    map<string, map<string, string>> rooms;
+    vector<Room*> rooms;
 
     /* Read data from JSON to DOM structure*/
     string content((istreambuf_iterator<char>(file)), (istreambuf_iterator<char>()));
     rapidjson::Document d;
     d.Parse(content.c_str());
 
-    /* Cycle through roooms and pack cameras to maps */
-    for (auto &val : d.GetObject())
+    /* Cycle through roooms in file and populate Room objects */
+    for (auto &room : d.GetObject())
     {
-        string roomName = val.name.GetString();
-        map <string, string> roomCams;
-        // Iterating through array of camera Objects in the room
-        for (auto &camItem : val.value.GetArray())
+        string roomName = room.name.GetString();
+        vector<Camera> roomCams;
+
+        // Iterate through array of camera Objects in the room
+        for (auto &camItem : room.value["cameras"].GetArray())
         {
             // for (auto &mem : camItem.GetObject())
             //     cout << mem.name.GetString() << endl;
-
-            // Add name and rtsp-address of the camera to the map
-            string camName = camItem["name"].GetString();
-            string camAddress = camItem["address"].GetString();
-            roomCams[camName] = camAddress;
+            Camera cam;
+            // Add name and rtsp-address of the camera
+            cam.name = camItem["name"].GetString();
+            cam.fullName = camItem["full_name"].GetString();
+            cam.uri = camItem["address"].GetString();
+            roomCams.push_back(cam);
         }
-        rooms.insert({roomName, roomCams});
+
+        // Get the first audio source of the array
+        AudioSource roomAudio;
+        auto audio = room.value["audio"].GetArray();
+        if (!audio.Empty())
+        {
+            roomAudio.name = audio[0]["full_name"].GetString();
+            roomAudio.uri = audio[0]["address"].GetString();
+        }
+
+        // Create new room and add it to vector
+        rooms.push_back(new Room(roomName, roomCams, roomAudio));
     }
     return rooms;
 }

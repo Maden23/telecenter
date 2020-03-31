@@ -29,7 +29,7 @@ def main():
         # Save the credentials for the next run
         with open('token.pickle', 'wb') as token:
             pickle.dump(creds, token)
-            
+
     try:
         service = build('admin', 'directory_v1', credentials=creds)
     except socket.gaierror:
@@ -41,36 +41,46 @@ def main():
     items = results.get('items', [])
 
     # Distribute ONVIF-cameras (names and adresses) to rooms
-    rooms = {} # {"room1" : [("cam1", "rtsp://123"), ("cam2", "rtsp://1234")], "room2" : {...}}
+    rooms = {} # {"room1" : { "cameras" :[("cam1", "cam1 full", "rtsp://123"), ("cam2", "cam2 full", "rtsp://1234")], "audio": [("source1", "rtsp://..."), ("sourse2", "rtsp://")], "room2" : {...}}
     if not items:
         print('No cameras in the domain.')
         exit(-1)
 
     for item in items:
-        if item['resourceType'] == "ONVIF-camera":
+        if 'resourceType' in item and item['resourceType'] in ["ONVIF-camera", "Encoder"]:
             if not item['floorSection'] in rooms:
-                rooms[item['floorSection']] = []
+                rooms[item['floorSection']] = {"cameras" : [], "audio" : []}
             name = item['userVisibleDescription'] if item['userVisibleDescription'] != "" else item['resourceName']
+            fullname = item['resourceName']
             # Make RTSP address
             info = json.loads(item['resourceDescription'])
             rtsp = "rtsp://" 
-            if 'login' in info and 'password' in info:
-                rtsp += info['login'] + ":" + info['password'] + "@"
+            if "rtsp_mainstream" in info:
+                rtsp = info["rtsp_mainstream"]
             else:
-                rtsp += "admin:Supervisor@"
-            rtsp += info['ip']
+                if 'login' in info and 'password' in info:
+                    rtsp += info['login'] + ":" + info['password'] + "@"
+                else:
+                    rtsp += "admin:Supervisor@"
+                rtsp += info['ip']
 
-            rooms[item['floorSection']].append((name, rtsp))
+            # If item has audio, place it in "audio" section
+            if 'audio' in info and info["audio"] == "main":
+                rooms[item['floorSection']]["audio"].append({'name' : name, 'full_name' : fullname, 'address' : rtsp})
+
+
+            rooms[item['floorSection']]["cameras"].append({'name' : name, 'full_name' : fullname, 'address' : rtsp})
 
     # Convert to JSON-like structure
-    JSONrooms = {}
-    for room in rooms:
-        JSONrooms[room] = []
-        for camName, camAddress in rooms[room]:
-            JSONrooms[room].append({'name' : camName, 'address' : camAddress})
+    # JSONrooms = {}
+    # for room in rooms:
+    #     JSONrooms[room] = []
+    #     for camName, fullCamName, camAddress in rooms[room]:
+    #         JSONrooms[room].append({'name' : camName, 'full_name' : fullCamName, 'address' : camAddress})
 
     with open("gsuite_rooms.json", "w", encoding='utf8') as file:
-        json.dump(JSONrooms, file, ensure_ascii=False)
+        # json.dump(JSONrooms, file, ensure_ascii=False)
+        json.dump(rooms, file, ensure_ascii=False)
 
 
 if __name__ == '__main__':

@@ -142,7 +142,6 @@ void Recorder::uploadVideo(string uri, string fileName)
 
 gboolean Recorder::checkIfRecStopped(gpointer data)  
 {
-    // TODO: Add rec image widget control here
     auto *runningRecordings = (map<Camera*, Recording*>*) data;
     for (auto it = runningRecordings->cbegin(); it != runningRecordings->end();)
     {

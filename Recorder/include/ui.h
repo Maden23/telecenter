@@ -6,10 +6,10 @@
 #include <unistd.h>
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
-#include "camera.h"
+#include "room.h"
 #include "config.h"
 #include "player.h"
-#include "recorder.h"
+#include "recorder.h"zzz
 
 /* For finding IP */
 #include <cstdlib>
@@ -30,57 +30,62 @@ class UI
 public:
 	UI(Config *config);
 	~UI();
-	void displayRecordingStatus(string cam_id, bool status);
-	Config *config;
-	Recorder *recorder;
-	string playingCamName = ""; // empty if none playing
-	// map<string, GtkWidget*> recImages;
-	vector<struct Camera*> camDataV; // stores data and ui objects assigned to cameras 
-	vector<GtkWidget*> switchGridV;  // stores grid objects with switches for edit mode on them
-	
+    void displayRecordingStatus(string cam_id, bool status);
+    Config *config;
+    Recorder *recorder;
+    string playingCamName = ""; // empty if none playing
+    // map<string, GtkWidget*> recImages;
+//	vector<struct Camera*> camDataV; // stores data and ui objects assigned to cameras
+    vector<GtkWidget*> switchGridV;  // stores grid objects with switches for edit mode on them
+
 private:
-	Player *player;
-	GtkBuilder *menuBuilder, *playerBuilder;
-	GtkWidget *menuWindow, *playerWindow;
-	GtkWidget *playerWidget, *playerLabel;
-	GtkWidget *editButton;
+    vector<Room*> *rooms;
+    Player *player;
+    GtkBuilder *menuBuilder, *playerBuilder;
+    GtkWidget *menuWindow, *playerWindow;
+    GtkWidget *playerWidget, *playerLabel;
+    GtkWidget *editButton;
 
 	int initStyles();
 	GtkWidget* windowInit(GtkBuilder** builder, string gladeFile, string windowName);
-	void initPlayerWidgets();
-	void initMenuWidgets();
-	void initCamWidgets(int room_n, map<string, string> cams);
+    void initPlayerWidgets();
+    void initMenuWidgets();
+    void initCamWidgets(int room_n, vector<Camera> *cams);
 	void initRoomTab(int room_n, string room_name);
 
 	/* For status bar information */
 	string findIP();
-	struct gdrive_status_data
-	{
-		Recorder *recorder;
-		GtkWidget *GDriveIcon;
-	};
-	static gboolean updateGDriveStatus(gpointer user_data);
+    struct gdrive_status_data
+    {
+        Recorder *recorder;
+        GtkWidget *GDriveIcon;
+    };
+    static gboolean updateGDriveStatus(gpointer user_data);
 
 	struct display_player_data
 	{
-		string camName;
-		string uri;
-		GtkWidget *playerLabel;
-		Player *player;
+        Camera cam;
+        GtkWidget *playerLabel;
+        Player *player;
 		string *playingCamName;
 	};
 	static void displayPlayer(GtkWidget* widget, gpointer data);
 
-	static gboolean keyPress(GtkWidget* widget, GdkEventKey *event, UI *ui);
+//    struct key_press_data
+//    {
+//        vector<Room*>* rooms;
+//        Recorder *recorder;
+//    };
+    static gboolean keyPress(GtkWidget* widget, GdkEventKey *event, UI *ui);
 
-	struct switch_state_changed_data
-	{
-		Camera *camData;
-		Recorder *recorder;
-	};
+    struct switch_state_changed_data
+    {
+        Camera *cam;
+        Recorder *recorder;
+    };
     static void switchStateChanged(GtkWidget* widget, gboolean state, gpointer user_data);
 
-	static void editButtonClicked(GtkWidget* widget, vector<GtkWidget*> *switchGridV);
+    static void editButtonClicked(GtkWidget* widget, vector<GtkWidget*> *switchGridV);
 };
 
 

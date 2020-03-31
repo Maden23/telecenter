@@ -15,7 +15,7 @@
 #include <bits/stdc++.h>
 
 #include "recording.h"
-#include "camera.h"
+#include "room.h"
 
 using namespace std; 
 
@@ -36,9 +36,8 @@ public:
     map<Camera*, Recording*> getRunningRecordings() { return runningRecordings; }
     bool startRecording(Camera* cam);
     bool stopRecording(Camera* cam);
-   
 
-    bool isGDriveUploadActive() {return runningGDriveUploads > 0; } 
+    bool isGDriveUploadActive() { return runningGDriveUploads > 0; }
    
 private:
     // map<string, pid_t> runningRecorders; //stream uri, pid

@@ -3,6 +3,7 @@
 UI::UI(Config *config)
 {
     this->config = config;
+    this->rooms = config->getRooms();
 
     gtk_init (nullptr, nullptr);
     
@@ -171,29 +172,32 @@ void UI::initPlayerWidgets()
 
 void UI::initMenuWidgets()
 {
-    auto rooms = config->getRooms();
-
     /* Make custom cameras the tab #0 */
-    auto custom = rooms.find("custom");
-    if (custom != rooms.end())
+    for (auto room : *rooms)
     {
-        initRoomTab(0, custom->first);
-        initCamWidgets(0, custom->second);
-        rooms.erase(custom);
+        if (room->type == CUSTOM)
+        {
+            initRoomTab(0, room->getName());
+            initCamWidgets(0, room->getCameras());
+            break;
+        }
     }
+
     /* Stip tab with custom cameras if there isn't any */
     int room_n = 1;
 
-    for (auto room : rooms)
+    for (auto room : *rooms)
     {
+        // Skip all custom rooms
+        if (room->type == CUSTOM) continue;
 
-        initRoomTab(room_n, room.first);
-        initCamWidgets(room_n, room.second);
+        initRoomTab(room_n, room->getName());
+        initCamWidgets(room_n, room->getCameras());
         room_n++;
     }  // for rooms
 
     /* Edit mode */
-    // Find edit button 
+    // Find edit button
     editButton = (GtkWidget*) gtk_builder_get_object(menuBuilder, "editButton");
     if (!editButton)
     {
@@ -206,25 +210,22 @@ void UI::initMenuWidgets()
     }
 }
 
-void UI::initCamWidgets(int room_n, map<string, string> cams)
+void UI::initCamWidgets(int room_n, vector<Camera> *cams)
 {
+
     /* Find out how many cameras are known */
-    if (cams.size() > 9)
+    if (cams->size() > 9)
     {
         cout << "Too many cameras to display in room " << room_n << endl << endl;
     }
 
     /*  Setting buttons for each camera. Remember not to run out of 9 buttons */
     int n = 0;  
-    for (auto &cam : cams)
+    for (auto &cam : *cams)
     {   
         if (n == 9) break;
-
         /* Create struct object for storing data and ui objects for the camera */
-        struct Camera *camData = new struct Camera;
-        camData->name = cam.first;
-        camData->uri = cam.second;
-        camData->record = false;
+        cam.record = false;
 
         /* Find the camera button object */
         string name = "b" + to_string(n) + "_" + to_string(room_n);
@@ -239,15 +240,15 @@ void UI::initCamWidgets(int room_n, map<string, string> cams)
 
         /* Show button and assign cam label */
         gtk_widget_show(button);
-        gtk_button_set_label(GTK_BUTTON(button), cam.first.c_str());
+        gtk_button_set_label(GTK_BUTTON(button), cam.name.c_str());
 
         /* Pass player and camName to click handler */
         struct display_player_data *data = new struct display_player_data;
-        *data = {camData->name, camData->uri, playerLabel, player, &playingCamName};
+        *data = {cam, playerLabel, player, &playingCamName};
         g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(displayPlayer), data);
 
         /* Add button to Camera struct */
-        camData->button = button;
+        cam.button = button;
 
         /* Find the rec image object */
         name = "i" + to_string(n) + "_" + to_string(room_n);
@@ -260,16 +261,13 @@ void UI::initCamWidgets(int room_n, map<string, string> cams)
         }
 
         /* Add image to Camera struct */
-        camData->recImage = recImage;
-
-        /* Add cemera data to vector */
-        camDataV.push_back(camData);
+        cam.recImage = recImage;
 
         /* Find a switch for this camera */
         name = "s" + to_string(n) + "_" + to_string(room_n);
         GtkWidget *sw = (GtkWidget*) gtk_builder_get_object(menuBuilder, name.c_str());
         switch_state_changed_data *sw_data = new switch_state_changed_data;
-        *sw_data = {camData, recorder};
+        *sw_data = {&cam, recorder};
         if (!sw)
         {
             cerr << "Cannot get switch " << name << endl << endl;
@@ -280,7 +278,7 @@ void UI::initCamWidgets(int room_n, map<string, string> cams)
             gtk_widget_show(sw);
             gtk_switch_set_active(GTK_SWITCH(sw), false);
             g_signal_connect(G_OBJECT(sw), "state-set", G_CALLBACK(switchStateChanged), sw_data);
-         }
+        }
 
         n++;
 
@@ -325,7 +323,7 @@ void UI::initRoomTab(int room_n, string room_name)
     else
     {
         // Store switchGrid in a vector to turn it on/off on edit button click
-        switchGridV.push_back(switchGrid); 
+        switchGridV.push_back(switchGrid);
     }
 
 }
@@ -335,37 +333,48 @@ void UI::displayPlayer(GtkWidget* widget, gpointer data)
     auto *context = (display_player_data*) data;
     // gtk_widget_show(context->playerWidget);
     // gtk_widget_show(context->playerLabel);
-    context->player->playStream(context->uri);
-    *context->playingCamName = context->camName;
-    gtk_label_set_text(GTK_LABEL(context->playerLabel), context->camName.c_str());
+    context->player->playStream(context->cam.uri);
+    *context->playingCamName = context->cam.fullName;
+    gtk_label_set_text(GTK_LABEL(context->playerLabel), context->cam.fullName.c_str());
 
 }
 
 gboolean UI::keyPress(GtkWidget* widget, GdkEventKey *event, UI *ui)
 {
+    if (!ui->rooms) return false;
+
     if (event->keyval == GDK_KEY_R || event->keyval == GDK_KEY_r)
     {
+        cerr << "Start key pressed" << endl << endl;
         // Check if any cameras are picked for recording
         bool picked;
-        for (auto cam : ui->camDataV)
+        for (auto room : *ui->rooms)
         {
-            if (cam->record)
+            for (auto cam : *room->getCameras())
             {
-                picked = true;
-                break;
+                if (cam.record)
+                {
+                    picked = true;
+                    break;
+                }
             }
+            if (picked) break;
         }
+
         if (!picked) return false;
 
         // Record all cameras that were picked
-        for (auto cam : ui->camDataV)
+        for (auto room : *ui->rooms)
         {
-            if(cam->record)
+            for (auto cam : *room->getCameras())
             {
-                ui->recorder->startRecording(cam);
-                gtk_widget_show(cam->recImage);
-            }
-        }
+                if(cam.record)
+                {
+                    ui->recorder->startRecording(&cam);
+                    gtk_widget_show(cam.recImage);
+                }
+            } // for cams
+        } // for rooms
     }
 
     if (event->keyval == GDK_KEY_S || event->keyval == GDK_KEY_s)
@@ -429,13 +438,13 @@ void UI::switchStateChanged(GtkWidget* widget, gboolean state, gpointer user_dat
     {
         if (state)
         {
-            gtk_widget_show(GTK_WIDGET(data->camData->recImage));
-            data->recorder->startRecording(data->camData);
+            gtk_widget_show(GTK_WIDGET(data->cam->recImage));
+            data->recorder->startRecording(data->cam);
         }
         else
         {
-            data->recorder->stopRecording(data->camData);
+            data->recorder->stopRecording(data->cam);
         }
     }
-    data->camData->record = state;
+    data->cam->record = state;
 }

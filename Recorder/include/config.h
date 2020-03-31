@@ -1,6 +1,9 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
+#include "rapidjson/document.h"
+#include "room.h"
+#include <vector>
 #include <map>
 #include <string>
 #include <algorithm>
@@ -8,7 +11,7 @@
 #include <iostream>
 #include <algorithm>
 #include <cstdlib>
-#include "rapidjson/document.h"
+
 
 using namespace std;
 
@@ -32,9 +35,9 @@ public:
     string getParam(string name);
     int getParamInt(string name);
 
-    string getCamUri(string cam);
+//    string getCamUri(string cam);
 
-    map<string, map<string, string>> getRooms();
+    vector<Room*> *getRooms();
     
 private:
     Config();
@@ -45,11 +48,10 @@ private:
     void getCustomRooms();
 
     string makeGSuiteRequest();
-    map<string, map<string, string>> readRoomsFromFile(string fileName);
+    vector<Room*> readRoomsFromFile(string fileName);
 
     map<string, string> configuration;
-    map<string, map<string, string>> rooms;
-
+    vector<Room*> rooms;
 };
 
 #endif
