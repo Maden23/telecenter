@@ -10,5 +10,14 @@ __pycache__
 *.log
 
 # Credentials
-client_secret.json
-storage.json
+*.json
+*.pickle
+
+# Qt files
+*.config
+*.files
+*.creator*
+*.includes
+*.pro
+
+rapidjson/
