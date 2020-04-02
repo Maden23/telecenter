@@ -1,0 +1,44 @@
+window#menu {
+	background-color: #444444;
+}
+
+button {
+	background-color: #444444;
+	background-image: none;
+	color: white;
+}
+
+button label {
+	font-size: 2em;
+	font-family: Quicksand;
+	color: white;
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+label#playerLabel {
+	color: white;
+	font-size: 2em;
+	font-family: Quicksand;
+}
+
+#playerLabelFrame {
+	background-color: black;
+}
+
+.switchGridBackground { 
+	background-color: black;
+	opacity: 0.5;
+}
+switch {
+	margin-left: 50px;
+	margin-right: 50px;
+	margin-bottom: 20px;
+	min-height: 50px;
+}
+
+statusbar label{
+	color: white;
+	font-size: 20px;
+	color: #808080
+}
