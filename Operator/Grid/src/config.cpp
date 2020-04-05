@@ -99,25 +99,22 @@ void Config::getCustomRooms()
 vector<Room*> Config::readRoomsFromFile(string fileName)
 {
     /* Check if file with rooms exists */
-    ifstream file(fileName);
-    if (!file.is_open())
+
+    FILE* pFile = fopen(fileName.c_str(), "rb");
+    if (!pFile)
     {
         cerr << fileName << " not found" << endl << endl;
         return {};
     }
-//    FILE* fp = fopen(fileName, "r");
-
-    vector<Room*> rooms;
 
     /* Read data from JSON to DOM structure*/
-    string content((istreambuf_iterator<char>(file)), (istreambuf_iterator<char>()));
-//    char readBuffer[65536];
-//    rapidjson::FileReadStream is(fp, readBuffer, sizeof(readBuffer));
+    char buffer[65536];
+    rapidjson::FileReadStream is(pFile, buffer, sizeof(buffer));
     rapidjson::Document d;
-    d.Parse(content.c_str());
-//    d.Parse(is);
+    d.ParseStream<0, rapidjson::UTF8<>, rapidjson::FileReadStream>(is);
 
     /* Cycle through roooms in file and populate Room objects */
+    vector<Room*> rooms;
     for (auto &room : d.GetObject())
     {
         string roomName = room.name.GetString();

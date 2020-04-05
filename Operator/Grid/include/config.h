@@ -1,8 +1,8 @@
 #ifndef CONFIG_H
 #define CONFIG_H
 
-//#include <rapidjson/document.h>
-//#include <rapidjson/filereadstream.h>
+#include "rapidjson/document.h"
+#include "rapidjson/filereadstream.h"
 
 #include <room.h>
 #include <vector>

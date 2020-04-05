@@ -1,13 +1,13 @@
 #ifndef UI_H
 #define UI_H
 
+#include "config.h"
 #include <iostream>
 #include <string>
 #include <unistd.h>
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
 #include "room.h"
-#include "config.h"
 #include "player.h"
 
 /* For finding IP */
