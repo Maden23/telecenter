@@ -1,0 +1,6 @@
+<map id="UI::switch_state_changed_data" name="UI::switch_state_changed_data">
+<area shape="rect" id="node2" href="$struct_camera.html" title="Camera" alt="" coords="33,196,101,223"/>
+<area shape="rect" id="node3" href="$class_player.html" title="The Player class. " alt="" coords="45,95,103,121"/>
+<area shape="rect" id="node4" href="$class_config.html" title="The Config class. " alt="" coords="81,5,141,32"/>
+<area shape="rect" id="node5" href="$class_recorder.html" title="Управляет процессом записи " alt="" coords="114,145,189,172"/>
+</map>

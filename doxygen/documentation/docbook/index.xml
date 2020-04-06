@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<book xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <info>
+    <title>IP-телестудия</title>
+    </info>
+    <chapter>
+        <title>Namespace Documentation</title>
+        <xi:include href="namespacefrom-gsuite.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="namespacegpio.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="namespacestd.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="namespaceui.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="namespacevideo-upload.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    </chapter>
+    <chapter>
+        <title>Группы</title>
+        <xi:include href="group__recorder.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="group__grid.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="group__network__monitor.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    </chapter>
+    <chapter>
+        <title>Классы</title>
+        <xi:include href="struct_audio_source.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="classui_1_1_camera.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="struct_camera.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="class_config.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="struct_u_i_1_1display__player__data.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="struct_u_i_1_1gdrive__status__data.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="classui_1_1_grapher.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="struct_pad_data.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="classui_1_1_pinger.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="class_player.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="class_qt_widgets_1_1_q_main_window.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="class_qt_widgets_1_1_q_widget.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="class_recorder.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="class_recording.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="class_room.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="struct_u_i_1_1switch__state__changed__data.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="class_u_i.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="classui_1_1_u_i_graph.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="classui_1_1_u_i_menu.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    </chapter>
+    <chapter>
+        <title>Файлы</title>
+        <xi:include href="groups_8dox.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="ui_8py.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="_operator_2_grid_2include_2config_8h.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="_recorder_2include_2config_8h.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="_operator_2_grid_2include_2player_8h.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="_recorder_2include_2player_8h.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="_operator_2_grid_2include_2room_8h.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="_recorder_2include_2room_8h.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="_operator_2_grid_2include_2ui_8h.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="_recorder_2include_2ui_8h.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="_operator_2_grid_2src_2config_8cpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="_recorder_2src_2config_8cpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="_operator_2_grid_2src_2from-gsuite_8py.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="_recorder_2src_2from-gsuite_8py.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="_operator_2_grid_2src_2main_8cpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="_recorder_2src_2main_8cpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="_operator_2_grid_2src_2player_8cpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="_recorder_2src_2player_8cpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="_operator_2_grid_2src_2ui_8cpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="_recorder_2src_2ui_8cpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="recorder_8h.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="recording_8h.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="gpio_8py.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="recorder_8cpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="recording_8cpp.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="video-upload_8py.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    </chapter>
+    <chapter>
+        <title>Директории</title>
+        <xi:include href="dir_63a30b49c2c778a4303b97e7878e631d.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="dir_ac4aeb4f950a28cebf1393cf97190cc4.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="dir_98a11d44d116def9db2ce41c2601f96b.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="dir_356d85c7fe3a31f6238a1e4b453e8aed.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="dir_c62009bade606762cbc9454b3b297489.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="dir_b2df46b3e07438c2f7bb907cd4fd47eb.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="dir_4bb62adb9b72408a64637345ff5c2e7c.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="dir_9c6075051e5002264f2fb44926966aa1.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+        <xi:include href="dir_237181a5d3cb966ea8a0d11693e487fd.xml" xmlns:xi="http://www.w3.org/2001/XInclude"/>
+    </chapter>
+</book>

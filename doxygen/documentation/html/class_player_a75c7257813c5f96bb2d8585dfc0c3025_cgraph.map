@@ -1,0 +1,6 @@
+<map id="Player::playStream" name="Player::playStream">
+<area shape="rect" id="node2" href="$class_player.html#a987a5a6f6bf24f530536090e9a832ef6" title="Player::busSyncHandler" alt="" coords="207,5,370,32"/>
+<area shape="rect" id="node3" href="$class_player.html#aeb024ba54089ecaf90753a6f6b8d07bc" title="Player::videoWidgetRealize_cb" alt="" coords="187,56,391,83"/>
+<area shape="rect" id="node4" href="$class_player.html#a31a79db48e8ebebddacd1bd76bf16f3d" title="Player::videoWidgetDraw_cb" alt="" coords="193,107,384,133"/>
+<area shape="rect" id="node5" href="$class_player.html#a43527d455f9de17468deb13fef887854" title="Player::pad_added_handler" alt="" coords="199,157,378,184"/>
+</map>

@@ -1,0 +1,202 @@
+\hypertarget{class_recorder_config}{}\section{Класс Recorder\+Config}
+\label{class_recorder_config}\index{Recorder\+Config@{Recorder\+Config}}
+
+
+Класс для хранения конфигурации  
+
+
+
+
+{\ttfamily \#include $<$config.\+h$>$}
+
+\subsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_recorder_config_a50fff4cd104ffad261f37e2162aefaf8}{set\+File} (string config\+Path)
+\item 
+string \hyperlink{class_recorder_config_afc65f46a71f6bacd707dbf461a5bfddb}{get\+Param} (string name)
+\item 
+int \hyperlink{class_recorder_config_a01e6881ce3a3b19990c53f62810daa4b}{get\+Param\+Int} (string name)
+\item 
+vector$<$ \hyperlink{class_room}{Room} $\ast$ $>$ $\ast$ \hyperlink{class_recorder_config_a38b5049c8ea73fbe7fe06bfca6fa216a}{get\+Rooms} ()
+\end{DoxyCompactItemize}
+\subsection*{Открытые статические члены}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_recorder_config}{Recorder\+Config} \& \hyperlink{class_recorder_config_a479f393f92d02955bd5c429c7723c79c}{get} ()
+\end{DoxyCompactItemize}
+\subsection*{Закрытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_recorder_config_a39ca563c2ac944a725b6d627ff364ab9}{Recorder\+Config} ()
+\item 
+\hyperlink{class_recorder_config_a8393f87b954754d668f43957399999e5}{Recorder\+Config} (const \hyperlink{class_recorder_config}{Recorder\+Config} \&)
+\item 
+\hyperlink{class_recorder_config}{Recorder\+Config} \& \hyperlink{class_recorder_config_a49c641cf388b7fcf54711cd2f9f52a1d}{operator=} (const \hyperlink{class_recorder_config}{Recorder\+Config} \&)
+\item 
+void \hyperlink{class_recorder_config_ae74d1af712e9684786ed33f67a8eeda3}{get\+G\+Suite\+Rooms} ()
+\item 
+void \hyperlink{class_recorder_config_a1a24b616ff9ca5beac0bb37210da9ef1}{get\+Custom\+Rooms} ()
+\item 
+string \hyperlink{class_recorder_config_abdba11995310d688ddeee1227de67cda}{make\+G\+Suite\+Request} ()
+\item 
+vector$<$ \hyperlink{class_room}{Room} $\ast$ $>$ \hyperlink{class_recorder_config_aa2d44f3749c087805183a62b013fa1ff}{read\+Rooms\+From\+File} (string file\+Name)
+\end{DoxyCompactItemize}
+\subsection*{Закрытые данные}
+\begin{DoxyCompactItemize}
+\item 
+map$<$ string, string $>$ \hyperlink{class_recorder_config_a4b5b3bcc77e7477f36d5a4dec2a0ac82}{configuration}
+\item 
+vector$<$ \hyperlink{class_room}{Room} $\ast$ $>$ \hyperlink{class_recorder_config_ac04e6a613601514d26353c38bbcc9804}{rooms}
+\end{DoxyCompactItemize}
+
+
+\subsection{Подробное описание}
+Класс для хранения конфигурации 
+
+Данный класс выполнен по шаблону singleton. Читает конфигурацию из файла и хранит параметры в словаре (std\+::map). Вызывает from\+\_\+gsuite.\+py для получения данных о камерах из G\+Sutie. Читает файл gsuite\+\_\+rooms.\+json и создает объекты \hyperlink{class_room}{Room} для каждой комнаты, которые затем хранит в массиве (std\+::vector)
+
+\subsection*{Форматирование файла конфигурации }
+
+Файл должен содержать параметры из таблицы ниже, отформатированные в виде \#Комментарий Параметр = значение
+
+\subsubsection*{Допустивые параметры }
+
+\tabulinesep=1mm
+\begin{longtabu} spread 0pt [c]{*{3}{|X[-1]}|}
+\hline
+\rowcolor{\tableheadbgcolor}\textbf{ Наименование }&\textbf{ Значение }&\textbf{ Описание  }\\\cline{1-3}
+\endfirsthead
+\hline
+\endfoot
+\hline
+\rowcolor{\tableheadbgcolor}\textbf{ Наименование }&\textbf{ Значение }&\textbf{ Описание  }\\\cline{1-3}
+\endhead
+screens &1 или 2 &Количество используемых экранов \\\cline{1-3}
+save\+To\+Folder &/путь &Путь к каталогу, в который будут сохраняться видеофайлы, начиная от корневого каталога системы (/) \\\cline{1-3}
+window\+Width &Число (в пикселях) &Ширина и высота окон программы. Используется в случае, если параметр screens=1 \\\cline{1-3}
+window\+Height &$^\wedge$ &$^\wedge$ \\\cline{1-3}
+video\+Time\+Limit &Число(в минутах) &Ограничение на длительность видео в одном файле. \\\cline{1-3}
+\end{longtabu}
+\subsection*{Использование класса\+: }
+
+Config $\ast$config = \&Config\+::get(); config-\/$>$set\+File(\char`\"{}recorder.\+conf\char`\"{}); config-\/$>$\hyperlink{class_recorder_config_a38b5049c8ea73fbe7fe06bfca6fa216a}{get\+Rooms()} 
+
+\subsection{Конструктор(ы)}
+\mbox{\Hypertarget{class_recorder_config_a39ca563c2ac944a725b6d627ff364ab9}\label{class_recorder_config_a39ca563c2ac944a725b6d627ff364ab9}} 
+\index{Recorder\+Config@{Recorder\+Config}!Recorder\+Config@{Recorder\+Config}}
+\index{Recorder\+Config@{Recorder\+Config}!Recorder\+Config@{Recorder\+Config}}
+\subsubsection{\texorpdfstring{Recorder\+Config()}{RecorderConfig()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Recorder\+Config\+::\+Recorder\+Config (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_recorder_config_a39ca563c2ac944a725b6d627ff364ab9_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_recorder_config_a8393f87b954754d668f43957399999e5}\label{class_recorder_config_a8393f87b954754d668f43957399999e5}} 
+\index{Recorder\+Config@{Recorder\+Config}!Recorder\+Config@{Recorder\+Config}}
+\index{Recorder\+Config@{Recorder\+Config}!Recorder\+Config@{Recorder\+Config}}
+\subsubsection{\texorpdfstring{Recorder\+Config()}{RecorderConfig()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Recorder\+Config\+::\+Recorder\+Config (\begin{DoxyParamCaption}\item[{const \hyperlink{class_recorder_config}{Recorder\+Config} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\subsection{Методы}
+\mbox{\Hypertarget{class_recorder_config_a479f393f92d02955bd5c429c7723c79c}\label{class_recorder_config_a479f393f92d02955bd5c429c7723c79c}} 
+\index{Recorder\+Config@{Recorder\+Config}!get@{get}}
+\index{get@{get}!Recorder\+Config@{Recorder\+Config}}
+\subsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily static \hyperlink{class_recorder_config}{Recorder\+Config}\& Recorder\+Config\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\mbox{\Hypertarget{class_recorder_config_a1a24b616ff9ca5beac0bb37210da9ef1}\label{class_recorder_config_a1a24b616ff9ca5beac0bb37210da9ef1}} 
+\index{Recorder\+Config@{Recorder\+Config}!get\+Custom\+Rooms@{get\+Custom\+Rooms}}
+\index{get\+Custom\+Rooms@{get\+Custom\+Rooms}!Recorder\+Config@{Recorder\+Config}}
+\subsubsection{\texorpdfstring{get\+Custom\+Rooms()}{getCustomRooms()}}
+{\footnotesize\ttfamily void Recorder\+Config\+::get\+Custom\+Rooms (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_recorder_config_a1a24b616ff9ca5beac0bb37210da9ef1_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_recorder_config_ae74d1af712e9684786ed33f67a8eeda3}\label{class_recorder_config_ae74d1af712e9684786ed33f67a8eeda3}} 
+\index{Recorder\+Config@{Recorder\+Config}!get\+G\+Suite\+Rooms@{get\+G\+Suite\+Rooms}}
+\index{get\+G\+Suite\+Rooms@{get\+G\+Suite\+Rooms}!Recorder\+Config@{Recorder\+Config}}
+\subsubsection{\texorpdfstring{get\+G\+Suite\+Rooms()}{getGSuiteRooms()}}
+{\footnotesize\ttfamily void Recorder\+Config\+::get\+G\+Suite\+Rooms (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_recorder_config_ae74d1af712e9684786ed33f67a8eeda3_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_recorder_config_afc65f46a71f6bacd707dbf461a5bfddb}\label{class_recorder_config_afc65f46a71f6bacd707dbf461a5bfddb}} 
+\index{Recorder\+Config@{Recorder\+Config}!get\+Param@{get\+Param}}
+\index{get\+Param@{get\+Param}!Recorder\+Config@{Recorder\+Config}}
+\subsubsection{\texorpdfstring{get\+Param()}{getParam()}}
+{\footnotesize\ttfamily string Recorder\+Config\+::get\+Param (\begin{DoxyParamCaption}\item[{string}]{name }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_recorder_config_a01e6881ce3a3b19990c53f62810daa4b}\label{class_recorder_config_a01e6881ce3a3b19990c53f62810daa4b}} 
+\index{Recorder\+Config@{Recorder\+Config}!get\+Param\+Int@{get\+Param\+Int}}
+\index{get\+Param\+Int@{get\+Param\+Int}!Recorder\+Config@{Recorder\+Config}}
+\subsubsection{\texorpdfstring{get\+Param\+Int()}{getParamInt()}}
+{\footnotesize\ttfamily int Recorder\+Config\+::get\+Param\+Int (\begin{DoxyParamCaption}\item[{string}]{name }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_recorder_config_a38b5049c8ea73fbe7fe06bfca6fa216a}\label{class_recorder_config_a38b5049c8ea73fbe7fe06bfca6fa216a}} 
+\index{Recorder\+Config@{Recorder\+Config}!get\+Rooms@{get\+Rooms}}
+\index{get\+Rooms@{get\+Rooms}!Recorder\+Config@{Recorder\+Config}}
+\subsubsection{\texorpdfstring{get\+Rooms()}{getRooms()}}
+{\footnotesize\ttfamily vector$<$ \hyperlink{class_room}{Room} $\ast$ $>$ $\ast$ Recorder\+Config\+::get\+Rooms (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_recorder_config_abdba11995310d688ddeee1227de67cda}\label{class_recorder_config_abdba11995310d688ddeee1227de67cda}} 
+\index{Recorder\+Config@{Recorder\+Config}!make\+G\+Suite\+Request@{make\+G\+Suite\+Request}}
+\index{make\+G\+Suite\+Request@{make\+G\+Suite\+Request}!Recorder\+Config@{Recorder\+Config}}
+\subsubsection{\texorpdfstring{make\+G\+Suite\+Request()}{makeGSuiteRequest()}}
+{\footnotesize\ttfamily string Recorder\+Config\+::make\+G\+Suite\+Request (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recorder_config_a49c641cf388b7fcf54711cd2f9f52a1d}\label{class_recorder_config_a49c641cf388b7fcf54711cd2f9f52a1d}} 
+\index{Recorder\+Config@{Recorder\+Config}!operator=@{operator=}}
+\index{operator=@{operator=}!Recorder\+Config@{Recorder\+Config}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \hyperlink{class_recorder_config}{Recorder\+Config}\& Recorder\+Config\+::operator= (\begin{DoxyParamCaption}\item[{const \hyperlink{class_recorder_config}{Recorder\+Config} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recorder_config_aa2d44f3749c087805183a62b013fa1ff}\label{class_recorder_config_aa2d44f3749c087805183a62b013fa1ff}} 
+\index{Recorder\+Config@{Recorder\+Config}!read\+Rooms\+From\+File@{read\+Rooms\+From\+File}}
+\index{read\+Rooms\+From\+File@{read\+Rooms\+From\+File}!Recorder\+Config@{Recorder\+Config}}
+\subsubsection{\texorpdfstring{read\+Rooms\+From\+File()}{readRoomsFromFile()}}
+{\footnotesize\ttfamily vector$<$ \hyperlink{class_room}{Room} $\ast$ $>$ Recorder\+Config\+::read\+Rooms\+From\+File (\begin{DoxyParamCaption}\item[{string}]{file\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recorder_config_a50fff4cd104ffad261f37e2162aefaf8}\label{class_recorder_config_a50fff4cd104ffad261f37e2162aefaf8}} 
+\index{Recorder\+Config@{Recorder\+Config}!set\+File@{set\+File}}
+\index{set\+File@{set\+File}!Recorder\+Config@{Recorder\+Config}}
+\subsubsection{\texorpdfstring{set\+File()}{setFile()}}
+{\footnotesize\ttfamily void Recorder\+Config\+::set\+File (\begin{DoxyParamCaption}\item[{string}]{config\+Path }\end{DoxyParamCaption})}
+
+
+
+\subsection{Данные класса}
+\mbox{\Hypertarget{class_recorder_config_a4b5b3bcc77e7477f36d5a4dec2a0ac82}\label{class_recorder_config_a4b5b3bcc77e7477f36d5a4dec2a0ac82}} 
+\index{Recorder\+Config@{Recorder\+Config}!configuration@{configuration}}
+\index{configuration@{configuration}!Recorder\+Config@{Recorder\+Config}}
+\subsubsection{\texorpdfstring{configuration}{configuration}}
+{\footnotesize\ttfamily map$<$string, string$>$ Recorder\+Config\+::configuration\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recorder_config_ac04e6a613601514d26353c38bbcc9804}\label{class_recorder_config_ac04e6a613601514d26353c38bbcc9804}} 
+\index{Recorder\+Config@{Recorder\+Config}!rooms@{rooms}}
+\index{rooms@{rooms}!Recorder\+Config@{Recorder\+Config}}
+\subsubsection{\texorpdfstring{rooms}{rooms}}
+{\footnotesize\ttfamily vector$<$\hyperlink{class_room}{Room}$\ast$$>$ Recorder\+Config\+::rooms\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+/home/jetson/controlroom/\+Studio/\+Recorder/include/\hyperlink{_recorder_2include_2config_8h}{config.\+h}\item 
+/home/jetson/controlroom/\+Studio/\+Recorder/src/\hyperlink{_recorder_2src_2config_8cpp}{config.\+cpp}\end{DoxyCompactItemize}

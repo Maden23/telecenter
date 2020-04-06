@@ -1,0 +1,161 @@
+\hypertarget{class_recorder}{}\section{Класс Recorder}
+\label{class_recorder}\index{Recorder@{Recorder}}
+
+
+Управляет процессом записи  
+
+
+
+
+{\ttfamily \#include $<$recorder.\+h$>$}
+
+
+
+Граф связей класса Recorder\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=138pt]{class_recorder__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_recorder_aa3cf7e6df22a7a21e8939e1dc1d02ea1}{Recorder} (\hyperlink{class_config}{Config} $\ast$\hyperlink{class_recorder_acc5a095c1d30b547c994f817438c054b}{config})
+\item 
+\hyperlink{class_recorder_a6b3c569577fcdc298d8d4a6a2b96e9a9}{$\sim$\+Recorder} ()
+\item 
+map$<$ \hyperlink{struct_camera}{Camera} $\ast$, \hyperlink{class_recording}{Recording} $\ast$ $>$ \hyperlink{class_recorder_afb29e7ee1c1d78b3b2c9e54133f88b62}{get\+Running\+Recordings} ()
+\item 
+bool \hyperlink{class_recorder_ac242ca5967dbf81f9ea39464eee2b06a}{start\+Recording} (\hyperlink{struct_camera}{Camera} $\ast$cam)
+\item 
+bool \hyperlink{class_recorder_ae3de658eb341149ef0fb207783b3602b}{stop\+Recording} (\hyperlink{struct_camera}{Camera} $\ast$cam)
+\item 
+bool \hyperlink{class_recorder_a2c3f20dfa022c936ede65ca34becb890}{is\+G\+Drive\+Upload\+Active} ()
+\end{DoxyCompactItemize}
+\subsection*{Закрытые члены}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_recorder_a2decf81333499f7c9f0193daed7e2091}{upload\+Video} (string uri, string file\+Name)
+\end{DoxyCompactItemize}
+\subsection*{Закрытые статические члены}
+\begin{DoxyCompactItemize}
+\item 
+static gboolean \hyperlink{class_recorder_a1fdebd3d390713fcafe6c76635760841}{check\+If\+Rec\+Stopped} (gpointer data)
+\end{DoxyCompactItemize}
+\subsection*{Закрытые данные}
+\begin{DoxyCompactItemize}
+\item 
+map$<$ \hyperlink{struct_camera}{Camera} $\ast$, \hyperlink{class_recording}{Recording} $\ast$ $>$ \hyperlink{class_recorder_a36bc2c958b17808861bd6f8b4204c82e}{running\+Recordings}
+\item 
+\hyperlink{class_config}{Config} $\ast$ \hyperlink{class_recorder_acc5a095c1d30b547c994f817438c054b}{config}
+\item 
+int \hyperlink{class_recorder_ae18bfd225286a1ebcd3b49de32d129cb}{running\+G\+Drive\+Uploads} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Подробное описание}
+Управляет процессом записи 
+
+Forks gstreamer pipelines for each recording Needs a stream id to start a recording Stores pids of running recorder processes Stops recordings by stream id 
+
+\subsection{Конструктор(ы)}
+\mbox{\Hypertarget{class_recorder_aa3cf7e6df22a7a21e8939e1dc1d02ea1}\label{class_recorder_aa3cf7e6df22a7a21e8939e1dc1d02ea1}} 
+\index{Recorder@{Recorder}!Recorder@{Recorder}}
+\index{Recorder@{Recorder}!Recorder@{Recorder}}
+\subsubsection{\texorpdfstring{Recorder()}{Recorder()}}
+{\footnotesize\ttfamily Recorder\+::\+Recorder (\begin{DoxyParamCaption}\item[{\hyperlink{class_config}{Config} $\ast$}]{config }\end{DoxyParamCaption})}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_recorder_aa3cf7e6df22a7a21e8939e1dc1d02ea1_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_recorder_a6b3c569577fcdc298d8d4a6a2b96e9a9}\label{class_recorder_a6b3c569577fcdc298d8d4a6a2b96e9a9}} 
+\index{Recorder@{Recorder}!````~Recorder@{$\sim$\+Recorder}}
+\index{````~Recorder@{$\sim$\+Recorder}!Recorder@{Recorder}}
+\subsubsection{\texorpdfstring{$\sim$\+Recorder()}{~Recorder()}}
+{\footnotesize\ttfamily Recorder\+::$\sim$\+Recorder (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\subsection{Методы}
+\mbox{\Hypertarget{class_recorder_a1fdebd3d390713fcafe6c76635760841}\label{class_recorder_a1fdebd3d390713fcafe6c76635760841}} 
+\index{Recorder@{Recorder}!check\+If\+Rec\+Stopped@{check\+If\+Rec\+Stopped}}
+\index{check\+If\+Rec\+Stopped@{check\+If\+Rec\+Stopped}!Recorder@{Recorder}}
+\subsubsection{\texorpdfstring{check\+If\+Rec\+Stopped()}{checkIfRecStopped()}}
+{\footnotesize\ttfamily gboolean Recorder\+::check\+If\+Rec\+Stopped (\begin{DoxyParamCaption}\item[{gpointer}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recorder_afb29e7ee1c1d78b3b2c9e54133f88b62}\label{class_recorder_afb29e7ee1c1d78b3b2c9e54133f88b62}} 
+\index{Recorder@{Recorder}!get\+Running\+Recordings@{get\+Running\+Recordings}}
+\index{get\+Running\+Recordings@{get\+Running\+Recordings}!Recorder@{Recorder}}
+\subsubsection{\texorpdfstring{get\+Running\+Recordings()}{getRunningRecordings()}}
+{\footnotesize\ttfamily map$<$\hyperlink{struct_camera}{Camera}$\ast$, \hyperlink{class_recording}{Recording}$\ast$$>$ Recorder\+::get\+Running\+Recordings (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_recorder_a2c3f20dfa022c936ede65ca34becb890}\label{class_recorder_a2c3f20dfa022c936ede65ca34becb890}} 
+\index{Recorder@{Recorder}!is\+G\+Drive\+Upload\+Active@{is\+G\+Drive\+Upload\+Active}}
+\index{is\+G\+Drive\+Upload\+Active@{is\+G\+Drive\+Upload\+Active}!Recorder@{Recorder}}
+\subsubsection{\texorpdfstring{is\+G\+Drive\+Upload\+Active()}{isGDriveUploadActive()}}
+{\footnotesize\ttfamily bool Recorder\+::is\+G\+Drive\+Upload\+Active (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_recorder_ac242ca5967dbf81f9ea39464eee2b06a}\label{class_recorder_ac242ca5967dbf81f9ea39464eee2b06a}} 
+\index{Recorder@{Recorder}!start\+Recording@{start\+Recording}}
+\index{start\+Recording@{start\+Recording}!Recorder@{Recorder}}
+\subsubsection{\texorpdfstring{start\+Recording()}{startRecording()}}
+{\footnotesize\ttfamily bool Recorder\+::start\+Recording (\begin{DoxyParamCaption}\item[{\hyperlink{struct_camera}{Camera} $\ast$}]{cam }\end{DoxyParamCaption})}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_recorder_ac242ca5967dbf81f9ea39464eee2b06a_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_recorder_ae3de658eb341149ef0fb207783b3602b}\label{class_recorder_ae3de658eb341149ef0fb207783b3602b}} 
+\index{Recorder@{Recorder}!stop\+Recording@{stop\+Recording}}
+\index{stop\+Recording@{stop\+Recording}!Recorder@{Recorder}}
+\subsubsection{\texorpdfstring{stop\+Recording()}{stopRecording()}}
+{\footnotesize\ttfamily bool Recorder\+::stop\+Recording (\begin{DoxyParamCaption}\item[{\hyperlink{struct_camera}{Camera} $\ast$}]{cam }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_recorder_a2decf81333499f7c9f0193daed7e2091}\label{class_recorder_a2decf81333499f7c9f0193daed7e2091}} 
+\index{Recorder@{Recorder}!upload\+Video@{upload\+Video}}
+\index{upload\+Video@{upload\+Video}!Recorder@{Recorder}}
+\subsubsection{\texorpdfstring{upload\+Video()}{uploadVideo()}}
+{\footnotesize\ttfamily void Recorder\+::upload\+Video (\begin{DoxyParamCaption}\item[{string}]{uri,  }\item[{string}]{file\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=325pt]{class_recorder_a2decf81333499f7c9f0193daed7e2091_cgraph}
+\end{center}
+\end{figure}
+
+
+\subsection{Данные класса}
+\mbox{\Hypertarget{class_recorder_acc5a095c1d30b547c994f817438c054b}\label{class_recorder_acc5a095c1d30b547c994f817438c054b}} 
+\index{Recorder@{Recorder}!config@{config}}
+\index{config@{config}!Recorder@{Recorder}}
+\subsubsection{\texorpdfstring{config}{config}}
+{\footnotesize\ttfamily \hyperlink{class_config}{Config}$\ast$ Recorder\+::config\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recorder_ae18bfd225286a1ebcd3b49de32d129cb}\label{class_recorder_ae18bfd225286a1ebcd3b49de32d129cb}} 
+\index{Recorder@{Recorder}!running\+G\+Drive\+Uploads@{running\+G\+Drive\+Uploads}}
+\index{running\+G\+Drive\+Uploads@{running\+G\+Drive\+Uploads}!Recorder@{Recorder}}
+\subsubsection{\texorpdfstring{running\+G\+Drive\+Uploads}{runningGDriveUploads}}
+{\footnotesize\ttfamily int Recorder\+::running\+G\+Drive\+Uploads = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recorder_a36bc2c958b17808861bd6f8b4204c82e}\label{class_recorder_a36bc2c958b17808861bd6f8b4204c82e}} 
+\index{Recorder@{Recorder}!running\+Recordings@{running\+Recordings}}
+\index{running\+Recordings@{running\+Recordings}!Recorder@{Recorder}}
+\subsubsection{\texorpdfstring{running\+Recordings}{runningRecordings}}
+{\footnotesize\ttfamily map$<$\hyperlink{struct_camera}{Camera}$\ast$, \hyperlink{class_recording}{Recording}$\ast$$>$ Recorder\+::running\+Recordings\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+/home/jetson/controlroom/\+Studio/\+Recorder/include/\hyperlink{recorder_8h}{recorder.\+h}\item 
+/home/jetson/controlroom/\+Studio/\+Recorder/src/\hyperlink{recorder_8cpp}{recorder.\+cpp}\end{DoxyCompactItemize}

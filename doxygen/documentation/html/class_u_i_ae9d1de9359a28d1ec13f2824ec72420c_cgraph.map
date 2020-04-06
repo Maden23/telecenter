@@ -1,0 +1,12 @@
+<map id="UI::keyPress" name="UI::keyPress">
+<area shape="rect" id="node2" href="$class_recorder.html#ac242ca5967dbf81f9ea39464eee2b06a" title="Recorder::startRecording" alt="" coords="175,56,343,83"/>
+<area shape="rect" id="node10" href="$class_recorder.html#afb29e7ee1c1d78b3b2c9e54133f88b62" title="Recorder::getRunningRecordings" alt="" coords="152,107,367,133"/>
+<area shape="rect" id="node11" href="$class_recorder.html#ae3de658eb341149ef0fb207783b3602b" title="Recorder::stopRecording" alt="" coords="176,157,343,184"/>
+<area shape="rect" id="node3" href="$class_recorder_config.html#a01e6881ce3a3b19990c53f62810daa4b" title="RecorderConfig::getParamInt" alt="" coords="415,5,607,32"/>
+<area shape="rect" id="node4" href="$class_recorder_config.html#afc65f46a71f6bacd707dbf461a5bfddb" title="RecorderConfig::getParam" alt="" coords="422,56,599,83"/>
+<area shape="rect" id="node5" href="$class_recording.html#a6258253b296dfc518b4c64c8f7cb9969" title="Recording::start" alt="" coords="453,107,568,133"/>
+<area shape="rect" id="node6" href="$class_recording.html#a6fcee36a2d8276d6b7bc111800f41c49" title="Recording::buildPipeline" alt="" coords="666,81,829,108"/>
+<area shape="rect" id="node9" href="$class_recording.html#a902cb9d3bacaaf992e38427bbe63319b" title="Recording::busSyncHandler" alt="" coords="655,132,840,159"/>
+<area shape="rect" id="node7" href="$class_recording.html#abea9877130d33f18639df0544497d473" title="Recording::pad_added\l_handler" alt="" coords="888,74,1040,115"/>
+<area shape="rect" id="node8" href="$class_recording.html#aaff0d133af8cc8bc3f514b7ae85fc99a" title="Recording::data_probe" alt="" coords="1088,81,1241,108"/>
+</map>

@@ -1,0 +1,252 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="namespaceui">
+<title>ui</title>
+        <section>
+            <title> Классы </title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>struct <link linkend="classui_1_1_camera">ui::Camera</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>struct <link linkend="classui_1_1_grapher">ui::Grapher</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>struct <link linkend="classui_1_1_pinger">ui::Pinger</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>struct <link linkend="classui_1_1_u_i_graph">ui::UIGraph</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>struct <link linkend="classui_1_1_u_i_menu">ui::UIMenu</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title>Переменные</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>dictionary <link linkend="namespaceui_1aad45a9db615017fdd003dcd9e271a9b9">adresses</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespaceui_1aa319e24d35c85648c0d34ea8d6c77912">app</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespaceui_1a4852f8d0ec72ef9b0220e692e9c1d362">menu</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespaceui_1a622dff979fe009d0b7a0b5065a48eeb4">stylesheet</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespaceui_1a67d6f2ec81b00e7991565662f9e946f7">display0</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespaceui_1a0b8ac4e4d4aa6108a23039c53766f6f1">graph</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespaceui_1afb5a8d9a573e872a43b870282effe261">display1</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespaceui_1a7ddac767c5071a1d37d729710165cdd4">widget</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespaceui_1a45f8c2fae5eb64cd2de3091bd3fc3ca8">plot</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespaceui_1a0f719593f62467929abfbb1db46530a9">rightAxis</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespaceui_1a253eda5cb3ca4d465c03c0efdcd850cd">leftAxis</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>dictionary <link linkend="namespaceui_1abb44f579230c8104a085647cbfd74b4e">labelStyle</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespaceui_1ae4eb85d01779e3357581532c19e8f6c9">units</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespaceui_1a30ed37eb10260adbcf97ae9f39bc5f8e">font</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespaceui_1a7a1d55977d90414ac9a33a4b2042ef52">tickFont</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespaceui_1a0031c57aa0841c20af5e52dc5634d026">x</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespaceui_1af8762a8410b6abe7b673bc2c8ef05784">True</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespaceui_1a21b97caebd553671413aa6d515e9a6dd">y</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespaceui_1adc51f403edb0c2ba24343024b93644b0">alpha</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespaceui_1a93ae6b16cc6a8252e4bf5a5d2ed94aa6">grapher</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>list <link linkend="namespaceui_1a8e2392b67718029c7ae06c8e4f79b9dc">cams</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>int <link linkend="namespaceui_1a864c62b3f0bd6745e0d18d87e70defe6">i</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespaceui_1af6332480b18dc17e84cc4045f3330aac">button</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespaceui_1affd9697385ba4bf6c290a661c5a9b6cd">label</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespaceui_1afb37972e0352b1558875ce89d7fdc0ad">camera</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespaceui_1af1457bf15aa8152a54da34956fe19382">threadpool</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespaceui_1a413340b69ea8a36f526ef691e1287f2c">pingTimer</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespaceui_1ad6a1f0cb59203283f1891267696aaf6e">pinger</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title>Функции</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="namespaceui_1ad062c21e9583db1aef2026bda2bfd294">runPing</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+</section>

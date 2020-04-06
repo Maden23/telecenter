@@ -1,0 +1,273 @@
+\hypertarget{namespacenetwork__monitor}{}\section{Пространство имен network\+\_\+monitor}
+\label{namespacenetwork__monitor}\index{network\+\_\+monitor@{network\+\_\+monitor}}
+\subsection*{Классы}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classnetwork__monitor_1_1_camera}{Camera}
+\item 
+class \hyperlink{classnetwork__monitor_1_1_grapher}{Grapher}
+\item 
+class \hyperlink{classnetwork__monitor_1_1_pinger}{Pinger}
+\begin{DoxyCompactList}\small\item\em Пингует камеры \end{DoxyCompactList}\item 
+class \hyperlink{classnetwork__monitor_1_1_u_i_graph}{U\+I\+Graph}
+\item 
+class \hyperlink{classnetwork__monitor_1_1_u_i_menu}{U\+I\+Menu}
+\end{DoxyCompactItemize}
+\subsection*{Функции}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespacenetwork__monitor_aa615228bd6f33e03eb168421f8980368}{run\+Ping} ()
+\end{DoxyCompactItemize}
+\subsection*{Переменные}
+\begin{DoxyCompactItemize}
+\item 
+dictionary \hyperlink{namespacenetwork__monitor_a58f207986e588fcaab74394ee1cf1bcb}{adresses}
+\item 
+\hyperlink{namespacenetwork__monitor_adbe4adbd468aaae0ca471744f30fa1f6}{app} = Qt\+Widgets.\+Q\+Application(\mbox{[}$\,$\mbox{]})
+\item 
+\hyperlink{namespacenetwork__monitor_ab8b736e67d7a9e580ef5b8ee4fe938f3}{menu} = \hyperlink{classnetwork__monitor_1_1_u_i_menu}{U\+I\+Menu}()
+\item 
+\hyperlink{namespacenetwork__monitor_aecaa32d63f4a4b3e0716b8fd40b8fb18}{stylesheet} = open(\char`\"{}../ui/stylesheet.\+css\char`\"{}, \char`\"{}r\char`\"{})
+\item 
+\hyperlink{namespacenetwork__monitor_aab66b1b4dd31ec48a9682731a2c7bff0}{display0} = Qt\+Widgets.\+Q\+Desktop\+Widget().screen\+Geometry(0)
+\item 
+\hyperlink{namespacenetwork__monitor_a699d5e9a412cebae671b9cd40b722391}{graph} = \hyperlink{classnetwork__monitor_1_1_u_i_graph}{U\+I\+Graph}()
+\item 
+\hyperlink{namespacenetwork__monitor_a37cbe75c4a7a0a69b30c0137312e181d}{display1} = Qt\+Widgets.\+Q\+Desktop\+Widget().screen\+Geometry(1)
+\item 
+\hyperlink{namespacenetwork__monitor_af816a5bcf89d9423a24881c39b602f90}{widget} = graph.\+find\+Child(pg.\+Plot\+Widget, \char`\"{}plotwidget\char`\"{})
+\item 
+\hyperlink{namespacenetwork__monitor_a26e25ec561afa4ed83eebb64d67c1b14}{plot} = widget.\+get\+Plot\+Item()
+\item 
+\hyperlink{namespacenetwork__monitor_a335a52bfad31ee0a6d975d8cb9e6db82}{right\+Axis} = plot.\+get\+Axis(\textquotesingle{}right\textquotesingle{})
+\item 
+\hyperlink{namespacenetwork__monitor_ad712067b9115dc6d60b0ad48899312d0}{left\+Axis} = plot.\+get\+Axis(\textquotesingle{}left\textquotesingle{})
+\item 
+dictionary \hyperlink{namespacenetwork__monitor_a7a1dfe61bcb6dea8bb5e51d87cfa6674}{label\+Style} = \{\textquotesingle{}color\textquotesingle{}\+: \textquotesingle{}\#F\+FF\textquotesingle{}, \textquotesingle{}\hyperlink{namespacenetwork__monitor_a3a49c4c8811caddc06b48cb72517bf6a}{font}-\/size\textquotesingle{}\+: \textquotesingle{}20pt\textquotesingle{}\}
+\item 
+\hyperlink{namespacenetwork__monitor_a093c6a470ae8f02c3ab41f344841d7b4}{units}
+\item 
+\hyperlink{namespacenetwork__monitor_a3a49c4c8811caddc06b48cb72517bf6a}{font} = Q\+Font()
+\item 
+\hyperlink{namespacenetwork__monitor_ab5dc49bb32143d840b5617593019b6cc}{tick\+Font}
+\item 
+\hyperlink{namespacenetwork__monitor_aa6307605f5261f2cc1985c18b1d6b525}{x}
+\item 
+\hyperlink{namespacenetwork__monitor_a21b2d9df8eef39c146e4d33a4d3ac153}{True}
+\item 
+\hyperlink{namespacenetwork__monitor_a3d4b2bbe9932d5f533511dd894a99987}{y}
+\item 
+\hyperlink{namespacenetwork__monitor_a0217c896f3b1258aa8de32cf83f58221}{alpha}
+\item 
+\hyperlink{namespacenetwork__monitor_a6caf9d5fe8492a62de30cc09eb3d6ee0}{grapher} = \hyperlink{classnetwork__monitor_1_1_grapher}{Grapher}(\hyperlink{namespacenetwork__monitor_a26e25ec561afa4ed83eebb64d67c1b14}{plot})
+\item 
+list \hyperlink{namespacenetwork__monitor_a7033c08f9dae3f4784ace432524d7c3d}{cams} = \mbox{[}$\,$\mbox{]}
+\item 
+int \hyperlink{namespacenetwork__monitor_acbaeef9dd38caeac7bfb4ce5cc555a68}{i} = 0
+\item 
+\hyperlink{namespacenetwork__monitor_a068b20f337cc6bb4d8f773203ba1eb72}{button} = menu.\+find\+Child(Qt\+Widgets.\+Q\+Push\+Button, \char`\"{}b\char`\"{} + str(\hyperlink{namespacenetwork__monitor_acbaeef9dd38caeac7bfb4ce5cc555a68}{i}))
+\item 
+\hyperlink{namespacenetwork__monitor_a581e75b195d137edaf37a10c8f54f10b}{label} = menu.\+find\+Child(Qt\+Widgets.\+Q\+Label, \char`\"{}l\char`\"{} + str(\hyperlink{namespacenetwork__monitor_acbaeef9dd38caeac7bfb4ce5cc555a68}{i}))
+\item 
+\hyperlink{namespacenetwork__monitor_a1642786c603ba143d757e407619d4a18}{camera} = \hyperlink{classnetwork__monitor_1_1_camera}{Camera}(\hyperlink{namespacenetwork__monitor_a58f207986e588fcaab74394ee1cf1bcb}{adresses}\mbox{[}c\mbox{]}, \hyperlink{namespacenetwork__monitor_a068b20f337cc6bb4d8f773203ba1eb72}{button}, \hyperlink{namespacenetwork__monitor_a581e75b195d137edaf37a10c8f54f10b}{label}, \hyperlink{namespacenetwork__monitor_a6caf9d5fe8492a62de30cc09eb3d6ee0}{grapher})
+\item 
+\hyperlink{namespacenetwork__monitor_af27fb18157e68ae57798c807d9a7ee63}{threadpool} = Q\+Thread\+Pool()
+\item 
+\hyperlink{namespacenetwork__monitor_a6b419aa619e07e27f109ac81f356fbeb}{ping\+Timer} = Q\+Timer()
+\item 
+\hyperlink{namespacenetwork__monitor_ad064e389b1b0120cadea8ef9d463f2da}{pinger} = \hyperlink{classnetwork__monitor_1_1_pinger}{Pinger}(\hyperlink{namespacenetwork__monitor_a7033c08f9dae3f4784ace432524d7c3d}{cams})
+\end{DoxyCompactItemize}
+
+
+\subsection{Функции}
+\mbox{\Hypertarget{namespacenetwork__monitor_aa615228bd6f33e03eb168421f8980368}\label{namespacenetwork__monitor_aa615228bd6f33e03eb168421f8980368}} 
+\index{network\+\_\+monitor@{network\+\_\+monitor}!run\+Ping@{run\+Ping}}
+\index{run\+Ping@{run\+Ping}!network\+\_\+monitor@{network\+\_\+monitor}}
+\subsubsection{\texorpdfstring{run\+Ping()}{runPing()}}
+{\footnotesize\ttfamily def network\+\_\+monitor.\+run\+Ping (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\subsection{Переменные}
+\mbox{\Hypertarget{namespacenetwork__monitor_a58f207986e588fcaab74394ee1cf1bcb}\label{namespacenetwork__monitor_a58f207986e588fcaab74394ee1cf1bcb}} 
+\index{network\+\_\+monitor@{network\+\_\+monitor}!adresses@{adresses}}
+\index{adresses@{adresses}!network\+\_\+monitor@{network\+\_\+monitor}}
+\subsubsection{\texorpdfstring{adresses}{adresses}}
+{\footnotesize\ttfamily dictionary network\+\_\+monitor.\+adresses}
+
+{\bfseries Инициализатор}
+\begin{DoxyCode}
+1 =  \{
+2     \textcolor{stringliteral}{'51'}: \textcolor{stringliteral}{'172.18.200.51'},
+3     \textcolor{stringliteral}{'52'}: \textcolor{stringliteral}{'172.18.200.52'},
+4     \textcolor{stringliteral}{'53'}: \textcolor{stringliteral}{'172.18.200.53'},
+5     \textcolor{stringliteral}{'54'}: \textcolor{stringliteral}{'172.18.200.54'},
+6     \textcolor{stringliteral}{'55'}: \textcolor{stringliteral}{'172.18.200.55'},
+7     \textcolor{stringliteral}{'56'}: \textcolor{stringliteral}{'172.18.200.56'},
+8     \textcolor{stringliteral}{'30'}: \textcolor{stringliteral}{'172.18.199.30'},
+9     \textcolor{stringliteral}{'32'}: \textcolor{stringliteral}{'172.18.199.32'},
+10     \textcolor{stringliteral}{'42'}: \textcolor{stringliteral}{'192.168.15.42'},   
+11 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{namespacenetwork__monitor_a0217c896f3b1258aa8de32cf83f58221}\label{namespacenetwork__monitor_a0217c896f3b1258aa8de32cf83f58221}} 
+\index{network\+\_\+monitor@{network\+\_\+monitor}!alpha@{alpha}}
+\index{alpha@{alpha}!network\+\_\+monitor@{network\+\_\+monitor}}
+\subsubsection{\texorpdfstring{alpha}{alpha}}
+{\footnotesize\ttfamily network\+\_\+monitor.\+alpha}
+
+\mbox{\Hypertarget{namespacenetwork__monitor_adbe4adbd468aaae0ca471744f30fa1f6}\label{namespacenetwork__monitor_adbe4adbd468aaae0ca471744f30fa1f6}} 
+\index{network\+\_\+monitor@{network\+\_\+monitor}!app@{app}}
+\index{app@{app}!network\+\_\+monitor@{network\+\_\+monitor}}
+\subsubsection{\texorpdfstring{app}{app}}
+{\footnotesize\ttfamily network\+\_\+monitor.\+app = Qt\+Widgets.\+Q\+Application(\mbox{[}$\,$\mbox{]})}
+
+\mbox{\Hypertarget{namespacenetwork__monitor_a068b20f337cc6bb4d8f773203ba1eb72}\label{namespacenetwork__monitor_a068b20f337cc6bb4d8f773203ba1eb72}} 
+\index{network\+\_\+monitor@{network\+\_\+monitor}!button@{button}}
+\index{button@{button}!network\+\_\+monitor@{network\+\_\+monitor}}
+\subsubsection{\texorpdfstring{button}{button}}
+{\footnotesize\ttfamily network\+\_\+monitor.\+button = menu.\+find\+Child(Qt\+Widgets.\+Q\+Push\+Button, \char`\"{}b\char`\"{} + str(\hyperlink{namespacenetwork__monitor_acbaeef9dd38caeac7bfb4ce5cc555a68}{i}))}
+
+\mbox{\Hypertarget{namespacenetwork__monitor_a1642786c603ba143d757e407619d4a18}\label{namespacenetwork__monitor_a1642786c603ba143d757e407619d4a18}} 
+\index{network\+\_\+monitor@{network\+\_\+monitor}!camera@{camera}}
+\index{camera@{camera}!network\+\_\+monitor@{network\+\_\+monitor}}
+\subsubsection{\texorpdfstring{camera}{camera}}
+{\footnotesize\ttfamily network\+\_\+monitor.\+camera = \hyperlink{classnetwork__monitor_1_1_camera}{Camera}(\hyperlink{namespacenetwork__monitor_a58f207986e588fcaab74394ee1cf1bcb}{adresses}\mbox{[}c\mbox{]}, \hyperlink{namespacenetwork__monitor_a068b20f337cc6bb4d8f773203ba1eb72}{button}, \hyperlink{namespacenetwork__monitor_a581e75b195d137edaf37a10c8f54f10b}{label}, \hyperlink{namespacenetwork__monitor_a6caf9d5fe8492a62de30cc09eb3d6ee0}{grapher})}
+
+\mbox{\Hypertarget{namespacenetwork__monitor_a7033c08f9dae3f4784ace432524d7c3d}\label{namespacenetwork__monitor_a7033c08f9dae3f4784ace432524d7c3d}} 
+\index{network\+\_\+monitor@{network\+\_\+monitor}!cams@{cams}}
+\index{cams@{cams}!network\+\_\+monitor@{network\+\_\+monitor}}
+\subsubsection{\texorpdfstring{cams}{cams}}
+{\footnotesize\ttfamily list network\+\_\+monitor.\+cams = \mbox{[}$\,$\mbox{]}}
+
+\mbox{\Hypertarget{namespacenetwork__monitor_aab66b1b4dd31ec48a9682731a2c7bff0}\label{namespacenetwork__monitor_aab66b1b4dd31ec48a9682731a2c7bff0}} 
+\index{network\+\_\+monitor@{network\+\_\+monitor}!display0@{display0}}
+\index{display0@{display0}!network\+\_\+monitor@{network\+\_\+monitor}}
+\subsubsection{\texorpdfstring{display0}{display0}}
+{\footnotesize\ttfamily network\+\_\+monitor.\+display0 = Qt\+Widgets.\+Q\+Desktop\+Widget().screen\+Geometry(0)}
+
+\mbox{\Hypertarget{namespacenetwork__monitor_a37cbe75c4a7a0a69b30c0137312e181d}\label{namespacenetwork__monitor_a37cbe75c4a7a0a69b30c0137312e181d}} 
+\index{network\+\_\+monitor@{network\+\_\+monitor}!display1@{display1}}
+\index{display1@{display1}!network\+\_\+monitor@{network\+\_\+monitor}}
+\subsubsection{\texorpdfstring{display1}{display1}}
+{\footnotesize\ttfamily network\+\_\+monitor.\+display1 = Qt\+Widgets.\+Q\+Desktop\+Widget().screen\+Geometry(1)}
+
+\mbox{\Hypertarget{namespacenetwork__monitor_a3a49c4c8811caddc06b48cb72517bf6a}\label{namespacenetwork__monitor_a3a49c4c8811caddc06b48cb72517bf6a}} 
+\index{network\+\_\+monitor@{network\+\_\+monitor}!font@{font}}
+\index{font@{font}!network\+\_\+monitor@{network\+\_\+monitor}}
+\subsubsection{\texorpdfstring{font}{font}}
+{\footnotesize\ttfamily network\+\_\+monitor.\+font = Q\+Font()}
+
+\mbox{\Hypertarget{namespacenetwork__monitor_a699d5e9a412cebae671b9cd40b722391}\label{namespacenetwork__monitor_a699d5e9a412cebae671b9cd40b722391}} 
+\index{network\+\_\+monitor@{network\+\_\+monitor}!graph@{graph}}
+\index{graph@{graph}!network\+\_\+monitor@{network\+\_\+monitor}}
+\subsubsection{\texorpdfstring{graph}{graph}}
+{\footnotesize\ttfamily network\+\_\+monitor.\+graph = \hyperlink{classnetwork__monitor_1_1_u_i_graph}{U\+I\+Graph}()}
+
+\mbox{\Hypertarget{namespacenetwork__monitor_a6caf9d5fe8492a62de30cc09eb3d6ee0}\label{namespacenetwork__monitor_a6caf9d5fe8492a62de30cc09eb3d6ee0}} 
+\index{network\+\_\+monitor@{network\+\_\+monitor}!grapher@{grapher}}
+\index{grapher@{grapher}!network\+\_\+monitor@{network\+\_\+monitor}}
+\subsubsection{\texorpdfstring{grapher}{grapher}}
+{\footnotesize\ttfamily network\+\_\+monitor.\+grapher = \hyperlink{classnetwork__monitor_1_1_grapher}{Grapher}(\hyperlink{namespacenetwork__monitor_a26e25ec561afa4ed83eebb64d67c1b14}{plot})}
+
+\mbox{\Hypertarget{namespacenetwork__monitor_acbaeef9dd38caeac7bfb4ce5cc555a68}\label{namespacenetwork__monitor_acbaeef9dd38caeac7bfb4ce5cc555a68}} 
+\index{network\+\_\+monitor@{network\+\_\+monitor}!i@{i}}
+\index{i@{i}!network\+\_\+monitor@{network\+\_\+monitor}}
+\subsubsection{\texorpdfstring{i}{i}}
+{\footnotesize\ttfamily int network\+\_\+monitor.\+i = 0}
+
+\mbox{\Hypertarget{namespacenetwork__monitor_a581e75b195d137edaf37a10c8f54f10b}\label{namespacenetwork__monitor_a581e75b195d137edaf37a10c8f54f10b}} 
+\index{network\+\_\+monitor@{network\+\_\+monitor}!label@{label}}
+\index{label@{label}!network\+\_\+monitor@{network\+\_\+monitor}}
+\subsubsection{\texorpdfstring{label}{label}}
+{\footnotesize\ttfamily network\+\_\+monitor.\+label = menu.\+find\+Child(Qt\+Widgets.\+Q\+Label, \char`\"{}l\char`\"{} + str(\hyperlink{namespacenetwork__monitor_acbaeef9dd38caeac7bfb4ce5cc555a68}{i}))}
+
+\mbox{\Hypertarget{namespacenetwork__monitor_a7a1dfe61bcb6dea8bb5e51d87cfa6674}\label{namespacenetwork__monitor_a7a1dfe61bcb6dea8bb5e51d87cfa6674}} 
+\index{network\+\_\+monitor@{network\+\_\+monitor}!label\+Style@{label\+Style}}
+\index{label\+Style@{label\+Style}!network\+\_\+monitor@{network\+\_\+monitor}}
+\subsubsection{\texorpdfstring{label\+Style}{labelStyle}}
+{\footnotesize\ttfamily dictionary network\+\_\+monitor.\+label\+Style = \{\textquotesingle{}color\textquotesingle{}\+: \textquotesingle{}\#F\+FF\textquotesingle{}, \textquotesingle{}\hyperlink{namespacenetwork__monitor_a3a49c4c8811caddc06b48cb72517bf6a}{font}-\/size\textquotesingle{}\+: \textquotesingle{}20pt\textquotesingle{}\}}
+
+\mbox{\Hypertarget{namespacenetwork__monitor_ad712067b9115dc6d60b0ad48899312d0}\label{namespacenetwork__monitor_ad712067b9115dc6d60b0ad48899312d0}} 
+\index{network\+\_\+monitor@{network\+\_\+monitor}!left\+Axis@{left\+Axis}}
+\index{left\+Axis@{left\+Axis}!network\+\_\+monitor@{network\+\_\+monitor}}
+\subsubsection{\texorpdfstring{left\+Axis}{leftAxis}}
+{\footnotesize\ttfamily network\+\_\+monitor.\+left\+Axis = plot.\+get\+Axis(\textquotesingle{}left\textquotesingle{})}
+
+\mbox{\Hypertarget{namespacenetwork__monitor_ab8b736e67d7a9e580ef5b8ee4fe938f3}\label{namespacenetwork__monitor_ab8b736e67d7a9e580ef5b8ee4fe938f3}} 
+\index{network\+\_\+monitor@{network\+\_\+monitor}!menu@{menu}}
+\index{menu@{menu}!network\+\_\+monitor@{network\+\_\+monitor}}
+\subsubsection{\texorpdfstring{menu}{menu}}
+{\footnotesize\ttfamily network\+\_\+monitor.\+menu = \hyperlink{classnetwork__monitor_1_1_u_i_menu}{U\+I\+Menu}()}
+
+\mbox{\Hypertarget{namespacenetwork__monitor_ad064e389b1b0120cadea8ef9d463f2da}\label{namespacenetwork__monitor_ad064e389b1b0120cadea8ef9d463f2da}} 
+\index{network\+\_\+monitor@{network\+\_\+monitor}!pinger@{pinger}}
+\index{pinger@{pinger}!network\+\_\+monitor@{network\+\_\+monitor}}
+\subsubsection{\texorpdfstring{pinger}{pinger}}
+{\footnotesize\ttfamily network\+\_\+monitor.\+pinger = \hyperlink{classnetwork__monitor_1_1_pinger}{Pinger}(\hyperlink{namespacenetwork__monitor_a7033c08f9dae3f4784ace432524d7c3d}{cams})}
+
+\mbox{\Hypertarget{namespacenetwork__monitor_a6b419aa619e07e27f109ac81f356fbeb}\label{namespacenetwork__monitor_a6b419aa619e07e27f109ac81f356fbeb}} 
+\index{network\+\_\+monitor@{network\+\_\+monitor}!ping\+Timer@{ping\+Timer}}
+\index{ping\+Timer@{ping\+Timer}!network\+\_\+monitor@{network\+\_\+monitor}}
+\subsubsection{\texorpdfstring{ping\+Timer}{pingTimer}}
+{\footnotesize\ttfamily network\+\_\+monitor.\+ping\+Timer = Q\+Timer()}
+
+\mbox{\Hypertarget{namespacenetwork__monitor_a26e25ec561afa4ed83eebb64d67c1b14}\label{namespacenetwork__monitor_a26e25ec561afa4ed83eebb64d67c1b14}} 
+\index{network\+\_\+monitor@{network\+\_\+monitor}!plot@{plot}}
+\index{plot@{plot}!network\+\_\+monitor@{network\+\_\+monitor}}
+\subsubsection{\texorpdfstring{plot}{plot}}
+{\footnotesize\ttfamily network\+\_\+monitor.\+plot = widget.\+get\+Plot\+Item()}
+
+\mbox{\Hypertarget{namespacenetwork__monitor_a335a52bfad31ee0a6d975d8cb9e6db82}\label{namespacenetwork__monitor_a335a52bfad31ee0a6d975d8cb9e6db82}} 
+\index{network\+\_\+monitor@{network\+\_\+monitor}!right\+Axis@{right\+Axis}}
+\index{right\+Axis@{right\+Axis}!network\+\_\+monitor@{network\+\_\+monitor}}
+\subsubsection{\texorpdfstring{right\+Axis}{rightAxis}}
+{\footnotesize\ttfamily network\+\_\+monitor.\+right\+Axis = plot.\+get\+Axis(\textquotesingle{}right\textquotesingle{})}
+
+\mbox{\Hypertarget{namespacenetwork__monitor_aecaa32d63f4a4b3e0716b8fd40b8fb18}\label{namespacenetwork__monitor_aecaa32d63f4a4b3e0716b8fd40b8fb18}} 
+\index{network\+\_\+monitor@{network\+\_\+monitor}!stylesheet@{stylesheet}}
+\index{stylesheet@{stylesheet}!network\+\_\+monitor@{network\+\_\+monitor}}
+\subsubsection{\texorpdfstring{stylesheet}{stylesheet}}
+{\footnotesize\ttfamily network\+\_\+monitor.\+stylesheet = open(\char`\"{}../ui/stylesheet.\+css\char`\"{}, \char`\"{}r\char`\"{})}
+
+\mbox{\Hypertarget{namespacenetwork__monitor_af27fb18157e68ae57798c807d9a7ee63}\label{namespacenetwork__monitor_af27fb18157e68ae57798c807d9a7ee63}} 
+\index{network\+\_\+monitor@{network\+\_\+monitor}!threadpool@{threadpool}}
+\index{threadpool@{threadpool}!network\+\_\+monitor@{network\+\_\+monitor}}
+\subsubsection{\texorpdfstring{threadpool}{threadpool}}
+{\footnotesize\ttfamily network\+\_\+monitor.\+threadpool = Q\+Thread\+Pool()}
+
+\mbox{\Hypertarget{namespacenetwork__monitor_ab5dc49bb32143d840b5617593019b6cc}\label{namespacenetwork__monitor_ab5dc49bb32143d840b5617593019b6cc}} 
+\index{network\+\_\+monitor@{network\+\_\+monitor}!tick\+Font@{tick\+Font}}
+\index{tick\+Font@{tick\+Font}!network\+\_\+monitor@{network\+\_\+monitor}}
+\subsubsection{\texorpdfstring{tick\+Font}{tickFont}}
+{\footnotesize\ttfamily network\+\_\+monitor.\+tick\+Font}
+
+\mbox{\Hypertarget{namespacenetwork__monitor_a21b2d9df8eef39c146e4d33a4d3ac153}\label{namespacenetwork__monitor_a21b2d9df8eef39c146e4d33a4d3ac153}} 
+\index{network\+\_\+monitor@{network\+\_\+monitor}!True@{True}}
+\index{True@{True}!network\+\_\+monitor@{network\+\_\+monitor}}
+\subsubsection{\texorpdfstring{True}{True}}
+{\footnotesize\ttfamily network\+\_\+monitor.\+True}
+
+\mbox{\Hypertarget{namespacenetwork__monitor_a093c6a470ae8f02c3ab41f344841d7b4}\label{namespacenetwork__monitor_a093c6a470ae8f02c3ab41f344841d7b4}} 
+\index{network\+\_\+monitor@{network\+\_\+monitor}!units@{units}}
+\index{units@{units}!network\+\_\+monitor@{network\+\_\+monitor}}
+\subsubsection{\texorpdfstring{units}{units}}
+{\footnotesize\ttfamily network\+\_\+monitor.\+units}
+
+\mbox{\Hypertarget{namespacenetwork__monitor_af816a5bcf89d9423a24881c39b602f90}\label{namespacenetwork__monitor_af816a5bcf89d9423a24881c39b602f90}} 
+\index{network\+\_\+monitor@{network\+\_\+monitor}!widget@{widget}}
+\index{widget@{widget}!network\+\_\+monitor@{network\+\_\+monitor}}
+\subsubsection{\texorpdfstring{widget}{widget}}
+{\footnotesize\ttfamily network\+\_\+monitor.\+widget = graph.\+find\+Child(pg.\+Plot\+Widget, \char`\"{}plotwidget\char`\"{})}
+
+\mbox{\Hypertarget{namespacenetwork__monitor_aa6307605f5261f2cc1985c18b1d6b525}\label{namespacenetwork__monitor_aa6307605f5261f2cc1985c18b1d6b525}} 
+\index{network\+\_\+monitor@{network\+\_\+monitor}!x@{x}}
+\index{x@{x}!network\+\_\+monitor@{network\+\_\+monitor}}
+\subsubsection{\texorpdfstring{x}{x}}
+{\footnotesize\ttfamily network\+\_\+monitor.\+x}
+
+\mbox{\Hypertarget{namespacenetwork__monitor_a3d4b2bbe9932d5f533511dd894a99987}\label{namespacenetwork__monitor_a3d4b2bbe9932d5f533511dd894a99987}} 
+\index{network\+\_\+monitor@{network\+\_\+monitor}!y@{y}}
+\index{y@{y}!network\+\_\+monitor@{network\+\_\+monitor}}
+\subsubsection{\texorpdfstring{y}{y}}
+{\footnotesize\ttfamily network\+\_\+monitor.\+y}
+

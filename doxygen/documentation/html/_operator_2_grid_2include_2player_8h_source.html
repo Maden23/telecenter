@@ -1,0 +1,112 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Телецентр МИЭМ: Исходный файл /home/jetson/controlroom/Studio/Operator/Grid/include/player.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Телецентр МИЭМ
+   </div>
+   <div id="projectbrief">19102</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('_operator_2_grid_2include_2player_8h_source.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">player.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_operator_2_grid_2include_2player_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef PLAYER_H</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define PLAYER_H</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;gtk/gtk.h&gt;</span></div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;</div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#if defined (GDK_WINDOWING_X11)  // for GDK_WINDOW_XID</span></div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;gdk/gdkx.h&gt;</span></div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#endif</span></div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#ifdef GDK_WINDOWING_WIN32</span></div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &amp;lt;gdk/gdkwin32.h&amp;gt;  // for GDK_WINDOW_HWND</span></div><div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#endif</span></div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#include &lt;gst/gst.h&gt;</span></div><div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#include &lt;gst/video/videooverlay.h&gt;</span></div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div><div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacestd.html">std</a>;</div><div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;</div><div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="struct_pad_data.html">   18</a></span>&#160;<span class="keyword">struct </span><a class="code" href="struct_pad_data.html">PadData</a></div><div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;{</div><div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="struct_pad_data.html#a2dcc36381541106e5f4d2a8eba93c743">   20</a></span>&#160;    GstElement *<a class="code" href="struct_pad_data.html#a2dcc36381541106e5f4d2a8eba93c743">src</a>;</div><div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="struct_pad_data.html#acd71290a8ca04825f41627151fd4caa3">   21</a></span>&#160;    GstElement *<a class="code" href="struct_pad_data.html#acd71290a8ca04825f41627151fd4caa3">depay</a>;</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;};</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div><div class="line"><a name="l00029"></a><span class="lineno"><a class="line" href="class_player.html">   29</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_player.html">Player</a></div><div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;{</div><div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="keyword">public</span>:</div><div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="class_player.html">Player</a>(GtkWidget* videoWindow, <span class="keywordtype">string</span> platform, <span class="keywordtype">string</span> uri, <span class="keywordtype">string</span> camName);</div><div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    ~<a class="code" href="class_player.html">Player</a>();</div><div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordtype">void</span> playStream();</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">void</span> stopStream();</div><div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;</div><div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="class_player.html#a370339dfdf9eb61905637283a72f9e22">   38</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_player.html#a370339dfdf9eb61905637283a72f9e22">isPlaying</a>() {<span class="keywordflow">return</span> playing;}</div><div class="line"><a name="l00039"></a><span class="lineno"><a class="line" href="class_player.html#ac3fb217cb2001134249fafcba07fe7e7">   39</a></span>&#160;    GstElement *pipeline, *<a class="code" href="class_player.html#ac3fb217cb2001134249fafcba07fe7e7">src</a>, *depay, *parse, *dec, *scale, *sink;</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;</div><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="keyword">private</span>:</div><div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="class_player.html#a93eaebe50e6ab8a19c35138b4c60f60c">   43</a></span>&#160;    <span class="keywordtype">bool</span> <a class="code" href="class_player.html#a93eaebe50e6ab8a19c35138b4c60f60c">playing</a>;</div><div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="class_player.html#a02eaaec54dce5238f76ef6b9f458c86d">   44</a></span>&#160;    <span class="keywordtype">string</span> <a class="code" href="class_player.html#a02eaaec54dce5238f76ef6b9f458c86d">uri</a>, camName;</div><div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="class_player.html#ae5ed3420e43869788a3e9bf4eb29e529">   45</a></span>&#160;    GtkWidget *<a class="code" href="class_player.html#ae5ed3420e43869788a3e9bf4eb29e529">videoWindow</a>;</div><div class="line"><a name="l00046"></a><span class="lineno"><a class="line" href="class_player.html#a746993d3cf67692b460334b0e0ede459">   46</a></span>&#160;    GstBus *<a class="code" href="class_player.html#a746993d3cf67692b460334b0e0ede459">bus</a>;</div><div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="class_player.html#a4335f10f38749272bbdee425e8e30388">   47</a></span>&#160;    <span class="keywordtype">string</span> <a class="code" href="class_player.html#a4335f10f38749272bbdee425e8e30388">platform</a>;</div><div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keywordtype">void</span> buildPipeline();</div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div><div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="comment">// Video rendering using GTK</span></div><div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="class_player.html#a6375b319e5ba03a025aea4a91f36f7eb">   51</a></span>&#160;    guintptr videoWindowHandle = 0;</div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> videoWidgetRealize_cb (GtkWidget *<a class="code" href="namespacenetwork__monitor.html#af816a5bcf89d9423a24881c39b602f90">widget</a>, <a class="code" href="class_player.html">Player</a> *player);</div><div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    <span class="keyword">static</span> gboolean videoWidgetDraw_cb (GtkWidget *<a class="code" href="namespacenetwork__monitor.html#af816a5bcf89d9423a24881c39b602f90">widget</a>, cairo_t *cr, gpointer user_data);</div><div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;</div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="comment">// Handelling bus messages (incuding &#39;prepare-window-handle&#39; for rendering video)</span></div><div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keyword">static</span> GstBusSyncReply busSyncHandler (GstBus *bus, GstMessage *message, <a class="code" href="class_player.html">Player</a> *player);</div><div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div><div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="comment">// Dynamic source linking</span></div><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">static</span> <span class="keywordtype">void</span> pad_added_handler (GstElement * src, GstPad * new_pad, <a class="code" href="class_player.html">Player</a> *player);</div><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;};</div><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div><div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;</div><div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="preprocessor">#endif // PLAYER_H</span></div><div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div><div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;</div><div class="ttc" id="class_player_html_ac3fb217cb2001134249fafcba07fe7e7"><div class="ttname"><a href="class_player.html#ac3fb217cb2001134249fafcba07fe7e7">Player::src</a></div><div class="ttdeci">GstElement * src</div><div class="ttdef"><b>Definition:</b> player.h:39</div></div>
+<div class="ttc" id="namespacenetwork__monitor_html_af816a5bcf89d9423a24881c39b602f90"><div class="ttname"><a href="namespacenetwork__monitor.html#af816a5bcf89d9423a24881c39b602f90">network_monitor.widget</a></div><div class="ttdeci">widget</div><div class="ttdef"><b>Definition:</b> network_monitor.py:170</div></div>
+<div class="ttc" id="struct_pad_data_html_acd71290a8ca04825f41627151fd4caa3"><div class="ttname"><a href="struct_pad_data.html#acd71290a8ca04825f41627151fd4caa3">PadData::depay</a></div><div class="ttdeci">GstElement * depay</div><div class="ttdef"><b>Definition:</b> player.h:21</div></div>
+<div class="ttc" id="namespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div></div>
+<div class="ttc" id="class_player_html_a4335f10f38749272bbdee425e8e30388"><div class="ttname"><a href="class_player.html#a4335f10f38749272bbdee425e8e30388">Player::platform</a></div><div class="ttdeci">string platform</div><div class="ttdef"><b>Definition:</b> player.h:47</div></div>
+<div class="ttc" id="class_player_html_a746993d3cf67692b460334b0e0ede459"><div class="ttname"><a href="class_player.html#a746993d3cf67692b460334b0e0ede459">Player::bus</a></div><div class="ttdeci">GstBus * bus</div><div class="ttdef"><b>Definition:</b> player.h:46</div></div>
+<div class="ttc" id="struct_pad_data_html_a2dcc36381541106e5f4d2a8eba93c743"><div class="ttname"><a href="struct_pad_data.html#a2dcc36381541106e5f4d2a8eba93c743">PadData::src</a></div><div class="ttdeci">GstElement * src</div><div class="ttdef"><b>Definition:</b> player.h:20</div></div>
+<div class="ttc" id="class_player_html_a370339dfdf9eb61905637283a72f9e22"><div class="ttname"><a href="class_player.html#a370339dfdf9eb61905637283a72f9e22">Player::isPlaying</a></div><div class="ttdeci">bool isPlaying()</div><div class="ttdef"><b>Definition:</b> player.h:38</div></div>
+<div class="ttc" id="class_player_html_a93eaebe50e6ab8a19c35138b4c60f60c"><div class="ttname"><a href="class_player.html#a93eaebe50e6ab8a19c35138b4c60f60c">Player::playing</a></div><div class="ttdeci">bool playing</div><div class="ttdef"><b>Definition:</b> player.h:43</div></div>
+<div class="ttc" id="struct_pad_data_html"><div class="ttname"><a href="struct_pad_data.html">PadData</a></div><div class="ttdef"><b>Definition:</b> player.h:18</div></div>
+<div class="ttc" id="class_player_html_a02eaaec54dce5238f76ef6b9f458c86d"><div class="ttname"><a href="class_player.html#a02eaaec54dce5238f76ef6b9f458c86d">Player::uri</a></div><div class="ttdeci">string uri</div><div class="ttdef"><b>Definition:</b> player.h:44</div></div>
+<div class="ttc" id="class_player_html"><div class="ttname"><a href="class_player.html">Player</a></div><div class="ttdoc">The Player class. </div><div class="ttdef"><b>Definition:</b> player.h:29</div></div>
+<div class="ttc" id="class_player_html_ae5ed3420e43869788a3e9bf4eb29e529"><div class="ttname"><a href="class_player.html#ae5ed3420e43869788a3e9bf4eb29e529">Player::videoWindow</a></div><div class="ttdeci">GtkWidget * videoWindow</div><div class="ttdef"><b>Definition:</b> player.h:45</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_c62009bade606762cbc9454b3b297489.html">Operator</a></li><li class="navelem"><a class="el" href="dir_63a30b49c2c778a4303b97e7878e631d.html">Grid</a></li><li class="navelem"><a class="el" href="dir_ac4aeb4f950a28cebf1393cf97190cc4.html">include</a></li><li class="navelem"><a class="el" href="_operator_2_grid_2include_2player_8h.html">player.h</a></li>
+    <li class="footer">Создано системой
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

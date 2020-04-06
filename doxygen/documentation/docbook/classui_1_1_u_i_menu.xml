@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="classui_1_1_u_i_menu">
+<title>ui::UIMenu class Reference</title>
+<para>Inheritance diagram for ui::UIMenu</para>
+<para>
+    <figure>
+        <title>Inheritance graph</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="classui_1_1_u_i_menu__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+<para>Collaboration diagram for ui::UIMenu</para>
+<para>
+    <figure>
+        <title>Collaboration graph</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="classui_1_1_u_i_menu__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+        <section>
+            <title></title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="classui_1_1_u_i_menu_1ad0be15df979e3d015a770bd08f3da88b">__init__</link> (
+self )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+            <section xml:id="classui_1_1_u_i_menu_1ad0be15df979e3d015a770bd08f3da88b">
+                <title>def ui.UIMenu.__init__ (self)</title> <emphasis></emphasis>
+                
+            </section>
+</section>

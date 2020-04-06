@@ -1,0 +1,26 @@
+<map id="UI::UI" name="UI::UI">
+<area shape="rect" id="node2" href="$class_recorder_config.html#a38b5049c8ea73fbe7fe06bfca6fa216a" title="RecorderConfig::getRooms" alt="" coords="112,5,293,32"/>
+<area shape="rect" id="node3" href="$class_u_i.html#ad6b4d1f070f96f4a8cd7919595b2f9a7" title="UI::windowInit" alt="" coords="149,56,256,83"/>
+<area shape="rect" id="node4" href="$class_recorder_config.html#afc65f46a71f6bacd707dbf461a5bfddb" title="RecorderConfig::getParam" alt="" coords="611,107,789,133"/>
+<area shape="rect" id="node5" href="$class_u_i.html#ae9d1de9359a28d1ec13f2824ec72420c" title="UI::keyPress" alt="" coords="153,233,252,260"/>
+<area shape="rect" id="node7" href="$class_recorder_config.html#a01e6881ce3a3b19990c53f62810daa4b" title="RecorderConfig::getParamInt" alt="" coords="604,259,796,285"/>
+<area shape="rect" id="node15" href="$class_u_i.html#a85a2b2c92c5d2017f50886f7a184ddd1" title="UI::initPlayerWidgets" alt="" coords="129,360,276,387"/>
+<area shape="rect" id="node16" href="$class_u_i.html#ac1d0ed7af2a3272527c544110fc37890" title="UI::initMenuWidgets" alt="" coords="132,411,273,437"/>
+<area shape="rect" id="node22" href="$class_u_i.html#aa7991c3483e84d5ed9f64eeb333c9e44" title="UI::findIP" alt="" coords="163,461,242,488"/>
+<area shape="rect" id="node23" href="$class_u_i.html#af5cf1161c6d50b6e1b1fbcfb6123e10f" title="UI::updateGDriveStatus" alt="" coords="121,512,284,539"/>
+<area shape="rect" id="node25" href="$class_u_i.html#a2405c93cf8c14f22ebc20de45116e52b" title="UI::initStyles" alt="" coords="153,563,252,589"/>
+<area shape="rect" id="node6" href="$class_recorder.html#ac242ca5967dbf81f9ea39464eee2b06a" title="Recorder::startRecording" alt="" coords="365,157,533,184"/>
+<area shape="rect" id="node13" href="$class_recorder.html#afb29e7ee1c1d78b3b2c9e54133f88b62" title="Recorder::getRunningRecordings" alt="" coords="341,208,556,235"/>
+<area shape="rect" id="node14" href="$class_recorder.html#ae3de658eb341149ef0fb207783b3602b" title="Recorder::stopRecording" alt="" coords="365,259,532,285"/>
+<area shape="rect" id="node8" href="$class_recording.html#a6258253b296dfc518b4c64c8f7cb9969" title="Recording::start" alt="" coords="643,157,757,184"/>
+<area shape="rect" id="node9" href="$class_recording.html#a6fcee36a2d8276d6b7bc111800f41c49" title="Recording::buildPipeline" alt="" coords="855,132,1018,159"/>
+<area shape="rect" id="node12" href="$class_recording.html#a902cb9d3bacaaf992e38427bbe63319b" title="Recording::busSyncHandler" alt="" coords="844,183,1029,209"/>
+<area shape="rect" id="node10" href="$class_recording.html#abea9877130d33f18639df0544497d473" title="Recording::pad_added\l_handler" alt="" coords="1077,125,1229,166"/>
+<area shape="rect" id="node11" href="$class_recording.html#aaff0d133af8cc8bc3f514b7ae85fc99a" title="Recording::data_probe" alt="" coords="1277,132,1431,159"/>
+<area shape="rect" id="node17" href="$class_u_i.html#ab66596071cbc18cb463b8a99266c7926" title="UI::initRoomTab" alt="" coords="389,360,508,387"/>
+<area shape="rect" id="node18" href="$class_u_i.html#abc8966cc08826d39716b86e0a160af24" title="UI::initCamWidgets" alt="" coords="380,411,517,437"/>
+<area shape="rect" id="node21" href="$class_u_i.html#a2dfc8b3ab8c46094cabe6c8c332174cd" title="UI::editButtonClicked" alt="" coords="375,461,522,488"/>
+<area shape="rect" id="node19" href="$class_u_i.html#a48bcf14dfe5f38c4c531bf11f7e7217a" title="UI::displayPlayer" alt="" coords="639,385,761,412"/>
+<area shape="rect" id="node20" href="$class_u_i.html#ad4a8a785914011267c9cba9ebe92cd23" title="UI::switchStateChanged" alt="" coords="617,436,783,463"/>
+<area shape="rect" id="node24" href="$class_recorder.html#a2c3f20dfa022c936ede65ca34becb890" title="Recorder::isGDriveUpload\lActive" alt="" coords="361,513,536,554"/>
+</map>

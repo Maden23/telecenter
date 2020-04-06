@@ -1,0 +1,25 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="namespacefrom-gsuite">
+<title>from-gsuite</title>
+        <section>
+            <title>Переменные</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>list <link linkend="namespacefrom-gsuite_1a359fb1aa3ebe4472fff6f682676e7dc0">SCOPES</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title>Функции</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="namespacefrom-gsuite_1a431d5ae5f08baa594842e68180930f6c">main</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+</section>

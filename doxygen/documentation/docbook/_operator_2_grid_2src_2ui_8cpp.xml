@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_operator_2_grid_2src_2ui_8cpp">
+    <title>ui.cpp File Reference</title>
+    <programlisting>#include &quot;ui.h&quot;</programlisting>
+<para>Include dependency diagram for ui.cpp</para>
+<para>
+    <figure>
+        <title>Dependency diagram</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="_operator_2_grid_2src_2ui_8cpp__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+<para>Included by dependency diagram for ui.cpp</para>
+<para>
+    <figure>
+        <title>Dependency diagram</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="_operator_2_grid_2src_2ui_8cpp__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+    <simplesect>
+        <title>Подробное описание</title>
+    <para>Definition in file /home/jetson/controlroom/Studio/Operator/Grid/src/ui.cpp</para>
+    </simplesect>
+</section>

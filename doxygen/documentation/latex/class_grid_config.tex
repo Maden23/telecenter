@@ -1,0 +1,174 @@
+\hypertarget{class_grid_config}{}\section{Класс Grid\+Config}
+\label{class_grid_config}\index{Grid\+Config@{Grid\+Config}}
+
+
+The Config class.  
+
+
+
+
+{\ttfamily \#include $<$config.\+h$>$}
+
+\subsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_grid_config_a06a311c3bc17bebae00cb6573378730f}{set\+File} (string config\+Path)
+\item 
+string \hyperlink{class_grid_config_a2f3515d56ac52c5da67d1e181808404a}{get\+Param} (string name)
+\item 
+int \hyperlink{class_grid_config_ac9df22f86cdb7d1c51b2273640aefc99}{get\+Param\+Int} (string name)
+\item 
+vector$<$ \hyperlink{class_room}{Room} $\ast$ $>$ $\ast$ \hyperlink{class_grid_config_a98f5a1bb1b4fc28cf7b5d1bc931f5a54}{get\+Rooms} ()
+\end{DoxyCompactItemize}
+\subsection*{Открытые статические члены}
+\begin{DoxyCompactItemize}
+\item 
+static \hyperlink{class_grid_config}{Grid\+Config} \& \hyperlink{class_grid_config_acbe684009967e7b8593c7e3303cdfbf5}{get} ()
+\end{DoxyCompactItemize}
+\subsection*{Закрытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_grid_config_ae61afbd4fe461d0c668e33f2480e9061}{Grid\+Config} ()
+\item 
+\hyperlink{class_grid_config_a5a5beaf46b0f41e6387b6378b9cf4b7c}{Grid\+Config} (const \hyperlink{class_grid_config}{Grid\+Config} \&)
+\item 
+\hyperlink{class_grid_config}{Grid\+Config} \& \hyperlink{class_grid_config_a852bde866378360d38d0722bb8c98f01}{operator=} (const \hyperlink{class_grid_config}{Grid\+Config} \&)
+\item 
+void \hyperlink{class_grid_config_af0f79f5721c69162bebeeac5e3bdcf03}{get\+G\+Suite\+Rooms} ()
+\item 
+void \hyperlink{class_grid_config_a33834786b69a7473552cfb025937c253}{get\+Custom\+Rooms} ()
+\item 
+string \hyperlink{class_grid_config_aa8cd575c3fe49c27603d6925f690049c}{make\+G\+Suite\+Request} ()
+\item 
+vector$<$ \hyperlink{class_room}{Room} $\ast$ $>$ \hyperlink{class_grid_config_a7772860b1d46afff422f8208fcd45291}{read\+Rooms\+From\+File} (string file\+Name)
+\end{DoxyCompactItemize}
+\subsection*{Закрытые данные}
+\begin{DoxyCompactItemize}
+\item 
+map$<$ string, string $>$ \hyperlink{class_grid_config_a9a956728ff118aeb9c1f9b249c50f250}{configuration}
+\item 
+vector$<$ \hyperlink{class_room}{Room} $\ast$ $>$ \hyperlink{class_grid_config_a1fc61cb11f7c487b1af888f8618a238f}{rooms}
+\end{DoxyCompactItemize}
+
+
+\subsection{Подробное описание}
+The Config class. 
+
+\subsection{Конструктор(ы)}
+\mbox{\Hypertarget{class_grid_config_ae61afbd4fe461d0c668e33f2480e9061}\label{class_grid_config_ae61afbd4fe461d0c668e33f2480e9061}} 
+\index{Grid\+Config@{Grid\+Config}!Grid\+Config@{Grid\+Config}}
+\index{Grid\+Config@{Grid\+Config}!Grid\+Config@{Grid\+Config}}
+\subsubsection{\texorpdfstring{Grid\+Config()}{GridConfig()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Grid\+Config\+::\+Grid\+Config (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_grid_config_ae61afbd4fe461d0c668e33f2480e9061_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_grid_config_a5a5beaf46b0f41e6387b6378b9cf4b7c}\label{class_grid_config_a5a5beaf46b0f41e6387b6378b9cf4b7c}} 
+\index{Grid\+Config@{Grid\+Config}!Grid\+Config@{Grid\+Config}}
+\index{Grid\+Config@{Grid\+Config}!Grid\+Config@{Grid\+Config}}
+\subsubsection{\texorpdfstring{Grid\+Config()}{GridConfig()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Grid\+Config\+::\+Grid\+Config (\begin{DoxyParamCaption}\item[{const \hyperlink{class_grid_config}{Grid\+Config} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\subsection{Методы}
+\mbox{\Hypertarget{class_grid_config_acbe684009967e7b8593c7e3303cdfbf5}\label{class_grid_config_acbe684009967e7b8593c7e3303cdfbf5}} 
+\index{Grid\+Config@{Grid\+Config}!get@{get}}
+\index{get@{get}!Grid\+Config@{Grid\+Config}}
+\subsubsection{\texorpdfstring{get()}{get()}}
+{\footnotesize\ttfamily static \hyperlink{class_grid_config}{Grid\+Config}\& Grid\+Config\+::get (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\mbox{\Hypertarget{class_grid_config_a33834786b69a7473552cfb025937c253}\label{class_grid_config_a33834786b69a7473552cfb025937c253}} 
+\index{Grid\+Config@{Grid\+Config}!get\+Custom\+Rooms@{get\+Custom\+Rooms}}
+\index{get\+Custom\+Rooms@{get\+Custom\+Rooms}!Grid\+Config@{Grid\+Config}}
+\subsubsection{\texorpdfstring{get\+Custom\+Rooms()}{getCustomRooms()}}
+{\footnotesize\ttfamily void Grid\+Config\+::get\+Custom\+Rooms (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_grid_config_a33834786b69a7473552cfb025937c253_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_grid_config_af0f79f5721c69162bebeeac5e3bdcf03}\label{class_grid_config_af0f79f5721c69162bebeeac5e3bdcf03}} 
+\index{Grid\+Config@{Grid\+Config}!get\+G\+Suite\+Rooms@{get\+G\+Suite\+Rooms}}
+\index{get\+G\+Suite\+Rooms@{get\+G\+Suite\+Rooms}!Grid\+Config@{Grid\+Config}}
+\subsubsection{\texorpdfstring{get\+G\+Suite\+Rooms()}{getGSuiteRooms()}}
+{\footnotesize\ttfamily void Grid\+Config\+::get\+G\+Suite\+Rooms (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_grid_config_af0f79f5721c69162bebeeac5e3bdcf03_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_grid_config_a2f3515d56ac52c5da67d1e181808404a}\label{class_grid_config_a2f3515d56ac52c5da67d1e181808404a}} 
+\index{Grid\+Config@{Grid\+Config}!get\+Param@{get\+Param}}
+\index{get\+Param@{get\+Param}!Grid\+Config@{Grid\+Config}}
+\subsubsection{\texorpdfstring{get\+Param()}{getParam()}}
+{\footnotesize\ttfamily string Grid\+Config\+::get\+Param (\begin{DoxyParamCaption}\item[{string}]{name }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_grid_config_ac9df22f86cdb7d1c51b2273640aefc99}\label{class_grid_config_ac9df22f86cdb7d1c51b2273640aefc99}} 
+\index{Grid\+Config@{Grid\+Config}!get\+Param\+Int@{get\+Param\+Int}}
+\index{get\+Param\+Int@{get\+Param\+Int}!Grid\+Config@{Grid\+Config}}
+\subsubsection{\texorpdfstring{get\+Param\+Int()}{getParamInt()}}
+{\footnotesize\ttfamily int Grid\+Config\+::get\+Param\+Int (\begin{DoxyParamCaption}\item[{string}]{name }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_grid_config_a98f5a1bb1b4fc28cf7b5d1bc931f5a54}\label{class_grid_config_a98f5a1bb1b4fc28cf7b5d1bc931f5a54}} 
+\index{Grid\+Config@{Grid\+Config}!get\+Rooms@{get\+Rooms}}
+\index{get\+Rooms@{get\+Rooms}!Grid\+Config@{Grid\+Config}}
+\subsubsection{\texorpdfstring{get\+Rooms()}{getRooms()}}
+{\footnotesize\ttfamily vector$<$ \hyperlink{class_room}{Room} $\ast$ $>$ $\ast$ Grid\+Config\+::get\+Rooms (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_grid_config_aa8cd575c3fe49c27603d6925f690049c}\label{class_grid_config_aa8cd575c3fe49c27603d6925f690049c}} 
+\index{Grid\+Config@{Grid\+Config}!make\+G\+Suite\+Request@{make\+G\+Suite\+Request}}
+\index{make\+G\+Suite\+Request@{make\+G\+Suite\+Request}!Grid\+Config@{Grid\+Config}}
+\subsubsection{\texorpdfstring{make\+G\+Suite\+Request()}{makeGSuiteRequest()}}
+{\footnotesize\ttfamily string Grid\+Config\+::make\+G\+Suite\+Request (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_grid_config_a852bde866378360d38d0722bb8c98f01}\label{class_grid_config_a852bde866378360d38d0722bb8c98f01}} 
+\index{Grid\+Config@{Grid\+Config}!operator=@{operator=}}
+\index{operator=@{operator=}!Grid\+Config@{Grid\+Config}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \hyperlink{class_grid_config}{Grid\+Config}\& Grid\+Config\+::operator= (\begin{DoxyParamCaption}\item[{const \hyperlink{class_grid_config}{Grid\+Config} \&}]{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_grid_config_a7772860b1d46afff422f8208fcd45291}\label{class_grid_config_a7772860b1d46afff422f8208fcd45291}} 
+\index{Grid\+Config@{Grid\+Config}!read\+Rooms\+From\+File@{read\+Rooms\+From\+File}}
+\index{read\+Rooms\+From\+File@{read\+Rooms\+From\+File}!Grid\+Config@{Grid\+Config}}
+\subsubsection{\texorpdfstring{read\+Rooms\+From\+File()}{readRoomsFromFile()}}
+{\footnotesize\ttfamily vector$<$ \hyperlink{class_room}{Room} $\ast$ $>$ Grid\+Config\+::read\+Rooms\+From\+File (\begin{DoxyParamCaption}\item[{string}]{file\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_grid_config_a06a311c3bc17bebae00cb6573378730f}\label{class_grid_config_a06a311c3bc17bebae00cb6573378730f}} 
+\index{Grid\+Config@{Grid\+Config}!set\+File@{set\+File}}
+\index{set\+File@{set\+File}!Grid\+Config@{Grid\+Config}}
+\subsubsection{\texorpdfstring{set\+File()}{setFile()}}
+{\footnotesize\ttfamily void Grid\+Config\+::set\+File (\begin{DoxyParamCaption}\item[{string}]{config\+Path }\end{DoxyParamCaption})}
+
+
+
+\subsection{Данные класса}
+\mbox{\Hypertarget{class_grid_config_a9a956728ff118aeb9c1f9b249c50f250}\label{class_grid_config_a9a956728ff118aeb9c1f9b249c50f250}} 
+\index{Grid\+Config@{Grid\+Config}!configuration@{configuration}}
+\index{configuration@{configuration}!Grid\+Config@{Grid\+Config}}
+\subsubsection{\texorpdfstring{configuration}{configuration}}
+{\footnotesize\ttfamily map$<$string, string$>$ Grid\+Config\+::configuration\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_grid_config_a1fc61cb11f7c487b1af888f8618a238f}\label{class_grid_config_a1fc61cb11f7c487b1af888f8618a238f}} 
+\index{Grid\+Config@{Grid\+Config}!rooms@{rooms}}
+\index{rooms@{rooms}!Grid\+Config@{Grid\+Config}}
+\subsubsection{\texorpdfstring{rooms}{rooms}}
+{\footnotesize\ttfamily vector$<$\hyperlink{class_room}{Room}$\ast$$>$ Grid\+Config\+::rooms\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+/home/jetson/controlroom/\+Studio/\+Operator/\+Grid/include/\hyperlink{_operator_2_grid_2include_2config_8h}{config.\+h}\item 
+/home/jetson/controlroom/\+Studio/\+Operator/\+Grid/src/\hyperlink{_operator_2_grid_2src_2config_8cpp}{config.\+cpp}\end{DoxyCompactItemize}

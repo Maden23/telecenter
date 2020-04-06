@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="dir_63a30b49c2c778a4303b97e7878e631d">
+    <title>Содержание директории Operator/Grid</title>
+<para>Directory dependency diagram for Operator/Grid</para>
+<para>
+    <figure>
+        <title>Directory Dependency diagram</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="dir_63a30b49c2c778a4303b97e7878e631d_dep.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+        <simplesect>
+            <title> Алфавитный указатель директорий </title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>dir <link linkend="dir_ac4aeb4f950a28cebf1393cf97190cc4">Operator/Grid/include</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>dir <link linkend="dir_237181a5d3cb966ea8a0d11693e487fd">Operator/Grid/src</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </simplesect>
+    <simplesect>
+        <title>Подробное описание</title>
+    <para>Directory location is /home/jetson/controlroom/Studio/Operator/Grid/</para>
+    </simplesect>
+</section>

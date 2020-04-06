@@ -1,0 +1,93 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="classui_1_1_pinger">
+<title>ui::Pinger class Reference</title>
+<para>Inheritance diagram for ui::Pinger</para>
+<para>
+    <figure>
+        <title>Inheritance graph</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="classui_1_1_pinger__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+<para>Collaboration diagram for ui::Pinger</para>
+<para>
+    <figure>
+        <title>Collaboration graph</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="classui_1_1_pinger__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+        <section>
+            <title>Открытые атрибуты</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>camList</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title></title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="classui_1_1_pinger_1a6e76192168383c7fbb72d6add7f27e80">__init__</link> (
+self , <link linkend="classui_1_1_pinger_1ac752aa12f824b1fd0ce9b94f7b3b14fe">camList</link> )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="classui_1_1_pinger_1ab94b3da4c7611e8075fa7fe7adb0c901">run</link> (
+self )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title></title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="classui_1_1_pinger_1a761e237a3492d45b892b61bd9ee7945d">_runCmd</link> (
+self , cmd , stderr )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <simplesect>
+            <title>Подробное описание</title>
+
+<para><literallayout>Updates ping information </literallayout> </para>
+                <para>Definition at line 24 of file ui.py</para>
+                <para>The Documentation for this struct was generated from the following file: </para>
+                <para><itemizedlist><listitem><para>ui.py</para></listitem></itemizedlist></para>
+        </simplesect>
+        <section>
+            <title>Данные класса</title>
+        </section>
+            <section xml:id="classui_1_1_pinger_1a6e76192168383c7fbb72d6add7f27e80">
+                <title>def ui.Pinger.__init__ (self, camList)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="classui_1_1_pinger_1ab94b3da4c7611e8075fa7fe7adb0c901">
+                <title>def ui.Pinger.run (self)</title> <emphasis></emphasis>
+                
+<para><literallayout>Function for QThreadPool to run in separate thread </literallayout> </para>
+
+            </section>
+            <section xml:id="classui_1_1_pinger_1a761e237a3492d45b892b61bd9ee7945d">
+                <title>def ui.Pinger._runCmd (self, cmd, stderr=STDOUT)</title> <emphasis></emphasis>
+                
+<para><literallayout>Run commend and get output </literallayout> </para>
+
+            </section>
+</section>

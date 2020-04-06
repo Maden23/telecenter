@@ -1,0 +1,219 @@
+\documentclass[twoside]{book}
+
+% Packages required by doxygen
+\usepackage{fixltx2e}
+\usepackage{calc}
+\usepackage{doxygen}
+\usepackage[export]{adjustbox} % also loads graphicx
+\usepackage{graphicx}
+\usepackage[utf8]{inputenc}
+\usepackage{makeidx}
+\usepackage{multicol}
+\usepackage{multirow}
+\PassOptionsToPackage{warn}{textcomp}
+\usepackage{textcomp}
+\usepackage[nointegrals]{wasysym}
+\usepackage[table]{xcolor}
+
+% NLS support packages
+\usepackage[T2A]{fontenc}
+\usepackage[russian]{babel}
+
+% Font selection
+\usepackage[T1]{fontenc}
+\usepackage[scaled=.90]{helvet}
+\usepackage{courier}
+\usepackage{amssymb}
+\usepackage{sectsty}
+\renewcommand{\familydefault}{\sfdefault}
+\allsectionsfont{%
+  \fontseries{bc}\selectfont%
+  \color{darkgray}%
+}
+\renewcommand{\DoxyLabelFont}{%
+  \fontseries{bc}\selectfont%
+  \color{darkgray}%
+}
+\newcommand{\+}{\discretionary{\mbox{\scriptsize$\hookleftarrow$}}{}{}}
+
+% Page & text layout
+\usepackage{geometry}
+\geometry{%
+  a4paper,%
+  top=2.5cm,%
+  bottom=2.5cm,%
+  left=2.5cm,%
+  right=2.5cm%
+}
+\tolerance=750
+\hfuzz=15pt
+\hbadness=750
+\setlength{\emergencystretch}{15pt}
+\setlength{\parindent}{0cm}
+\setlength{\parskip}{3ex plus 2ex minus 2ex}
+\makeatletter
+\renewcommand{\paragraph}{%
+  \@startsection{paragraph}{4}{0ex}{-1.0ex}{1.0ex}{%
+    \normalfont\normalsize\bfseries\SS@parafont%
+  }%
+}
+\renewcommand{\subparagraph}{%
+  \@startsection{subparagraph}{5}{0ex}{-1.0ex}{1.0ex}{%
+    \normalfont\normalsize\bfseries\SS@subparafont%
+  }%
+}
+\makeatother
+
+% Headers & footers
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\fancyhead[LE]{\fancyplain{}{\bfseries\thepage}}
+\fancyhead[CE]{\fancyplain{}{}}
+\fancyhead[RE]{\fancyplain{}{\bfseries\leftmark}}
+\fancyhead[LO]{\fancyplain{}{\bfseries\rightmark}}
+\fancyhead[CO]{\fancyplain{}{}}
+\fancyhead[RO]{\fancyplain{}{\bfseries\thepage}}
+\fancyfoot[LE]{\fancyplain{}{}}
+\fancyfoot[CE]{\fancyplain{}{}}
+\fancyfoot[RE]{\fancyplain{}{\bfseries\scriptsize Создано системой Doxygen }}
+\fancyfoot[LO]{\fancyplain{}{\bfseries\scriptsize Создано системой Doxygen }}
+\fancyfoot[CO]{\fancyplain{}{}}
+\fancyfoot[RO]{\fancyplain{}{}}
+\renewcommand{\footrulewidth}{0.4pt}
+\renewcommand{\chaptermark}[1]{%
+  \markboth{#1}{}%
+}
+\renewcommand{\sectionmark}[1]{%
+  \markright{\thesection\ #1}%
+}
+
+% Indices & bibliography
+\usepackage{natbib}
+\usepackage[titles]{tocloft}
+\setcounter{tocdepth}{3}
+\setcounter{secnumdepth}{5}
+\makeindex
+
+% Hyperlinks (required, but should be loaded last)
+\usepackage{ifpdf}
+\ifpdf
+  \usepackage[pdftex,pagebackref=true]{hyperref}
+\else
+  \usepackage[ps2pdf,pagebackref=true]{hyperref}
+\fi
+\hypersetup{%
+  colorlinks=true,%
+  linkcolor=blue,%
+  citecolor=blue,%
+  unicode%
+}
+
+% Custom commands
+\newcommand{\clearemptydoublepage}{%
+  \newpage{\pagestyle{empty}\cleardoublepage}%
+}
+
+\usepackage{caption}
+\captionsetup{labelsep=space,justification=centering,font={bf},singlelinecheck=off,skip=4pt,position=top}
+
+%===== C O N T E N T S =====
+
+\begin{document}
+
+% Titlepage & ToC
+\hypersetup{pageanchor=false,
+             bookmarksnumbered=true,
+             pdfencoding=unicode
+            }
+\pagenumbering{alph}
+\begin{titlepage}
+\vspace*{7cm}
+\begin{center}%
+{\Large Телецентр МИЭМ }\\
+\vspace*{1cm}
+{\large Создано системой Doxygen 1.8.13}\\
+\end{center}
+\end{titlepage}
+\clearemptydoublepage
+\pagenumbering{roman}
+\tableofcontents
+\clearemptydoublepage
+\pagenumbering{arabic}
+\hypersetup{pageanchor=true}
+
+%--- Begin generated contents ---
+\chapter{Алфавитный указатель групп}
+\input{modules}
+\chapter{Алфавитный указатель пространств имен}
+\input{namespaces}
+\chapter{Иерархический список классов}
+\input{hierarchy}
+\chapter{Алфавитный указатель классов}
+\input{annotated}
+\chapter{Список файлов}
+\input{files}
+\chapter{Группы}
+\input{group__recorder}
+\include{group__grid}
+\include{group__network__monitor}
+\chapter{Пространства имен}
+\input{namespacefrom-gsuite}
+\input{namespacegpio}
+\input{namespacenetwork__monitor}
+\input{namespacevideo-upload}
+\chapter{Классы}
+\input{struct_audio_source}
+\input{classnetwork__monitor_1_1_camera}
+\input{struct_camera}
+\input{class_config}
+\input{struct_u_i_1_1display__player__data}
+\input{struct_u_i_1_1gdrive__status__data}
+\input{classnetwork__monitor_1_1_grapher}
+\input{struct_pad_data}
+\input{classnetwork__monitor_1_1_pinger}
+\input{class_player}
+\input{class_recorder}
+\input{class_recording}
+\input{class_room}
+\input{struct_u_i_1_1switch__state__changed__data}
+\input{class_u_i}
+\input{classnetwork__monitor_1_1_u_i_graph}
+\input{classnetwork__monitor_1_1_u_i_menu}
+\chapter{Файлы}
+\input{groups_8dox}
+\input{network__monitor_8py}
+\input{_operator_2_grid_2include_2config_8h}
+\input{_recorder_2include_2config_8h}
+\input{_operator_2_grid_2include_2player_8h}
+\input{_recorder_2include_2player_8h}
+\input{_operator_2_grid_2include_2room_8h}
+\input{_recorder_2include_2room_8h}
+\input{_operator_2_grid_2include_2ui_8h}
+\input{_recorder_2include_2ui_8h}
+\input{_operator_2_grid_2src_2config_8cpp}
+\input{_recorder_2src_2config_8cpp}
+\input{_operator_2_grid_2src_2from-gsuite_8py}
+\input{_recorder_2src_2from-gsuite_8py}
+\input{_operator_2_grid_2src_2main_8cpp}
+\input{_recorder_2src_2main_8cpp}
+\input{_operator_2_grid_2src_2player_8cpp}
+\input{_recorder_2src_2player_8cpp}
+\input{_operator_2_grid_2src_2ui_8cpp}
+\input{_recorder_2src_2ui_8cpp}
+\input{recorder_8h}
+\input{recording_8h}
+\input{gpio_8py}
+\input{recorder_8cpp}
+\input{recording_8cpp}
+\input{video-upload_8py}
+%--- End generated contents ---
+
+% Index
+\backmatter
+\newpage
+\phantomsection
+\clearemptydoublepage
+\addcontentsline{toc}{chapter}{Алфавитный указатель}
+\printindex
+
+\end{document}

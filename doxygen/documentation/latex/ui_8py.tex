@@ -1,0 +1,84 @@
+\hypertarget{ui_8py}{}\section{Файл /home/jetson/controlroom/\+Studio/\+Network/src/ui.py}
+\label{ui_8py}\index{/home/jetson/controlroom/\+Studio/\+Network/src/ui.\+py@{/home/jetson/controlroom/\+Studio/\+Network/src/ui.\+py}}
+\subsection*{Классы}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classui_1_1_u_i_menu}{ui.\+U\+I\+Menu}
+\item 
+class \hyperlink{classui_1_1_u_i_graph}{ui.\+U\+I\+Graph}
+\item 
+class \hyperlink{classui_1_1_pinger}{ui.\+Pinger}
+\begin{DoxyCompactList}\small\item\em Пингует камеры \end{DoxyCompactList}\item 
+class \hyperlink{classui_1_1_grapher}{ui.\+Grapher}
+\item 
+class \hyperlink{classui_1_1_camera}{ui.\+Camera}
+\end{DoxyCompactItemize}
+\subsection*{Пространства имен}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespaceui}{ui}
+\end{DoxyCompactItemize}
+\subsection*{Функции}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespaceui_ad062c21e9583db1aef2026bda2bfd294}{ui.\+run\+Ping} ()
+\end{DoxyCompactItemize}
+\subsection*{Переменные}
+\begin{DoxyCompactItemize}
+\item 
+dictionary \hyperlink{namespaceui_aad45a9db615017fdd003dcd9e271a9b9}{ui.\+adresses}
+\item 
+\hyperlink{namespaceui_aa319e24d35c85648c0d34ea8d6c77912}{ui.\+app} = Qt\+Widgets.\+Q\+Application(\mbox{[}$\,$\mbox{]})
+\item 
+\hyperlink{namespaceui_a4852f8d0ec72ef9b0220e692e9c1d362}{ui.\+menu} = U\+I\+Menu()
+\item 
+\hyperlink{namespaceui_a622dff979fe009d0b7a0b5065a48eeb4}{ui.\+stylesheet} = open(\char`\"{}../ui/stylesheet.\+css\char`\"{}, \char`\"{}r\char`\"{})
+\item 
+\hyperlink{namespaceui_a67d6f2ec81b00e7991565662f9e946f7}{ui.\+display0} = Qt\+Widgets.\+Q\+Desktop\+Widget().screen\+Geometry(0)
+\item 
+\hyperlink{namespaceui_a0b8ac4e4d4aa6108a23039c53766f6f1}{ui.\+graph} = U\+I\+Graph()
+\item 
+\hyperlink{namespaceui_afb5a8d9a573e872a43b870282effe261}{ui.\+display1} = Qt\+Widgets.\+Q\+Desktop\+Widget().screen\+Geometry(1)
+\item 
+\hyperlink{namespaceui_a7ddac767c5071a1d37d729710165cdd4}{ui.\+widget} = graph.\+find\+Child(pg.\+Plot\+Widget, \char`\"{}plotwidget\char`\"{})
+\item 
+\hyperlink{namespaceui_a45f8c2fae5eb64cd2de3091bd3fc3ca8}{ui.\+plot} = widget.\+get\+Plot\+Item()
+\item 
+\hyperlink{namespaceui_a0f719593f62467929abfbb1db46530a9}{ui.\+right\+Axis} = plot.\+get\+Axis(\textquotesingle{}right\textquotesingle{})
+\item 
+\hyperlink{namespaceui_a253eda5cb3ca4d465c03c0efdcd850cd}{ui.\+left\+Axis} = plot.\+get\+Axis(\textquotesingle{}left\textquotesingle{})
+\item 
+dictionary \hyperlink{namespaceui_abb44f579230c8104a085647cbfd74b4e}{ui.\+label\+Style} = \{\textquotesingle{}color\textquotesingle{}\+: \textquotesingle{}\#F\+FF\textquotesingle{}, \textquotesingle{}font-\/size\textquotesingle{}\+: \textquotesingle{}20pt\textquotesingle{}\}
+\item 
+\hyperlink{namespaceui_ae4eb85d01779e3357581532c19e8f6c9}{ui.\+units}
+\item 
+\hyperlink{namespaceui_a30ed37eb10260adbcf97ae9f39bc5f8e}{ui.\+font} = Q\+Font()
+\item 
+\hyperlink{namespaceui_a7a1d55977d90414ac9a33a4b2042ef52}{ui.\+tick\+Font}
+\item 
+\hyperlink{namespaceui_a0031c57aa0841c20af5e52dc5634d026}{ui.\+x}
+\item 
+\hyperlink{namespaceui_af8762a8410b6abe7b673bc2c8ef05784}{ui.\+True}
+\item 
+\hyperlink{namespaceui_a21b97caebd553671413aa6d515e9a6dd}{ui.\+y}
+\item 
+\hyperlink{namespaceui_adc51f403edb0c2ba24343024b93644b0}{ui.\+alpha}
+\item 
+\hyperlink{namespaceui_a93ae6b16cc6a8252e4bf5a5d2ed94aa6}{ui.\+grapher} = Grapher(plot)
+\item 
+list \hyperlink{namespaceui_a8e2392b67718029c7ae06c8e4f79b9dc}{ui.\+cams} = \mbox{[}$\,$\mbox{]}
+\item 
+int \hyperlink{namespaceui_a864c62b3f0bd6745e0d18d87e70defe6}{ui.\+i} = 0
+\item 
+\hyperlink{namespaceui_af6332480b18dc17e84cc4045f3330aac}{ui.\+button} = menu.\+find\+Child(Qt\+Widgets.\+Q\+Push\+Button, \char`\"{}b\char`\"{} + str(i))
+\item 
+\hyperlink{namespaceui_affd9697385ba4bf6c290a661c5a9b6cd}{ui.\+label} = menu.\+find\+Child(Qt\+Widgets.\+Q\+Label, \char`\"{}l\char`\"{} + str(i))
+\item 
+\hyperlink{namespaceui_afb37972e0352b1558875ce89d7fdc0ad}{ui.\+camera} = \hyperlink{struct_camera}{Camera}(adresses\mbox{[}c\mbox{]}, button, label, grapher)
+\item 
+\hyperlink{namespaceui_af1457bf15aa8152a54da34956fe19382}{ui.\+threadpool} = Q\+Thread\+Pool()
+\item 
+\hyperlink{namespaceui_a413340b69ea8a36f526ef691e1287f2c}{ui.\+ping\+Timer} = Q\+Timer()
+\item 
+\hyperlink{namespaceui_ad6a1f0cb59203283f1891267696aaf6e}{ui.\+pinger} = Pinger(cams)
+\end{DoxyCompactItemize}

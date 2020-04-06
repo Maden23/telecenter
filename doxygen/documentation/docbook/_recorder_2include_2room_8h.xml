@@ -1,0 +1,74 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_recorder_2include_2room_8h">
+    <title>room.h File Reference</title>
+    <programlisting>#include &lt;string&gt;</programlisting>
+    <programlisting>#include &lt;vector&gt;</programlisting>
+    <programlisting>#include &lt;gtk/gtk.h&gt;</programlisting>
+<para>Include dependency diagram for room.h</para>
+<para>
+    <figure>
+        <title>Dependency diagram</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="_recorder_2include_2room_8h__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+<para>Included by dependency diagram for room.h</para>
+<para>
+    <figure>
+        <title>Dependency diagram</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="_recorder_2include_2room_8h__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+        <section>
+            <title> Классы </title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>struct <link linkend="struct_camera">Camera</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>struct <link linkend="struct_audio_source">AudioSource</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>struct <link linkend="class_room">Room</link></para>
+<para><emphasis>The Room class.</emphasis></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title>Перечисления</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                            <para><literallayout>enum <link linkend="_recorder_2include_2room_8h_1aba46c5e77984ba564800a07427f8eeb1">room_t</link> {
+<link linkend="_operator_2_grid_2include_2room_8h_1aba46c5e77984ba564800a07427f8eeb1a945d6010d321d9fe75cbba7b6f37f3b5">CUSTOM</link>,
+<link linkend="_operator_2_grid_2include_2room_8h_1aba46c5e77984ba564800a07427f8eeb1af3becc2ef5d63e47f97c711e7a49fc5a">GSUITE</link>,
+<link linkend="_recorder_2include_2room_8h_1aba46c5e77984ba564800a07427f8eeb1a945d6010d321d9fe75cbba7b6f37f3b5">CUSTOM</link>,
+<link linkend="_recorder_2include_2room_8h_1aba46c5e77984ba564800a07427f8eeb1af3becc2ef5d63e47f97c711e7a49fc5a">GSUITE</link>
+}</literallayout>
+</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+    <simplesect>
+        <title>Подробное описание</title>
+    <para>Definition in file /home/jetson/controlroom/Studio/Recorder/include/room.h</para>
+    </simplesect>
+</section>

@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Телецентр МИЭМ: Исходный файл /home/jetson/controlroom/Studio/Operator/Grid/include/room.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Телецентр МИЭМ
+   </div>
+   <div id="projectbrief">19102</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('_operator_2_grid_2include_2room_8h_source.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="headertitle">
+<div class="title">room.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<a href="_operator_2_grid_2include_2room_8h.html">См. документацию.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#ifndef ROOM_H</span></div><div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;<span class="preprocessor">#define ROOM_H</span></div><div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;</div><div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div><div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div><div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;gtk/gtk.h&gt;</span></div><div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;<a class="code" href="_operator_2_grid_2include_2player_8h.html">player.h</a>&gt;</span></div><div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;</div><div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="keyword">using namespace </span><a class="code" href="namespacestd.html">std</a>;</div><div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;</div><div class="line"><a name="l00011"></a><span class="lineno"><a class="line" href="_operator_2_grid_2include_2room_8h.html#aba46c5e77984ba564800a07427f8eeb1">   11</a></span>&#160;<span class="keyword">enum</span> <a class="code" href="_operator_2_grid_2include_2room_8h.html#aba46c5e77984ba564800a07427f8eeb1">room_t</a> {<a class="code" href="_operator_2_grid_2include_2room_8h.html#aba46c5e77984ba564800a07427f8eeb1a945d6010d321d9fe75cbba7b6f37f3b5">CUSTOM</a>, <a class="code" href="_operator_2_grid_2include_2room_8h.html#aba46c5e77984ba564800a07427f8eeb1af3becc2ef5d63e47f97c711e7a49fc5a">GSUITE</a>};</div><div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div><div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div><div class="line"><a name="l00014"></a><span class="lineno"><a class="line" href="struct_camera.html">   14</a></span>&#160;<span class="keyword">struct </span><a class="code" href="struct_camera.html">Camera</a></div><div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;{</div><div class="line"><a name="l00016"></a><span class="lineno"><a class="line" href="struct_camera.html#a2adbd6da5cc41fb114c72b8616c00faf">   16</a></span>&#160;    <span class="keywordtype">string</span> <a class="code" href="struct_camera.html#a2adbd6da5cc41fb114c72b8616c00faf">name</a>;</div><div class="line"><a name="l00017"></a><span class="lineno"><a class="line" href="struct_camera.html#a36dcf32b67cd3d0dcb45ab59fcc02cdb">   17</a></span>&#160;    <span class="keywordtype">string</span> <a class="code" href="struct_camera.html#a36dcf32b67cd3d0dcb45ab59fcc02cdb">fullName</a>;</div><div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="struct_camera.html#a5d50a2e299b2cccd65b57982c678c8c4">   18</a></span>&#160;    <span class="keywordtype">string</span> <a class="code" href="struct_camera.html#a5d50a2e299b2cccd65b57982c678c8c4">uri</a>;</div><div class="line"><a name="l00019"></a><span class="lineno"><a class="line" href="struct_camera.html#a9b1f95d3238bada633cf31b6e40c2d71">   19</a></span>&#160;    <a class="code" href="class_player.html">Player</a> *<a class="code" href="struct_camera.html#a9b1f95d3238bada633cf31b6e40c2d71">player</a>;</div><div class="line"><a name="l00020"></a><span class="lineno"><a class="line" href="struct_camera.html#af463d4b36a2af1143d92b48cd5a8fa77">   20</a></span>&#160;    GtkWidget *<a class="code" href="struct_camera.html#af463d4b36a2af1143d92b48cd5a8fa77">button</a>;</div><div class="line"><a name="l00021"></a><span class="lineno"><a class="line" href="struct_camera.html#a6edbf520f8292d21ac6cccc61d45c41b">   21</a></span>&#160;    GtkWidget *<a class="code" href="struct_camera.html#a6edbf520f8292d21ac6cccc61d45c41b">drawingArea</a>;</div><div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;};</div><div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;</div><div class="line"><a name="l00024"></a><span class="lineno"><a class="line" href="struct_audio_source.html">   24</a></span>&#160;<span class="keyword">struct </span><a class="code" href="struct_audio_source.html">AudioSource</a></div><div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;{</div><div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="struct_audio_source.html#ab4db8d8ad6e0552f565932b7b3f432ee">   26</a></span>&#160;    <span class="keywordtype">string</span> <a class="code" href="struct_audio_source.html#ab4db8d8ad6e0552f565932b7b3f432ee">name</a>;</div><div class="line"><a name="l00027"></a><span class="lineno"><a class="line" href="struct_audio_source.html#a462a95c3122f83138e524f2c26361a1c">   27</a></span>&#160;    <span class="keywordtype">string</span> <a class="code" href="struct_audio_source.html#a462a95c3122f83138e524f2c26361a1c">uri</a>;</div><div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;};</div><div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;</div><div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="class_room.html">   34</a></span>&#160;<span class="keyword">class </span><a class="code" href="class_room.html">Room</a></div><div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;{</div><div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">public</span>:</div><div class="line"><a name="l00037"></a><span class="lineno"><a class="line" href="class_room.html#a545e0b1d59ba66d72691c0dec993d9f0">   37</a></span>&#160;    <a class="code" href="class_room.html#a545e0b1d59ba66d72691c0dec993d9f0">Room</a>(<span class="keywordtype">string</span> name, vector&lt;Camera&gt; cameras, <a class="code" href="struct_audio_source.html">AudioSource</a> audio)</div><div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    {</div><div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;        this-&gt;name = name;</div><div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        this-&gt;cameras = cameras;</div><div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        this-&gt;audio = audio;</div><div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    }</div><div class="line"><a name="l00043"></a><span class="lineno"><a class="line" href="class_room.html#ac6ef93a7d9c3e1d624e025058d5f16ff">   43</a></span>&#160;    <a class="code" href="class_room.html#ac6ef93a7d9c3e1d624e025058d5f16ff">Room</a>() {}</div><div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;</div><div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="class_room.html#a9b8b36d17943edd1d8085bb5c2d8dbbf">   45</a></span>&#160;    <a class="code" href="_operator_2_grid_2include_2room_8h.html#aba46c5e77984ba564800a07427f8eeb1">room_t</a> <a class="code" href="class_room.html#a9b8b36d17943edd1d8085bb5c2d8dbbf">type</a>;</div><div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;</div><div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="class_room.html#a5701522ecf180c978eaa454d79f3e305">   47</a></span>&#160;    <span class="keywordtype">string</span> <a class="code" href="class_room.html#a5701522ecf180c978eaa454d79f3e305">getName</a>() { <span class="keywordflow">return</span> name; }</div><div class="line"><a name="l00048"></a><span class="lineno"><a class="line" href="class_room.html#a3b4c4c8f33572ff196d75a187ed98021">   48</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_room.html#a3b4c4c8f33572ff196d75a187ed98021">setName</a>(<span class="keywordtype">string</span> name) { this-&gt;name = name; }</div><div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;</div><div class="line"><a name="l00050"></a><span class="lineno"><a class="line" href="class_room.html#a4a67443ce377dda8f71d862428a31ef1">   50</a></span>&#160;    vector&lt;Camera&gt;* <a class="code" href="class_room.html#a4a67443ce377dda8f71d862428a31ef1">getCameras</a>() { <span class="keywordflow">return</span> &amp;cameras; }</div><div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="class_room.html#ae105a370ebb1cdded2254d39c547a5fd">   51</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_room.html#ae105a370ebb1cdded2254d39c547a5fd">setCameras</a>(vector &lt;Camera&gt; <a class="code" href="namespacenetwork__monitor.html#a7033c08f9dae3f4784ace432524d7c3d">cams</a>) { cameras = <a class="code" href="namespacenetwork__monitor.html#a7033c08f9dae3f4784ace432524d7c3d">cams</a>; }</div><div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div><div class="line"><a name="l00053"></a><span class="lineno"><a class="line" href="class_room.html#ad99b6c39b3322dc0f28ce31c35402bb9">   53</a></span>&#160;    <a class="code" href="struct_audio_source.html">AudioSource</a> <a class="code" href="class_room.html#ad99b6c39b3322dc0f28ce31c35402bb9">getAudioSource</a>() { <span class="keywordflow">return</span> audio; }</div><div class="line"><a name="l00054"></a><span class="lineno"><a class="line" href="class_room.html#ae51a48335bf154e1194c1acc2fa16813">   54</a></span>&#160;    <span class="keywordtype">void</span> <a class="code" href="class_room.html#ae51a48335bf154e1194c1acc2fa16813">setAudioSource</a>(<a class="code" href="struct_audio_source.html">AudioSource</a> audio) { this-&gt;audio = audio; }</div><div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;</div><div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;<span class="keyword">private</span>:</div><div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="class_room.html#ae75204d685fe893bf4c867f9f3a79eb3">   57</a></span>&#160;   <span class="keywordtype">string</span> <a class="code" href="class_room.html#ae75204d685fe893bf4c867f9f3a79eb3">name</a>;</div><div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="class_room.html#a09874479cea41dde79c7c8dfdbd1703c">   58</a></span>&#160;   <a class="code" href="struct_audio_source.html">AudioSource</a> <a class="code" href="class_room.html#a09874479cea41dde79c7c8dfdbd1703c">audio</a>;</div><div class="line"><a name="l00059"></a><span class="lineno"><a class="line" href="class_room.html#a3e2ec3339b74eccacc2946d42151efc1">   59</a></span>&#160;   vector&lt;Camera&gt; <a class="code" href="class_room.html#a3e2ec3339b74eccacc2946d42151efc1">cameras</a>;</div><div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;};</div><div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div><div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div><div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="preprocessor">#endif // ROOM_H</span></div><div class="ttc" id="class_room_html_a4a67443ce377dda8f71d862428a31ef1"><div class="ttname"><a href="class_room.html#a4a67443ce377dda8f71d862428a31ef1">Room::getCameras</a></div><div class="ttdeci">vector&lt; Camera &gt; * getCameras()</div><div class="ttdef"><b>Definition:</b> room.h:50</div></div>
+<div class="ttc" id="struct_camera_html_a5d50a2e299b2cccd65b57982c678c8c4"><div class="ttname"><a href="struct_camera.html#a5d50a2e299b2cccd65b57982c678c8c4">Camera::uri</a></div><div class="ttdeci">string uri</div><div class="ttdef"><b>Definition:</b> room.h:18</div></div>
+<div class="ttc" id="class_room_html_a3b4c4c8f33572ff196d75a187ed98021"><div class="ttname"><a href="class_room.html#a3b4c4c8f33572ff196d75a187ed98021">Room::setName</a></div><div class="ttdeci">void setName(string name)</div><div class="ttdef"><b>Definition:</b> room.h:48</div></div>
+<div class="ttc" id="struct_camera_html_a2adbd6da5cc41fb114c72b8616c00faf"><div class="ttname"><a href="struct_camera.html#a2adbd6da5cc41fb114c72b8616c00faf">Camera::name</a></div><div class="ttdeci">string name</div><div class="ttdef"><b>Definition:</b> room.h:16</div></div>
+<div class="ttc" id="class_room_html_ac6ef93a7d9c3e1d624e025058d5f16ff"><div class="ttname"><a href="class_room.html#ac6ef93a7d9c3e1d624e025058d5f16ff">Room::Room</a></div><div class="ttdeci">Room()</div><div class="ttdef"><b>Definition:</b> room.h:43</div></div>
+<div class="ttc" id="class_room_html_ad99b6c39b3322dc0f28ce31c35402bb9"><div class="ttname"><a href="class_room.html#ad99b6c39b3322dc0f28ce31c35402bb9">Room::getAudioSource</a></div><div class="ttdeci">AudioSource getAudioSource()</div><div class="ttdef"><b>Definition:</b> room.h:53</div></div>
+<div class="ttc" id="class_room_html_a9b8b36d17943edd1d8085bb5c2d8dbbf"><div class="ttname"><a href="class_room.html#a9b8b36d17943edd1d8085bb5c2d8dbbf">Room::type</a></div><div class="ttdeci">room_t type</div><div class="ttdef"><b>Definition:</b> room.h:45</div></div>
+<div class="ttc" id="namespacestd_html"><div class="ttname"><a href="namespacestd.html">std</a></div></div>
+<div class="ttc" id="struct_audio_source_html"><div class="ttname"><a href="struct_audio_source.html">AudioSource</a></div><div class="ttdef"><b>Definition:</b> room.h:24</div></div>
+<div class="ttc" id="class_room_html_ae75204d685fe893bf4c867f9f3a79eb3"><div class="ttname"><a href="class_room.html#ae75204d685fe893bf4c867f9f3a79eb3">Room::name</a></div><div class="ttdeci">string name</div><div class="ttdef"><b>Definition:</b> room.h:57</div></div>
+<div class="ttc" id="class_room_html_a09874479cea41dde79c7c8dfdbd1703c"><div class="ttname"><a href="class_room.html#a09874479cea41dde79c7c8dfdbd1703c">Room::audio</a></div><div class="ttdeci">AudioSource audio</div><div class="ttdef"><b>Definition:</b> room.h:58</div></div>
+<div class="ttc" id="struct_camera_html_af463d4b36a2af1143d92b48cd5a8fa77"><div class="ttname"><a href="struct_camera.html#af463d4b36a2af1143d92b48cd5a8fa77">Camera::button</a></div><div class="ttdeci">GtkWidget * button</div><div class="ttdef"><b>Definition:</b> room.h:20</div></div>
+<div class="ttc" id="class_room_html_ae105a370ebb1cdded2254d39c547a5fd"><div class="ttname"><a href="class_room.html#ae105a370ebb1cdded2254d39c547a5fd">Room::setCameras</a></div><div class="ttdeci">void setCameras(vector&lt; Camera &gt; cams)</div><div class="ttdef"><b>Definition:</b> room.h:51</div></div>
+<div class="ttc" id="_operator_2_grid_2include_2room_8h_html_aba46c5e77984ba564800a07427f8eeb1af3becc2ef5d63e47f97c711e7a49fc5a"><div class="ttname"><a href="_operator_2_grid_2include_2room_8h.html#aba46c5e77984ba564800a07427f8eeb1af3becc2ef5d63e47f97c711e7a49fc5a">GSUITE</a></div><div class="ttdef"><b>Definition:</b> room.h:11</div></div>
+<div class="ttc" id="struct_camera_html_a6edbf520f8292d21ac6cccc61d45c41b"><div class="ttname"><a href="struct_camera.html#a6edbf520f8292d21ac6cccc61d45c41b">Camera::drawingArea</a></div><div class="ttdeci">GtkWidget * drawingArea</div><div class="ttdef"><b>Definition:</b> room.h:21</div></div>
+<div class="ttc" id="namespacenetwork__monitor_html_a7033c08f9dae3f4784ace432524d7c3d"><div class="ttname"><a href="namespacenetwork__monitor.html#a7033c08f9dae3f4784ace432524d7c3d">network_monitor.cams</a></div><div class="ttdeci">list cams</div><div class="ttdef"><b>Definition:</b> network_monitor.py:191</div></div>
+<div class="ttc" id="struct_camera_html_a36dcf32b67cd3d0dcb45ab59fcc02cdb"><div class="ttname"><a href="struct_camera.html#a36dcf32b67cd3d0dcb45ab59fcc02cdb">Camera::fullName</a></div><div class="ttdeci">string fullName</div><div class="ttdef"><b>Definition:</b> room.h:17</div></div>
+<div class="ttc" id="_operator_2_grid_2include_2player_8h_html"><div class="ttname"><a href="_operator_2_grid_2include_2player_8h.html">player.h</a></div></div>
+<div class="ttc" id="class_room_html_a3e2ec3339b74eccacc2946d42151efc1"><div class="ttname"><a href="class_room.html#a3e2ec3339b74eccacc2946d42151efc1">Room::cameras</a></div><div class="ttdeci">vector&lt; Camera &gt; cameras</div><div class="ttdef"><b>Definition:</b> room.h:59</div></div>
+<div class="ttc" id="struct_camera_html"><div class="ttname"><a href="struct_camera.html">Camera</a></div><div class="ttdef"><b>Definition:</b> room.h:14</div></div>
+<div class="ttc" id="class_room_html_ae51a48335bf154e1194c1acc2fa16813"><div class="ttname"><a href="class_room.html#ae51a48335bf154e1194c1acc2fa16813">Room::setAudioSource</a></div><div class="ttdeci">void setAudioSource(AudioSource audio)</div><div class="ttdef"><b>Definition:</b> room.h:54</div></div>
+<div class="ttc" id="_operator_2_grid_2include_2room_8h_html_aba46c5e77984ba564800a07427f8eeb1a945d6010d321d9fe75cbba7b6f37f3b5"><div class="ttname"><a href="_operator_2_grid_2include_2room_8h.html#aba46c5e77984ba564800a07427f8eeb1a945d6010d321d9fe75cbba7b6f37f3b5">CUSTOM</a></div><div class="ttdef"><b>Definition:</b> room.h:11</div></div>
+<div class="ttc" id="struct_camera_html_a9b1f95d3238bada633cf31b6e40c2d71"><div class="ttname"><a href="struct_camera.html#a9b1f95d3238bada633cf31b6e40c2d71">Camera::player</a></div><div class="ttdeci">Player * player</div><div class="ttdef"><b>Definition:</b> room.h:19</div></div>
+<div class="ttc" id="class_room_html"><div class="ttname"><a href="class_room.html">Room</a></div><div class="ttdoc">The Room class. </div><div class="ttdef"><b>Definition:</b> room.h:34</div></div>
+<div class="ttc" id="class_room_html_a5701522ecf180c978eaa454d79f3e305"><div class="ttname"><a href="class_room.html#a5701522ecf180c978eaa454d79f3e305">Room::getName</a></div><div class="ttdeci">string getName()</div><div class="ttdef"><b>Definition:</b> room.h:47</div></div>
+<div class="ttc" id="_operator_2_grid_2include_2room_8h_html_aba46c5e77984ba564800a07427f8eeb1"><div class="ttname"><a href="_operator_2_grid_2include_2room_8h.html#aba46c5e77984ba564800a07427f8eeb1">room_t</a></div><div class="ttdeci">room_t</div><div class="ttdef"><b>Definition:</b> room.h:11</div></div>
+<div class="ttc" id="struct_audio_source_html_a462a95c3122f83138e524f2c26361a1c"><div class="ttname"><a href="struct_audio_source.html#a462a95c3122f83138e524f2c26361a1c">AudioSource::uri</a></div><div class="ttdeci">string uri</div><div class="ttdef"><b>Definition:</b> room.h:27</div></div>
+<div class="ttc" id="class_room_html_a545e0b1d59ba66d72691c0dec993d9f0"><div class="ttname"><a href="class_room.html#a545e0b1d59ba66d72691c0dec993d9f0">Room::Room</a></div><div class="ttdeci">Room(string name, vector&lt; Camera &gt; cameras, AudioSource audio)</div><div class="ttdef"><b>Definition:</b> room.h:37</div></div>
+<div class="ttc" id="class_player_html"><div class="ttname"><a href="class_player.html">Player</a></div><div class="ttdoc">The Player class. </div><div class="ttdef"><b>Definition:</b> player.h:29</div></div>
+<div class="ttc" id="struct_audio_source_html_ab4db8d8ad6e0552f565932b7b3f432ee"><div class="ttname"><a href="struct_audio_source.html#ab4db8d8ad6e0552f565932b7b3f432ee">AudioSource::name</a></div><div class="ttdeci">string name</div><div class="ttdef"><b>Definition:</b> room.h:26</div></div>
+</div><!-- fragment --></div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_c62009bade606762cbc9454b3b297489.html">Operator</a></li><li class="navelem"><a class="el" href="dir_63a30b49c2c778a4303b97e7878e631d.html">Grid</a></li><li class="navelem"><a class="el" href="dir_ac4aeb4f950a28cebf1393cf97190cc4.html">include</a></li><li class="navelem"><a class="el" href="_operator_2_grid_2include_2room_8h.html">room.h</a></li>
+    <li class="footer">Создано системой
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

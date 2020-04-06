@@ -1,0 +1,7 @@
+<map id="UI::initMenuWidgets" name="UI::initMenuWidgets">
+<area shape="rect" id="node2" href="$class_u_i.html#ab66596071cbc18cb463b8a99266c7926" title="UI::initRoomTab" alt="" coords="204,5,323,32"/>
+<area shape="rect" id="node3" href="$class_u_i.html#abc8966cc08826d39716b86e0a160af24" title="UI::initCamWidgets" alt="" coords="195,56,332,83"/>
+<area shape="rect" id="node6" href="$class_u_i.html#a4d6fc1c395de1396c3b4c17f60ce53f9" title="UI::pageSwitched" alt="" coords="200,107,327,133"/>
+<area shape="rect" id="node4" href="$class_u_i.html#a48bcf14dfe5f38c4c531bf11f7e7217a" title="UI::displayPlayer" alt="" coords="381,31,503,57"/>
+<area shape="rect" id="node5" href="$class_config.html#ae20fcfa28d82f1d2d1a4387a00a9f8b2" title="Config::getParam" alt="" coords="380,81,504,108"/>
+</map>

@@ -1,0 +1,60 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="recording_8h">
+    <title>recording.h File Reference</title>
+    <programlisting>#include &lt;string&gt;</programlisting>
+    <programlisting>#include &lt;gst/gst.h&gt;</programlisting>
+    <programlisting>#include &lt;iostream&gt;</programlisting>
+<para>Include dependency diagram for recording.h</para>
+<para>
+    <figure>
+        <title>Dependency diagram</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="recording_8h__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+<para>Included by dependency diagram for recording.h</para>
+<para>
+    <figure>
+        <title>Dependency diagram</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="recording_8h__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+        <section>
+            <title> Классы </title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>struct <link linkend="class_recording">Recording</link></para>
+<para><emphasis>The Recording class.</emphasis></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title>Перечисления</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                            <para><literallayout>enum <link linkend="recording_8h_1af9bff8ff1154a04a899276af806b8586">status_t</link> {
+<link linkend="recording_8h_1af9bff8ff1154a04a899276af806b8586a1061be6c3fb88d32829cba6f6b2be304">RUNNING</link>,
+<link linkend="recording_8h_1af9bff8ff1154a04a899276af806b8586a32fb07b4772ca4ee2861321344034f33">RELINKING</link>,
+<link linkend="recording_8h_1af9bff8ff1154a04a899276af806b8586a898cbaf2e64179c5cfdff4d10b3728c1">STOPPING</link>,
+<link linkend="recording_8h_1af9bff8ff1154a04a899276af806b8586a948b2aee15f52b421fa4770c47bcfe8c">STOPPED</link>
+}</literallayout>
+</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+    <simplesect>
+        <title>Подробное описание</title>
+    <para>Definition in file /home/jetson/controlroom/Studio/Recorder/include/recording.h</para>
+    </simplesect>
+</section>

@@ -1,0 +1,8 @@
+<map id="RecorderPlayer::RecorderPlayer" name="RecorderPlayer::RecorderPlayer">
+<area shape="rect" id="node2" href="$class_recorder_player.html#ad1bf2b3712c21b8d5c24f01b23a5c854" title="RecorderPlayer::videoWidget\lDraw_cb" alt="" coords="239,5,431,47"/>
+<area shape="rect" id="node3" href="$class_recorder_player.html#adac1a9507b04011782c05557220ef7f2" title="RecorderPlayer::videoWidget\lRealize_cb" alt="" coords="239,71,431,112"/>
+<area shape="rect" id="node4" href="$class_recorder_player.html#a2406c730cc930fb3aa800142c041a950" title="RecorderPlayer::buildPipeline" alt="" coords="238,137,431,163"/>
+<area shape="rect" id="node7" href="$class_recorder_player.html#adb7a205e6752a5a88e23f5595508ad98" title="RecorderPlayer::busSyncHandler" alt="" coords="227,187,443,214"/>
+<area shape="rect" id="node5" href="$class_recorder_config.html#afc65f46a71f6bacd707dbf461a5bfddb" title="RecorderConfig::getParam" alt="" coords="491,107,668,134"/>
+<area shape="rect" id="node6" href="$class_recorder_player.html#adcdcc7aea5f2b7984b240f961dfcc8a9" title="RecorderPlayer::pad\l_added_handler" alt="" coords="509,159,650,200"/>
+</map>

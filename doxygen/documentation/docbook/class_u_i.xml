@@ -1,0 +1,500 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="class_u_i">
+<title>UI class Reference</title>
+<para>
+    <programlisting>#include <link linkend="_operator_2_grid_2include_2ui_8h">&lt;ui.h&gt;</link></programlisting>
+</para>
+<para>Inheritance diagram for UI</para>
+<para>
+    <figure>
+        <title>Inheritance graph</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="class_u_i__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+<para>Collaboration diagram for UI</para>
+<para>
+    <figure>
+        <title>Collaboration graph</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="class_u_i__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+        <section>
+            <title> Классы </title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>struct <link linkend="struct_u_i_1_1display__player__data">UI::display_player_data</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>struct <link linkend="struct_u_i_1_1gdrive__status__data">UI::gdrive_status_data</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>struct <link linkend="struct_u_i_1_1switch__state__changed__data">UI::switch_state_changed_data</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title>Открытые атрибуты</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>Config * config</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>string playingCamName</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>Recorder * recorder</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>vector&lt; GtkWidget * &gt; switchGridV</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title>Закрытые данные</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>vector&lt; Room * &gt; * rooms</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>map&lt; Camera *, Player * &gt; players</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>GtkBuilder * menuBuilder</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>GtkWidget * menuWindow</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>Player * player</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>GtkBuilder * playerBuilder</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>GtkWidget * playerWindow</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>GtkWidget * playerWidget</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>GtkWidget * playerLabel</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>GtkWidget * editButton</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title></title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="class_u_i_1a2b49119b809785f66dd97ce769ab1753">UI</link> (
+<link linkend="class_config">Config</link> * config)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="class_u_i_1a1b23d0c64c7cbb3d143d90ec532a7ccd">~UI</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="class_u_i_1a2b49119b809785f66dd97ce769ab1753">UI</link> (
+<link linkend="class_config">Config</link> * config)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="class_u_i_1a1b23d0c64c7cbb3d143d90ec532a7ccd">~UI</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>void <link linkend="class_u_i_1ad860928c87b2a7f4e18b3f6e15774dd3">displayRecordingStatus</link> (
+string cam_id, bool status)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title></title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>static int <link linkend="class_u_i_1a405d8c6cbfea57303917867587e7e523">on_show</link> (
+gpointer ui_ptr)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>static void <link linkend="class_u_i_1a4d6fc1c395de1396c3b4c17f60ce53f9">pageSwitched</link> (
+GtkWidget * widget, GParamSpec * property, vector&lt; <link linkend="class_room">Room</link> *&gt; * rooms)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>static void <link linkend="class_u_i_1a48bcf14dfe5f38c4c531bf11f7e7217a">displayPlayer</link> (
+GtkWidget * widget, gpointer data)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>static gboolean <link linkend="class_u_i_1ae9d1de9359a28d1ec13f2824ec72420c">keyPress</link> (
+GtkWidget * widget, GdkEventKey * event, <link linkend="class_u_i">UI</link> * ui)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>static gboolean <link linkend="class_u_i_1af5cf1161c6d50b6e1b1fbcfb6123e10f">updateGDriveStatus</link> (
+gpointer user_data)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>static void <link linkend="class_u_i_1ae033d92357c8c8a175809bbee3e08b9b">displayPlayer</link> (
+GtkWidget * widget, gpointer data)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>static gboolean <link linkend="class_u_i_1ab9db8fde45ae6595a956feab77aaf2ca">keyPress</link> (
+GtkWidget * widget, GdkEventKey * event, <link linkend="class_u_i">UI</link> * ui)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>static void <link linkend="class_u_i_1ad4a8a785914011267c9cba9ebe92cd23">switchStateChanged</link> (
+GtkWidget * widget, gboolean state, gpointer user_data)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>static void <link linkend="class_u_i_1a2dfc8b3ab8c46094cabe6c8c332174cd">editButtonClicked</link> (
+GtkWidget * widget, vector&lt; GtkWidget *&gt; * switchGridV)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title></title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>int <link linkend="class_u_i_1a2405c93cf8c14f22ebc20de45116e52b">initStyles</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>GtkWidget * <link linkend="class_u_i_1ad6b4d1f070f96f4a8cd7919595b2f9a7">windowInit</link> (
+GtkBuilder ** builder, string gladeFile, string windowName)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>void <link linkend="class_u_i_1ac1d0ed7af2a3272527c544110fc37890">initMenuWidgets</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>void <link linkend="class_u_i_1abc8966cc08826d39716b86e0a160af24">initCamWidgets</link> (
+int room_n, vector&lt; <link linkend="struct_camera">Camera</link> &gt; * cams)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>void <link linkend="class_u_i_1ab66596071cbc18cb463b8a99266c7926">initRoomTab</link> (
+int room_n, string room_name)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>string <link linkend="class_u_i_1aa7991c3483e84d5ed9f64eeb333c9e44">findIP</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>int <link linkend="class_u_i_1a2405c93cf8c14f22ebc20de45116e52b">initStyles</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>GtkWidget * <link linkend="class_u_i_1ad65c4c017205871946a731f015d74f3c">windowInit</link> (
+GtkBuilder ** builder, string gladeFile, string windowName)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>void <link linkend="class_u_i_1a85a2b2c92c5d2017f50886f7a184ddd1">initPlayerWidgets</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>void <link linkend="class_u_i_1ac1d0ed7af2a3272527c544110fc37890">initMenuWidgets</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>void <link linkend="class_u_i_1abc8966cc08826d39716b86e0a160af24">initCamWidgets</link> (
+int room_n, vector&lt; <link linkend="struct_camera">Camera</link> &gt; * cams)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>void <link linkend="class_u_i_1ab66596071cbc18cb463b8a99266c7926">initRoomTab</link> (
+int room_n, string room_name)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>string <link linkend="class_u_i_1aa7991c3483e84d5ed9f64eeb333c9e44">findIP</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+    <simplesect>
+
+<para>The <link linkend="class_u_i">UI</link> class. </para>
+    </simplesect>
+        <section>
+            <title>Данные класса</title>
+        </section>
+        <section>
+            <title>Данные класса</title>
+        </section>
+            <section xml:id="class_u_i_1a2b49119b809785f66dd97ce769ab1753">
+                <title>UI::UI (Config *config)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_u_i_1a1b23d0c64c7cbb3d143d90ec532a7ccd">
+                <title>UI::~UI ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_u_i_1a2b49119b809785f66dd97ce769ab1753">
+                <title>UI::UI (Config *config)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_u_i_1a1b23d0c64c7cbb3d143d90ec532a7ccd">
+                <title>UI::~UI ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_u_i_1ad860928c87b2a7f4e18b3f6e15774dd3">
+                <title>void UI::displayRecordingStatus (string cam_id, bool status)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_u_i_1a405d8c6cbfea57303917867587e7e523">
+                <title>int UI::on_show (gpointer ui_ptr)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_u_i_1a4d6fc1c395de1396c3b4c17f60ce53f9">
+                <title>void UI::pageSwitched (GtkWidget *widget, GParamSpec *property, vector&lt; Room *&gt; *rooms)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_u_i_1a48bcf14dfe5f38c4c531bf11f7e7217a">
+                <title>void UI::displayPlayer (GtkWidget *widget, gpointer data)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_u_i_1ae9d1de9359a28d1ec13f2824ec72420c">
+                <title>gboolean UI::keyPress (GtkWidget *widget, GdkEventKey *event, UI *ui)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_u_i_1af5cf1161c6d50b6e1b1fbcfb6123e10f">
+                <title>gboolean UI::updateGDriveStatus (gpointer user_data)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_u_i_1ae033d92357c8c8a175809bbee3e08b9b">
+                <title>static void UI::displayPlayer (GtkWidget *widget, gpointer data)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_u_i_1ab9db8fde45ae6595a956feab77aaf2ca">
+                <title>static gboolean UI::keyPress (GtkWidget *widget, GdkEventKey *event, UI *ui)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_u_i_1ad4a8a785914011267c9cba9ebe92cd23">
+                <title>void UI::switchStateChanged (GtkWidget *widget, gboolean state, gpointer user_data)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_u_i_1a2dfc8b3ab8c46094cabe6c8c332174cd">
+                <title>void UI::editButtonClicked (GtkWidget *widget, vector&lt; GtkWidget *&gt; *switchGridV)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_u_i_1a2405c93cf8c14f22ebc20de45116e52b">
+                <title>int UI::initStyles ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_u_i_1ad6b4d1f070f96f4a8cd7919595b2f9a7">
+                <title>GtkWidget * UI::windowInit (GtkBuilder **builder, string gladeFile, string windowName)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_u_i_1ac1d0ed7af2a3272527c544110fc37890">
+                <title>void UI::initMenuWidgets ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_u_i_1abc8966cc08826d39716b86e0a160af24">
+                <title>void UI::initCamWidgets (int room_n, vector&lt; Camera &gt; *cams)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_u_i_1ab66596071cbc18cb463b8a99266c7926">
+                <title>void UI::initRoomTab (int room_n, string room_name)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_u_i_1aa7991c3483e84d5ed9f64eeb333c9e44">
+                <title>string UI::findIP ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_u_i_1a2405c93cf8c14f22ebc20de45116e52b">
+                <title>int UI::initStyles ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_u_i_1ad65c4c017205871946a731f015d74f3c">
+                <title>GtkWidget* UI::windowInit (GtkBuilder **builder, string gladeFile, string windowName)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_u_i_1a85a2b2c92c5d2017f50886f7a184ddd1">
+                <title>void UI::initPlayerWidgets ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_u_i_1ac1d0ed7af2a3272527c544110fc37890">
+                <title>void UI::initMenuWidgets ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_u_i_1abc8966cc08826d39716b86e0a160af24">
+                <title>void UI::initCamWidgets (int room_n, vector&lt; Camera &gt; *cams)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_u_i_1ab66596071cbc18cb463b8a99266c7926">
+                <title>void UI::initRoomTab (int room_n, string room_name)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_u_i_1aa7991c3483e84d5ed9f64eeb333c9e44">
+                <title>string UI::findIP ()</title> <emphasis></emphasis>
+                
+            </section>
+</section>

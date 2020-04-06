@@ -1,0 +1,413 @@
+\hypertarget{class_recording}{}\section{Класс Recording}
+\label{class_recording}\index{Recording@{Recording}}
+
+
+The \hyperlink{class_recording}{Recording} class.  
+
+
+
+
+{\ttfamily \#include $<$recording.\+h$>$}
+
+\subsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_recording_a128dd5017ad1bece8921226043c65fd7}{Recording} (string \hyperlink{class_recording_a60be340a7e3962c15362fb03d31dbba9}{uri}, string \hyperlink{class_recording_a0c0a828e5bf501fc26db662cb00dc6f4}{folder}, string \hyperlink{class_recording_a180143a05953b93dcc80707e36f4a282}{cam\+Name}, long \hyperlink{class_recording_a395293a5505e242ace2abd0ea8269d7c}{timeout}, long \hyperlink{class_recording_a222cf4edc0c19920121639525e6975e3}{video\+Time\+Limit})
+\item 
+\hyperlink{class_recording_a193bfe4e47869bec27433899dbe30543}{$\sim$\+Recording} ()
+\item 
+string \hyperlink{class_recording_a9c1a632374ab3887670ed1e9e18a5e50}{get\+File\+Name} ()
+\item 
+\hyperlink{recording_8h_af9bff8ff1154a04a899276af806b8586}{status\+\_\+t} \hyperlink{class_recording_a611b49ac3f6935c312a7f3dc141d3db7}{get\+Status} ()
+\item 
+bool \hyperlink{class_recording_a6258253b296dfc518b4c64c8f7cb9969}{start} ()
+\item 
+bool \hyperlink{class_recording_a1a53044e56c8a6cf6de62a9c0a7f9ae8}{stop} ()
+\end{DoxyCompactItemize}
+\subsection*{Открытые атрибуты}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{recording_8h_af9bff8ff1154a04a899276af806b8586}{status\+\_\+t} \hyperlink{class_recording_a607280d887f940ece786b3c1092739e7}{status}
+\item 
+string \hyperlink{class_recording_a60be340a7e3962c15362fb03d31dbba9}{uri}
+\item 
+string \hyperlink{class_recording_a180143a05953b93dcc80707e36f4a282}{cam\+Name}
+\item 
+string \hyperlink{class_recording_a01f00d2da7a894586da88ceed7c195d6}{file\+Name}
+\item 
+string \hyperlink{class_recording_a0c0a828e5bf501fc26db662cb00dc6f4}{folder}
+\end{DoxyCompactItemize}
+\subsection*{Закрытые члены}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_recording_a6fcee36a2d8276d6b7bc111800f41c49}{build\+Pipeline} ()
+\end{DoxyCompactItemize}
+\subsection*{Закрытые статические члены}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{class_recording_abea9877130d33f18639df0544497d473}{pad\+\_\+added\+\_\+handler} (Gst\+Element $\ast$\hyperlink{class_recording_ac8a63197a7a9f24e6af9d204c351d9ab}{src}, Gst\+Pad $\ast$new\+\_\+pad, \hyperlink{class_recording}{Recording} $\ast$recording)
+\item 
+static Gst\+Bus\+Sync\+Reply \hyperlink{class_recording_a902cb9d3bacaaf992e38427bbe63319b}{bus\+Sync\+Handler} (Gst\+Bus $\ast$bus, Gst\+Message $\ast$message, \hyperlink{class_recording}{Recording} $\ast$recording)
+\item 
+static Gst\+Pad\+Probe\+Return \hyperlink{class_recording_a60c63e897855daf4532e7a03c8a37026}{probe\+\_\+block\+\_\+stream} (Gst\+Pad $\ast$pad, Gst\+Pad\+Probe\+Info $\ast$info, gpointer user\+\_\+data)
+\item 
+static Gst\+Pad\+Probe\+Return \hyperlink{class_recording_a235992b4e8c358b6a648d84ed1e69969}{probe\+\_\+eos\+\_\+in\+\_\+stream} (Gst\+Pad $\ast$pad, Gst\+Pad\+Probe\+Info $\ast$info, gpointer user\+\_\+data)
+\item 
+static Gst\+Pad\+Probe\+Return \hyperlink{class_recording_a489e974a8481fdc9b6161c96f59ece8e}{probe\+\_\+idle\+\_\+relink} (Gst\+Pad $\ast$pad, Gst\+Pad\+Probe\+Info $\ast$info, gpointer user\+\_\+data)
+\item 
+static Gst\+Pad\+Probe\+Return \hyperlink{class_recording_aaff0d133af8cc8bc3f514b7ae85fc99a}{data\+\_\+probe} (Gst\+Pad $\ast$pad, Gst\+Pad\+Probe\+Info $\ast$info, gpointer user\+\_\+data)
+\item 
+static gboolean \hyperlink{class_recording_aebc44e786341582a88b0d91889110c3c}{freeze\+\_\+check} (gpointer user\+\_\+data)
+\item 
+static bool \hyperlink{class_recording_ab2a5a4db519db59f6de69699bfe04bc6}{element\+Src\+Linked} (Gst\+Element $\ast$elem)
+\item 
+static bool \hyperlink{class_recording_ac7f2d0b11324334fe3c54927fae60d9c}{element\+Sink\+Linked} (Gst\+Element $\ast$elem)
+\item 
+static bool \hyperlink{class_recording_a8cff139562008be79b2368c4a51d6ffe}{relink\+Elements} (Gst\+Element $\ast$wrong\+\_\+src, Gst\+Element $\ast$right\+\_\+src, Gst\+Element $\ast$\hyperlink{class_recording_a006ab2adce4204e46eea916f17b68401}{sink})
+\end{DoxyCompactItemize}
+\subsection*{Закрытые данные}
+\begin{DoxyCompactItemize}
+\item 
+long \hyperlink{class_recording_a395293a5505e242ace2abd0ea8269d7c}{timeout}
+\item 
+long \hyperlink{class_recording_a222cf4edc0c19920121639525e6975e3}{video\+Time\+Limit}
+\item 
+int \hyperlink{class_recording_aef145697847a9e6675766dff249cf345}{freeze\+\_\+check\+\_\+id}
+\item 
+bool \hyperlink{class_recording_a8b3e718465495256436ee9dec586db1b}{stream\+Linked}
+\item 
+Gst\+Element $\ast$ \hyperlink{class_recording_af8c6df8e128533d6302e1f3bbaeac24b}{pipeline}
+\item 
+Gst\+Element $\ast$ \hyperlink{class_recording_ac8a63197a7a9f24e6af9d204c351d9ab}{src}
+\item 
+Gst\+Element $\ast$ \hyperlink{class_recording_a8899df1df3191c30d75d1318f12a9bec}{testsrc}
+\item 
+Gst\+Element $\ast$ \hyperlink{class_recording_a52bbcffe004812e90c5153c9051ba42e}{depay}
+\item 
+Gst\+Element $\ast$ \hyperlink{class_recording_af9bcc96225df8f1bf8fa33605b275656}{parse}
+\item 
+Gst\+Element $\ast$ \hyperlink{class_recording_a8c794a5feb7aa0584742584bbaca44fe}{streamcapsfilter}
+\item 
+Gst\+Element $\ast$ \hyperlink{class_recording_aa27843b1afce4572ab5bf4a910290b59}{mux}
+\item 
+Gst\+Element $\ast$ \hyperlink{class_recording_a006ab2adce4204e46eea916f17b68401}{sink}
+\item 
+Gst\+Element $\ast$ \hyperlink{class_recording_ab6006415906dfd17903df1bd5e45445c}{enc}
+\item 
+Gst\+Element $\ast$ \hyperlink{class_recording_ac94a1a97b8e08c825dcfb7a75b20dfed}{fakesink}
+\item 
+Gst\+Element $\ast$ \hyperlink{class_recording_aa947984714cd94e8648c51fed143059c}{testcapsfilter}
+\item 
+Gst\+Clock $\ast$ \hyperlink{class_recording_a54a3555942d7e9980c1dd6af64de05e0}{clock}
+\item 
+Gst\+Clock\+Time \hyperlink{class_recording_a3dfeb68c3b09bd72f332f466b6512448}{last\+Buffer\+Time}
+\item 
+gint \hyperlink{class_recording_a62a737d846719fb3d13cbfec4f2b7387}{in\+\_\+idle\+\_\+probe}
+\end{DoxyCompactItemize}
+
+
+\subsection{Подробное описание}
+The \hyperlink{class_recording}{Recording} class. 
+
+\subsection{Конструктор(ы)}
+\mbox{\Hypertarget{class_recording_a128dd5017ad1bece8921226043c65fd7}\label{class_recording_a128dd5017ad1bece8921226043c65fd7}} 
+\index{Recording@{Recording}!Recording@{Recording}}
+\index{Recording@{Recording}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{Recording()}{Recording()}}
+{\footnotesize\ttfamily Recording\+::\+Recording (\begin{DoxyParamCaption}\item[{string}]{uri,  }\item[{string}]{folder,  }\item[{string}]{cam\+Name,  }\item[{long}]{timeout,  }\item[{long}]{video\+Time\+Limit }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_recording_a193bfe4e47869bec27433899dbe30543}\label{class_recording_a193bfe4e47869bec27433899dbe30543}} 
+\index{Recording@{Recording}!````~Recording@{$\sim$\+Recording}}
+\index{````~Recording@{$\sim$\+Recording}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{$\sim$\+Recording()}{~Recording()}}
+{\footnotesize\ttfamily Recording\+::$\sim$\+Recording (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\subsection{Методы}
+\mbox{\Hypertarget{class_recording_a6fcee36a2d8276d6b7bc111800f41c49}\label{class_recording_a6fcee36a2d8276d6b7bc111800f41c49}} 
+\index{Recording@{Recording}!build\+Pipeline@{build\+Pipeline}}
+\index{build\+Pipeline@{build\+Pipeline}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{build\+Pipeline()}{buildPipeline()}}
+{\footnotesize\ttfamily bool Recording\+::build\+Pipeline (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_recording_a6fcee36a2d8276d6b7bc111800f41c49_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_recording_a902cb9d3bacaaf992e38427bbe63319b}\label{class_recording_a902cb9d3bacaaf992e38427bbe63319b}} 
+\index{Recording@{Recording}!bus\+Sync\+Handler@{bus\+Sync\+Handler}}
+\index{bus\+Sync\+Handler@{bus\+Sync\+Handler}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{bus\+Sync\+Handler()}{busSyncHandler()}}
+{\footnotesize\ttfamily Gst\+Bus\+Sync\+Reply Recording\+::bus\+Sync\+Handler (\begin{DoxyParamCaption}\item[{Gst\+Bus $\ast$}]{bus,  }\item[{Gst\+Message $\ast$}]{message,  }\item[{\hyperlink{class_recording}{Recording} $\ast$}]{recording }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recording_aaff0d133af8cc8bc3f514b7ae85fc99a}\label{class_recording_aaff0d133af8cc8bc3f514b7ae85fc99a}} 
+\index{Recording@{Recording}!data\+\_\+probe@{data\+\_\+probe}}
+\index{data\+\_\+probe@{data\+\_\+probe}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{data\+\_\+probe()}{data\_probe()}}
+{\footnotesize\ttfamily Gst\+Pad\+Probe\+Return Recording\+::data\+\_\+probe (\begin{DoxyParamCaption}\item[{Gst\+Pad $\ast$}]{pad,  }\item[{Gst\+Pad\+Probe\+Info $\ast$}]{info,  }\item[{gpointer}]{user\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recording_ac7f2d0b11324334fe3c54927fae60d9c}\label{class_recording_ac7f2d0b11324334fe3c54927fae60d9c}} 
+\index{Recording@{Recording}!element\+Sink\+Linked@{element\+Sink\+Linked}}
+\index{element\+Sink\+Linked@{element\+Sink\+Linked}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{element\+Sink\+Linked()}{elementSinkLinked()}}
+{\footnotesize\ttfamily bool Recording\+::element\+Sink\+Linked (\begin{DoxyParamCaption}\item[{Gst\+Element $\ast$}]{elem }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recording_ab2a5a4db519db59f6de69699bfe04bc6}\label{class_recording_ab2a5a4db519db59f6de69699bfe04bc6}} 
+\index{Recording@{Recording}!element\+Src\+Linked@{element\+Src\+Linked}}
+\index{element\+Src\+Linked@{element\+Src\+Linked}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{element\+Src\+Linked()}{elementSrcLinked()}}
+{\footnotesize\ttfamily bool Recording\+::element\+Src\+Linked (\begin{DoxyParamCaption}\item[{Gst\+Element $\ast$}]{elem }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recording_aebc44e786341582a88b0d91889110c3c}\label{class_recording_aebc44e786341582a88b0d91889110c3c}} 
+\index{Recording@{Recording}!freeze\+\_\+check@{freeze\+\_\+check}}
+\index{freeze\+\_\+check@{freeze\+\_\+check}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{freeze\+\_\+check()}{freeze\_check()}}
+{\footnotesize\ttfamily gboolean Recording\+::freeze\+\_\+check (\begin{DoxyParamCaption}\item[{gpointer}]{user\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_recording_aebc44e786341582a88b0d91889110c3c_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_recording_a9c1a632374ab3887670ed1e9e18a5e50}\label{class_recording_a9c1a632374ab3887670ed1e9e18a5e50}} 
+\index{Recording@{Recording}!get\+File\+Name@{get\+File\+Name}}
+\index{get\+File\+Name@{get\+File\+Name}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{get\+File\+Name()}{getFileName()}}
+{\footnotesize\ttfamily string Recording\+::get\+File\+Name (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_recording_a611b49ac3f6935c312a7f3dc141d3db7}\label{class_recording_a611b49ac3f6935c312a7f3dc141d3db7}} 
+\index{Recording@{Recording}!get\+Status@{get\+Status}}
+\index{get\+Status@{get\+Status}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{get\+Status()}{getStatus()}}
+{\footnotesize\ttfamily \hyperlink{recording_8h_af9bff8ff1154a04a899276af806b8586}{status\+\_\+t} Recording\+::get\+Status (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_recording_abea9877130d33f18639df0544497d473}\label{class_recording_abea9877130d33f18639df0544497d473}} 
+\index{Recording@{Recording}!pad\+\_\+added\+\_\+handler@{pad\+\_\+added\+\_\+handler}}
+\index{pad\+\_\+added\+\_\+handler@{pad\+\_\+added\+\_\+handler}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{pad\+\_\+added\+\_\+handler()}{pad\_added\_handler()}}
+{\footnotesize\ttfamily void Recording\+::pad\+\_\+added\+\_\+handler (\begin{DoxyParamCaption}\item[{Gst\+Element $\ast$}]{src,  }\item[{Gst\+Pad $\ast$}]{new\+\_\+pad,  }\item[{\hyperlink{class_recording}{Recording} $\ast$}]{recording }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=345pt]{class_recording_abea9877130d33f18639df0544497d473_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_recording_a60c63e897855daf4532e7a03c8a37026}\label{class_recording_a60c63e897855daf4532e7a03c8a37026}} 
+\index{Recording@{Recording}!probe\+\_\+block\+\_\+stream@{probe\+\_\+block\+\_\+stream}}
+\index{probe\+\_\+block\+\_\+stream@{probe\+\_\+block\+\_\+stream}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{probe\+\_\+block\+\_\+stream()}{probe\_block\_stream()}}
+{\footnotesize\ttfamily Gst\+Pad\+Probe\+Return Recording\+::probe\+\_\+block\+\_\+stream (\begin{DoxyParamCaption}\item[{Gst\+Pad $\ast$}]{pad,  }\item[{Gst\+Pad\+Probe\+Info $\ast$}]{info,  }\item[{gpointer}]{user\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_recording_a60c63e897855daf4532e7a03c8a37026_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_recording_a235992b4e8c358b6a648d84ed1e69969}\label{class_recording_a235992b4e8c358b6a648d84ed1e69969}} 
+\index{Recording@{Recording}!probe\+\_\+eos\+\_\+in\+\_\+stream@{probe\+\_\+eos\+\_\+in\+\_\+stream}}
+\index{probe\+\_\+eos\+\_\+in\+\_\+stream@{probe\+\_\+eos\+\_\+in\+\_\+stream}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{probe\+\_\+eos\+\_\+in\+\_\+stream()}{probe\_eos\_in\_stream()}}
+{\footnotesize\ttfamily Gst\+Pad\+Probe\+Return Recording\+::probe\+\_\+eos\+\_\+in\+\_\+stream (\begin{DoxyParamCaption}\item[{Gst\+Pad $\ast$}]{pad,  }\item[{Gst\+Pad\+Probe\+Info $\ast$}]{info,  }\item[{gpointer}]{user\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_recording_a235992b4e8c358b6a648d84ed1e69969_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_recording_a489e974a8481fdc9b6161c96f59ece8e}\label{class_recording_a489e974a8481fdc9b6161c96f59ece8e}} 
+\index{Recording@{Recording}!probe\+\_\+idle\+\_\+relink@{probe\+\_\+idle\+\_\+relink}}
+\index{probe\+\_\+idle\+\_\+relink@{probe\+\_\+idle\+\_\+relink}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{probe\+\_\+idle\+\_\+relink()}{probe\_idle\_relink()}}
+{\footnotesize\ttfamily Gst\+Pad\+Probe\+Return Recording\+::probe\+\_\+idle\+\_\+relink (\begin{DoxyParamCaption}\item[{Gst\+Pad $\ast$}]{pad,  }\item[{Gst\+Pad\+Probe\+Info $\ast$}]{info,  }\item[{gpointer}]{user\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_recording_a489e974a8481fdc9b6161c96f59ece8e_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_recording_a8cff139562008be79b2368c4a51d6ffe}\label{class_recording_a8cff139562008be79b2368c4a51d6ffe}} 
+\index{Recording@{Recording}!relink\+Elements@{relink\+Elements}}
+\index{relink\+Elements@{relink\+Elements}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{relink\+Elements()}{relinkElements()}}
+{\footnotesize\ttfamily bool Recording\+::relink\+Elements (\begin{DoxyParamCaption}\item[{Gst\+Element $\ast$}]{wrong\+\_\+src,  }\item[{Gst\+Element $\ast$}]{right\+\_\+src,  }\item[{Gst\+Element $\ast$}]{sink }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recording_a6258253b296dfc518b4c64c8f7cb9969}\label{class_recording_a6258253b296dfc518b4c64c8f7cb9969}} 
+\index{Recording@{Recording}!start@{start}}
+\index{start@{start}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{start()}{start()}}
+{\footnotesize\ttfamily bool Recording\+::start (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_recording_a6258253b296dfc518b4c64c8f7cb9969_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_recording_a1a53044e56c8a6cf6de62a9c0a7f9ae8}\label{class_recording_a1a53044e56c8a6cf6de62a9c0a7f9ae8}} 
+\index{Recording@{Recording}!stop@{stop}}
+\index{stop@{stop}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{stop()}{stop()}}
+{\footnotesize\ttfamily bool Recording\+::stop (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\subsection{Данные класса}
+\mbox{\Hypertarget{class_recording_a180143a05953b93dcc80707e36f4a282}\label{class_recording_a180143a05953b93dcc80707e36f4a282}} 
+\index{Recording@{Recording}!cam\+Name@{cam\+Name}}
+\index{cam\+Name@{cam\+Name}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{cam\+Name}{camName}}
+{\footnotesize\ttfamily string Recording\+::cam\+Name}
+
+\mbox{\Hypertarget{class_recording_a54a3555942d7e9980c1dd6af64de05e0}\label{class_recording_a54a3555942d7e9980c1dd6af64de05e0}} 
+\index{Recording@{Recording}!clock@{clock}}
+\index{clock@{clock}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{clock}{clock}}
+{\footnotesize\ttfamily Gst\+Clock$\ast$ Recording\+::clock\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recording_a52bbcffe004812e90c5153c9051ba42e}\label{class_recording_a52bbcffe004812e90c5153c9051ba42e}} 
+\index{Recording@{Recording}!depay@{depay}}
+\index{depay@{depay}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{depay}{depay}}
+{\footnotesize\ttfamily Gst\+Element $\ast$ Recording\+::depay\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recording_ab6006415906dfd17903df1bd5e45445c}\label{class_recording_ab6006415906dfd17903df1bd5e45445c}} 
+\index{Recording@{Recording}!enc@{enc}}
+\index{enc@{enc}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{enc}{enc}}
+{\footnotesize\ttfamily Gst\+Element$\ast$ Recording\+::enc\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recording_ac94a1a97b8e08c825dcfb7a75b20dfed}\label{class_recording_ac94a1a97b8e08c825dcfb7a75b20dfed}} 
+\index{Recording@{Recording}!fakesink@{fakesink}}
+\index{fakesink@{fakesink}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{fakesink}{fakesink}}
+{\footnotesize\ttfamily Gst\+Element $\ast$ Recording\+::fakesink\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recording_a01f00d2da7a894586da88ceed7c195d6}\label{class_recording_a01f00d2da7a894586da88ceed7c195d6}} 
+\index{Recording@{Recording}!file\+Name@{file\+Name}}
+\index{file\+Name@{file\+Name}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{file\+Name}{fileName}}
+{\footnotesize\ttfamily string Recording\+::file\+Name}
+
+\mbox{\Hypertarget{class_recording_a0c0a828e5bf501fc26db662cb00dc6f4}\label{class_recording_a0c0a828e5bf501fc26db662cb00dc6f4}} 
+\index{Recording@{Recording}!folder@{folder}}
+\index{folder@{folder}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{folder}{folder}}
+{\footnotesize\ttfamily string Recording\+::folder}
+
+\mbox{\Hypertarget{class_recording_aef145697847a9e6675766dff249cf345}\label{class_recording_aef145697847a9e6675766dff249cf345}} 
+\index{Recording@{Recording}!freeze\+\_\+check\+\_\+id@{freeze\+\_\+check\+\_\+id}}
+\index{freeze\+\_\+check\+\_\+id@{freeze\+\_\+check\+\_\+id}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{freeze\+\_\+check\+\_\+id}{freeze\_check\_id}}
+{\footnotesize\ttfamily int Recording\+::freeze\+\_\+check\+\_\+id\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recording_a62a737d846719fb3d13cbfec4f2b7387}\label{class_recording_a62a737d846719fb3d13cbfec4f2b7387}} 
+\index{Recording@{Recording}!in\+\_\+idle\+\_\+probe@{in\+\_\+idle\+\_\+probe}}
+\index{in\+\_\+idle\+\_\+probe@{in\+\_\+idle\+\_\+probe}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{in\+\_\+idle\+\_\+probe}{in\_idle\_probe}}
+{\footnotesize\ttfamily gint Recording\+::in\+\_\+idle\+\_\+probe\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recording_a3dfeb68c3b09bd72f332f466b6512448}\label{class_recording_a3dfeb68c3b09bd72f332f466b6512448}} 
+\index{Recording@{Recording}!last\+Buffer\+Time@{last\+Buffer\+Time}}
+\index{last\+Buffer\+Time@{last\+Buffer\+Time}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{last\+Buffer\+Time}{lastBufferTime}}
+{\footnotesize\ttfamily Gst\+Clock\+Time Recording\+::last\+Buffer\+Time\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recording_aa27843b1afce4572ab5bf4a910290b59}\label{class_recording_aa27843b1afce4572ab5bf4a910290b59}} 
+\index{Recording@{Recording}!mux@{mux}}
+\index{mux@{mux}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{mux}{mux}}
+{\footnotesize\ttfamily Gst\+Element $\ast$ Recording\+::mux\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recording_af9bcc96225df8f1bf8fa33605b275656}\label{class_recording_af9bcc96225df8f1bf8fa33605b275656}} 
+\index{Recording@{Recording}!parse@{parse}}
+\index{parse@{parse}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{parse}{parse}}
+{\footnotesize\ttfamily Gst\+Element $\ast$ Recording\+::parse\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recording_af8c6df8e128533d6302e1f3bbaeac24b}\label{class_recording_af8c6df8e128533d6302e1f3bbaeac24b}} 
+\index{Recording@{Recording}!pipeline@{pipeline}}
+\index{pipeline@{pipeline}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{pipeline}{pipeline}}
+{\footnotesize\ttfamily Gst\+Element$\ast$ Recording\+::pipeline\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recording_a006ab2adce4204e46eea916f17b68401}\label{class_recording_a006ab2adce4204e46eea916f17b68401}} 
+\index{Recording@{Recording}!sink@{sink}}
+\index{sink@{sink}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{sink}{sink}}
+{\footnotesize\ttfamily Gst\+Element $\ast$ Recording\+::sink\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recording_ac8a63197a7a9f24e6af9d204c351d9ab}\label{class_recording_ac8a63197a7a9f24e6af9d204c351d9ab}} 
+\index{Recording@{Recording}!src@{src}}
+\index{src@{src}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{src}{src}}
+{\footnotesize\ttfamily Gst\+Element $\ast$ Recording\+::src\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recording_a607280d887f940ece786b3c1092739e7}\label{class_recording_a607280d887f940ece786b3c1092739e7}} 
+\index{Recording@{Recording}!status@{status}}
+\index{status@{status}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{status}{status}}
+{\footnotesize\ttfamily \hyperlink{recording_8h_af9bff8ff1154a04a899276af806b8586}{status\+\_\+t} Recording\+::status}
+
+\mbox{\Hypertarget{class_recording_a8c794a5feb7aa0584742584bbaca44fe}\label{class_recording_a8c794a5feb7aa0584742584bbaca44fe}} 
+\index{Recording@{Recording}!streamcapsfilter@{streamcapsfilter}}
+\index{streamcapsfilter@{streamcapsfilter}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{streamcapsfilter}{streamcapsfilter}}
+{\footnotesize\ttfamily Gst\+Element $\ast$ Recording\+::streamcapsfilter\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recording_a8b3e718465495256436ee9dec586db1b}\label{class_recording_a8b3e718465495256436ee9dec586db1b}} 
+\index{Recording@{Recording}!stream\+Linked@{stream\+Linked}}
+\index{stream\+Linked@{stream\+Linked}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{stream\+Linked}{streamLinked}}
+{\footnotesize\ttfamily bool Recording\+::stream\+Linked\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recording_aa947984714cd94e8648c51fed143059c}\label{class_recording_aa947984714cd94e8648c51fed143059c}} 
+\index{Recording@{Recording}!testcapsfilter@{testcapsfilter}}
+\index{testcapsfilter@{testcapsfilter}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{testcapsfilter}{testcapsfilter}}
+{\footnotesize\ttfamily Gst\+Element $\ast$ Recording\+::testcapsfilter\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recording_a8899df1df3191c30d75d1318f12a9bec}\label{class_recording_a8899df1df3191c30d75d1318f12a9bec}} 
+\index{Recording@{Recording}!testsrc@{testsrc}}
+\index{testsrc@{testsrc}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{testsrc}{testsrc}}
+{\footnotesize\ttfamily Gst\+Element $\ast$ Recording\+::testsrc\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recording_a395293a5505e242ace2abd0ea8269d7c}\label{class_recording_a395293a5505e242ace2abd0ea8269d7c}} 
+\index{Recording@{Recording}!timeout@{timeout}}
+\index{timeout@{timeout}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{timeout}{timeout}}
+{\footnotesize\ttfamily long Recording\+::timeout\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recording_a60be340a7e3962c15362fb03d31dbba9}\label{class_recording_a60be340a7e3962c15362fb03d31dbba9}} 
+\index{Recording@{Recording}!uri@{uri}}
+\index{uri@{uri}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{uri}{uri}}
+{\footnotesize\ttfamily string Recording\+::uri}
+
+\mbox{\Hypertarget{class_recording_a222cf4edc0c19920121639525e6975e3}\label{class_recording_a222cf4edc0c19920121639525e6975e3}} 
+\index{Recording@{Recording}!video\+Time\+Limit@{video\+Time\+Limit}}
+\index{video\+Time\+Limit@{video\+Time\+Limit}!Recording@{Recording}}
+\subsubsection{\texorpdfstring{video\+Time\+Limit}{videoTimeLimit}}
+{\footnotesize\ttfamily long Recording\+::video\+Time\+Limit\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+/home/jetson/controlroom/\+Studio/\+Recorder/include/\hyperlink{recording_8h}{recording.\+h}\item 
+/home/jetson/controlroom/\+Studio/\+Recorder/src/\hyperlink{recording_8cpp}{recording.\+cpp}\end{DoxyCompactItemize}

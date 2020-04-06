@@ -1,0 +1,109 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="classui_1_1_grapher">
+<title>ui::Grapher class Reference</title>
+<para>Inheritance diagram for ui::Grapher</para>
+<para>
+    <figure>
+        <title>Inheritance graph</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="classui_1_1_grapher__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+<para>Collaboration diagram for ui::Grapher</para>
+<para>
+    <figure>
+        <title>Collaboration graph</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="classui_1_1_grapher__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+        <section>
+            <title>Открытые атрибуты</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>plot</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>curve</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>activeCam</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>data</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title></title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="classui_1_1_grapher_1adc14400ac80cf0e0ed6c03ef6672dd0d">__init__</link> (
+self , <link linkend="classui_1_1_grapher_1a7baf77d6615f5ae10d6beba8185e2e7e">plot</link> )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="classui_1_1_grapher_1a84bfc263d057da0961099866932fa80f">setData</link> (
+self , cam , <link linkend="classui_1_1_grapher_1a17abaedfc40072844120f9d23f39be35">data</link> )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="classui_1_1_grapher_1ab3993d59f2ea6e3af6009c3e0c2d8c4a">changeCam</link> (
+self , cam )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <simplesect>
+            <title>Подробное описание</title>
+
+<para><literallayout>Draws a graph on PlotWidget</literallayout> </para>
+                <para>Definition at line 61 of file ui.py</para>
+                <para>The Documentation for this struct was generated from the following file: </para>
+                <para><itemizedlist><listitem><para>ui.py</para></listitem></itemizedlist></para>
+        </simplesect>
+        <section>
+            <title>Данные класса</title>
+        </section>
+            <section xml:id="classui_1_1_grapher_1adc14400ac80cf0e0ed6c03ef6672dd0d">
+                <title>def ui.Grapher.__init__ (self, plot)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="classui_1_1_grapher_1a84bfc263d057da0961099866932fa80f">
+                <title>def ui.Grapher.setData (self, cam, data)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="classui_1_1_grapher_1ab3993d59f2ea6e3af6009c3e0c2d8c4a">
+                <title>def ui.Grapher.changeCam (self, cam)</title> <emphasis></emphasis>
+                
+<para><literallayout>Set name or ip of camera, which data should be drawn</literallayout> </para>
+
+            </section>
+</section>

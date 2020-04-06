@@ -1,0 +1,419 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="class_recording">
+<title>Recording class Reference</title>
+<para>
+    <programlisting>#include <link linkend="recording_8h">&lt;recording.h&gt;</link></programlisting>
+</para>
+<para>Inheritance diagram for Recording</para>
+<para>
+    <figure>
+        <title>Inheritance graph</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="class_recording__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+<para>Collaboration diagram for Recording</para>
+<para>
+    <figure>
+        <title>Collaboration graph</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="class_recording__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+        <section>
+            <title>Открытые атрибуты</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>status_t status</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>string uri</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>string camName</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>string fileName</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>string folder</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title>Закрытые данные</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>long timeout</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>long videoTimeLimit</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>int freeze_check_id</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>bool streamLinked</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>GstElement * pipeline</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>GstElement * src</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>GstElement * testsrc</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>GstElement * depay</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>GstElement * parse</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>GstElement * streamcapsfilter</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>GstElement * mux</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>GstElement * sink</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>GstElement * enc</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>GstElement * fakesink</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>GstElement * testcapsfilter</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>GstClock * clock</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>GstClockTime lastBufferTime</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>gint in_idle_probe</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title></title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="class_recording_1a128dd5017ad1bece8921226043c65fd7">Recording</link> (
+string uri, string folder, string camName, long timeout, long videoTimeLimit)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="class_recording_1a193bfe4e47869bec27433899dbe30543">~Recording</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>string <link linkend="class_recording_1a9c1a632374ab3887670ed1e9e18a5e50">getFileName</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para><link linkend="recording_8h_1af9bff8ff1154a04a899276af806b8586">status_t</link> <link linkend="class_recording_1a611b49ac3f6935c312a7f3dc141d3db7">getStatus</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>bool <link linkend="class_recording_1a6258253b296dfc518b4c64c8f7cb9969">start</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>bool <link linkend="class_recording_1a1a53044e56c8a6cf6de62a9c0a7f9ae8">stop</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title></title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>bool <link linkend="class_recording_1a6fcee36a2d8276d6b7bc111800f41c49">buildPipeline</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title></title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>static void <link linkend="class_recording_1abea9877130d33f18639df0544497d473">pad_added_handler</link> (
+GstElement * src, GstPad * new_pad, <link linkend="class_recording">Recording</link> * recording)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>static GstBusSyncReply <link linkend="class_recording_1a902cb9d3bacaaf992e38427bbe63319b">busSyncHandler</link> (
+GstBus * bus, GstMessage * message, <link linkend="class_recording">Recording</link> * recording)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>static GstPadProbeReturn <link linkend="class_recording_1a60c63e897855daf4532e7a03c8a37026">probe_block_stream</link> (
+GstPad * pad, GstPadProbeInfo * info, gpointer user_data)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>static GstPadProbeReturn <link linkend="class_recording_1a235992b4e8c358b6a648d84ed1e69969">probe_eos_in_stream</link> (
+GstPad * pad, GstPadProbeInfo * info, gpointer user_data)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>static GstPadProbeReturn <link linkend="class_recording_1a489e974a8481fdc9b6161c96f59ece8e">probe_idle_relink</link> (
+GstPad * pad, GstPadProbeInfo * info, gpointer user_data)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>static GstPadProbeReturn <link linkend="class_recording_1aaff0d133af8cc8bc3f514b7ae85fc99a">data_probe</link> (
+GstPad * pad, GstPadProbeInfo * info, gpointer user_data)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>static gboolean <link linkend="class_recording_1aebc44e786341582a88b0d91889110c3c">freeze_check</link> (
+gpointer user_data)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>static bool <link linkend="class_recording_1ab2a5a4db519db59f6de69699bfe04bc6">elementSrcLinked</link> (
+GstElement * elem)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>static bool <link linkend="class_recording_1ac7f2d0b11324334fe3c54927fae60d9c">elementSinkLinked</link> (
+GstElement * elem)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>static bool <link linkend="class_recording_1a8cff139562008be79b2368c4a51d6ffe">relinkElements</link> (
+GstElement * wrong_src, GstElement * right_src, GstElement * sink)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+    <simplesect>
+
+<para>The <link linkend="class_recording">Recording</link> class. </para>
+    </simplesect>
+        <section>
+            <title>Данные класса</title>
+        </section>
+        <section>
+            <title>Данные класса</title>
+        </section>
+            <section xml:id="class_recording_1a128dd5017ad1bece8921226043c65fd7">
+                <title>Recording::Recording (string uri, string folder, string camName, long timeout, long videoTimeLimit)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_recording_1a193bfe4e47869bec27433899dbe30543">
+                <title>Recording::~Recording ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_recording_1a9c1a632374ab3887670ed1e9e18a5e50">
+                <title>string Recording::getFileName ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_recording_1a611b49ac3f6935c312a7f3dc141d3db7">
+                <title>status_t Recording::getStatus ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_recording_1a6258253b296dfc518b4c64c8f7cb9969">
+                <title>bool Recording::start ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_recording_1a1a53044e56c8a6cf6de62a9c0a7f9ae8">
+                <title>bool Recording::stop ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_recording_1a6fcee36a2d8276d6b7bc111800f41c49">
+                <title>bool Recording::buildPipeline ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_recording_1abea9877130d33f18639df0544497d473">
+                <title>void Recording::pad_added_handler (GstElement *src, GstPad *new_pad, Recording *recording)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_recording_1a902cb9d3bacaaf992e38427bbe63319b">
+                <title>GstBusSyncReply Recording::busSyncHandler (GstBus *bus, GstMessage *message, Recording *recording)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_recording_1a60c63e897855daf4532e7a03c8a37026">
+                <title>GstPadProbeReturn Recording::probe_block_stream (GstPad *pad, GstPadProbeInfo *info, gpointer user_data)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_recording_1a235992b4e8c358b6a648d84ed1e69969">
+                <title>GstPadProbeReturn Recording::probe_eos_in_stream (GstPad *pad, GstPadProbeInfo *info, gpointer user_data)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_recording_1a489e974a8481fdc9b6161c96f59ece8e">
+                <title>GstPadProbeReturn Recording::probe_idle_relink (GstPad *pad, GstPadProbeInfo *info, gpointer user_data)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_recording_1aaff0d133af8cc8bc3f514b7ae85fc99a">
+                <title>GstPadProbeReturn Recording::data_probe (GstPad *pad, GstPadProbeInfo *info, gpointer user_data)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_recording_1aebc44e786341582a88b0d91889110c3c">
+                <title>gboolean Recording::freeze_check (gpointer user_data)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_recording_1ab2a5a4db519db59f6de69699bfe04bc6">
+                <title>bool Recording::elementSrcLinked (GstElement *elem)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_recording_1ac7f2d0b11324334fe3c54927fae60d9c">
+                <title>bool Recording::elementSinkLinked (GstElement *elem)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_recording_1a8cff139562008be79b2368c4a51d6ffe">
+                <title>bool Recording::relinkElements (GstElement *wrong_src, GstElement *right_src, GstElement *sink)</title> <emphasis></emphasis>
+                
+            </section>
+</section>

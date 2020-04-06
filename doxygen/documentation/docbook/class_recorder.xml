@@ -1,0 +1,173 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="class_recorder">
+<title>Recorder class Reference</title>
+<para>
+    <programlisting>#include <link linkend="recorder_8h">&lt;recorder.h&gt;</link></programlisting>
+</para>
+<para>Inheritance diagram for Recorder</para>
+<para>
+    <figure>
+        <title>Inheritance graph</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="class_recorder__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+<para>Collaboration diagram for Recorder</para>
+<para>
+    <figure>
+        <title>Collaboration graph</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="class_recorder__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+        <section>
+            <title>Закрытые данные</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>map&lt; Camera *, Recording * &gt; runningRecordings</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>Config * config</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>int runningGDriveUploads</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title></title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="class_recorder_1aa3cf7e6df22a7a21e8939e1dc1d02ea1">Recorder</link> (
+<link linkend="class_config">Config</link> * config)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="class_recorder_1a6b3c569577fcdc298d8d4a6a2b96e9a9">~Recorder</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>map&lt; <link linkend="struct_camera">Camera</link> *, <link linkend="class_recording">Recording</link> * &gt; <link linkend="class_recorder_1afb29e7ee1c1d78b3b2c9e54133f88b62">getRunningRecordings</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>bool <link linkend="class_recorder_1ac242ca5967dbf81f9ea39464eee2b06a">startRecording</link> (
+<link linkend="struct_camera">Camera</link> * cam)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>bool <link linkend="class_recorder_1ae3de658eb341149ef0fb207783b3602b">stopRecording</link> (
+<link linkend="struct_camera">Camera</link> * cam)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>bool <link linkend="class_recorder_1a2c3f20dfa022c936ede65ca34becb890">isGDriveUploadActive</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title></title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>void <link linkend="class_recorder_1a2decf81333499f7c9f0193daed7e2091">uploadVideo</link> (
+string uri, string fileName)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title></title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>static gboolean <link linkend="class_recorder_1a1fdebd3d390713fcafe6c76635760841">checkIfRecStopped</link> (
+gpointer data)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+    <simplesect>
+
+<para>Управляет процессом записи </para>
+    </simplesect>
+        <simplesect>
+            <title>Подробное описание</title>
+
+<para>Forks gstreamer pipelines for each recording Needs a stream id to start a recording Stores pids of running recorder processes Stops recordings by stream id </para>
+                <para>Definition at line 32 of file recorder.h</para>
+                <para>The Documentation for this struct was generated from the following file: </para>
+                <para><itemizedlist><listitem><para>recorder.h</para></listitem></itemizedlist></para>
+        </simplesect>
+        <section>
+            <title>Данные класса</title>
+        </section>
+            <section xml:id="class_recorder_1aa3cf7e6df22a7a21e8939e1dc1d02ea1">
+                <title>Recorder::Recorder (Config *config)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_recorder_1a6b3c569577fcdc298d8d4a6a2b96e9a9">
+                <title>Recorder::~Recorder ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_recorder_1afb29e7ee1c1d78b3b2c9e54133f88b62">
+                <title>map&lt;Camera*, Recording*&gt; Recorder::getRunningRecordings ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_recorder_1ac242ca5967dbf81f9ea39464eee2b06a">
+                <title>bool Recorder::startRecording (Camera *cam)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_recorder_1ae3de658eb341149ef0fb207783b3602b">
+                <title>bool Recorder::stopRecording (Camera *cam)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_recorder_1a2c3f20dfa022c936ede65ca34becb890">
+                <title>bool Recorder::isGDriveUploadActive ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_recorder_1a2decf81333499f7c9f0193daed7e2091">
+                <title>void Recorder::uploadVideo (string uri, string fileName)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_recorder_1a1fdebd3d390713fcafe6c76635760841">
+                <title>gboolean Recorder::checkIfRecStopped (gpointer data)</title> <emphasis></emphasis>
+                
+            </section>
+</section>

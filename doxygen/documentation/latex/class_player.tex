@@ -1,0 +1,345 @@
+\hypertarget{class_player}{}\section{Класс Player}
+\label{class_player}\index{Player@{Player}}
+
+
+The \hyperlink{class_player}{Player} class.  
+
+
+
+
+{\ttfamily \#include $<$player.\+h$>$}
+
+
+
+Граф связей класса Player\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=133pt]{class_player__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_player_a0e17f3ec3397aa056d2ee88a060a7d36}{Player} (Gtk\+Widget $\ast$\hyperlink{class_player_ae5ed3420e43869788a3e9bf4eb29e529}{video\+Window}, string \hyperlink{class_player_a4335f10f38749272bbdee425e8e30388}{platform}, string \hyperlink{class_player_a02eaaec54dce5238f76ef6b9f458c86d}{uri}, string \hyperlink{class_player_af5647b79bedfd422ca8758c90c6bbc45}{cam\+Name})
+\item 
+\hyperlink{class_player_a749d2c00e1fe0f5c2746f7505a58c062}{$\sim$\+Player} ()
+\item 
+void \hyperlink{class_player_a082180138fe92098aa9a1f51fd9ad40d}{play\+Stream} ()
+\item 
+void \hyperlink{class_player_aa8396672dd38d93e1000b7b0f55e9c24}{stop\+Stream} ()
+\item 
+bool \hyperlink{class_player_a370339dfdf9eb61905637283a72f9e22}{is\+Playing} ()
+\item 
+\hyperlink{class_player_a4b179b1c59f780f59e215fa5642acb99}{Player} (Gtk\+Widget $\ast$\hyperlink{class_player_ae5ed3420e43869788a3e9bf4eb29e529}{video\+Window}, \hyperlink{class_config}{Config} $\ast$\hyperlink{class_player_a53cd9b524dac60ecacd99f0812c71332}{config})
+\item 
+\hyperlink{class_player_a749d2c00e1fe0f5c2746f7505a58c062}{$\sim$\+Player} ()
+\item 
+void \hyperlink{class_player_a75c7257813c5f96bb2d8585dfc0c3025}{play\+Stream} (string \hyperlink{class_player_a02eaaec54dce5238f76ef6b9f458c86d}{uri})
+\end{DoxyCompactItemize}
+\subsection*{Открытые атрибуты}
+\begin{DoxyCompactItemize}
+\item 
+Gst\+Element $\ast$ \hyperlink{class_player_aa8cd0e05525fd7cf5ee60b40b1388254}{pipeline}
+\item 
+Gst\+Element $\ast$ \hyperlink{class_player_ac3fb217cb2001134249fafcba07fe7e7}{src}
+\item 
+Gst\+Element $\ast$ \hyperlink{class_player_a612fee9ac56aee91fd64e770f946e2e4}{depay}
+\item 
+Gst\+Element $\ast$ \hyperlink{class_player_a9aafd7f61221255c78b81c8715148676}{parse}
+\item 
+Gst\+Element $\ast$ \hyperlink{class_player_a79ccb8bdee134c230a8c242d5123356d}{dec}
+\item 
+Gst\+Element $\ast$ \hyperlink{class_player_a0cb0a126d4348e773fd2627c2a25d9e1}{scale}
+\item 
+Gst\+Element $\ast$ \hyperlink{class_player_aabd00fa1e998c6e4db1a83e6fee285ba}{sink}
+\item 
+\hyperlink{class_config}{Config} $\ast$ \hyperlink{class_player_a53cd9b524dac60ecacd99f0812c71332}{config}
+\end{DoxyCompactItemize}
+\subsection*{Закрытые члены}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_player_aca2616201a97a901612fd9df7a900ca1}{build\+Pipeline} ()
+\item 
+void \hyperlink{class_player_aca2616201a97a901612fd9df7a900ca1}{build\+Pipeline} ()
+\end{DoxyCompactItemize}
+\subsection*{Закрытые статические члены}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{class_player_aeb024ba54089ecaf90753a6f6b8d07bc}{video\+Widget\+Realize\+\_\+cb} (Gtk\+Widget $\ast$widget, \hyperlink{class_player}{Player} $\ast$player)
+\item 
+static gboolean \hyperlink{class_player_a31a79db48e8ebebddacd1bd76bf16f3d}{video\+Widget\+Draw\+\_\+cb} (Gtk\+Widget $\ast$widget, cairo\+\_\+t $\ast$cr, gpointer user\+\_\+data)
+\item 
+static Gst\+Bus\+Sync\+Reply \hyperlink{class_player_a987a5a6f6bf24f530536090e9a832ef6}{bus\+Sync\+Handler} (Gst\+Bus $\ast$\hyperlink{class_player_a746993d3cf67692b460334b0e0ede459}{bus}, Gst\+Message $\ast$message, \hyperlink{class_player}{Player} $\ast$player)
+\item 
+static void \hyperlink{class_player_a43527d455f9de17468deb13fef887854}{pad\+\_\+added\+\_\+handler} (Gst\+Element $\ast$\hyperlink{class_player_ac3fb217cb2001134249fafcba07fe7e7}{src}, Gst\+Pad $\ast$new\+\_\+pad, \hyperlink{class_player}{Player} $\ast$player)
+\item 
+static void \hyperlink{class_player_a6a18c90131b03493e506d50d16925436}{video\+Widget\+Realize\+\_\+cb} (Gtk\+Widget $\ast$widget, \hyperlink{class_player}{Player} $\ast$player)
+\item 
+static gboolean \hyperlink{class_player_a3e6f827b42b56e7685a66e739d643ecc}{video\+Widget\+Draw\+\_\+cb} (Gtk\+Widget $\ast$widget, cairo\+\_\+t $\ast$cr, gpointer user\+\_\+data)
+\item 
+static Gst\+Bus\+Sync\+Reply \hyperlink{class_player_a4f4e39756894a693bc45515f9eeded97}{bus\+Sync\+Handler} (Gst\+Bus $\ast$\hyperlink{class_player_a746993d3cf67692b460334b0e0ede459}{bus}, Gst\+Message $\ast$message, \hyperlink{class_player}{Player} $\ast$player)
+\item 
+static void \hyperlink{class_player_a3e74802e5bf9b62f5a0908637ace1913}{pad\+\_\+added\+\_\+handler} (Gst\+Element $\ast$\hyperlink{class_player_ac3fb217cb2001134249fafcba07fe7e7}{src}, Gst\+Pad $\ast$new\+\_\+pad, \hyperlink{class_player}{Player} $\ast$player)
+\end{DoxyCompactItemize}
+\subsection*{Закрытые данные}
+\begin{DoxyCompactItemize}
+\item 
+bool \hyperlink{class_player_a93eaebe50e6ab8a19c35138b4c60f60c}{playing}
+\item 
+string \hyperlink{class_player_a02eaaec54dce5238f76ef6b9f458c86d}{uri}
+\item 
+string \hyperlink{class_player_af5647b79bedfd422ca8758c90c6bbc45}{cam\+Name}
+\item 
+Gtk\+Widget $\ast$ \hyperlink{class_player_ae5ed3420e43869788a3e9bf4eb29e529}{video\+Window}
+\item 
+Gst\+Bus $\ast$ \hyperlink{class_player_a746993d3cf67692b460334b0e0ede459}{bus}
+\item 
+string \hyperlink{class_player_a4335f10f38749272bbdee425e8e30388}{platform}
+\item 
+guintptr \hyperlink{class_player_a6375b319e5ba03a025aea4a91f36f7eb}{video\+Window\+Handle} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Подробное описание}
+The \hyperlink{class_player}{Player} class. 
+
+\subsection{Конструктор(ы)}
+\mbox{\Hypertarget{class_player_a0e17f3ec3397aa056d2ee88a060a7d36}\label{class_player_a0e17f3ec3397aa056d2ee88a060a7d36}} 
+\index{Player@{Player}!Player@{Player}}
+\index{Player@{Player}!Player@{Player}}
+\subsubsection{\texorpdfstring{Player()}{Player()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Player\+::\+Player (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{video\+Window,  }\item[{string}]{platform,  }\item[{string}]{uri,  }\item[{string}]{cam\+Name }\end{DoxyParamCaption})}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_player_a0e17f3ec3397aa056d2ee88a060a7d36_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_player_a749d2c00e1fe0f5c2746f7505a58c062}\label{class_player_a749d2c00e1fe0f5c2746f7505a58c062}} 
+\index{Player@{Player}!````~Player@{$\sim$\+Player}}
+\index{````~Player@{$\sim$\+Player}!Player@{Player}}
+\subsubsection{\texorpdfstring{$\sim$\+Player()}{~Player()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Player\+::$\sim$\+Player (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_player_a4b179b1c59f780f59e215fa5642acb99}\label{class_player_a4b179b1c59f780f59e215fa5642acb99}} 
+\index{Player@{Player}!Player@{Player}}
+\index{Player@{Player}!Player@{Player}}
+\subsubsection{\texorpdfstring{Player()}{Player()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Player\+::\+Player (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{video\+Window,  }\item[{\hyperlink{class_config}{Config} $\ast$}]{config }\end{DoxyParamCaption})}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_player_a4b179b1c59f780f59e215fa5642acb99_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_player_a749d2c00e1fe0f5c2746f7505a58c062}\label{class_player_a749d2c00e1fe0f5c2746f7505a58c062}} 
+\index{Player@{Player}!````~Player@{$\sim$\+Player}}
+\index{````~Player@{$\sim$\+Player}!Player@{Player}}
+\subsubsection{\texorpdfstring{$\sim$\+Player()}{~Player()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Player\+::$\sim$\+Player (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\subsection{Методы}
+\mbox{\Hypertarget{class_player_aca2616201a97a901612fd9df7a900ca1}\label{class_player_aca2616201a97a901612fd9df7a900ca1}} 
+\index{Player@{Player}!build\+Pipeline@{build\+Pipeline}}
+\index{build\+Pipeline@{build\+Pipeline}!Player@{Player}}
+\subsubsection{\texorpdfstring{build\+Pipeline()}{buildPipeline()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Player\+::build\+Pipeline (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_player_aca2616201a97a901612fd9df7a900ca1}\label{class_player_aca2616201a97a901612fd9df7a900ca1}} 
+\index{Player@{Player}!build\+Pipeline@{build\+Pipeline}}
+\index{build\+Pipeline@{build\+Pipeline}!Player@{Player}}
+\subsubsection{\texorpdfstring{build\+Pipeline()}{buildPipeline()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Player\+::build\+Pipeline (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_player_aca2616201a97a901612fd9df7a900ca1_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_player_a4f4e39756894a693bc45515f9eeded97}\label{class_player_a4f4e39756894a693bc45515f9eeded97}} 
+\index{Player@{Player}!bus\+Sync\+Handler@{bus\+Sync\+Handler}}
+\index{bus\+Sync\+Handler@{bus\+Sync\+Handler}!Player@{Player}}
+\subsubsection{\texorpdfstring{bus\+Sync\+Handler()}{busSyncHandler()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily static Gst\+Bus\+Sync\+Reply Player\+::bus\+Sync\+Handler (\begin{DoxyParamCaption}\item[{Gst\+Bus $\ast$}]{bus,  }\item[{Gst\+Message $\ast$}]{message,  }\item[{\hyperlink{class_player}{Player} $\ast$}]{player }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_player_a987a5a6f6bf24f530536090e9a832ef6}\label{class_player_a987a5a6f6bf24f530536090e9a832ef6}} 
+\index{Player@{Player}!bus\+Sync\+Handler@{bus\+Sync\+Handler}}
+\index{bus\+Sync\+Handler@{bus\+Sync\+Handler}!Player@{Player}}
+\subsubsection{\texorpdfstring{bus\+Sync\+Handler()}{busSyncHandler()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Gst\+Bus\+Sync\+Reply Player\+::bus\+Sync\+Handler (\begin{DoxyParamCaption}\item[{Gst\+Bus $\ast$}]{bus,  }\item[{Gst\+Message $\ast$}]{message,  }\item[{\hyperlink{class_player}{Player} $\ast$}]{player }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_player_a370339dfdf9eb61905637283a72f9e22}\label{class_player_a370339dfdf9eb61905637283a72f9e22}} 
+\index{Player@{Player}!is\+Playing@{is\+Playing}}
+\index{is\+Playing@{is\+Playing}!Player@{Player}}
+\subsubsection{\texorpdfstring{is\+Playing()}{isPlaying()}}
+{\footnotesize\ttfamily bool Player\+::is\+Playing (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\mbox{\Hypertarget{class_player_a3e74802e5bf9b62f5a0908637ace1913}\label{class_player_a3e74802e5bf9b62f5a0908637ace1913}} 
+\index{Player@{Player}!pad\+\_\+added\+\_\+handler@{pad\+\_\+added\+\_\+handler}}
+\index{pad\+\_\+added\+\_\+handler@{pad\+\_\+added\+\_\+handler}!Player@{Player}}
+\subsubsection{\texorpdfstring{pad\+\_\+added\+\_\+handler()}{pad\_added\_handler()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily static void Player\+::pad\+\_\+added\+\_\+handler (\begin{DoxyParamCaption}\item[{Gst\+Element $\ast$}]{src,  }\item[{Gst\+Pad $\ast$}]{new\+\_\+pad,  }\item[{\hyperlink{class_player}{Player} $\ast$}]{player }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_player_a43527d455f9de17468deb13fef887854}\label{class_player_a43527d455f9de17468deb13fef887854}} 
+\index{Player@{Player}!pad\+\_\+added\+\_\+handler@{pad\+\_\+added\+\_\+handler}}
+\index{pad\+\_\+added\+\_\+handler@{pad\+\_\+added\+\_\+handler}!Player@{Player}}
+\subsubsection{\texorpdfstring{pad\+\_\+added\+\_\+handler()}{pad\_added\_handler()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Player\+::pad\+\_\+added\+\_\+handler (\begin{DoxyParamCaption}\item[{Gst\+Element $\ast$}]{src,  }\item[{Gst\+Pad $\ast$}]{new\+\_\+pad,  }\item[{\hyperlink{class_player}{Player} $\ast$}]{player }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_player_a75c7257813c5f96bb2d8585dfc0c3025}\label{class_player_a75c7257813c5f96bb2d8585dfc0c3025}} 
+\index{Player@{Player}!play\+Stream@{play\+Stream}}
+\index{play\+Stream@{play\+Stream}!Player@{Player}}
+\subsubsection{\texorpdfstring{play\+Stream()}{playStream()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Player\+::play\+Stream (\begin{DoxyParamCaption}\item[{string}]{uri }\end{DoxyParamCaption})}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_player_a75c7257813c5f96bb2d8585dfc0c3025_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_player_a082180138fe92098aa9a1f51fd9ad40d}\label{class_player_a082180138fe92098aa9a1f51fd9ad40d}} 
+\index{Player@{Player}!play\+Stream@{play\+Stream}}
+\index{play\+Stream@{play\+Stream}!Player@{Player}}
+\subsubsection{\texorpdfstring{play\+Stream()}{playStream()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Player\+::play\+Stream (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_player_aa8396672dd38d93e1000b7b0f55e9c24}\label{class_player_aa8396672dd38d93e1000b7b0f55e9c24}} 
+\index{Player@{Player}!stop\+Stream@{stop\+Stream}}
+\index{stop\+Stream@{stop\+Stream}!Player@{Player}}
+\subsubsection{\texorpdfstring{stop\+Stream()}{stopStream()}}
+{\footnotesize\ttfamily void Player\+::stop\+Stream (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_player_a3e6f827b42b56e7685a66e739d643ecc}\label{class_player_a3e6f827b42b56e7685a66e739d643ecc}} 
+\index{Player@{Player}!video\+Widget\+Draw\+\_\+cb@{video\+Widget\+Draw\+\_\+cb}}
+\index{video\+Widget\+Draw\+\_\+cb@{video\+Widget\+Draw\+\_\+cb}!Player@{Player}}
+\subsubsection{\texorpdfstring{video\+Widget\+Draw\+\_\+cb()}{videoWidgetDraw\_cb()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily static gboolean Player\+::video\+Widget\+Draw\+\_\+cb (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{cairo\+\_\+t $\ast$}]{cr,  }\item[{gpointer}]{user\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_player_a31a79db48e8ebebddacd1bd76bf16f3d}\label{class_player_a31a79db48e8ebebddacd1bd76bf16f3d}} 
+\index{Player@{Player}!video\+Widget\+Draw\+\_\+cb@{video\+Widget\+Draw\+\_\+cb}}
+\index{video\+Widget\+Draw\+\_\+cb@{video\+Widget\+Draw\+\_\+cb}!Player@{Player}}
+\subsubsection{\texorpdfstring{video\+Widget\+Draw\+\_\+cb()}{videoWidgetDraw\_cb()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily gboolean Player\+::video\+Widget\+Draw\+\_\+cb (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{cairo\+\_\+t $\ast$}]{cr,  }\item[{gpointer}]{user\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_player_a6a18c90131b03493e506d50d16925436}\label{class_player_a6a18c90131b03493e506d50d16925436}} 
+\index{Player@{Player}!video\+Widget\+Realize\+\_\+cb@{video\+Widget\+Realize\+\_\+cb}}
+\index{video\+Widget\+Realize\+\_\+cb@{video\+Widget\+Realize\+\_\+cb}!Player@{Player}}
+\subsubsection{\texorpdfstring{video\+Widget\+Realize\+\_\+cb()}{videoWidgetRealize\_cb()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily static void Player\+::video\+Widget\+Realize\+\_\+cb (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{\hyperlink{class_player}{Player} $\ast$}]{player }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_player_aeb024ba54089ecaf90753a6f6b8d07bc}\label{class_player_aeb024ba54089ecaf90753a6f6b8d07bc}} 
+\index{Player@{Player}!video\+Widget\+Realize\+\_\+cb@{video\+Widget\+Realize\+\_\+cb}}
+\index{video\+Widget\+Realize\+\_\+cb@{video\+Widget\+Realize\+\_\+cb}!Player@{Player}}
+\subsubsection{\texorpdfstring{video\+Widget\+Realize\+\_\+cb()}{videoWidgetRealize\_cb()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Player\+::video\+Widget\+Realize\+\_\+cb (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{\hyperlink{class_player}{Player} $\ast$}]{player }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+\subsection{Данные класса}
+\mbox{\Hypertarget{class_player_a746993d3cf67692b460334b0e0ede459}\label{class_player_a746993d3cf67692b460334b0e0ede459}} 
+\index{Player@{Player}!bus@{bus}}
+\index{bus@{bus}!Player@{Player}}
+\subsubsection{\texorpdfstring{bus}{bus}}
+{\footnotesize\ttfamily Gst\+Bus $\ast$ Player\+::bus\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_player_af5647b79bedfd422ca8758c90c6bbc45}\label{class_player_af5647b79bedfd422ca8758c90c6bbc45}} 
+\index{Player@{Player}!cam\+Name@{cam\+Name}}
+\index{cam\+Name@{cam\+Name}!Player@{Player}}
+\subsubsection{\texorpdfstring{cam\+Name}{camName}}
+{\footnotesize\ttfamily string Player\+::cam\+Name\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_player_a53cd9b524dac60ecacd99f0812c71332}\label{class_player_a53cd9b524dac60ecacd99f0812c71332}} 
+\index{Player@{Player}!config@{config}}
+\index{config@{config}!Player@{Player}}
+\subsubsection{\texorpdfstring{config}{config}}
+{\footnotesize\ttfamily \hyperlink{class_config}{Config}$\ast$ Player\+::config}
+
+\mbox{\Hypertarget{class_player_a79ccb8bdee134c230a8c242d5123356d}\label{class_player_a79ccb8bdee134c230a8c242d5123356d}} 
+\index{Player@{Player}!dec@{dec}}
+\index{dec@{dec}!Player@{Player}}
+\subsubsection{\texorpdfstring{dec}{dec}}
+{\footnotesize\ttfamily Gst\+Element $\ast$ Player\+::dec}
+
+\mbox{\Hypertarget{class_player_a612fee9ac56aee91fd64e770f946e2e4}\label{class_player_a612fee9ac56aee91fd64e770f946e2e4}} 
+\index{Player@{Player}!depay@{depay}}
+\index{depay@{depay}!Player@{Player}}
+\subsubsection{\texorpdfstring{depay}{depay}}
+{\footnotesize\ttfamily Gst\+Element $\ast$ Player\+::depay}
+
+\mbox{\Hypertarget{class_player_a9aafd7f61221255c78b81c8715148676}\label{class_player_a9aafd7f61221255c78b81c8715148676}} 
+\index{Player@{Player}!parse@{parse}}
+\index{parse@{parse}!Player@{Player}}
+\subsubsection{\texorpdfstring{parse}{parse}}
+{\footnotesize\ttfamily Gst\+Element $\ast$ Player\+::parse}
+
+\mbox{\Hypertarget{class_player_aa8cd0e05525fd7cf5ee60b40b1388254}\label{class_player_aa8cd0e05525fd7cf5ee60b40b1388254}} 
+\index{Player@{Player}!pipeline@{pipeline}}
+\index{pipeline@{pipeline}!Player@{Player}}
+\subsubsection{\texorpdfstring{pipeline}{pipeline}}
+{\footnotesize\ttfamily Gst\+Element $\ast$ Player\+::pipeline}
+
+\mbox{\Hypertarget{class_player_a4335f10f38749272bbdee425e8e30388}\label{class_player_a4335f10f38749272bbdee425e8e30388}} 
+\index{Player@{Player}!platform@{platform}}
+\index{platform@{platform}!Player@{Player}}
+\subsubsection{\texorpdfstring{platform}{platform}}
+{\footnotesize\ttfamily string Player\+::platform\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_player_a93eaebe50e6ab8a19c35138b4c60f60c}\label{class_player_a93eaebe50e6ab8a19c35138b4c60f60c}} 
+\index{Player@{Player}!playing@{playing}}
+\index{playing@{playing}!Player@{Player}}
+\subsubsection{\texorpdfstring{playing}{playing}}
+{\footnotesize\ttfamily bool Player\+::playing\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_player_a0cb0a126d4348e773fd2627c2a25d9e1}\label{class_player_a0cb0a126d4348e773fd2627c2a25d9e1}} 
+\index{Player@{Player}!scale@{scale}}
+\index{scale@{scale}!Player@{Player}}
+\subsubsection{\texorpdfstring{scale}{scale}}
+{\footnotesize\ttfamily Gst\+Element $\ast$ Player\+::scale}
+
+\mbox{\Hypertarget{class_player_aabd00fa1e998c6e4db1a83e6fee285ba}\label{class_player_aabd00fa1e998c6e4db1a83e6fee285ba}} 
+\index{Player@{Player}!sink@{sink}}
+\index{sink@{sink}!Player@{Player}}
+\subsubsection{\texorpdfstring{sink}{sink}}
+{\footnotesize\ttfamily Gst\+Element $\ast$ Player\+::sink}
+
+\mbox{\Hypertarget{class_player_ac3fb217cb2001134249fafcba07fe7e7}\label{class_player_ac3fb217cb2001134249fafcba07fe7e7}} 
+\index{Player@{Player}!src@{src}}
+\index{src@{src}!Player@{Player}}
+\subsubsection{\texorpdfstring{src}{src}}
+{\footnotesize\ttfamily Gst\+Element $\ast$ Player\+::src}
+
+\mbox{\Hypertarget{class_player_a02eaaec54dce5238f76ef6b9f458c86d}\label{class_player_a02eaaec54dce5238f76ef6b9f458c86d}} 
+\index{Player@{Player}!uri@{uri}}
+\index{uri@{uri}!Player@{Player}}
+\subsubsection{\texorpdfstring{uri}{uri}}
+{\footnotesize\ttfamily string Player\+::uri\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_player_ae5ed3420e43869788a3e9bf4eb29e529}\label{class_player_ae5ed3420e43869788a3e9bf4eb29e529}} 
+\index{Player@{Player}!video\+Window@{video\+Window}}
+\index{video\+Window@{video\+Window}!Player@{Player}}
+\subsubsection{\texorpdfstring{video\+Window}{videoWindow}}
+{\footnotesize\ttfamily Gtk\+Widget $\ast$ Player\+::video\+Window\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_player_a6375b319e5ba03a025aea4a91f36f7eb}\label{class_player_a6375b319e5ba03a025aea4a91f36f7eb}} 
+\index{Player@{Player}!video\+Window\+Handle@{video\+Window\+Handle}}
+\index{video\+Window\+Handle@{video\+Window\+Handle}!Player@{Player}}
+\subsubsection{\texorpdfstring{video\+Window\+Handle}{videoWindowHandle}}
+{\footnotesize\ttfamily guintptr Player\+::video\+Window\+Handle = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+/home/jetson/controlroom/\+Studio/\+Operator/\+Grid/include/\hyperlink{_operator_2_grid_2include_2player_8h}{player.\+h}\item 
+/home/jetson/controlroom/\+Studio/\+Operator/\+Grid/src/\hyperlink{_operator_2_grid_2src_2player_8cpp}{player.\+cpp}\end{DoxyCompactItemize}

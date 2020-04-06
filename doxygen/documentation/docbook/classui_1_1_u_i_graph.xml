@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="classui_1_1_u_i_graph">
+<title>ui::UIGraph class Reference</title>
+<para>Inheritance diagram for ui::UIGraph</para>
+<para>
+    <figure>
+        <title>Inheritance graph</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="classui_1_1_u_i_graph__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+<para>Collaboration diagram for ui::UIGraph</para>
+<para>
+    <figure>
+        <title>Collaboration graph</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="classui_1_1_u_i_graph__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+        <section>
+            <title></title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="classui_1_1_u_i_graph_1a9be722ae2ab9d25453b743bc1fdad7e3">__init__</link> (
+self )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+            <section xml:id="classui_1_1_u_i_graph_1a9be722ae2ab9d25453b743bc1fdad7e3">
+                <title>def ui.UIGraph.__init__ (self)</title> <emphasis></emphasis>
+                
+            </section>
+</section>

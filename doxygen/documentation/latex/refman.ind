@@ -1,0 +1,802 @@
+\begin{theindex}
+
+  \item {/home/jetson/controlroom/\+Studio/\+Network/src/ui.\+py}, 
+		\hyperpage{83}
+  \item {/home/jetson/controlroom/\+Studio/\+Operator/\+Grid/include/config.\+h}, 
+		\hyperpage{84}
+  \item {/home/jetson/controlroom/\+Studio/\+Operator/\+Grid/include/player.\+h}, 
+		\hyperpage{86}
+  \item {/home/jetson/controlroom/\+Studio/\+Operator/\+Grid/include/room.\+h}, 
+		\hyperpage{88}
+  \item {/home/jetson/controlroom/\+Studio/\+Operator/\+Grid/include/ui.\+h}, 
+		\hyperpage{91}
+  \item {/home/jetson/controlroom/\+Studio/\+Operator/\+Grid/src/config.\+cpp}, 
+		\hyperpage{93}
+  \item {/home/jetson/controlroom/\+Studio/\+Operator/\+Grid/src/from-\/gsuite.\+py}, 
+		\hyperpage{94}
+  \item {/home/jetson/controlroom/\+Studio/\+Operator/\+Grid/src/main.\+cpp}, 
+		\hyperpage{95}
+  \item {/home/jetson/controlroom/\+Studio/\+Operator/\+Grid/src/player.\+cpp}, 
+		\hyperpage{97}
+  \item {/home/jetson/controlroom/\+Studio/\+Operator/\+Grid/src/ui.\+cpp}, 
+		\hyperpage{97}
+  \item {/home/jetson/controlroom/\+Studio/\+Recorder/include/config.\+h}, 
+		\hyperpage{85}
+  \item {/home/jetson/controlroom/\+Studio/\+Recorder/include/player.\+h}, 
+		\hyperpage{87}
+  \item {/home/jetson/controlroom/\+Studio/\+Recorder/include/recorder.\+h}, 
+		\hyperpage{98}
+  \item {/home/jetson/controlroom/\+Studio/\+Recorder/include/recording.\+h}, 
+		\hyperpage{99}
+  \item {/home/jetson/controlroom/\+Studio/\+Recorder/include/room.\+h}, 
+		\hyperpage{90}
+  \item {/home/jetson/controlroom/\+Studio/\+Recorder/include/ui.\+h}, 
+		\hyperpage{92}
+  \item {/home/jetson/controlroom/\+Studio/\+Recorder/src/config.\+cpp}, 
+		\hyperpage{93}
+  \item {/home/jetson/controlroom/\+Studio/\+Recorder/src/from-\/gsuite.\+py}, 
+		\hyperpage{94}
+  \item {/home/jetson/controlroom/\+Studio/\+Recorder/src/gpio.\+py}, 
+		\hyperpage{101}
+  \item {/home/jetson/controlroom/\+Studio/\+Recorder/src/main.\+cpp}, 
+		\hyperpage{96}
+  \item {/home/jetson/controlroom/\+Studio/\+Recorder/src/player.\+cpp}, 
+		\hyperpage{97}
+  \item {/home/jetson/controlroom/\+Studio/\+Recorder/src/recorder.\+cpp}, 
+		\hyperpage{101}
+  \item {/home/jetson/controlroom/\+Studio/\+Recorder/src/recording.\+cpp}, 
+		\hyperpage{102}
+  \item {/home/jetson/controlroom/\+Studio/\+Recorder/src/ui.\+cpp}, 
+		\hyperpage{98}
+  \item {/home/jetson/controlroom/\+Studio/\+Recorder/src/video-\/upload.\+py}, 
+		\hyperpage{102}
+  \item {\+\_\+\+\_\+init\+\_\+\+\_\+}
+    \subitem {ui\+::\+Camera}, \hyperpage{28}
+    \subitem {ui\+::\+Grapher}, \hyperpage{40}
+    \subitem {ui\+::\+Pinger}, \hyperpage{43}
+    \subitem {ui\+::\+U\+I\+Graph}, \hyperpage{80}
+    \subitem {ui\+::\+U\+I\+Menu}, \hyperpage{81}
+  \item {\+\_\+run\+Cmd}
+    \subitem {ui\+::\+Pinger}, \hyperpage{44}
+  \item {\IeC {\CYRR }\IeC {\cyre }\IeC {\cyrk }\IeC {\cyro }\IeC {\cyrr }\IeC {\cyrd }\IeC {\cyre }\IeC {\cyrr }}, 
+		\hyperpage{11}
+  \item {\IeC {\CYRS }\IeC {\cyre }\IeC {\cyrt }\IeC {\cyre }\IeC {\cyrv }\IeC {\cyro }\IeC {\cyrishrt } \IeC {\cyrm }\IeC {\cyro }\IeC {\cyrn }\IeC {\cyri }\IeC {\cyrt }\IeC {\cyro }\IeC {\cyrr }}, 
+		\hyperpage{13}
+  \item {\IeC {\CYRS }\IeC {\cyre }\IeC {\cyrt }\IeC {\cyrk }\IeC {\cyra } \IeC {\cyrv }\IeC {\cyri }\IeC {\cyrd }\IeC {\cyre }\IeC {\cyro }\IeC {\cyrp }\IeC {\cyro }\IeC {\cyrt }\IeC {\cyro }\IeC {\cyrk }\IeC {\cyro }\IeC {\cyrv }}, 
+		\hyperpage{12}
+  \item {$\sim$\+Player}
+    \subitem {Player}, \hyperpage{46, 47}
+  \item {$\sim$\+Recorder}
+    \subitem {Recorder}, \hyperpage{53}
+  \item {$\sim$\+Recording}
+    \subitem {Recording}, \hyperpage{57}
+  \item {$\sim$\+UI}
+    \subitem {UI}, \hyperpage{72}
+
+  \indexspace
+
+  \item {active\+Cam}
+    \subitem {ui\+::\+Grapher}, \hyperpage{41}
+  \item {adresses}
+    \subitem {ui}, \hyperpage{19}
+  \item {alpha}
+    \subitem {ui}, \hyperpage{20}
+  \item {app}
+    \subitem {ui}, \hyperpage{20}
+  \item {args}
+    \subitem {video-\/upload}, \hyperpage{24}
+  \item {audio}
+    \subitem {Room}, \hyperpage{68}
+  \item {Audio\+Source}, \hyperpage{27}
+    \subitem {name}, \hyperpage{27}
+    \subitem {uri}, \hyperpage{27}
+
+  \indexspace
+
+  \item {build\+Pipeline}
+    \subitem {Player}, \hyperpage{47}
+    \subitem {Recording}, \hyperpage{57}
+  \item {bus}
+    \subitem {Player}, \hyperpage{50}
+  \item {bus\+Sync\+Handler}
+    \subitem {Player}, \hyperpage{48}
+    \subitem {Recording}, \hyperpage{58}
+  \item {button}
+    \subitem {Camera}, \hyperpage{30}
+    \subitem {ui}, \hyperpage{20}
+    \subitem {ui\+::\+Camera}, \hyperpage{29}
+
+  \indexspace
+
+  \item {cam}
+    \subitem {U\+I\+::display\+\_\+player\+\_\+data}, \hyperpage{38}
+    \subitem {U\+I\+::switch\+\_\+state\+\_\+changed\+\_\+data}, 
+		\hyperpage{69}
+  \item {cam\+List}
+    \subitem {ui\+::\+Pinger}, \hyperpage{44}
+  \item {cam\+Name}
+    \subitem {Player}, \hyperpage{50}
+    \subitem {Recording}, \hyperpage{61}
+  \item {Camera}, \hyperpage{30}
+    \subitem {button}, \hyperpage{30}
+    \subitem {drawing\+Area}, \hyperpage{30}
+    \subitem {full\+Name}, \hyperpage{30}
+    \subitem {name}, \hyperpage{31}
+    \subitem {player}, \hyperpage{31}
+    \subitem {rec\+Image}, \hyperpage{31}
+    \subitem {record}, \hyperpage{31}
+    \subitem {uri}, \hyperpage{31}
+  \item {camera}
+    \subitem {ui}, \hyperpage{20}
+  \item {cameras}
+    \subitem {Room}, \hyperpage{68}
+  \item {cams}
+    \subitem {ui}, \hyperpage{20}
+  \item {change\+Cam}
+    \subitem {ui\+::\+Grapher}, \hyperpage{40}
+  \item {check\+If\+Rec\+Stopped}
+    \subitem {Recorder}, \hyperpage{54}
+  \item {clock}
+    \subitem {Recording}, \hyperpage{61}
+  \item {Config}, \hyperpage{31}
+    \subitem {Config}, \hyperpage{33}
+    \subitem {configuration}, \hyperpage{37}
+    \subitem {get}, \hyperpage{34}
+    \subitem {get\+Custom\+Rooms}, \hyperpage{34}
+    \subitem {get\+G\+Suite\+Rooms}, \hyperpage{34, 35}
+    \subitem {get\+Param}, \hyperpage{35}
+    \subitem {get\+Param\+Int}, \hyperpage{35}
+    \subitem {get\+Rooms}, \hyperpage{35, 36}
+    \subitem {make\+G\+Suite\+Request}, \hyperpage{36}
+    \subitem {operator=}, \hyperpage{36}
+    \subitem {read\+Rooms\+From\+File}, \hyperpage{36}
+    \subitem {rooms}, \hyperpage{37}
+    \subitem {set\+File}, \hyperpage{37}
+  \item {config}
+    \subitem {Player}, \hyperpage{50}
+    \subitem {Recorder}, \hyperpage{55}
+    \subitem {UI}, \hyperpage{77}
+  \item {configuration}
+    \subitem {Config}, \hyperpage{37}
+  \item {creds}
+    \subitem {video-\/upload}, \hyperpage{24}
+  \item {curve}
+    \subitem {ui\+::\+Grapher}, \hyperpage{41}
+
+  \indexspace
+
+  \item {D\+R\+I\+VE}
+    \subitem {video-\/upload}, \hyperpage{24}
+  \item {data}
+    \subitem {ui\+::\+Grapher}, \hyperpage{41}
+  \item {data\+\_\+probe}
+    \subitem {Recording}, \hyperpage{58}
+  \item {dec}
+    \subitem {Player}, \hyperpage{51}
+  \item {depay}
+    \subitem {Pad\+Data}, \hyperpage{42}
+    \subitem {Player}, \hyperpage{51}
+    \subitem {Recording}, \hyperpage{61}
+  \item {display0}
+    \subitem {ui}, \hyperpage{20}
+  \item {display1}
+    \subitem {ui}, \hyperpage{21}
+  \item {display\+Player}
+    \subitem {UI}, \hyperpage{72, 73}
+  \item {display\+Recording\+Status}
+    \subitem {UI}, \hyperpage{73}
+  \item {draw\+Me}
+    \subitem {ui\+::\+Camera}, \hyperpage{28}
+  \item {drawing\+Area}
+    \subitem {Camera}, \hyperpage{30}
+
+  \indexspace
+
+  \item {edit\+Button}
+    \subitem {UI}, \hyperpage{78}
+  \item {edit\+Button\+Clicked}
+    \subitem {UI}, \hyperpage{73}
+  \item {element\+Sink\+Linked}
+    \subitem {Recording}, \hyperpage{58}
+  \item {element\+Src\+Linked}
+    \subitem {Recording}, \hyperpage{58}
+  \item {enc}
+    \subitem {Recording}, \hyperpage{62}
+
+  \indexspace
+
+  \item {fakesink}
+    \subitem {Recording}, \hyperpage{62}
+  \item {file\+Name}
+    \subitem {Recording}, \hyperpage{62}
+  \item {filename}
+    \subitem {video-\/upload}, \hyperpage{24}
+  \item {find\+IP}
+    \subitem {UI}, \hyperpage{73}
+  \item {flow}
+    \subitem {video-\/upload}, \hyperpage{24}
+  \item {folder}
+    \subitem {Recording}, \hyperpage{62}
+  \item {font}
+    \subitem {ui}, \hyperpage{21}
+  \item {freeze\+\_\+check}
+    \subitem {Recording}, \hyperpage{58}
+  \item {freeze\+\_\+check\+\_\+id}
+    \subitem {Recording}, \hyperpage{62}
+  \item {from-\/gsuite}, \hyperpage{15}
+    \subitem {main}, \hyperpage{15}
+    \subitem {S\+C\+O\+P\+ES}, \hyperpage{15}
+  \item {full\+Name}
+    \subitem {Camera}, \hyperpage{30}
+
+  \indexspace
+
+  \item {G\+Drive\+Icon}
+    \subitem {U\+I\+::gdrive\+\_\+status\+\_\+data}, \hyperpage{39}
+  \item {get}
+    \subitem {Config}, \hyperpage{34}
+  \item {get\+Audio\+Source}
+    \subitem {Room}, \hyperpage{66}
+  \item {get\+Cameras}
+    \subitem {Room}, \hyperpage{66}
+  \item {get\+Custom\+Rooms}
+    \subitem {Config}, \hyperpage{34}
+  \item {get\+File\+Name}
+    \subitem {Recording}, \hyperpage{59}
+  \item {get\+G\+Suite\+Rooms}
+    \subitem {Config}, \hyperpage{34, 35}
+  \item {get\+Name}
+    \subitem {Room}, \hyperpage{66, 67}
+  \item {get\+Param}
+    \subitem {Config}, \hyperpage{35}
+  \item {get\+Param\+Int}
+    \subitem {Config}, \hyperpage{35}
+  \item {get\+Rooms}
+    \subitem {Config}, \hyperpage{35, 36}
+  \item {get\+Running\+Recordings}
+    \subitem {Recorder}, \hyperpage{54}
+  \item {get\+Status}
+    \subitem {Recording}, \hyperpage{59}
+  \item {gpio}, \hyperpage{16}
+    \subitem {key\+\_\+m}, \hyperpage{18}
+    \subitem {key\+\_\+r}, \hyperpage{18}
+    \subitem {key\+\_\+s}, \hyperpage{18}
+    \subitem {keypress}, \hyperpage{16}
+    \subitem {main}, \hyperpage{16}
+    \subitem {menu}, \hyperpage{18}
+    \subitem {menu\+\_\+cb}, \hyperpage{16}
+    \subitem {rec}, \hyperpage{18}
+    \subitem {rec\+\_\+cb}, \hyperpage{17}
+    \subitem {stop}, \hyperpage{18}
+    \subitem {stop\+\_\+cb}, \hyperpage{17}
+  \item {graph}
+    \subitem {ui}, \hyperpage{21}
+  \item {grapher}
+    \subitem {ui}, \hyperpage{21}
+    \subitem {ui\+::\+Camera}, \hyperpage{29}
+  \item {groups.\+dox}, \hyperpage{83}
+
+  \indexspace
+
+  \item {help}
+    \subitem {video-\/upload}, \hyperpage{24}
+
+  \indexspace
+
+  \item {i}
+    \subitem {ui}, \hyperpage{21}
+  \item {in\+\_\+idle\+\_\+probe}
+    \subitem {Recording}, \hyperpage{62}
+  \item {init\+Cam\+Widgets}
+    \subitem {UI}, \hyperpage{74}
+  \item {init\+Menu\+Widgets}
+    \subitem {UI}, \hyperpage{74}
+  \item {init\+Player\+Widgets}
+    \subitem {UI}, \hyperpage{75}
+  \item {init\+Room\+Tab}
+    \subitem {UI}, \hyperpage{75}
+  \item {init\+Styles}
+    \subitem {UI}, \hyperpage{75}
+  \item {ip}
+    \subitem {ui\+::\+Camera}, \hyperpage{29}
+  \item {is\+G\+Drive\+Upload\+Active}
+    \subitem {Recorder}, \hyperpage{54}
+  \item {is\+Playing}
+    \subitem {Player}, \hyperpage{48}
+
+  \indexspace
+
+  \item {key\+\_\+m}
+    \subitem {gpio}, \hyperpage{18}
+  \item {key\+\_\+r}
+    \subitem {gpio}, \hyperpage{18}
+  \item {key\+\_\+s}
+    \subitem {gpio}, \hyperpage{18}
+  \item {key\+Press}
+    \subitem {UI}, \hyperpage{76}
+  \item {keypress}
+    \subitem {gpio}, \hyperpage{16}
+
+  \indexspace
+
+  \item {label}
+    \subitem {ui}, \hyperpage{21}
+    \subitem {ui\+::\+Camera}, \hyperpage{29}
+  \item {label\+Style}
+    \subitem {ui}, \hyperpage{21}
+  \item {last\+Buffer\+Time}
+    \subitem {Recording}, \hyperpage{62}
+  \item {left\+Axis}
+    \subitem {ui}, \hyperpage{21}
+
+  \indexspace
+
+  \item {main}
+    \subitem {from-\/gsuite}, \hyperpage{15}
+    \subitem {gpio}, \hyperpage{16}
+    \subitem {Operator/\+Grid/src/main.\+cpp}, \hyperpage{95}
+    \subitem {Recorder/src/main.\+cpp}, \hyperpage{96}
+  \item {make\+G\+Suite\+Request}
+    \subitem {Config}, \hyperpage{36}
+  \item {menu}
+    \subitem {gpio}, \hyperpage{18}
+    \subitem {ui}, \hyperpage{22}
+  \item {menu\+\_\+cb}
+    \subitem {gpio}, \hyperpage{16}
+  \item {menu\+Builder}
+    \subitem {UI}, \hyperpage{78}
+  \item {menu\+Window}
+    \subitem {UI}, \hyperpage{78}
+  \item {metadata}
+    \subitem {video-\/upload}, \hyperpage{24}
+  \item {mux}
+    \subitem {Recording}, \hyperpage{62}
+
+  \indexspace
+
+  \item {name}
+    \subitem {Audio\+Source}, \hyperpage{27}
+    \subitem {Camera}, \hyperpage{31}
+    \subitem {Room}, \hyperpage{68}
+
+  \indexspace
+
+  \item {on\+\_\+show}
+    \subitem {UI}, \hyperpage{76}
+  \item {Operator/\+Grid/include/room.\+h}
+    \subitem {room\+\_\+t}, \hyperpage{90}
+  \item {Operator/\+Grid/src/main.\+cpp}
+    \subitem {main}, \hyperpage{95}
+  \item {operator=}
+    \subitem {Config}, \hyperpage{36}
+
+  \indexspace
+
+  \item {pad\+\_\+added\+\_\+handler}
+    \subitem {Player}, \hyperpage{48}
+    \subitem {Recording}, \hyperpage{59}
+  \item {Pad\+Data}, \hyperpage{42}
+    \subitem {depay}, \hyperpage{42}
+    \subitem {src}, \hyperpage{42}
+  \item {page\+Switched}
+    \subitem {UI}, \hyperpage{76}
+  \item {parse}
+    \subitem {Player}, \hyperpage{51}
+    \subitem {Recording}, \hyperpage{63}
+  \item {parser}
+    \subitem {video-\/upload}, \hyperpage{24}
+  \item {ping\+History}
+    \subitem {ui\+::\+Camera}, \hyperpage{29}
+  \item {ping\+Timer}
+    \subitem {ui}, \hyperpage{22}
+  \item {pinger}
+    \subitem {ui}, \hyperpage{22}
+  \item {pipeline}
+    \subitem {Player}, \hyperpage{51}
+    \subitem {Recording}, \hyperpage{63}
+  \item {platform}
+    \subitem {Player}, \hyperpage{51}
+  \item {play\+Stream}
+    \subitem {Player}, \hyperpage{49}
+  \item {Player}, \hyperpage{45}
+    \subitem {$\sim$\+Player}, \hyperpage{46, 47}
+    \subitem {build\+Pipeline}, \hyperpage{47}
+    \subitem {bus}, \hyperpage{50}
+    \subitem {bus\+Sync\+Handler}, \hyperpage{48}
+    \subitem {cam\+Name}, \hyperpage{50}
+    \subitem {config}, \hyperpage{50}
+    \subitem {dec}, \hyperpage{51}
+    \subitem {depay}, \hyperpage{51}
+    \subitem {is\+Playing}, \hyperpage{48}
+    \subitem {pad\+\_\+added\+\_\+handler}, \hyperpage{48}
+    \subitem {parse}, \hyperpage{51}
+    \subitem {pipeline}, \hyperpage{51}
+    \subitem {platform}, \hyperpage{51}
+    \subitem {play\+Stream}, \hyperpage{49}
+    \subitem {Player}, \hyperpage{46, 47}
+    \subitem {playing}, \hyperpage{51}
+    \subitem {scale}, \hyperpage{51}
+    \subitem {sink}, \hyperpage{51}
+    \subitem {src}, \hyperpage{52}
+    \subitem {stop\+Stream}, \hyperpage{49}
+    \subitem {uri}, \hyperpage{52}
+    \subitem {video\+Widget\+Draw\+\_\+cb}, \hyperpage{49, 50}
+    \subitem {video\+Widget\+Realize\+\_\+cb}, \hyperpage{50}
+    \subitem {video\+Window}, \hyperpage{52}
+    \subitem {video\+Window\+Handle}, \hyperpage{52}
+  \item {player}
+    \subitem {Camera}, \hyperpage{31}
+    \subitem {U\+I\+::display\+\_\+player\+\_\+data}, \hyperpage{38}
+    \subitem {UI}, \hyperpage{78}
+  \item {player\+Builder}
+    \subitem {UI}, \hyperpage{78}
+  \item {player\+Label}
+    \subitem {U\+I\+::display\+\_\+player\+\_\+data}, \hyperpage{38}
+    \subitem {UI}, \hyperpage{78}
+  \item {player\+Widget}
+    \subitem {UI}, \hyperpage{78}
+  \item {player\+Window}
+    \subitem {UI}, \hyperpage{79}
+  \item {players}
+    \subitem {UI}, \hyperpage{78}
+  \item {playing}
+    \subitem {Player}, \hyperpage{51}
+  \item {playing\+Cam\+Name}
+    \subitem {U\+I\+::display\+\_\+player\+\_\+data}, \hyperpage{39}
+    \subitem {UI}, \hyperpage{79}
+  \item {plot}
+    \subitem {ui}, \hyperpage{22}
+    \subitem {ui\+::\+Grapher}, \hyperpage{41}
+  \item {probe\+\_\+block\+\_\+stream}
+    \subitem {Recording}, \hyperpage{59}
+  \item {probe\+\_\+eos\+\_\+in\+\_\+stream}
+    \subitem {Recording}, \hyperpage{60}
+  \item {probe\+\_\+idle\+\_\+relink}
+    \subitem {Recording}, \hyperpage{60}
+
+  \indexspace
+
+  \item {read\+Rooms\+From\+File}
+    \subitem {Config}, \hyperpage{36}
+  \item {rec}
+    \subitem {gpio}, \hyperpage{18}
+  \item {rec\+\_\+cb}
+    \subitem {gpio}, \hyperpage{17}
+  \item {rec\+Image}
+    \subitem {Camera}, \hyperpage{31}
+  \item {record}
+    \subitem {Camera}, \hyperpage{31}
+  \item {Recorder}, \hyperpage{52}
+    \subitem {$\sim$\+Recorder}, \hyperpage{53}
+    \subitem {check\+If\+Rec\+Stopped}, \hyperpage{54}
+    \subitem {config}, \hyperpage{55}
+    \subitem {get\+Running\+Recordings}, \hyperpage{54}
+    \subitem {is\+G\+Drive\+Upload\+Active}, \hyperpage{54}
+    \subitem {Recorder}, \hyperpage{53}
+    \subitem {running\+G\+Drive\+Uploads}, \hyperpage{55}
+    \subitem {running\+Recordings}, \hyperpage{55}
+    \subitem {start\+Recording}, \hyperpage{54}
+    \subitem {stop\+Recording}, \hyperpage{54}
+    \subitem {upload\+Video}, \hyperpage{55}
+  \item {recorder}
+    \subitem {U\+I\+::gdrive\+\_\+status\+\_\+data}, \hyperpage{40}
+    \subitem {U\+I\+::switch\+\_\+state\+\_\+changed\+\_\+data}, 
+		\hyperpage{69}
+    \subitem {UI}, \hyperpage{79}
+  \item {Recorder/include/room.\+h}
+    \subitem {room\+\_\+t}, \hyperpage{91}
+  \item {Recorder/src/main.\+cpp}
+    \subitem {main}, \hyperpage{96}
+  \item {Recording}, \hyperpage{56}
+    \subitem {$\sim$\+Recording}, \hyperpage{57}
+    \subitem {build\+Pipeline}, \hyperpage{57}
+    \subitem {bus\+Sync\+Handler}, \hyperpage{58}
+    \subitem {cam\+Name}, \hyperpage{61}
+    \subitem {clock}, \hyperpage{61}
+    \subitem {data\+\_\+probe}, \hyperpage{58}
+    \subitem {depay}, \hyperpage{61}
+    \subitem {element\+Sink\+Linked}, \hyperpage{58}
+    \subitem {element\+Src\+Linked}, \hyperpage{58}
+    \subitem {enc}, \hyperpage{62}
+    \subitem {fakesink}, \hyperpage{62}
+    \subitem {file\+Name}, \hyperpage{62}
+    \subitem {folder}, \hyperpage{62}
+    \subitem {freeze\+\_\+check}, \hyperpage{58}
+    \subitem {freeze\+\_\+check\+\_\+id}, \hyperpage{62}
+    \subitem {get\+File\+Name}, \hyperpage{59}
+    \subitem {get\+Status}, \hyperpage{59}
+    \subitem {in\+\_\+idle\+\_\+probe}, \hyperpage{62}
+    \subitem {last\+Buffer\+Time}, \hyperpage{62}
+    \subitem {mux}, \hyperpage{62}
+    \subitem {pad\+\_\+added\+\_\+handler}, \hyperpage{59}
+    \subitem {parse}, \hyperpage{63}
+    \subitem {pipeline}, \hyperpage{63}
+    \subitem {probe\+\_\+block\+\_\+stream}, \hyperpage{59}
+    \subitem {probe\+\_\+eos\+\_\+in\+\_\+stream}, \hyperpage{60}
+    \subitem {probe\+\_\+idle\+\_\+relink}, \hyperpage{60}
+    \subitem {Recording}, \hyperpage{57}
+    \subitem {relink\+Elements}, \hyperpage{60}
+    \subitem {sink}, \hyperpage{63}
+    \subitem {src}, \hyperpage{63}
+    \subitem {start}, \hyperpage{61}
+    \subitem {status}, \hyperpage{63}
+    \subitem {stop}, \hyperpage{61}
+    \subitem {stream\+Linked}, \hyperpage{63}
+    \subitem {streamcapsfilter}, \hyperpage{63}
+    \subitem {testcapsfilter}, \hyperpage{63}
+    \subitem {testsrc}, \hyperpage{64}
+    \subitem {timeout}, \hyperpage{64}
+    \subitem {uri}, \hyperpage{64}
+    \subitem {video\+Time\+Limit}, \hyperpage{64}
+  \item {recording.\+h}
+    \subitem {status\+\_\+t}, \hyperpage{100}
+  \item {relink\+Elements}
+    \subitem {Recording}, \hyperpage{60}
+  \item {res}
+    \subitem {video-\/upload}, \hyperpage{25}
+  \item {right\+Axis}
+    \subitem {ui}, \hyperpage{22}
+  \item {Room}, \hyperpage{64}
+    \subitem {audio}, \hyperpage{68}
+    \subitem {cameras}, \hyperpage{68}
+    \subitem {get\+Audio\+Source}, \hyperpage{66}
+    \subitem {get\+Cameras}, \hyperpage{66}
+    \subitem {get\+Name}, \hyperpage{66, 67}
+    \subitem {name}, \hyperpage{68}
+    \subitem {Room}, \hyperpage{65, 66}
+    \subitem {set\+Audio\+Source}, \hyperpage{67}
+    \subitem {set\+Cameras}, \hyperpage{67}
+    \subitem {set\+Name}, \hyperpage{67}
+    \subitem {type}, \hyperpage{68}
+  \item {room\+\_\+t}
+    \subitem {Operator/\+Grid/include/room.\+h}, \hyperpage{90}
+    \subitem {Recorder/include/room.\+h}, \hyperpage{91}
+  \item {rooms}
+    \subitem {Config}, \hyperpage{37}
+    \subitem {UI}, \hyperpage{79}
+  \item {run}
+    \subitem {ui\+::\+Pinger}, \hyperpage{44}
+  \item {run\+Ping}
+    \subitem {ui}, \hyperpage{19}
+  \item {running\+G\+Drive\+Uploads}
+    \subitem {Recorder}, \hyperpage{55}
+  \item {running\+Recordings}
+    \subitem {Recorder}, \hyperpage{55}
+
+  \indexspace
+
+  \item {S\+C\+O\+P\+ES}
+    \subitem {from-\/gsuite}, \hyperpage{15}
+    \subitem {video-\/upload}, \hyperpage{25}
+  \item {scale}
+    \subitem {Player}, \hyperpage{51}
+  \item {set\+Audio\+Source}
+    \subitem {Room}, \hyperpage{67}
+  \item {set\+Cameras}
+    \subitem {Room}, \hyperpage{67}
+  \item {set\+Data}
+    \subitem {ui\+::\+Grapher}, \hyperpage{41}
+  \item {set\+File}
+    \subitem {Config}, \hyperpage{37}
+  \item {set\+Name}
+    \subitem {Room}, \hyperpage{67}
+  \item {set\+Ping}
+    \subitem {ui\+::\+Camera}, \hyperpage{28}
+  \item {sink}
+    \subitem {Player}, \hyperpage{51}
+    \subitem {Recording}, \hyperpage{63}
+  \item {src}
+    \subitem {Pad\+Data}, \hyperpage{42}
+    \subitem {Player}, \hyperpage{52}
+    \subitem {Recording}, \hyperpage{63}
+  \item {start}
+    \subitem {Recording}, \hyperpage{61}
+  \item {start\+Recording}
+    \subitem {Recorder}, \hyperpage{54}
+  \item {status}
+    \subitem {Recording}, \hyperpage{63}
+  \item {status\+\_\+t}
+    \subitem {recording.\+h}, \hyperpage{100}
+  \item {stop}
+    \subitem {gpio}, \hyperpage{18}
+    \subitem {Recording}, \hyperpage{61}
+  \item {stop\+\_\+cb}
+    \subitem {gpio}, \hyperpage{17}
+  \item {stop\+Recording}
+    \subitem {Recorder}, \hyperpage{54}
+  \item {stop\+Stream}
+    \subitem {Player}, \hyperpage{49}
+  \item {store}
+    \subitem {video-\/upload}, \hyperpage{25}
+  \item {stream\+Linked}
+    \subitem {Recording}, \hyperpage{63}
+  \item {streamcapsfilter}
+    \subitem {Recording}, \hyperpage{63}
+  \item {stylesheet}
+    \subitem {ui}, \hyperpage{22}
+  \item {switch\+GridV}
+    \subitem {UI}, \hyperpage{79}
+  \item {switch\+State\+Changed}
+    \subitem {UI}, \hyperpage{76}
+
+  \indexspace
+
+  \item {testcapsfilter}
+    \subitem {Recording}, \hyperpage{63}
+  \item {testsrc}
+    \subitem {Recording}, \hyperpage{64}
+  \item {threadpool}
+    \subitem {ui}, \hyperpage{22}
+  \item {tick\+Font}
+    \subitem {ui}, \hyperpage{22}
+  \item {timeout}
+    \subitem {Recording}, \hyperpage{64}
+  \item {True}
+    \subitem {ui}, \hyperpage{23}
+  \item {type}
+    \subitem {Room}, \hyperpage{68}
+    \subitem {video-\/upload}, \hyperpage{25}
+
+  \indexspace
+
+  \item {U\+I\+::display\+\_\+player\+\_\+data}, \hyperpage{38}
+    \subitem {cam}, \hyperpage{38}
+    \subitem {player}, \hyperpage{38}
+    \subitem {player\+Label}, \hyperpage{38}
+    \subitem {playing\+Cam\+Name}, \hyperpage{39}
+  \item {U\+I\+::gdrive\+\_\+status\+\_\+data}, \hyperpage{39}
+    \subitem {G\+Drive\+Icon}, \hyperpage{39}
+    \subitem {recorder}, \hyperpage{40}
+  \item {U\+I\+::switch\+\_\+state\+\_\+changed\+\_\+data}, 
+		\hyperpage{69}
+    \subitem {cam}, \hyperpage{69}
+    \subitem {recorder}, \hyperpage{69}
+  \item {UI}, \hyperpage{70}
+    \subitem {$\sim$\+UI}, \hyperpage{72}
+    \subitem {config}, \hyperpage{77}
+    \subitem {display\+Player}, \hyperpage{72, 73}
+    \subitem {display\+Recording\+Status}, \hyperpage{73}
+    \subitem {edit\+Button}, \hyperpage{78}
+    \subitem {edit\+Button\+Clicked}, \hyperpage{73}
+    \subitem {find\+IP}, \hyperpage{73}
+    \subitem {init\+Cam\+Widgets}, \hyperpage{74}
+    \subitem {init\+Menu\+Widgets}, \hyperpage{74}
+    \subitem {init\+Player\+Widgets}, \hyperpage{75}
+    \subitem {init\+Room\+Tab}, \hyperpage{75}
+    \subitem {init\+Styles}, \hyperpage{75}
+    \subitem {key\+Press}, \hyperpage{76}
+    \subitem {menu\+Builder}, \hyperpage{78}
+    \subitem {menu\+Window}, \hyperpage{78}
+    \subitem {on\+\_\+show}, \hyperpage{76}
+    \subitem {page\+Switched}, \hyperpage{76}
+    \subitem {player}, \hyperpage{78}
+    \subitem {player\+Builder}, \hyperpage{78}
+    \subitem {player\+Label}, \hyperpage{78}
+    \subitem {player\+Widget}, \hyperpage{78}
+    \subitem {player\+Window}, \hyperpage{79}
+    \subitem {players}, \hyperpage{78}
+    \subitem {playing\+Cam\+Name}, \hyperpage{79}
+    \subitem {recorder}, \hyperpage{79}
+    \subitem {rooms}, \hyperpage{79}
+    \subitem {switch\+GridV}, \hyperpage{79}
+    \subitem {switch\+State\+Changed}, \hyperpage{76}
+    \subitem {UI}, \hyperpage{71, 72}
+    \subitem {update\+G\+Drive\+Status}, \hyperpage{77}
+    \subitem {window\+Init}, \hyperpage{77}
+  \item {ui}, \hyperpage{18}
+    \subitem {adresses}, \hyperpage{19}
+    \subitem {alpha}, \hyperpage{20}
+    \subitem {app}, \hyperpage{20}
+    \subitem {button}, \hyperpage{20}
+    \subitem {camera}, \hyperpage{20}
+    \subitem {cams}, \hyperpage{20}
+    \subitem {display0}, \hyperpage{20}
+    \subitem {display1}, \hyperpage{21}
+    \subitem {font}, \hyperpage{21}
+    \subitem {graph}, \hyperpage{21}
+    \subitem {grapher}, \hyperpage{21}
+    \subitem {i}, \hyperpage{21}
+    \subitem {label}, \hyperpage{21}
+    \subitem {label\+Style}, \hyperpage{21}
+    \subitem {left\+Axis}, \hyperpage{21}
+    \subitem {menu}, \hyperpage{22}
+    \subitem {ping\+Timer}, \hyperpage{22}
+    \subitem {pinger}, \hyperpage{22}
+    \subitem {plot}, \hyperpage{22}
+    \subitem {right\+Axis}, \hyperpage{22}
+    \subitem {run\+Ping}, \hyperpage{19}
+    \subitem {stylesheet}, \hyperpage{22}
+    \subitem {threadpool}, \hyperpage{22}
+    \subitem {tick\+Font}, \hyperpage{22}
+    \subitem {True}, \hyperpage{23}
+    \subitem {units}, \hyperpage{23}
+    \subitem {widget}, \hyperpage{23}
+    \subitem {x}, \hyperpage{23}
+    \subitem {y}, \hyperpage{23}
+  \item {ui.\+Camera}, \hyperpage{28}
+  \item {ui.\+Grapher}, \hyperpage{40}
+  \item {ui.\+Pinger}, \hyperpage{42}
+  \item {ui.\+U\+I\+Graph}, \hyperpage{80}
+  \item {ui.\+U\+I\+Menu}, \hyperpage{81}
+  \item {ui\+::\+Camera}
+    \subitem {\+\_\+\+\_\+init\+\_\+\+\_\+}, \hyperpage{28}
+    \subitem {button}, \hyperpage{29}
+    \subitem {draw\+Me}, \hyperpage{28}
+    \subitem {grapher}, \hyperpage{29}
+    \subitem {ip}, \hyperpage{29}
+    \subitem {label}, \hyperpage{29}
+    \subitem {ping\+History}, \hyperpage{29}
+    \subitem {set\+Ping}, \hyperpage{28}
+  \item {ui\+::\+Grapher}
+    \subitem {\+\_\+\+\_\+init\+\_\+\+\_\+}, \hyperpage{40}
+    \subitem {active\+Cam}, \hyperpage{41}
+    \subitem {change\+Cam}, \hyperpage{40}
+    \subitem {curve}, \hyperpage{41}
+    \subitem {data}, \hyperpage{41}
+    \subitem {plot}, \hyperpage{41}
+    \subitem {set\+Data}, \hyperpage{41}
+  \item {ui\+::\+Pinger}
+    \subitem {\+\_\+\+\_\+init\+\_\+\+\_\+}, \hyperpage{43}
+    \subitem {\+\_\+run\+Cmd}, \hyperpage{44}
+    \subitem {cam\+List}, \hyperpage{44}
+    \subitem {run}, \hyperpage{44}
+  \item {ui\+::\+U\+I\+Graph}
+    \subitem {\+\_\+\+\_\+init\+\_\+\+\_\+}, \hyperpage{80}
+  \item {ui\+::\+U\+I\+Menu}
+    \subitem {\+\_\+\+\_\+init\+\_\+\+\_\+}, \hyperpage{81}
+  \item {units}
+    \subitem {ui}, \hyperpage{23}
+  \item {update\+G\+Drive\+Status}
+    \subitem {UI}, \hyperpage{77}
+  \item {upload\+Video}
+    \subitem {Recorder}, \hyperpage{55}
+  \item {uri}
+    \subitem {Audio\+Source}, \hyperpage{27}
+    \subitem {Camera}, \hyperpage{31}
+    \subitem {Player}, \hyperpage{52}
+    \subitem {Recording}, \hyperpage{64}
+
+  \indexspace
+
+  \item {video-\/upload}, \hyperpage{23}
+    \subitem {args}, \hyperpage{24}
+    \subitem {creds}, \hyperpage{24}
+    \subitem {D\+R\+I\+VE}, \hyperpage{24}
+    \subitem {filename}, \hyperpage{24}
+    \subitem {flow}, \hyperpage{24}
+    \subitem {help}, \hyperpage{24}
+    \subitem {metadata}, \hyperpage{24}
+    \subitem {parser}, \hyperpage{24}
+    \subitem {res}, \hyperpage{25}
+    \subitem {S\+C\+O\+P\+ES}, \hyperpage{25}
+    \subitem {store}, \hyperpage{25}
+    \subitem {type}, \hyperpage{25}
+  \item {video\+Time\+Limit}
+    \subitem {Recording}, \hyperpage{64}
+  \item {video\+Widget\+Draw\+\_\+cb}
+    \subitem {Player}, \hyperpage{49, 50}
+  \item {video\+Widget\+Realize\+\_\+cb}
+    \subitem {Player}, \hyperpage{50}
+  \item {video\+Window}
+    \subitem {Player}, \hyperpage{52}
+  \item {video\+Window\+Handle}
+    \subitem {Player}, \hyperpage{52}
+
+  \indexspace
+
+  \item {widget}
+    \subitem {ui}, \hyperpage{23}
+  \item {window\+Init}
+    \subitem {UI}, \hyperpage{77}
+
+  \indexspace
+
+  \item {x}
+    \subitem {ui}, \hyperpage{23}
+
+  \indexspace
+
+  \item {y}
+    \subitem {ui}, \hyperpage{23}
+
+\end{theindex}

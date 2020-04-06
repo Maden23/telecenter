@@ -1,0 +1,6 @@
+<map id="Recording::freeze_check" name="Recording::freeze_check">
+<area shape="rect" id="node2" href="$class_recording.html#a60c63e897855daf4532e7a03c8a37026" title="Recording::probe_block\l_stream" alt="" coords="220,5,379,47"/>
+<area shape="rect" id="node3" href="$class_recording.html#a235992b4e8c358b6a648d84ed1e69969" title="Recording::probe_eos\l_in_stream" alt="" coords="427,5,576,47"/>
+<area shape="rect" id="node4" href="$class_recording.html#a489e974a8481fdc9b6161c96f59ece8e" title="Recording::probe_idle\l_relink" alt="" coords="624,5,772,47"/>
+<area shape="rect" id="node5" href="$class_recording.html#a8cff139562008be79b2368c4a51d6ffe" title="Recording::relinkElements" alt="" coords="820,13,995,39"/>
+</map>

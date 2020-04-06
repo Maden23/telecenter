@@ -1,0 +1,14 @@
+<map id="UI::UI" name="UI::UI">
+<area shape="rect" id="node2" href="$class_config.html#a644ff01239e20fabb038a2b2eddf1a26" title="Config::getRooms" alt="" coords="119,5,247,32"/>
+<area shape="rect" id="node3" href="$class_u_i.html#ad6b4d1f070f96f4a8cd7919595b2f9a7" title="UI::windowInit" alt="" coords="129,56,236,83"/>
+<area shape="rect" id="node4" href="$class_config.html#ae20fcfa28d82f1d2d1a4387a00a9f8b2" title="Config::getParam" alt="" coords="487,132,611,159"/>
+<area shape="rect" id="node5" href="$class_u_i.html#ae9d1de9359a28d1ec13f2824ec72420c" title="UI::keyPress" alt="" coords="133,157,232,184"/>
+<area shape="rect" id="node6" href="$class_u_i.html#ac1d0ed7af2a3272527c544110fc37890" title="UI::initMenuWidgets" alt="" coords="112,208,253,235"/>
+<area shape="rect" id="node11" href="$class_u_i.html#aa7991c3483e84d5ed9f64eeb333c9e44" title="UI::findIP" alt="" coords="143,259,222,285"/>
+<area shape="rect" id="node12" href="$class_u_i.html#a2405c93cf8c14f22ebc20de45116e52b" title="UI::initStyles" alt="" coords="133,309,232,336"/>
+<area shape="rect" id="node13" href="$class_config.html#a37b55073aa9e1a0e5a06323df5686c13" title="Config::getParamInt" alt="" coords="113,360,252,387"/>
+<area shape="rect" id="node7" href="$class_u_i.html#ab66596071cbc18cb463b8a99266c7926" title="UI::initRoomTab" alt="" coords="311,157,429,184"/>
+<area shape="rect" id="node8" href="$class_u_i.html#abc8966cc08826d39716b86e0a160af24" title="UI::initCamWidgets" alt="" coords="301,208,439,235"/>
+<area shape="rect" id="node10" href="$class_u_i.html#a4d6fc1c395de1396c3b4c17f60ce53f9" title="UI::pageSwitched" alt="" coords="307,259,433,285"/>
+<area shape="rect" id="node9" href="$class_u_i.html#a48bcf14dfe5f38c4c531bf11f7e7217a" title="UI::displayPlayer" alt="" coords="487,208,610,235"/>
+</map>

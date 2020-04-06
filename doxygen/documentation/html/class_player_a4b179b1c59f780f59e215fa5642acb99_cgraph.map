@@ -1,0 +1,9 @@
+<map id="Player::Player" name="Player::Player">
+<area shape="rect" id="node2" href="$class_player.html#a31a79db48e8ebebddacd1bd76bf16f3d" title="Player::videoWidgetDraw_cb" alt="" coords="164,5,355,32"/>
+<area shape="rect" id="node3" href="$class_player.html#aeb024ba54089ecaf90753a6f6b8d07bc" title="Player::videoWidgetRealize_cb" alt="" coords="157,56,361,83"/>
+<area shape="rect" id="node4" href="$class_player.html#aca2616201a97a901612fd9df7a900ca1" title="Player::buildPipeline" alt="" coords="189,107,329,133"/>
+<area shape="rect" id="node5" href="$class_player.html#a43527d455f9de17468deb13fef887854" title="Player::pad_added_handler" alt="" coords="409,132,588,159"/>
+<area shape="rect" id="node6" href="$class_player.html#a987a5a6f6bf24f530536090e9a832ef6" title="Player::busSyncHandler" alt="" coords="178,208,341,235"/>
+<area shape="rect" id="node7" href="$class_player.html#a749d2c00e1fe0f5c2746f7505a58c062" title="Player::~Player" alt="" coords="203,259,315,285"/>
+<area shape="rect" id="node8" href="$class_config.html#ae20fcfa28d82f1d2d1a4387a00a9f8b2" title="Config::getParam" alt="" coords="197,309,321,336"/>
+</map>

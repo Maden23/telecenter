@@ -1,0 +1,426 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="class_config">
+<title>Config class Reference</title>
+<para>
+    <programlisting>#include <link linkend="_operator_2_grid_2include_2config_8h">&lt;config.h&gt;</link></programlisting>
+</para>
+<para>Inheritance diagram for Config</para>
+<para>
+    <figure>
+        <title>Inheritance graph</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="class_config__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+<para>Collaboration diagram for Config</para>
+<para>
+    <figure>
+        <title>Collaboration graph</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="class_config__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+        <section>
+            <title>Закрытые данные</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>map&lt; string, string &gt; configuration</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>vector&lt; Room * &gt; rooms</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title></title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>static <link linkend="class_config">Config</link> &amp; <link linkend="class_config_1a5154d96acc76c1fae8c564f3705fe197">get</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>static <link linkend="class_config">Config</link> &amp; <link linkend="class_config_1a5154d96acc76c1fae8c564f3705fe197">get</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title></title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>void <link linkend="class_config_1a06542bc14d3414c075a9cbb04f1e9a37">setFile</link> (
+string configPath)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>string <link linkend="class_config_1ae20fcfa28d82f1d2d1a4387a00a9f8b2">getParam</link> (
+string name)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>int <link linkend="class_config_1a37b55073aa9e1a0e5a06323df5686c13">getParamInt</link> (
+string name)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>vector&lt; <link linkend="class_room">Room</link> * &gt; * <link linkend="class_config_1a644ff01239e20fabb038a2b2eddf1a26">getRooms</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>void <link linkend="class_config_1a06542bc14d3414c075a9cbb04f1e9a37">setFile</link> (
+string configPath)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>string <link linkend="class_config_1ae20fcfa28d82f1d2d1a4387a00a9f8b2">getParam</link> (
+string name)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>int <link linkend="class_config_1a37b55073aa9e1a0e5a06323df5686c13">getParamInt</link> (
+string name)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>vector&lt; <link linkend="class_room">Room</link> * &gt; * <link linkend="class_config_1ab10c3b7d3a76fcfa411ecba1dddc9716">getRooms</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title></title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="class_config_1abd0c571c116924871e30444b192b792a">Config</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="class_config_1add59e40b81cf0ffb43571bc201781dc0">Config</link> (
+const <link linkend="class_config">Config</link> &amp; )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para><link linkend="class_config">Config</link> &amp; <link linkend="class_config_1a301e8f32b1fad83bcab780bfa3fec1e9">operator=</link> (
+const <link linkend="class_config">Config</link> &amp; )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>void <link linkend="class_config_1a8a710b2b2b1e6280195389e9f84d0fba">getGSuiteRooms</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>void <link linkend="class_config_1af15e32047889f0d0e304cf4f5f218711">getCustomRooms</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>string <link linkend="class_config_1a45dfcb0ab6def40b1ee15a0521a717ac">makeGSuiteRequest</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>vector&lt; <link linkend="class_room">Room</link> * &gt; <link linkend="class_config_1a585a61660c48877296ed9409c83b01c5">readRoomsFromFile</link> (
+string fileName)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="class_config_1abd0c571c116924871e30444b192b792a">Config</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="class_config_1add59e40b81cf0ffb43571bc201781dc0">Config</link> (
+const <link linkend="class_config">Config</link> &amp; )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para><link linkend="class_config">Config</link> &amp; <link linkend="class_config_1a301e8f32b1fad83bcab780bfa3fec1e9">operator=</link> (
+const <link linkend="class_config">Config</link> &amp; )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>void <link linkend="class_config_1a8a710b2b2b1e6280195389e9f84d0fba">getGSuiteRooms</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>void <link linkend="class_config_1af15e32047889f0d0e304cf4f5f218711">getCustomRooms</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>string <link linkend="class_config_1a45dfcb0ab6def40b1ee15a0521a717ac">makeGSuiteRequest</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>vector&lt; <link linkend="class_room">Room</link> * &gt; <link linkend="class_config_1a8da1c4e1553854e6f248867f168de9ad">readRoomsFromFile</link> (
+string fileName)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+    <simplesect>
+
+<para>Класс для хранения конфигурации </para>
+    </simplesect>
+        <simplesect>
+            <title>Подробное описание</title>
+
+<para>Данный класс выполнен по шаблону singleton. Читает конфигурацию из файла и хранит параметры в словаре (std::map). Вызывает from_gsuite.py для получения данных о камерах из GSutie. Читает файл gsuite_rooms.json и создает объекты <link linkend="class_room">Room</link> для каждой комнаты, которые затем хранит в массиве (std::vector)</para>
+
+<para><formalpara><title>Форматирование файла конфигурации </title></formalpara>
+</para>
+
+<para>Файл должен содержать параметры из таблицы ниже, отформатированные в виде #Комментарий Параметр = значение</para>
+
+<para><formalpara><title>Допустивые параметры </title></formalpara>
+</para>
+
+<para><table frame="all">
+    <title></title>
+    <tgroup cols="3" align="left" colsep="1" rowsep="1">
+    <tbody>
+<row>
+<entry>
+<para>Наименование </para>
+</entry><entry>
+<para>Значение </para>
+</entry><entry>
+<para>Описание  </para>
+</entry></row>
+<row>
+<entry>
+<para>screens </para>
+</entry><entry>
+<para>1 или 2 </para>
+</entry><entry>
+<para>Количество используемых экранов </para>
+</entry></row>
+<row>
+<entry>
+<para>saveToFolder </para>
+</entry><entry>
+<para>/путь </para>
+</entry><entry>
+<para>Путь к каталогу, в который будут сохраняться видеофайлы, начиная от корневого каталога системы (/) </para>
+</entry></row>
+<row>
+<entry>
+<para>windowWidth </para>
+</entry><entry>
+<para>Число (в пикселях) </para>
+</entry><entry>
+<para>Ширина и высота окон программы. Используется в случае, если параметр screens=1 </para>
+</entry></row>
+<row>
+<entry>
+<para>windowHeight </para>
+</entry><entry>
+<para>^ </para>
+</entry><entry>
+<para>^ </para>
+</entry></row>
+<row>
+<entry>
+<para>videoTimeLimit </para>
+</entry><entry>
+<para>Число(в минутах) </para>
+</entry><entry>
+<para>Ограничение на длительность видео в одном файле. </para>
+</entry></row>
+    </tbody>
+    </tgroup>
+</table>
+<formalpara><title>Использование класса: </title></formalpara>
+</para>
+
+<para><link linkend="class_config">Config</link> *config = &amp;<link linkend="class_config_1a5154d96acc76c1fae8c564f3705fe197">Config::get()</link>; config-&gt;setFile(&quot;recorder.conf&quot;); config-&gt;<link linkend="class_config_1a644ff01239e20fabb038a2b2eddf1a26">getRooms()</link> </para>
+                <para>Definition at line 28 of file config.h</para>
+                <para>The Documentation for this struct was generated from the following file: </para>
+                <para><itemizedlist><listitem><para>config.h</para></listitem></itemizedlist></para>
+        </simplesect>
+        <section>
+            <title>Данные класса</title>
+        </section>
+            <section xml:id="class_config_1a5154d96acc76c1fae8c564f3705fe197">
+                <title>static Config&amp; Config::get ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_config_1a5154d96acc76c1fae8c564f3705fe197">
+                <title>static Config&amp; Config::get ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_config_1a06542bc14d3414c075a9cbb04f1e9a37">
+                <title>void Config::setFile (string configPath)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_config_1ae20fcfa28d82f1d2d1a4387a00a9f8b2">
+                <title>string Config::getParam (string name)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_config_1a37b55073aa9e1a0e5a06323df5686c13">
+                <title>int Config::getParamInt (string name)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_config_1a644ff01239e20fabb038a2b2eddf1a26">
+                <title>vector&lt; Room * &gt; * Config::getRooms ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_config_1a06542bc14d3414c075a9cbb04f1e9a37">
+                <title>void Config::setFile (string configPath)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_config_1ae20fcfa28d82f1d2d1a4387a00a9f8b2">
+                <title>string Config::getParam (string name)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_config_1a37b55073aa9e1a0e5a06323df5686c13">
+                <title>int Config::getParamInt (string name)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_config_1ab10c3b7d3a76fcfa411ecba1dddc9716">
+                <title>vector&lt;Room*&gt;* Config::getRooms ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_config_1abd0c571c116924871e30444b192b792a">
+                <title>Config::Config ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_config_1add59e40b81cf0ffb43571bc201781dc0">
+                <title>Config::Config (const Config &amp;)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_config_1a301e8f32b1fad83bcab780bfa3fec1e9">
+                <title>Config&amp; Config::operator= (const Config &amp;)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_config_1a8a710b2b2b1e6280195389e9f84d0fba">
+                <title>void Config::getGSuiteRooms ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_config_1af15e32047889f0d0e304cf4f5f218711">
+                <title>void Config::getCustomRooms ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_config_1a45dfcb0ab6def40b1ee15a0521a717ac">
+                <title>string Config::makeGSuiteRequest ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_config_1a585a61660c48877296ed9409c83b01c5">
+                <title>vector&lt; Room * &gt; Config::readRoomsFromFile (string fileName)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_config_1abd0c571c116924871e30444b192b792a">
+                <title>Config::Config ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_config_1add59e40b81cf0ffb43571bc201781dc0">
+                <title>Config::Config (const Config &amp;)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_config_1a301e8f32b1fad83bcab780bfa3fec1e9">
+                <title>Config&amp; Config::operator= (const Config &amp;)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_config_1a8a710b2b2b1e6280195389e9f84d0fba">
+                <title>void Config::getGSuiteRooms ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_config_1af15e32047889f0d0e304cf4f5f218711">
+                <title>void Config::getCustomRooms ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_config_1a45dfcb0ab6def40b1ee15a0521a717ac">
+                <title>string Config::makeGSuiteRequest ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_config_1a8da1c4e1553854e6f248867f168de9ad">
+                <title>vector&lt;Room*&gt; Config::readRoomsFromFile (string fileName)</title> <emphasis></emphasis>
+                
+            </section>
+</section>

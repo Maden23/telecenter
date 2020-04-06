@@ -1,0 +1,104 @@
+\hypertarget{namespacevideo-upload}{}\section{Пространство имен video-\/upload}
+\label{namespacevideo-upload}\index{video-\/upload@{video-\/upload}}
+\subsection*{Переменные}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespacevideo-upload_adb444a75aaa0c0e590807701931bafef}{parser} = argparse.\+Argument\+Parser(\char`\"{}Videofile name and location\char`\"{})
+\item 
+\hyperlink{namespacevideo-upload_a7febd43c5f8604092229ae1ccf261f0c}{help}
+\item 
+\hyperlink{namespacevideo-upload_a0aea8bad307fcc1764683855862406c5}{type}
+\item 
+\hyperlink{namespacevideo-upload_a9e790ab261c9413ed47dafe46c022063}{args} = parser.\+parse\+\_\+args()
+\item 
+string \hyperlink{namespacevideo-upload_a76e331163a34b55da69ecdf6ca084eab}{S\+C\+O\+P\+ES} = \textquotesingle{}https\+://www.\+googleapis.\+com/auth/drive.\+file\textquotesingle{}
+\item 
+\hyperlink{namespacevideo-upload_a1bbb99b1568829c7cb6af40564c671d3}{store} = file.\+Storage(\textquotesingle{}storage.\+json\textquotesingle{})
+\item 
+\hyperlink{namespacevideo-upload_a5c691a1aa9c397a8485738b164fbf511}{creds} = store.\+get()
+\item 
+\hyperlink{namespacevideo-upload_a7f676962b30f842d93805a11467d4404}{flow} = client.\+flow\+\_\+from\+\_\+clientsecrets(\textquotesingle{}client\+\_\+secret.\+json\textquotesingle{}, scope = \hyperlink{namespacevideo-upload_a76e331163a34b55da69ecdf6ca084eab}{S\+C\+O\+P\+ES})
+\item 
+\hyperlink{namespacevideo-upload_a70c1c74c0d69dbc8748f55e9678bd7e8}{D\+R\+I\+VE} = build(\textquotesingle{}drive\textquotesingle{}, \textquotesingle{}v3\textquotesingle{}, http = creds.\+authorize(Http()))
+\item 
+\hyperlink{namespacevideo-upload_a8f0c224b0d6326d66b6a471fb3ae06b7}{filename} = args.\+location + args.\+filename
+\item 
+dictionary \hyperlink{namespacevideo-upload_a078e77756bf147602ea81c2485e0b3ca}{metadata} = \{\textquotesingle{}name\textquotesingle{}\+: args.\+filename\}
+\item 
+\hyperlink{namespacevideo-upload_a98d77aa7929949660affdd840263f994}{res} = D\+R\+I\+V\+E.\+files().create(body = \hyperlink{namespacevideo-upload_a078e77756bf147602ea81c2485e0b3ca}{metadata}, media\+\_\+body = \hyperlink{namespacevideo-upload_a8f0c224b0d6326d66b6a471fb3ae06b7}{filename}).execute()
+\end{DoxyCompactItemize}
+
+
+\subsection{Переменные}
+\mbox{\Hypertarget{namespacevideo-upload_a9e790ab261c9413ed47dafe46c022063}\label{namespacevideo-upload_a9e790ab261c9413ed47dafe46c022063}} 
+\index{video-\/upload@{video-\/upload}!args@{args}}
+\index{args@{args}!video-\/upload@{video-\/upload}}
+\subsubsection{\texorpdfstring{args}{args}}
+{\footnotesize\ttfamily video-\/upload.\+args = parser.\+parse\+\_\+args()}
+
+\mbox{\Hypertarget{namespacevideo-upload_a5c691a1aa9c397a8485738b164fbf511}\label{namespacevideo-upload_a5c691a1aa9c397a8485738b164fbf511}} 
+\index{video-\/upload@{video-\/upload}!creds@{creds}}
+\index{creds@{creds}!video-\/upload@{video-\/upload}}
+\subsubsection{\texorpdfstring{creds}{creds}}
+{\footnotesize\ttfamily video-\/upload.\+creds = store.\+get()}
+
+\mbox{\Hypertarget{namespacevideo-upload_a70c1c74c0d69dbc8748f55e9678bd7e8}\label{namespacevideo-upload_a70c1c74c0d69dbc8748f55e9678bd7e8}} 
+\index{video-\/upload@{video-\/upload}!D\+R\+I\+VE@{D\+R\+I\+VE}}
+\index{D\+R\+I\+VE@{D\+R\+I\+VE}!video-\/upload@{video-\/upload}}
+\subsubsection{\texorpdfstring{D\+R\+I\+VE}{DRIVE}}
+{\footnotesize\ttfamily video-\/upload.\+D\+R\+I\+VE = build(\textquotesingle{}drive\textquotesingle{}, \textquotesingle{}v3\textquotesingle{}, http = creds.\+authorize(Http()))}
+
+\mbox{\Hypertarget{namespacevideo-upload_a8f0c224b0d6326d66b6a471fb3ae06b7}\label{namespacevideo-upload_a8f0c224b0d6326d66b6a471fb3ae06b7}} 
+\index{video-\/upload@{video-\/upload}!filename@{filename}}
+\index{filename@{filename}!video-\/upload@{video-\/upload}}
+\subsubsection{\texorpdfstring{filename}{filename}}
+{\footnotesize\ttfamily video-\/upload.\+filename = args.\+location + args.\+filename}
+
+\mbox{\Hypertarget{namespacevideo-upload_a7f676962b30f842d93805a11467d4404}\label{namespacevideo-upload_a7f676962b30f842d93805a11467d4404}} 
+\index{video-\/upload@{video-\/upload}!flow@{flow}}
+\index{flow@{flow}!video-\/upload@{video-\/upload}}
+\subsubsection{\texorpdfstring{flow}{flow}}
+{\footnotesize\ttfamily video-\/upload.\+flow = client.\+flow\+\_\+from\+\_\+clientsecrets(\textquotesingle{}client\+\_\+secret.\+json\textquotesingle{}, scope = \hyperlink{namespacevideo-upload_a76e331163a34b55da69ecdf6ca084eab}{S\+C\+O\+P\+ES})}
+
+\mbox{\Hypertarget{namespacevideo-upload_a7febd43c5f8604092229ae1ccf261f0c}\label{namespacevideo-upload_a7febd43c5f8604092229ae1ccf261f0c}} 
+\index{video-\/upload@{video-\/upload}!help@{help}}
+\index{help@{help}!video-\/upload@{video-\/upload}}
+\subsubsection{\texorpdfstring{help}{help}}
+{\footnotesize\ttfamily video-\/upload.\+help}
+
+\mbox{\Hypertarget{namespacevideo-upload_a078e77756bf147602ea81c2485e0b3ca}\label{namespacevideo-upload_a078e77756bf147602ea81c2485e0b3ca}} 
+\index{video-\/upload@{video-\/upload}!metadata@{metadata}}
+\index{metadata@{metadata}!video-\/upload@{video-\/upload}}
+\subsubsection{\texorpdfstring{metadata}{metadata}}
+{\footnotesize\ttfamily dictionary video-\/upload.\+metadata = \{\textquotesingle{}name\textquotesingle{}\+: args.\+filename\}}
+
+\mbox{\Hypertarget{namespacevideo-upload_adb444a75aaa0c0e590807701931bafef}\label{namespacevideo-upload_adb444a75aaa0c0e590807701931bafef}} 
+\index{video-\/upload@{video-\/upload}!parser@{parser}}
+\index{parser@{parser}!video-\/upload@{video-\/upload}}
+\subsubsection{\texorpdfstring{parser}{parser}}
+{\footnotesize\ttfamily video-\/upload.\+parser = argparse.\+Argument\+Parser(\char`\"{}Videofile name and location\char`\"{})}
+
+\mbox{\Hypertarget{namespacevideo-upload_a98d77aa7929949660affdd840263f994}\label{namespacevideo-upload_a98d77aa7929949660affdd840263f994}} 
+\index{video-\/upload@{video-\/upload}!res@{res}}
+\index{res@{res}!video-\/upload@{video-\/upload}}
+\subsubsection{\texorpdfstring{res}{res}}
+{\footnotesize\ttfamily video-\/upload.\+res = D\+R\+I\+V\+E.\+files().create(body = \hyperlink{namespacevideo-upload_a078e77756bf147602ea81c2485e0b3ca}{metadata}, media\+\_\+body = \hyperlink{namespacevideo-upload_a8f0c224b0d6326d66b6a471fb3ae06b7}{filename}).execute()}
+
+\mbox{\Hypertarget{namespacevideo-upload_a76e331163a34b55da69ecdf6ca084eab}\label{namespacevideo-upload_a76e331163a34b55da69ecdf6ca084eab}} 
+\index{video-\/upload@{video-\/upload}!S\+C\+O\+P\+ES@{S\+C\+O\+P\+ES}}
+\index{S\+C\+O\+P\+ES@{S\+C\+O\+P\+ES}!video-\/upload@{video-\/upload}}
+\subsubsection{\texorpdfstring{S\+C\+O\+P\+ES}{SCOPES}}
+{\footnotesize\ttfamily string video-\/upload.\+S\+C\+O\+P\+ES = \textquotesingle{}https\+://www.\+googleapis.\+com/auth/drive.\+file\textquotesingle{}}
+
+\mbox{\Hypertarget{namespacevideo-upload_a1bbb99b1568829c7cb6af40564c671d3}\label{namespacevideo-upload_a1bbb99b1568829c7cb6af40564c671d3}} 
+\index{video-\/upload@{video-\/upload}!store@{store}}
+\index{store@{store}!video-\/upload@{video-\/upload}}
+\subsubsection{\texorpdfstring{store}{store}}
+{\footnotesize\ttfamily video-\/upload.\+store = file.\+Storage(\textquotesingle{}storage.\+json\textquotesingle{})}
+
+\mbox{\Hypertarget{namespacevideo-upload_a0aea8bad307fcc1764683855862406c5}\label{namespacevideo-upload_a0aea8bad307fcc1764683855862406c5}} 
+\index{video-\/upload@{video-\/upload}!type@{type}}
+\index{type@{type}!video-\/upload@{video-\/upload}}
+\subsubsection{\texorpdfstring{type}{type}}
+{\footnotesize\ttfamily video-\/upload.\+type}
+

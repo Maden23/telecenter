@@ -1,0 +1,268 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="class_room">
+<title>Room class Reference</title>
+<para>
+    <programlisting>#include <link linkend="_operator_2_grid_2include_2room_8h">&lt;room.h&gt;</link></programlisting>
+</para>
+<para>Inheritance diagram for Room</para>
+<para>
+    <figure>
+        <title>Inheritance graph</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="class_room__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+<para>Collaboration diagram for Room</para>
+<para>
+    <figure>
+        <title>Collaboration graph</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="class_room__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+        <section>
+            <title>Открытые атрибуты</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>room_t type</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title>Закрытые данные</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>string name</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>AudioSource audio</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>vector&lt; Camera &gt; cameras</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title></title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="class_room_1a545e0b1d59ba66d72691c0dec993d9f0">Room</link> (
+string name, vector&lt; <link linkend="struct_camera">Camera</link> &gt; cameras, <link linkend="struct_audio_source">AudioSource</link> audio)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="class_room_1ac6ef93a7d9c3e1d624e025058d5f16ff">Room</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>string <link linkend="class_room_1a5701522ecf180c978eaa454d79f3e305">getName</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>void <link linkend="class_room_1a3b4c4c8f33572ff196d75a187ed98021">setName</link> (
+string name)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>vector&lt; <link linkend="struct_camera">Camera</link> &gt; * <link linkend="class_room_1a4a67443ce377dda8f71d862428a31ef1">getCameras</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>void <link linkend="class_room_1ae105a370ebb1cdded2254d39c547a5fd">setCameras</link> (
+vector&lt; <link linkend="struct_camera">Camera</link> &gt; cams)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para><link linkend="struct_audio_source">AudioSource</link> <link linkend="class_room_1ad99b6c39b3322dc0f28ce31c35402bb9">getAudioSource</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>void <link linkend="class_room_1ae51a48335bf154e1194c1acc2fa16813">setAudioSource</link> (
+<link linkend="struct_audio_source">AudioSource</link> audio)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="class_room_1a545e0b1d59ba66d72691c0dec993d9f0">Room</link> (
+string name, vector&lt; <link linkend="struct_camera">Camera</link> &gt; cameras, <link linkend="struct_audio_source">AudioSource</link> audio)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="class_room_1ac6ef93a7d9c3e1d624e025058d5f16ff">Room</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>string <link linkend="class_room_1a5701522ecf180c978eaa454d79f3e305">getName</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>void <link linkend="class_room_1a3b4c4c8f33572ff196d75a187ed98021">setName</link> (
+string name)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>vector&lt; <link linkend="struct_camera">Camera</link> &gt; * <link linkend="class_room_1a4a67443ce377dda8f71d862428a31ef1">getCameras</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>void <link linkend="class_room_1ae105a370ebb1cdded2254d39c547a5fd">setCameras</link> (
+vector&lt; <link linkend="struct_camera">Camera</link> &gt; cams)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para><link linkend="struct_audio_source">AudioSource</link> <link linkend="class_room_1ad99b6c39b3322dc0f28ce31c35402bb9">getAudioSource</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>void <link linkend="class_room_1ae51a48335bf154e1194c1acc2fa16813">setAudioSource</link> (
+<link linkend="struct_audio_source">AudioSource</link> audio)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+    <simplesect>
+
+<para>The <link linkend="class_room">Room</link> class. </para>
+    </simplesect>
+        <section>
+            <title>Данные класса</title>
+        </section>
+        <section>
+            <title>Данные класса</title>
+        </section>
+            <section xml:id="class_room_1a545e0b1d59ba66d72691c0dec993d9f0">
+                <title>Room::Room (string name, vector&lt; Camera &gt; cameras, AudioSource audio)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_room_1ac6ef93a7d9c3e1d624e025058d5f16ff">
+                <title>Room::Room ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_room_1a5701522ecf180c978eaa454d79f3e305">
+                <title>string Room::getName ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_room_1a3b4c4c8f33572ff196d75a187ed98021">
+                <title>void Room::setName (string name)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_room_1a4a67443ce377dda8f71d862428a31ef1">
+                <title>vector&lt;Camera&gt;* Room::getCameras ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_room_1ae105a370ebb1cdded2254d39c547a5fd">
+                <title>void Room::setCameras (vector&lt; Camera &gt; cams)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_room_1ad99b6c39b3322dc0f28ce31c35402bb9">
+                <title>AudioSource Room::getAudioSource ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_room_1ae51a48335bf154e1194c1acc2fa16813">
+                <title>void Room::setAudioSource (AudioSource audio)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_room_1a545e0b1d59ba66d72691c0dec993d9f0">
+                <title>Room::Room (string name, vector&lt; Camera &gt; cameras, AudioSource audio)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_room_1ac6ef93a7d9c3e1d624e025058d5f16ff">
+                <title>Room::Room ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_room_1a5701522ecf180c978eaa454d79f3e305">
+                <title>string Room::getName ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_room_1a3b4c4c8f33572ff196d75a187ed98021">
+                <title>void Room::setName (string name)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_room_1a4a67443ce377dda8f71d862428a31ef1">
+                <title>vector&lt;Camera&gt;* Room::getCameras ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_room_1ae105a370ebb1cdded2254d39c547a5fd">
+                <title>void Room::setCameras (vector&lt; Camera &gt; cams)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_room_1ad99b6c39b3322dc0f28ce31c35402bb9">
+                <title>AudioSource Room::getAudioSource ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_room_1ae51a48335bf154e1194c1acc2fa16813">
+                <title>void Room::setAudioSource (AudioSource audio)</title> <emphasis></emphasis>
+                
+            </section>
+</section>

@@ -1,0 +1,5 @@
+<map id="RecorderConfig::RecorderConfig" name="RecorderConfig::RecorderConfig">
+<area shape="rect" id="node2" href="$class_recorder_config.html#a1a24b616ff9ca5beac0bb37210da9ef1" title="RecorderConfig::getCustom\lRooms" alt="" coords="228,5,413,47"/>
+<area shape="rect" id="node4" href="$class_recorder_config.html#ae74d1af712e9684786ed33f67a8eeda3" title="RecorderConfig::getGSuite\lRooms" alt="" coords="231,71,410,112"/>
+<area shape="rect" id="node3" href="$class_recorder_config.html#aa2d44f3749c087805183a62b013fa1ff" title="RecorderConfig::readRooms\lFromFile" alt="" coords="461,39,649,80"/>
+</map>

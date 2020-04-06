@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="namespacevideo-upload">
+<title>video-upload</title>
+        <section>
+            <title>Переменные</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespacevideo-upload_1adb444a75aaa0c0e590807701931bafef">parser</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespacevideo-upload_1a7febd43c5f8604092229ae1ccf261f0c">help</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespacevideo-upload_1a0aea8bad307fcc1764683855862406c5">type</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespacevideo-upload_1a9e790ab261c9413ed47dafe46c022063">args</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>string <link linkend="namespacevideo-upload_1a76e331163a34b55da69ecdf6ca084eab">SCOPES</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespacevideo-upload_1a1bbb99b1568829c7cb6af40564c671d3">store</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespacevideo-upload_1a5c691a1aa9c397a8485738b164fbf511">creds</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespacevideo-upload_1a7f676962b30f842d93805a11467d4404">flow</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespacevideo-upload_1a70c1c74c0d69dbc8748f55e9678bd7e8">DRIVE</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespacevideo-upload_1a8f0c224b0d6326d66b6a471fb3ae06b7">filename</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>dictionary <link linkend="namespacevideo-upload_1a078e77756bf147602ea81c2485e0b3ca">metadata</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="namespacevideo-upload_1a98d77aa7929949660affdd840263f994">res</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+</section>

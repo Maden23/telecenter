@@ -1,0 +1,114 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="classui_1_1_camera">
+<title>ui::Camera class Reference</title>
+<para>Inheritance diagram for ui::Camera</para>
+<para>
+    <figure>
+        <title>Inheritance graph</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="classui_1_1_camera__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+<para>Collaboration diagram for ui::Camera</para>
+<para>
+    <figure>
+        <title>Collaboration graph</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="classui_1_1_camera__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+        <section>
+            <title>Открытые атрибуты</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>ip</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>button</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>label</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>grapher</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>pingHistory</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title></title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="classui_1_1_camera_1a57b0a706f72ec8877414cf9f38d0200e">__init__</link> (
+self , <link linkend="classui_1_1_camera_1a3abc65d91421c37e93557714044bdf9a">ip</link> , <link linkend="classui_1_1_camera_1aeec48b1317d4cbb0a35d41b0b02ab838">button</link> , <link linkend="classui_1_1_camera_1aa3daa8e29e510ab75e6df4571469f9b1">label</link> , <link linkend="classui_1_1_camera_1a3c90ee3bc847caf6e232e0c9c144ff81">grapher</link> )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="classui_1_1_camera_1ab80e266281042190e7c8cd49fb04ec3c">setPing</link> (
+self , error , time )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="classui_1_1_camera_1a2eb0686a9ed44e4b3f464c333dafee8d">drawMe</link> (
+self )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <simplesect>
+            <title>Подробное описание</title>
+
+<para><literallayout>Containes all camera information and ui objects</literallayout> </para>
+                <para>Definition at line 92 of file ui.py</para>
+                <para>The Documentation for this struct was generated from the following file: </para>
+                <para><itemizedlist><listitem><para>ui.py</para></listitem></itemizedlist></para>
+        </simplesect>
+        <section>
+            <title>Данные класса</title>
+        </section>
+            <section xml:id="classui_1_1_camera_1a57b0a706f72ec8877414cf9f38d0200e">
+                <title>def ui.Camera.__init__ (self, ip, button, label, grapher)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="classui_1_1_camera_1ab80e266281042190e7c8cd49fb04ec3c">
+                <title>def ui.Camera.setPing (self, error, time)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="classui_1_1_camera_1a2eb0686a9ed44e4b3f464c333dafee8d">
+                <title>def ui.Camera.drawMe (self)</title> <emphasis></emphasis>
+                
+            </section>
+</section>

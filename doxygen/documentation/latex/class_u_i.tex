@@ -1,0 +1,439 @@
+\hypertarget{class_u_i}{}\section{Класс UI}
+\label{class_u_i}\index{UI@{UI}}
+
+
+The \hyperlink{class_u_i}{UI} class.  
+
+
+
+
+{\ttfamily \#include $<$ui.\+h$>$}
+
+
+
+Граф связей класса UI\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=240pt]{class_u_i__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Классы}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_u_i_1_1display__player__data}{display\+\_\+player\+\_\+data}
+\item 
+struct \hyperlink{struct_u_i_1_1gdrive__status__data}{gdrive\+\_\+status\+\_\+data}
+\item 
+struct \hyperlink{struct_u_i_1_1switch__state__changed__data}{switch\+\_\+state\+\_\+changed\+\_\+data}
+\end{DoxyCompactItemize}
+\subsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_u_i_a2b49119b809785f66dd97ce769ab1753}{UI} (\hyperlink{class_config}{Config} $\ast$\hyperlink{class_u_i_a6966022e569960221b61ea4f0111a484}{config})
+\item 
+\hyperlink{class_u_i_a1b23d0c64c7cbb3d143d90ec532a7ccd}{$\sim$\+UI} ()
+\item 
+\hyperlink{class_u_i_a2b49119b809785f66dd97ce769ab1753}{UI} (\hyperlink{class_config}{Config} $\ast$\hyperlink{class_u_i_a6966022e569960221b61ea4f0111a484}{config})
+\item 
+\hyperlink{class_u_i_a1b23d0c64c7cbb3d143d90ec532a7ccd}{$\sim$\+UI} ()
+\item 
+void \hyperlink{class_u_i_ad860928c87b2a7f4e18b3f6e15774dd3}{display\+Recording\+Status} (string cam\+\_\+id, bool status)
+\end{DoxyCompactItemize}
+\subsection*{Открытые атрибуты}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_config}{Config} $\ast$ \hyperlink{class_u_i_a6966022e569960221b61ea4f0111a484}{config}
+\item 
+string \hyperlink{class_u_i_a519609c35edd6f678d5d78fe88fac888}{playing\+Cam\+Name} = \char`\"{}\char`\"{}
+\item 
+\hyperlink{class_recorder}{Recorder} $\ast$ \hyperlink{class_u_i_aa857564b96618cd520b18b9c0ef95f00}{recorder}
+\item 
+vector$<$ Gtk\+Widget $\ast$ $>$ \hyperlink{class_u_i_a6e64500f18e96ae92dc4f584f37dfc4f}{switch\+GridV}
+\end{DoxyCompactItemize}
+\subsection*{Закрытые члены}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{class_u_i_a2405c93cf8c14f22ebc20de45116e52b}{init\+Styles} ()
+\item 
+Gtk\+Widget $\ast$ \hyperlink{class_u_i_ad6b4d1f070f96f4a8cd7919595b2f9a7}{window\+Init} (Gtk\+Builder $\ast$$\ast$builder, string glade\+File, string window\+Name)
+\item 
+void \hyperlink{class_u_i_ac1d0ed7af2a3272527c544110fc37890}{init\+Menu\+Widgets} ()
+\item 
+void \hyperlink{class_u_i_abc8966cc08826d39716b86e0a160af24}{init\+Cam\+Widgets} (int room\+\_\+n, vector$<$ \hyperlink{struct_camera}{Camera} $>$ $\ast$cams)
+\item 
+void \hyperlink{class_u_i_ab66596071cbc18cb463b8a99266c7926}{init\+Room\+Tab} (int room\+\_\+n, string room\+\_\+name)
+\item 
+string \hyperlink{class_u_i_aa7991c3483e84d5ed9f64eeb333c9e44}{find\+IP} ()
+\item 
+int \hyperlink{class_u_i_a2405c93cf8c14f22ebc20de45116e52b}{init\+Styles} ()
+\item 
+Gtk\+Widget $\ast$ \hyperlink{class_u_i_ad65c4c017205871946a731f015d74f3c}{window\+Init} (Gtk\+Builder $\ast$$\ast$builder, string glade\+File, string window\+Name)
+\item 
+void \hyperlink{class_u_i_a85a2b2c92c5d2017f50886f7a184ddd1}{init\+Player\+Widgets} ()
+\item 
+void \hyperlink{class_u_i_ac1d0ed7af2a3272527c544110fc37890}{init\+Menu\+Widgets} ()
+\item 
+void \hyperlink{class_u_i_abc8966cc08826d39716b86e0a160af24}{init\+Cam\+Widgets} (int room\+\_\+n, vector$<$ \hyperlink{struct_camera}{Camera} $>$ $\ast$cams)
+\item 
+void \hyperlink{class_u_i_ab66596071cbc18cb463b8a99266c7926}{init\+Room\+Tab} (int room\+\_\+n, string room\+\_\+name)
+\item 
+string \hyperlink{class_u_i_aa7991c3483e84d5ed9f64eeb333c9e44}{find\+IP} ()
+\end{DoxyCompactItemize}
+\subsection*{Закрытые статические члены}
+\begin{DoxyCompactItemize}
+\item 
+static int \hyperlink{class_u_i_a405d8c6cbfea57303917867587e7e523}{on\+\_\+show} (gpointer ui\+\_\+ptr)
+\item 
+static void \hyperlink{class_u_i_a4d6fc1c395de1396c3b4c17f60ce53f9}{page\+Switched} (Gtk\+Widget $\ast$widget, G\+Param\+Spec $\ast$property, vector$<$ \hyperlink{class_room}{Room} $\ast$$>$ $\ast$\hyperlink{class_u_i_ad5e9a6fd88afba6e3a647c75be137d13}{rooms})
+\item 
+static void \hyperlink{class_u_i_a48bcf14dfe5f38c4c531bf11f7e7217a}{display\+Player} (Gtk\+Widget $\ast$widget, gpointer data)
+\item 
+static gboolean \hyperlink{class_u_i_ae9d1de9359a28d1ec13f2824ec72420c}{key\+Press} (Gtk\+Widget $\ast$widget, Gdk\+Event\+Key $\ast$event, \hyperlink{class_u_i}{UI} $\ast$ui)
+\item 
+static gboolean \hyperlink{class_u_i_af5cf1161c6d50b6e1b1fbcfb6123e10f}{update\+G\+Drive\+Status} (gpointer user\+\_\+data)
+\item 
+static void \hyperlink{class_u_i_ae033d92357c8c8a175809bbee3e08b9b}{display\+Player} (Gtk\+Widget $\ast$widget, gpointer data)
+\item 
+static gboolean \hyperlink{class_u_i_ab9db8fde45ae6595a956feab77aaf2ca}{key\+Press} (Gtk\+Widget $\ast$widget, Gdk\+Event\+Key $\ast$event, \hyperlink{class_u_i}{UI} $\ast$ui)
+\item 
+static void \hyperlink{class_u_i_ad4a8a785914011267c9cba9ebe92cd23}{switch\+State\+Changed} (Gtk\+Widget $\ast$widget, gboolean state, gpointer user\+\_\+data)
+\item 
+static void \hyperlink{class_u_i_a2dfc8b3ab8c46094cabe6c8c332174cd}{edit\+Button\+Clicked} (Gtk\+Widget $\ast$widget, vector$<$ Gtk\+Widget $\ast$$>$ $\ast$\hyperlink{class_u_i_a6e64500f18e96ae92dc4f584f37dfc4f}{switch\+GridV})
+\end{DoxyCompactItemize}
+\subsection*{Закрытые данные}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ \hyperlink{class_room}{Room} $\ast$ $>$ $\ast$ \hyperlink{class_u_i_ad5e9a6fd88afba6e3a647c75be137d13}{rooms}
+\item 
+map$<$ \hyperlink{struct_camera}{Camera} $\ast$, \hyperlink{class_player}{Player} $\ast$ $>$ \hyperlink{class_u_i_ac5805ed5874e6c85ad1e607a9080793e}{players}
+\item 
+Gtk\+Builder $\ast$ \hyperlink{class_u_i_a971badc03d122b8de17d37fec58157eb}{menu\+Builder}
+\item 
+Gtk\+Widget $\ast$ \hyperlink{class_u_i_a279e69dd8e9b22b5a2a9cfa117ac4446}{menu\+Window}
+\item 
+\hyperlink{class_player}{Player} $\ast$ \hyperlink{class_u_i_a201dd0c0bb94e697654b923090776a12}{player}
+\item 
+Gtk\+Builder $\ast$ \hyperlink{class_u_i_a460a7c95bf2db2595070f7c2a9009cc4}{player\+Builder}
+\item 
+Gtk\+Widget $\ast$ \hyperlink{class_u_i_acf7b7529c59af602e9d2642d881e9fdc}{player\+Window}
+\item 
+Gtk\+Widget $\ast$ \hyperlink{class_u_i_a809a7dd49c802ce7805bb6e1036b7ace}{player\+Widget}
+\item 
+Gtk\+Widget $\ast$ \hyperlink{class_u_i_ae6090309318f008e3497552119fc46b9}{player\+Label}
+\item 
+Gtk\+Widget $\ast$ \hyperlink{class_u_i_a3ebae98c80dca1700ddbfcb7b5b56ee8}{edit\+Button}
+\end{DoxyCompactItemize}
+
+
+\subsection{Подробное описание}
+The \hyperlink{class_u_i}{UI} class. 
+
+\subsection{Конструктор(ы)}
+\mbox{\Hypertarget{class_u_i_a2b49119b809785f66dd97ce769ab1753}\label{class_u_i_a2b49119b809785f66dd97ce769ab1753}} 
+\index{UI@{UI}!UI@{UI}}
+\index{UI@{UI}!UI@{UI}}
+\subsubsection{\texorpdfstring{U\+I()}{UI()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily U\+I\+::\+UI (\begin{DoxyParamCaption}\item[{\hyperlink{class_config}{Config} $\ast$}]{config }\end{DoxyParamCaption})}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_u_i_a2b49119b809785f66dd97ce769ab1753_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_u_i_a1b23d0c64c7cbb3d143d90ec532a7ccd}\label{class_u_i_a1b23d0c64c7cbb3d143d90ec532a7ccd}} 
+\index{UI@{UI}!````~UI@{$\sim$\+UI}}
+\index{````~UI@{$\sim$\+UI}!UI@{UI}}
+\subsubsection{\texorpdfstring{$\sim$\+U\+I()}{~UI()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily U\+I\+::$\sim$\+UI (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_u_i_a2b49119b809785f66dd97ce769ab1753}\label{class_u_i_a2b49119b809785f66dd97ce769ab1753}} 
+\index{UI@{UI}!UI@{UI}}
+\index{UI@{UI}!UI@{UI}}
+\subsubsection{\texorpdfstring{U\+I()}{UI()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily U\+I\+::\+UI (\begin{DoxyParamCaption}\item[{\hyperlink{class_config}{Config} $\ast$}]{config }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_u_i_a1b23d0c64c7cbb3d143d90ec532a7ccd}\label{class_u_i_a1b23d0c64c7cbb3d143d90ec532a7ccd}} 
+\index{UI@{UI}!````~UI@{$\sim$\+UI}}
+\index{````~UI@{$\sim$\+UI}!UI@{UI}}
+\subsubsection{\texorpdfstring{$\sim$\+U\+I()}{~UI()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily U\+I\+::$\sim$\+UI (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\subsection{Методы}
+\mbox{\Hypertarget{class_u_i_a48bcf14dfe5f38c4c531bf11f7e7217a}\label{class_u_i_a48bcf14dfe5f38c4c531bf11f7e7217a}} 
+\index{UI@{UI}!display\+Player@{display\+Player}}
+\index{display\+Player@{display\+Player}!UI@{UI}}
+\subsubsection{\texorpdfstring{display\+Player()}{displayPlayer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void U\+I\+::display\+Player (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{gpointer}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_u_i_ae033d92357c8c8a175809bbee3e08b9b}\label{class_u_i_ae033d92357c8c8a175809bbee3e08b9b}} 
+\index{UI@{UI}!display\+Player@{display\+Player}}
+\index{display\+Player@{display\+Player}!UI@{UI}}
+\subsubsection{\texorpdfstring{display\+Player()}{displayPlayer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static void U\+I\+::display\+Player (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{gpointer}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_u_i_ad860928c87b2a7f4e18b3f6e15774dd3}\label{class_u_i_ad860928c87b2a7f4e18b3f6e15774dd3}} 
+\index{UI@{UI}!display\+Recording\+Status@{display\+Recording\+Status}}
+\index{display\+Recording\+Status@{display\+Recording\+Status}!UI@{UI}}
+\subsubsection{\texorpdfstring{display\+Recording\+Status()}{displayRecordingStatus()}}
+{\footnotesize\ttfamily void U\+I\+::display\+Recording\+Status (\begin{DoxyParamCaption}\item[{string}]{cam\+\_\+id,  }\item[{bool}]{status }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_u_i_a2dfc8b3ab8c46094cabe6c8c332174cd}\label{class_u_i_a2dfc8b3ab8c46094cabe6c8c332174cd}} 
+\index{UI@{UI}!edit\+Button\+Clicked@{edit\+Button\+Clicked}}
+\index{edit\+Button\+Clicked@{edit\+Button\+Clicked}!UI@{UI}}
+\subsubsection{\texorpdfstring{edit\+Button\+Clicked()}{editButtonClicked()}}
+{\footnotesize\ttfamily void U\+I\+::edit\+Button\+Clicked (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{vector$<$ Gtk\+Widget $\ast$$>$ $\ast$}]{switch\+GridV }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=285pt]{class_u_i_a2dfc8b3ab8c46094cabe6c8c332174cd_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_u_i_aa7991c3483e84d5ed9f64eeb333c9e44}\label{class_u_i_aa7991c3483e84d5ed9f64eeb333c9e44}} 
+\index{UI@{UI}!find\+IP@{find\+IP}}
+\index{find\+IP@{find\+IP}!UI@{UI}}
+\subsubsection{\texorpdfstring{find\+I\+P()}{findIP()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily string U\+I\+::find\+IP (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_u_i_aa7991c3483e84d5ed9f64eeb333c9e44}\label{class_u_i_aa7991c3483e84d5ed9f64eeb333c9e44}} 
+\index{UI@{UI}!find\+IP@{find\+IP}}
+\index{find\+IP@{find\+IP}!UI@{UI}}
+\subsubsection{\texorpdfstring{find\+I\+P()}{findIP()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily string U\+I\+::find\+IP (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_u_i_abc8966cc08826d39716b86e0a160af24}\label{class_u_i_abc8966cc08826d39716b86e0a160af24}} 
+\index{UI@{UI}!init\+Cam\+Widgets@{init\+Cam\+Widgets}}
+\index{init\+Cam\+Widgets@{init\+Cam\+Widgets}!UI@{UI}}
+\subsubsection{\texorpdfstring{init\+Cam\+Widgets()}{initCamWidgets()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void U\+I\+::init\+Cam\+Widgets (\begin{DoxyParamCaption}\item[{int}]{room\+\_\+n,  }\item[{vector$<$ \hyperlink{struct_camera}{Camera} $>$ $\ast$}]{cams }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=312pt]{class_u_i_abc8966cc08826d39716b86e0a160af24_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_u_i_abc8966cc08826d39716b86e0a160af24}\label{class_u_i_abc8966cc08826d39716b86e0a160af24}} 
+\index{UI@{UI}!init\+Cam\+Widgets@{init\+Cam\+Widgets}}
+\index{init\+Cam\+Widgets@{init\+Cam\+Widgets}!UI@{UI}}
+\subsubsection{\texorpdfstring{init\+Cam\+Widgets()}{initCamWidgets()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void U\+I\+::init\+Cam\+Widgets (\begin{DoxyParamCaption}\item[{int}]{room\+\_\+n,  }\item[{vector$<$ \hyperlink{struct_camera}{Camera} $>$ $\ast$}]{cams }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_u_i_ac1d0ed7af2a3272527c544110fc37890}\label{class_u_i_ac1d0ed7af2a3272527c544110fc37890}} 
+\index{UI@{UI}!init\+Menu\+Widgets@{init\+Menu\+Widgets}}
+\index{init\+Menu\+Widgets@{init\+Menu\+Widgets}!UI@{UI}}
+\subsubsection{\texorpdfstring{init\+Menu\+Widgets()}{initMenuWidgets()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void U\+I\+::init\+Menu\+Widgets (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_u_i_ac1d0ed7af2a3272527c544110fc37890_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_u_i_ac1d0ed7af2a3272527c544110fc37890}\label{class_u_i_ac1d0ed7af2a3272527c544110fc37890}} 
+\index{UI@{UI}!init\+Menu\+Widgets@{init\+Menu\+Widgets}}
+\index{init\+Menu\+Widgets@{init\+Menu\+Widgets}!UI@{UI}}
+\subsubsection{\texorpdfstring{init\+Menu\+Widgets()}{initMenuWidgets()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void U\+I\+::init\+Menu\+Widgets (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_u_i_a85a2b2c92c5d2017f50886f7a184ddd1}\label{class_u_i_a85a2b2c92c5d2017f50886f7a184ddd1}} 
+\index{UI@{UI}!init\+Player\+Widgets@{init\+Player\+Widgets}}
+\index{init\+Player\+Widgets@{init\+Player\+Widgets}!UI@{UI}}
+\subsubsection{\texorpdfstring{init\+Player\+Widgets()}{initPlayerWidgets()}}
+{\footnotesize\ttfamily void U\+I\+::init\+Player\+Widgets (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_u_i_a85a2b2c92c5d2017f50886f7a184ddd1_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_u_i_ab66596071cbc18cb463b8a99266c7926}\label{class_u_i_ab66596071cbc18cb463b8a99266c7926}} 
+\index{UI@{UI}!init\+Room\+Tab@{init\+Room\+Tab}}
+\index{init\+Room\+Tab@{init\+Room\+Tab}!UI@{UI}}
+\subsubsection{\texorpdfstring{init\+Room\+Tab()}{initRoomTab()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void U\+I\+::init\+Room\+Tab (\begin{DoxyParamCaption}\item[{int}]{room\+\_\+n,  }\item[{string}]{room\+\_\+name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_u_i_ab66596071cbc18cb463b8a99266c7926}\label{class_u_i_ab66596071cbc18cb463b8a99266c7926}} 
+\index{UI@{UI}!init\+Room\+Tab@{init\+Room\+Tab}}
+\index{init\+Room\+Tab@{init\+Room\+Tab}!UI@{UI}}
+\subsubsection{\texorpdfstring{init\+Room\+Tab()}{initRoomTab()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void U\+I\+::init\+Room\+Tab (\begin{DoxyParamCaption}\item[{int}]{room\+\_\+n,  }\item[{string}]{room\+\_\+name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_u_i_a2405c93cf8c14f22ebc20de45116e52b}\label{class_u_i_a2405c93cf8c14f22ebc20de45116e52b}} 
+\index{UI@{UI}!init\+Styles@{init\+Styles}}
+\index{init\+Styles@{init\+Styles}!UI@{UI}}
+\subsubsection{\texorpdfstring{init\+Styles()}{initStyles()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily int U\+I\+::init\+Styles (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_u_i_a2405c93cf8c14f22ebc20de45116e52b}\label{class_u_i_a2405c93cf8c14f22ebc20de45116e52b}} 
+\index{UI@{UI}!init\+Styles@{init\+Styles}}
+\index{init\+Styles@{init\+Styles}!UI@{UI}}
+\subsubsection{\texorpdfstring{init\+Styles()}{initStyles()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily int U\+I\+::init\+Styles (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_u_i_ae9d1de9359a28d1ec13f2824ec72420c}\label{class_u_i_ae9d1de9359a28d1ec13f2824ec72420c}} 
+\index{UI@{UI}!key\+Press@{key\+Press}}
+\index{key\+Press@{key\+Press}!UI@{UI}}
+\subsubsection{\texorpdfstring{key\+Press()}{keyPress()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily gboolean U\+I\+::key\+Press (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{Gdk\+Event\+Key $\ast$}]{event,  }\item[{\hyperlink{class_u_i}{UI} $\ast$}]{ui }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_u_i_ab9db8fde45ae6595a956feab77aaf2ca}\label{class_u_i_ab9db8fde45ae6595a956feab77aaf2ca}} 
+\index{UI@{UI}!key\+Press@{key\+Press}}
+\index{key\+Press@{key\+Press}!UI@{UI}}
+\subsubsection{\texorpdfstring{key\+Press()}{keyPress()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily static gboolean U\+I\+::key\+Press (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{Gdk\+Event\+Key $\ast$}]{event,  }\item[{\hyperlink{class_u_i}{UI} $\ast$}]{ui }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_u_i_a405d8c6cbfea57303917867587e7e523}\label{class_u_i_a405d8c6cbfea57303917867587e7e523}} 
+\index{UI@{UI}!on\+\_\+show@{on\+\_\+show}}
+\index{on\+\_\+show@{on\+\_\+show}!UI@{UI}}
+\subsubsection{\texorpdfstring{on\+\_\+show()}{on\_show()}}
+{\footnotesize\ttfamily int U\+I\+::on\+\_\+show (\begin{DoxyParamCaption}\item[{gpointer}]{ui\+\_\+ptr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_u_i_a405d8c6cbfea57303917867587e7e523_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_u_i_a4d6fc1c395de1396c3b4c17f60ce53f9}\label{class_u_i_a4d6fc1c395de1396c3b4c17f60ce53f9}} 
+\index{UI@{UI}!page\+Switched@{page\+Switched}}
+\index{page\+Switched@{page\+Switched}!UI@{UI}}
+\subsubsection{\texorpdfstring{page\+Switched()}{pageSwitched()}}
+{\footnotesize\ttfamily void U\+I\+::page\+Switched (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{G\+Param\+Spec $\ast$}]{property,  }\item[{vector$<$ \hyperlink{class_room}{Room} $\ast$$>$ $\ast$}]{rooms }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_u_i_ad4a8a785914011267c9cba9ebe92cd23}\label{class_u_i_ad4a8a785914011267c9cba9ebe92cd23}} 
+\index{UI@{UI}!switch\+State\+Changed@{switch\+State\+Changed}}
+\index{switch\+State\+Changed@{switch\+State\+Changed}!UI@{UI}}
+\subsubsection{\texorpdfstring{switch\+State\+Changed()}{switchStateChanged()}}
+{\footnotesize\ttfamily void U\+I\+::switch\+State\+Changed (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{gboolean}]{state,  }\item[{gpointer}]{user\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_u_i_af5cf1161c6d50b6e1b1fbcfb6123e10f}\label{class_u_i_af5cf1161c6d50b6e1b1fbcfb6123e10f}} 
+\index{UI@{UI}!update\+G\+Drive\+Status@{update\+G\+Drive\+Status}}
+\index{update\+G\+Drive\+Status@{update\+G\+Drive\+Status}!UI@{UI}}
+\subsubsection{\texorpdfstring{update\+G\+Drive\+Status()}{updateGDriveStatus()}}
+{\footnotesize\ttfamily gboolean U\+I\+::update\+G\+Drive\+Status (\begin{DoxyParamCaption}\item[{gpointer}]{user\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_u_i_af5cf1161c6d50b6e1b1fbcfb6123e10f_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_u_i_ad6b4d1f070f96f4a8cd7919595b2f9a7}\label{class_u_i_ad6b4d1f070f96f4a8cd7919595b2f9a7}} 
+\index{UI@{UI}!window\+Init@{window\+Init}}
+\index{window\+Init@{window\+Init}!UI@{UI}}
+\subsubsection{\texorpdfstring{window\+Init()}{windowInit()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily Gtk\+Widget $\ast$ U\+I\+::window\+Init (\begin{DoxyParamCaption}\item[{Gtk\+Builder $\ast$$\ast$}]{builder,  }\item[{string}]{glade\+File,  }\item[{string}]{window\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_u_i_ad65c4c017205871946a731f015d74f3c}\label{class_u_i_ad65c4c017205871946a731f015d74f3c}} 
+\index{UI@{UI}!window\+Init@{window\+Init}}
+\index{window\+Init@{window\+Init}!UI@{UI}}
+\subsubsection{\texorpdfstring{window\+Init()}{windowInit()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily Gtk\+Widget$\ast$ U\+I\+::window\+Init (\begin{DoxyParamCaption}\item[{Gtk\+Builder $\ast$$\ast$}]{builder,  }\item[{string}]{glade\+File,  }\item[{string}]{window\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\subsection{Данные класса}
+\mbox{\Hypertarget{class_u_i_a6966022e569960221b61ea4f0111a484}\label{class_u_i_a6966022e569960221b61ea4f0111a484}} 
+\index{UI@{UI}!config@{config}}
+\index{config@{config}!UI@{UI}}
+\subsubsection{\texorpdfstring{config}{config}}
+{\footnotesize\ttfamily \hyperlink{class_config}{Config} $\ast$ U\+I\+::config}
+
+\mbox{\Hypertarget{class_u_i_a3ebae98c80dca1700ddbfcb7b5b56ee8}\label{class_u_i_a3ebae98c80dca1700ddbfcb7b5b56ee8}} 
+\index{UI@{UI}!edit\+Button@{edit\+Button}}
+\index{edit\+Button@{edit\+Button}!UI@{UI}}
+\subsubsection{\texorpdfstring{edit\+Button}{editButton}}
+{\footnotesize\ttfamily Gtk\+Widget$\ast$ U\+I\+::edit\+Button\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_u_i_a971badc03d122b8de17d37fec58157eb}\label{class_u_i_a971badc03d122b8de17d37fec58157eb}} 
+\index{UI@{UI}!menu\+Builder@{menu\+Builder}}
+\index{menu\+Builder@{menu\+Builder}!UI@{UI}}
+\subsubsection{\texorpdfstring{menu\+Builder}{menuBuilder}}
+{\footnotesize\ttfamily Gtk\+Builder $\ast$ U\+I\+::menu\+Builder\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_u_i_a279e69dd8e9b22b5a2a9cfa117ac4446}\label{class_u_i_a279e69dd8e9b22b5a2a9cfa117ac4446}} 
+\index{UI@{UI}!menu\+Window@{menu\+Window}}
+\index{menu\+Window@{menu\+Window}!UI@{UI}}
+\subsubsection{\texorpdfstring{menu\+Window}{menuWindow}}
+{\footnotesize\ttfamily Gtk\+Widget $\ast$ U\+I\+::menu\+Window\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_u_i_a201dd0c0bb94e697654b923090776a12}\label{class_u_i_a201dd0c0bb94e697654b923090776a12}} 
+\index{UI@{UI}!player@{player}}
+\index{player@{player}!UI@{UI}}
+\subsubsection{\texorpdfstring{player}{player}}
+{\footnotesize\ttfamily \hyperlink{class_player}{Player}$\ast$ U\+I\+::player\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_u_i_a460a7c95bf2db2595070f7c2a9009cc4}\label{class_u_i_a460a7c95bf2db2595070f7c2a9009cc4}} 
+\index{UI@{UI}!player\+Builder@{player\+Builder}}
+\index{player\+Builder@{player\+Builder}!UI@{UI}}
+\subsubsection{\texorpdfstring{player\+Builder}{playerBuilder}}
+{\footnotesize\ttfamily Gtk\+Builder $\ast$ U\+I\+::player\+Builder\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_u_i_ae6090309318f008e3497552119fc46b9}\label{class_u_i_ae6090309318f008e3497552119fc46b9}} 
+\index{UI@{UI}!player\+Label@{player\+Label}}
+\index{player\+Label@{player\+Label}!UI@{UI}}
+\subsubsection{\texorpdfstring{player\+Label}{playerLabel}}
+{\footnotesize\ttfamily Gtk\+Widget $\ast$ U\+I\+::player\+Label\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_u_i_ac5805ed5874e6c85ad1e607a9080793e}\label{class_u_i_ac5805ed5874e6c85ad1e607a9080793e}} 
+\index{UI@{UI}!players@{players}}
+\index{players@{players}!UI@{UI}}
+\subsubsection{\texorpdfstring{players}{players}}
+{\footnotesize\ttfamily map$<$\hyperlink{struct_camera}{Camera}$\ast$, \hyperlink{class_player}{Player}$\ast$$>$ U\+I\+::players\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_u_i_a809a7dd49c802ce7805bb6e1036b7ace}\label{class_u_i_a809a7dd49c802ce7805bb6e1036b7ace}} 
+\index{UI@{UI}!player\+Widget@{player\+Widget}}
+\index{player\+Widget@{player\+Widget}!UI@{UI}}
+\subsubsection{\texorpdfstring{player\+Widget}{playerWidget}}
+{\footnotesize\ttfamily Gtk\+Widget$\ast$ U\+I\+::player\+Widget\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_u_i_acf7b7529c59af602e9d2642d881e9fdc}\label{class_u_i_acf7b7529c59af602e9d2642d881e9fdc}} 
+\index{UI@{UI}!player\+Window@{player\+Window}}
+\index{player\+Window@{player\+Window}!UI@{UI}}
+\subsubsection{\texorpdfstring{player\+Window}{playerWindow}}
+{\footnotesize\ttfamily Gtk\+Widget $\ast$ U\+I\+::player\+Window\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_u_i_a519609c35edd6f678d5d78fe88fac888}\label{class_u_i_a519609c35edd6f678d5d78fe88fac888}} 
+\index{UI@{UI}!playing\+Cam\+Name@{playing\+Cam\+Name}}
+\index{playing\+Cam\+Name@{playing\+Cam\+Name}!UI@{UI}}
+\subsubsection{\texorpdfstring{playing\+Cam\+Name}{playingCamName}}
+{\footnotesize\ttfamily string U\+I\+::playing\+Cam\+Name = \char`\"{}\char`\"{}}
+
+\mbox{\Hypertarget{class_u_i_aa857564b96618cd520b18b9c0ef95f00}\label{class_u_i_aa857564b96618cd520b18b9c0ef95f00}} 
+\index{UI@{UI}!recorder@{recorder}}
+\index{recorder@{recorder}!UI@{UI}}
+\subsubsection{\texorpdfstring{recorder}{recorder}}
+{\footnotesize\ttfamily \hyperlink{class_recorder}{Recorder}$\ast$ U\+I\+::recorder}
+
+\mbox{\Hypertarget{class_u_i_ad5e9a6fd88afba6e3a647c75be137d13}\label{class_u_i_ad5e9a6fd88afba6e3a647c75be137d13}} 
+\index{UI@{UI}!rooms@{rooms}}
+\index{rooms@{rooms}!UI@{UI}}
+\subsubsection{\texorpdfstring{rooms}{rooms}}
+{\footnotesize\ttfamily vector$<$ \hyperlink{class_room}{Room} $\ast$ $>$ $\ast$ U\+I\+::rooms\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_u_i_a6e64500f18e96ae92dc4f584f37dfc4f}\label{class_u_i_a6e64500f18e96ae92dc4f584f37dfc4f}} 
+\index{UI@{UI}!switch\+GridV@{switch\+GridV}}
+\index{switch\+GridV@{switch\+GridV}!UI@{UI}}
+\subsubsection{\texorpdfstring{switch\+GridV}{switchGridV}}
+{\footnotesize\ttfamily vector$<$Gtk\+Widget$\ast$$>$ U\+I\+::switch\+GridV}
+
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+/home/jetson/controlroom/\+Studio/\+Operator/\+Grid/include/\hyperlink{_operator_2_grid_2include_2ui_8h}{ui.\+h}\item 
+/home/jetson/controlroom/\+Studio/\+Operator/\+Grid/src/\hyperlink{_operator_2_grid_2src_2ui_8cpp}{ui.\+cpp}\end{DoxyCompactItemize}

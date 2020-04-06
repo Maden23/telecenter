@@ -1,0 +1,6 @@
+<map id="Recording::start" name="Recording::start">
+<area shape="rect" id="node2" href="$class_recording.html#a6fcee36a2d8276d6b7bc111800f41c49" title="Recording::buildPipeline" alt="" coords="179,13,342,39"/>
+<area shape="rect" id="node5" href="$class_recording.html#a902cb9d3bacaaf992e38427bbe63319b" title="Recording::busSyncHandler" alt="" coords="168,63,353,90"/>
+<area shape="rect" id="node3" href="$class_recording.html#abea9877130d33f18639df0544497d473" title="Recording::pad_added\l_handler" alt="" coords="401,5,553,47"/>
+<area shape="rect" id="node4" href="$class_recording.html#aaff0d133af8cc8bc3f514b7ae85fc99a" title="Recording::data_probe" alt="" coords="601,13,755,39"/>
+</map>

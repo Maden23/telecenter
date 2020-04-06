@@ -1,0 +1,34 @@
+\hypertarget{video-upload_8py}{}\section{Файл /home/jetson/controlroom/\+Studio/\+Recorder/src/video-\/upload.py}
+\label{video-upload_8py}\index{/home/jetson/controlroom/\+Studio/\+Recorder/src/video-\/upload.\+py@{/home/jetson/controlroom/\+Studio/\+Recorder/src/video-\/upload.\+py}}
+\subsection*{Пространства имен}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespacevideo-upload}{video-\/upload}
+\end{DoxyCompactItemize}
+\subsection*{Переменные}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{namespacevideo-upload_adb444a75aaa0c0e590807701931bafef}{video-\/upload.\+parser} = argparse.\+Argument\+Parser(\char`\"{}Videofile name and location\char`\"{})
+\item 
+\hyperlink{namespacevideo-upload_a7febd43c5f8604092229ae1ccf261f0c}{video-\/upload.\+help}
+\item 
+\hyperlink{namespacevideo-upload_a0aea8bad307fcc1764683855862406c5}{video-\/upload.\+type}
+\item 
+\hyperlink{namespacevideo-upload_a9e790ab261c9413ed47dafe46c022063}{video-\/upload.\+args} = parser.\+parse\+\_\+args()
+\item 
+string \hyperlink{namespacevideo-upload_a76e331163a34b55da69ecdf6ca084eab}{video-\/upload.\+S\+C\+O\+P\+ES} = \textquotesingle{}https\+://www.\+googleapis.\+com/auth/drive.\+file\textquotesingle{}
+\item 
+\hyperlink{namespacevideo-upload_a1bbb99b1568829c7cb6af40564c671d3}{video-\/upload.\+store} = file.\+Storage(\textquotesingle{}storage.\+json\textquotesingle{})
+\item 
+\hyperlink{namespacevideo-upload_a5c691a1aa9c397a8485738b164fbf511}{video-\/upload.\+creds} = store.\+get()
+\item 
+\hyperlink{namespacevideo-upload_a7f676962b30f842d93805a11467d4404}{video-\/upload.\+flow} = client.\+flow\+\_\+from\+\_\+clientsecrets(\textquotesingle{}client\+\_\+secret.\+json\textquotesingle{}, scope = S\+C\+O\+P\+ES)
+\item 
+\hyperlink{namespacevideo-upload_a70c1c74c0d69dbc8748f55e9678bd7e8}{video-\/upload.\+D\+R\+I\+VE} = build(\textquotesingle{}drive\textquotesingle{}, \textquotesingle{}v3\textquotesingle{}, http = creds.\+authorize(Http()))
+\item 
+\hyperlink{namespacevideo-upload_a8f0c224b0d6326d66b6a471fb3ae06b7}{video-\/upload.\+filename} = args.\+location + args.\+filename
+\item 
+dictionary \hyperlink{namespacevideo-upload_a078e77756bf147602ea81c2485e0b3ca}{video-\/upload.\+metadata} = \{\textquotesingle{}name\textquotesingle{}\+: args.\+filename\}
+\item 
+\hyperlink{namespacevideo-upload_a98d77aa7929949660affdd840263f994}{video-\/upload.\+res} = D\+R\+I\+V\+E.\+files().create(body = metadata, media\+\_\+body = filename).execute()
+\end{DoxyCompactItemize}

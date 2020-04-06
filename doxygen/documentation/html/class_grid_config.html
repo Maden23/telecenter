@@ -1,0 +1,503 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>IP-телестудия: Класс GridConfig</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">IP-телестудия
+   </div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('class_grid_config.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Открытые члены</a> &#124;
+<a href="#pub-static-methods">Открытые статические члены</a> &#124;
+<a href="#pri-methods">Закрытые члены</a> &#124;
+<a href="#pri-attribs">Закрытые данные</a> &#124;
+<a href="class_grid_config-members.html">Полный список членов класса</a>  </div>
+  <div class="headertitle">
+<div class="title">Класс GridConfig<div class="ingroups"><a class="el" href="group__grid.html">Сетка видеопотоков</a></div></div>  </div>
+</div><!--header-->
+<div class="contents">
+
+<p>The Config class.  
+ <a href="class_grid_config.html#details">Подробнее...</a></p>
+
+<p><code>#include &lt;<a class="el" href="_operator_2_grid_2include_2config_8h_source.html">config.h</a>&gt;</code></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
+Открытые члены</h2></td></tr>
+<tr class="memitem:a06a311c3bc17bebae00cb6573378730f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid_config.html#a06a311c3bc17bebae00cb6573378730f">setFile</a> (string configPath)</td></tr>
+<tr class="separator:a06a311c3bc17bebae00cb6573378730f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f3515d56ac52c5da67d1e181808404a"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid_config.html#a2f3515d56ac52c5da67d1e181808404a">getParam</a> (string name)</td></tr>
+<tr class="separator:a2f3515d56ac52c5da67d1e181808404a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac9df22f86cdb7d1c51b2273640aefc99"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid_config.html#ac9df22f86cdb7d1c51b2273640aefc99">getParamInt</a> (string name)</td></tr>
+<tr class="separator:ac9df22f86cdb7d1c51b2273640aefc99"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a98f5a1bb1b4fc28cf7b5d1bc931f5a54"><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="class_room.html">Room</a> * &gt; *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid_config.html#a98f5a1bb1b4fc28cf7b5d1bc931f5a54">getRooms</a> ()</td></tr>
+<tr class="separator:a98f5a1bb1b4fc28cf7b5d1bc931f5a54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
+Открытые статические члены</h2></td></tr>
+<tr class="memitem:acbe684009967e7b8593c7e3303cdfbf5"><td class="memItemLeft" align="right" valign="top">static <a class="el" href="class_grid_config.html">GridConfig</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid_config.html#acbe684009967e7b8593c7e3303cdfbf5">get</a> ()</td></tr>
+<tr class="separator:acbe684009967e7b8593c7e3303cdfbf5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-methods"></a>
+Закрытые члены</h2></td></tr>
+<tr class="memitem:ae61afbd4fe461d0c668e33f2480e9061"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid_config.html#ae61afbd4fe461d0c668e33f2480e9061">GridConfig</a> ()</td></tr>
+<tr class="separator:ae61afbd4fe461d0c668e33f2480e9061"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5a5beaf46b0f41e6387b6378b9cf4b7c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid_config.html#a5a5beaf46b0f41e6387b6378b9cf4b7c">GridConfig</a> (const <a class="el" href="class_grid_config.html">GridConfig</a> &amp;)</td></tr>
+<tr class="separator:a5a5beaf46b0f41e6387b6378b9cf4b7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a852bde866378360d38d0722bb8c98f01"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_grid_config.html">GridConfig</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid_config.html#a852bde866378360d38d0722bb8c98f01">operator=</a> (const <a class="el" href="class_grid_config.html">GridConfig</a> &amp;)</td></tr>
+<tr class="separator:a852bde866378360d38d0722bb8c98f01"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af0f79f5721c69162bebeeac5e3bdcf03"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid_config.html#af0f79f5721c69162bebeeac5e3bdcf03">getGSuiteRooms</a> ()</td></tr>
+<tr class="separator:af0f79f5721c69162bebeeac5e3bdcf03"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a33834786b69a7473552cfb025937c253"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid_config.html#a33834786b69a7473552cfb025937c253">getCustomRooms</a> ()</td></tr>
+<tr class="separator:a33834786b69a7473552cfb025937c253"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa8cd575c3fe49c27603d6925f690049c"><td class="memItemLeft" align="right" valign="top">string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid_config.html#aa8cd575c3fe49c27603d6925f690049c">makeGSuiteRequest</a> ()</td></tr>
+<tr class="separator:aa8cd575c3fe49c27603d6925f690049c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7772860b1d46afff422f8208fcd45291"><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="class_room.html">Room</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid_config.html#a7772860b1d46afff422f8208fcd45291">readRoomsFromFile</a> (string fileName)</td></tr>
+<tr class="separator:a7772860b1d46afff422f8208fcd45291"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pri-attribs"></a>
+Закрытые данные</h2></td></tr>
+<tr class="memitem:a9a956728ff118aeb9c1f9b249c50f250"><td class="memItemLeft" align="right" valign="top">map&lt; string, string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid_config.html#a9a956728ff118aeb9c1f9b249c50f250">configuration</a></td></tr>
+<tr class="separator:a9a956728ff118aeb9c1f9b249c50f250"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1fc61cb11f7c487b1af888f8618a238f"><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="class_room.html">Room</a> * &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_grid_config.html#a1fc61cb11f7c487b1af888f8618a238f">rooms</a></td></tr>
+<tr class="separator:a1fc61cb11f7c487b1af888f8618a238f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<a name="details" id="details"></a><h2 class="groupheader">Подробное описание</h2>
+<div class="textblock"><p>The Config class. </p>
+</div><h2 class="groupheader">Конструктор(ы)</h2>
+<a id="ae61afbd4fe461d0c668e33f2480e9061"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae61afbd4fe461d0c668e33f2480e9061">&#9670;&nbsp;</a></span>GridConfig() <span class="overload">[1/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GridConfig::GridConfig </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_grid_config_ae61afbd4fe461d0c668e33f2480e9061_cgraph.png" border="0" usemap="#class_grid_config_ae61afbd4fe461d0c668e33f2480e9061_cgraph" alt=""/></div>
+<map name="class_grid_config_ae61afbd4fe461d0c668e33f2480e9061_cgraph" id="class_grid_config_ae61afbd4fe461d0c668e33f2480e9061_cgraph">
+<area shape="rect" id="node2" href="class_grid_config.html#a33834786b69a7473552cfb025937c253" title="GridConfig::getCustomRooms" alt="" coords="208,5,407,32"/>
+<area shape="rect" id="node4" href="class_grid_config.html#af0f79f5721c69162bebeeac5e3bdcf03" title="GridConfig::getGSuiteRooms" alt="" coords="211,56,403,83"/>
+<area shape="rect" id="node3" href="class_grid_config.html#a7772860b1d46afff422f8208fcd45291" title="GridConfig::readRoomsFromFile" alt="" coords="455,31,665,57"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a5a5beaf46b0f41e6387b6378b9cf4b7c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5a5beaf46b0f41e6387b6378b9cf4b7c">&#9670;&nbsp;</a></span>GridConfig() <span class="overload">[2/2]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">GridConfig::GridConfig </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_grid_config.html">GridConfig</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Методы</h2>
+<a id="acbe684009967e7b8593c7e3303cdfbf5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acbe684009967e7b8593c7e3303cdfbf5">&#9670;&nbsp;</a></span>get()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">static <a class="el" href="class_grid_config.html">GridConfig</a>&amp; GridConfig::get </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a33834786b69a7473552cfb025937c253"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a33834786b69a7473552cfb025937c253">&#9670;&nbsp;</a></span>getCustomRooms()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GridConfig::getCustomRooms </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_grid_config_a33834786b69a7473552cfb025937c253_cgraph.png" border="0" usemap="#class_grid_config_a33834786b69a7473552cfb025937c253_cgraph" alt=""/></div>
+<map name="class_grid_config_a33834786b69a7473552cfb025937c253_cgraph" id="class_grid_config_a33834786b69a7473552cfb025937c253_cgraph">
+<area shape="rect" id="node2" href="class_grid_config.html#a7772860b1d46afff422f8208fcd45291" title="GridConfig::readRoomsFromFile" alt="" coords="252,5,463,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="af0f79f5721c69162bebeeac5e3bdcf03"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af0f79f5721c69162bebeeac5e3bdcf03">&#9670;&nbsp;</a></span>getGSuiteRooms()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GridConfig::getGSuiteRooms </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<div class="dynheader">
+Граф вызовов:</div>
+<div class="dyncontent">
+<div class="center"><img src="class_grid_config_af0f79f5721c69162bebeeac5e3bdcf03_cgraph.png" border="0" usemap="#class_grid_config_af0f79f5721c69162bebeeac5e3bdcf03_cgraph" alt=""/></div>
+<map name="class_grid_config_af0f79f5721c69162bebeeac5e3bdcf03_cgraph" id="class_grid_config_af0f79f5721c69162bebeeac5e3bdcf03_cgraph">
+<area shape="rect" id="node2" href="class_grid_config.html#a7772860b1d46afff422f8208fcd45291" title="GridConfig::readRoomsFromFile" alt="" coords="245,5,456,32"/>
+</map>
+</div>
+
+</div>
+</div>
+<a id="a2f3515d56ac52c5da67d1e181808404a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f3515d56ac52c5da67d1e181808404a">&#9670;&nbsp;</a></span>getParam()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">string GridConfig::getParam </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="ac9df22f86cdb7d1c51b2273640aefc99"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac9df22f86cdb7d1c51b2273640aefc99">&#9670;&nbsp;</a></span>getParamInt()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int GridConfig::getParamInt </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a98f5a1bb1b4fc28cf7b5d1bc931f5a54"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a98f5a1bb1b4fc28cf7b5d1bc931f5a54">&#9670;&nbsp;</a></span>getRooms()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt; <a class="el" href="class_room.html">Room</a> * &gt; * GridConfig::getRooms </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="aa8cd575c3fe49c27603d6925f690049c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa8cd575c3fe49c27603d6925f690049c">&#9670;&nbsp;</a></span>makeGSuiteRequest()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">string GridConfig::makeGSuiteRequest </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a852bde866378360d38d0722bb8c98f01"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a852bde866378360d38d0722bb8c98f01">&#9670;&nbsp;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_grid_config.html">GridConfig</a>&amp; GridConfig::operator= </td>
+          <td>(</td>
+          <td class="paramtype">const <a class="el" href="class_grid_config.html">GridConfig</a> &amp;&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7772860b1d46afff422f8208fcd45291"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7772860b1d46afff422f8208fcd45291">&#9670;&nbsp;</a></span>readRoomsFromFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt; <a class="el" href="class_room.html">Room</a> * &gt; GridConfig::readRoomsFromFile </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>fileName</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a06a311c3bc17bebae00cb6573378730f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a06a311c3bc17bebae00cb6573378730f">&#9670;&nbsp;</a></span>setFile()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void GridConfig::setFile </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>configPath</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<h2 class="groupheader">Данные класса</h2>
+<a id="a9a956728ff118aeb9c1f9b249c50f250"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9a956728ff118aeb9c1f9b249c50f250">&#9670;&nbsp;</a></span>configuration</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">map&lt;string, string&gt; GridConfig::configuration</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a1fc61cb11f7c487b1af888f8618a238f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1fc61cb11f7c487b1af888f8618a238f">&#9670;&nbsp;</a></span>rooms</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">vector&lt;<a class="el" href="class_room.html">Room</a>*&gt; GridConfig::rooms</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<hr/>Объявления и описания членов классов находятся в файлах:<ul>
+<li>/home/jetson/controlroom/Studio/Operator/Grid/include/<a class="el" href="_operator_2_grid_2include_2config_8h_source.html">config.h</a></li>
+<li>/home/jetson/controlroom/Studio/Operator/Grid/src/<a class="el" href="_operator_2_grid_2src_2config_8cpp.html">config.cpp</a></li>
+</ul>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="class_grid_config.html">GridConfig</a></li>
+    <li class="footer">Создано системой
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

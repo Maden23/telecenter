@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_recorder_2include_2player_8h">
+    <title>player.h File Reference</title>
+    <programlisting>#include &lt;gtk/gtk.h&gt;</programlisting>
+    <programlisting>#include &lt;gst/gst.h&gt;</programlisting>
+    <programlisting>#include &lt;gst/video/videooverlay.h&gt;</programlisting>
+    <programlisting>#include &quot;config.h&quot;</programlisting>
+<para>Include dependency diagram for player.h</para>
+<para>
+    <figure>
+        <title>Dependency diagram</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="_recorder_2include_2player_8h__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+<para>Included by dependency diagram for player.h</para>
+<para>
+    <figure>
+        <title>Dependency diagram</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="_recorder_2include_2player_8h__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+        <section>
+            <title> Классы </title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>struct <link linkend="struct_pad_data">PadData</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>struct <link linkend="class_player">Player</link></para>
+<para><emphasis>The Player class.</emphasis></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+    <simplesect>
+        <title>Подробное описание</title>
+    <para>Definition in file /home/jetson/controlroom/Studio/Recorder/include/player.h</para>
+    </simplesect>
+</section>

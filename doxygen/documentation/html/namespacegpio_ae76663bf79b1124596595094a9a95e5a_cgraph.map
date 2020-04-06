@@ -1,0 +1,6 @@
+<map id="gpio.main" name="gpio.main">
+<area shape="rect" id="node2" href="$namespacegpio.html#a3d6472f268230baafcc5895596b07a6a" title="gpio.stop_cb" alt="" coords="135,5,231,32"/>
+<area shape="rect" id="node4" href="$namespacegpio.html#a29bb86ae5be5d1d6f4f2e8783480a8cd" title="gpio.rec_cb" alt="" coords="139,56,228,83"/>
+<area shape="rect" id="node5" href="$namespacegpio.html#a67087cfb10312de7d9b64c388777585f" title="gpio.menu_cb" alt="" coords="132,107,235,133"/>
+<area shape="rect" id="node3" href="$namespacegpio.html#a163967890b998f0910bb0cefc45939ab" title="gpio.keypress" alt="" coords="283,56,385,83"/>
+</map>

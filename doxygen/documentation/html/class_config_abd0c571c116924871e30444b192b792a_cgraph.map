@@ -1,0 +1,5 @@
+<map id="Config::Config" name="Config::Config">
+<area shape="rect" id="node2" href="$class_config.html#af15e32047889f0d0e304cf4f5f218711" title="Config::getCustomRooms" alt="" coords="160,5,335,32"/>
+<area shape="rect" id="node4" href="$class_config.html#a8a710b2b2b1e6280195389e9f84d0fba" title="Config::getGSuiteRooms" alt="" coords="163,56,331,83"/>
+<area shape="rect" id="node3" href="$class_config.html#a585a61660c48877296ed9409c83b01c5" title="Config::readRoomsFromFile" alt="" coords="383,31,569,57"/>
+</map>

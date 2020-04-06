@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="group__network__monitor">
+    <title>Сетевой монитор</title>
+<para>Collaboration diagram for Сетевой монитор</para>
+<para>
+    <figure>
+        <title>Group Collaboration diagram</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="group__network__monitor.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+
+<para>Выполняет ping камер и отображает график изменения значений для выбранной камеры </para>
+        <section>
+            <title>Подробное описание</title>
+        </section>
+</section>

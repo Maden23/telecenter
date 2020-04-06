@@ -1,0 +1,219 @@
+\hypertarget{class_recorder_player}{}\section{Класс Recorder\+Player}
+\label{class_recorder_player}\index{Recorder\+Player@{Recorder\+Player}}
+
+
+The Player class.  
+
+
+
+
+{\ttfamily \#include $<$player.\+h$>$}
+
+
+
+Граф связей класса Recorder\+Player\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=165pt]{class_recorder_player__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_recorder_player_a12a01ff15528f155880500982849f800}{Recorder\+Player} (Gtk\+Widget $\ast$\hyperlink{class_recorder_player_a88e14542c46c550d3366ce20c047dcef}{video\+Window}, \hyperlink{class_recorder_config}{Recorder\+Config} $\ast$\hyperlink{class_recorder_player_a9ad3716db3ce5c242a94eba40f74e059}{config})
+\item 
+\hyperlink{class_recorder_player_af01cf1dba228330537e610a9de7decca}{$\sim$\+Recorder\+Player} ()
+\item 
+void \hyperlink{class_recorder_player_aa7f1f74d987ad24366fddb6444d82b63}{play\+Stream} (string uri)
+\end{DoxyCompactItemize}
+\subsection*{Открытые атрибуты}
+\begin{DoxyCompactItemize}
+\item 
+Gst\+Element $\ast$ \hyperlink{class_recorder_player_afa8d3c3ed7c47d50aebaa0706b3b81b9}{pipeline}
+\item 
+Gst\+Element $\ast$ \hyperlink{class_recorder_player_a9d7939305cd8972f5c14ba3faff82488}{src}
+\item 
+Gst\+Element $\ast$ \hyperlink{class_recorder_player_aac0114349529d713c16b6efb4458fc6f}{depay}
+\item 
+Gst\+Element $\ast$ \hyperlink{class_recorder_player_a0e6d094f8295cefc578b76b55575efe5}{parse}
+\item 
+Gst\+Element $\ast$ \hyperlink{class_recorder_player_a260ebe2ca2863452605bfcbb8c7db315}{dec}
+\item 
+Gst\+Element $\ast$ \hyperlink{class_recorder_player_a95c63aaccc7881e10b50b6f3020eeb3b}{scale}
+\item 
+Gst\+Element $\ast$ \hyperlink{class_recorder_player_a66c0560426b8ce256c4a1d5a930fbc5b}{sink}
+\item 
+\hyperlink{class_recorder_config}{Recorder\+Config} $\ast$ \hyperlink{class_recorder_player_a9ad3716db3ce5c242a94eba40f74e059}{config}
+\end{DoxyCompactItemize}
+\subsection*{Закрытые члены}
+\begin{DoxyCompactItemize}
+\item 
+void \hyperlink{class_recorder_player_a2406c730cc930fb3aa800142c041a950}{build\+Pipeline} ()
+\end{DoxyCompactItemize}
+\subsection*{Закрытые статические члены}
+\begin{DoxyCompactItemize}
+\item 
+static void \hyperlink{class_recorder_player_adac1a9507b04011782c05557220ef7f2}{video\+Widget\+Realize\+\_\+cb} (Gtk\+Widget $\ast$widget, \hyperlink{class_recorder_player}{Recorder\+Player} $\ast$player)
+\item 
+static gboolean \hyperlink{class_recorder_player_ad1bf2b3712c21b8d5c24f01b23a5c854}{video\+Widget\+Draw\+\_\+cb} (Gtk\+Widget $\ast$widget, cairo\+\_\+t $\ast$cr, gpointer user\+\_\+data)
+\item 
+static Gst\+Bus\+Sync\+Reply \hyperlink{class_recorder_player_adb7a205e6752a5a88e23f5595508ad98}{bus\+Sync\+Handler} (Gst\+Bus $\ast$\hyperlink{class_recorder_player_a98cd2c8d5761cae28e518e529e5c310b}{bus}, Gst\+Message $\ast$message, \hyperlink{class_recorder_player}{Recorder\+Player} $\ast$player)
+\item 
+static void \hyperlink{class_recorder_player_adcdcc7aea5f2b7984b240f961dfcc8a9}{pad\+\_\+added\+\_\+handler} (Gst\+Element $\ast$\hyperlink{class_recorder_player_a9d7939305cd8972f5c14ba3faff82488}{src}, Gst\+Pad $\ast$new\+\_\+pad, \hyperlink{class_recorder_player}{Recorder\+Player} $\ast$player)
+\end{DoxyCompactItemize}
+\subsection*{Закрытые данные}
+\begin{DoxyCompactItemize}
+\item 
+Gtk\+Widget $\ast$ \hyperlink{class_recorder_player_a88e14542c46c550d3366ce20c047dcef}{video\+Window}
+\item 
+Gst\+Bus $\ast$ \hyperlink{class_recorder_player_a98cd2c8d5761cae28e518e529e5c310b}{bus}
+\item 
+guintptr \hyperlink{class_recorder_player_a2c788aa6e0c30a8333198f859ce21955}{video\+Window\+Handle} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Подробное описание}
+The Player class. 
+
+\subsection{Конструктор(ы)}
+\mbox{\Hypertarget{class_recorder_player_a12a01ff15528f155880500982849f800}\label{class_recorder_player_a12a01ff15528f155880500982849f800}} 
+\index{Recorder\+Player@{Recorder\+Player}!Recorder\+Player@{Recorder\+Player}}
+\index{Recorder\+Player@{Recorder\+Player}!Recorder\+Player@{Recorder\+Player}}
+\subsubsection{\texorpdfstring{Recorder\+Player()}{RecorderPlayer()}}
+{\footnotesize\ttfamily Recorder\+Player\+::\+Recorder\+Player (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{video\+Window,  }\item[{\hyperlink{class_recorder_config}{Recorder\+Config} $\ast$}]{config }\end{DoxyParamCaption})}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_recorder_player_a12a01ff15528f155880500982849f800_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_recorder_player_af01cf1dba228330537e610a9de7decca}\label{class_recorder_player_af01cf1dba228330537e610a9de7decca}} 
+\index{Recorder\+Player@{Recorder\+Player}!````~Recorder\+Player@{$\sim$\+Recorder\+Player}}
+\index{````~Recorder\+Player@{$\sim$\+Recorder\+Player}!Recorder\+Player@{Recorder\+Player}}
+\subsubsection{\texorpdfstring{$\sim$\+Recorder\+Player()}{~RecorderPlayer()}}
+{\footnotesize\ttfamily Recorder\+Player\+::$\sim$\+Recorder\+Player (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\subsection{Методы}
+\mbox{\Hypertarget{class_recorder_player_a2406c730cc930fb3aa800142c041a950}\label{class_recorder_player_a2406c730cc930fb3aa800142c041a950}} 
+\index{Recorder\+Player@{Recorder\+Player}!build\+Pipeline@{build\+Pipeline}}
+\index{build\+Pipeline@{build\+Pipeline}!Recorder\+Player@{Recorder\+Player}}
+\subsubsection{\texorpdfstring{build\+Pipeline()}{buildPipeline()}}
+{\footnotesize\ttfamily void Recorder\+Player\+::build\+Pipeline (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_recorder_player_a2406c730cc930fb3aa800142c041a950_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_recorder_player_adb7a205e6752a5a88e23f5595508ad98}\label{class_recorder_player_adb7a205e6752a5a88e23f5595508ad98}} 
+\index{Recorder\+Player@{Recorder\+Player}!bus\+Sync\+Handler@{bus\+Sync\+Handler}}
+\index{bus\+Sync\+Handler@{bus\+Sync\+Handler}!Recorder\+Player@{Recorder\+Player}}
+\subsubsection{\texorpdfstring{bus\+Sync\+Handler()}{busSyncHandler()}}
+{\footnotesize\ttfamily Gst\+Bus\+Sync\+Reply Recorder\+Player\+::bus\+Sync\+Handler (\begin{DoxyParamCaption}\item[{Gst\+Bus $\ast$}]{bus,  }\item[{Gst\+Message $\ast$}]{message,  }\item[{\hyperlink{class_recorder_player}{Recorder\+Player} $\ast$}]{player }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recorder_player_adcdcc7aea5f2b7984b240f961dfcc8a9}\label{class_recorder_player_adcdcc7aea5f2b7984b240f961dfcc8a9}} 
+\index{Recorder\+Player@{Recorder\+Player}!pad\+\_\+added\+\_\+handler@{pad\+\_\+added\+\_\+handler}}
+\index{pad\+\_\+added\+\_\+handler@{pad\+\_\+added\+\_\+handler}!Recorder\+Player@{Recorder\+Player}}
+\subsubsection{\texorpdfstring{pad\+\_\+added\+\_\+handler()}{pad\_added\_handler()}}
+{\footnotesize\ttfamily void Recorder\+Player\+::pad\+\_\+added\+\_\+handler (\begin{DoxyParamCaption}\item[{Gst\+Element $\ast$}]{src,  }\item[{Gst\+Pad $\ast$}]{new\+\_\+pad,  }\item[{\hyperlink{class_recorder_player}{Recorder\+Player} $\ast$}]{player }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recorder_player_aa7f1f74d987ad24366fddb6444d82b63}\label{class_recorder_player_aa7f1f74d987ad24366fddb6444d82b63}} 
+\index{Recorder\+Player@{Recorder\+Player}!play\+Stream@{play\+Stream}}
+\index{play\+Stream@{play\+Stream}!Recorder\+Player@{Recorder\+Player}}
+\subsubsection{\texorpdfstring{play\+Stream()}{playStream()}}
+{\footnotesize\ttfamily void Recorder\+Player\+::play\+Stream (\begin{DoxyParamCaption}\item[{string}]{uri }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{class_recorder_player_ad1bf2b3712c21b8d5c24f01b23a5c854}\label{class_recorder_player_ad1bf2b3712c21b8d5c24f01b23a5c854}} 
+\index{Recorder\+Player@{Recorder\+Player}!video\+Widget\+Draw\+\_\+cb@{video\+Widget\+Draw\+\_\+cb}}
+\index{video\+Widget\+Draw\+\_\+cb@{video\+Widget\+Draw\+\_\+cb}!Recorder\+Player@{Recorder\+Player}}
+\subsubsection{\texorpdfstring{video\+Widget\+Draw\+\_\+cb()}{videoWidgetDraw\_cb()}}
+{\footnotesize\ttfamily gboolean Recorder\+Player\+::video\+Widget\+Draw\+\_\+cb (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{cairo\+\_\+t $\ast$}]{cr,  }\item[{gpointer}]{user\+\_\+data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recorder_player_adac1a9507b04011782c05557220ef7f2}\label{class_recorder_player_adac1a9507b04011782c05557220ef7f2}} 
+\index{Recorder\+Player@{Recorder\+Player}!video\+Widget\+Realize\+\_\+cb@{video\+Widget\+Realize\+\_\+cb}}
+\index{video\+Widget\+Realize\+\_\+cb@{video\+Widget\+Realize\+\_\+cb}!Recorder\+Player@{Recorder\+Player}}
+\subsubsection{\texorpdfstring{video\+Widget\+Realize\+\_\+cb()}{videoWidgetRealize\_cb()}}
+{\footnotesize\ttfamily void Recorder\+Player\+::video\+Widget\+Realize\+\_\+cb (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{\hyperlink{class_recorder_player}{Recorder\+Player} $\ast$}]{player }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+\subsection{Данные класса}
+\mbox{\Hypertarget{class_recorder_player_a98cd2c8d5761cae28e518e529e5c310b}\label{class_recorder_player_a98cd2c8d5761cae28e518e529e5c310b}} 
+\index{Recorder\+Player@{Recorder\+Player}!bus@{bus}}
+\index{bus@{bus}!Recorder\+Player@{Recorder\+Player}}
+\subsubsection{\texorpdfstring{bus}{bus}}
+{\footnotesize\ttfamily Gst\+Bus$\ast$ Recorder\+Player\+::bus\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recorder_player_a9ad3716db3ce5c242a94eba40f74e059}\label{class_recorder_player_a9ad3716db3ce5c242a94eba40f74e059}} 
+\index{Recorder\+Player@{Recorder\+Player}!config@{config}}
+\index{config@{config}!Recorder\+Player@{Recorder\+Player}}
+\subsubsection{\texorpdfstring{config}{config}}
+{\footnotesize\ttfamily \hyperlink{class_recorder_config}{Recorder\+Config}$\ast$ Recorder\+Player\+::config}
+
+\mbox{\Hypertarget{class_recorder_player_a260ebe2ca2863452605bfcbb8c7db315}\label{class_recorder_player_a260ebe2ca2863452605bfcbb8c7db315}} 
+\index{Recorder\+Player@{Recorder\+Player}!dec@{dec}}
+\index{dec@{dec}!Recorder\+Player@{Recorder\+Player}}
+\subsubsection{\texorpdfstring{dec}{dec}}
+{\footnotesize\ttfamily Gst\+Element $\ast$ Recorder\+Player\+::dec}
+
+\mbox{\Hypertarget{class_recorder_player_aac0114349529d713c16b6efb4458fc6f}\label{class_recorder_player_aac0114349529d713c16b6efb4458fc6f}} 
+\index{Recorder\+Player@{Recorder\+Player}!depay@{depay}}
+\index{depay@{depay}!Recorder\+Player@{Recorder\+Player}}
+\subsubsection{\texorpdfstring{depay}{depay}}
+{\footnotesize\ttfamily Gst\+Element $\ast$ Recorder\+Player\+::depay}
+
+\mbox{\Hypertarget{class_recorder_player_a0e6d094f8295cefc578b76b55575efe5}\label{class_recorder_player_a0e6d094f8295cefc578b76b55575efe5}} 
+\index{Recorder\+Player@{Recorder\+Player}!parse@{parse}}
+\index{parse@{parse}!Recorder\+Player@{Recorder\+Player}}
+\subsubsection{\texorpdfstring{parse}{parse}}
+{\footnotesize\ttfamily Gst\+Element $\ast$ Recorder\+Player\+::parse}
+
+\mbox{\Hypertarget{class_recorder_player_afa8d3c3ed7c47d50aebaa0706b3b81b9}\label{class_recorder_player_afa8d3c3ed7c47d50aebaa0706b3b81b9}} 
+\index{Recorder\+Player@{Recorder\+Player}!pipeline@{pipeline}}
+\index{pipeline@{pipeline}!Recorder\+Player@{Recorder\+Player}}
+\subsubsection{\texorpdfstring{pipeline}{pipeline}}
+{\footnotesize\ttfamily Gst\+Element$\ast$ Recorder\+Player\+::pipeline}
+
+\mbox{\Hypertarget{class_recorder_player_a95c63aaccc7881e10b50b6f3020eeb3b}\label{class_recorder_player_a95c63aaccc7881e10b50b6f3020eeb3b}} 
+\index{Recorder\+Player@{Recorder\+Player}!scale@{scale}}
+\index{scale@{scale}!Recorder\+Player@{Recorder\+Player}}
+\subsubsection{\texorpdfstring{scale}{scale}}
+{\footnotesize\ttfamily Gst\+Element $\ast$ Recorder\+Player\+::scale}
+
+\mbox{\Hypertarget{class_recorder_player_a66c0560426b8ce256c4a1d5a930fbc5b}\label{class_recorder_player_a66c0560426b8ce256c4a1d5a930fbc5b}} 
+\index{Recorder\+Player@{Recorder\+Player}!sink@{sink}}
+\index{sink@{sink}!Recorder\+Player@{Recorder\+Player}}
+\subsubsection{\texorpdfstring{sink}{sink}}
+{\footnotesize\ttfamily Gst\+Element $\ast$ Recorder\+Player\+::sink}
+
+\mbox{\Hypertarget{class_recorder_player_a9d7939305cd8972f5c14ba3faff82488}\label{class_recorder_player_a9d7939305cd8972f5c14ba3faff82488}} 
+\index{Recorder\+Player@{Recorder\+Player}!src@{src}}
+\index{src@{src}!Recorder\+Player@{Recorder\+Player}}
+\subsubsection{\texorpdfstring{src}{src}}
+{\footnotesize\ttfamily Gst\+Element $\ast$ Recorder\+Player\+::src}
+
+\mbox{\Hypertarget{class_recorder_player_a88e14542c46c550d3366ce20c047dcef}\label{class_recorder_player_a88e14542c46c550d3366ce20c047dcef}} 
+\index{Recorder\+Player@{Recorder\+Player}!video\+Window@{video\+Window}}
+\index{video\+Window@{video\+Window}!Recorder\+Player@{Recorder\+Player}}
+\subsubsection{\texorpdfstring{video\+Window}{videoWindow}}
+{\footnotesize\ttfamily Gtk\+Widget$\ast$ Recorder\+Player\+::video\+Window\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_recorder_player_a2c788aa6e0c30a8333198f859ce21955}\label{class_recorder_player_a2c788aa6e0c30a8333198f859ce21955}} 
+\index{Recorder\+Player@{Recorder\+Player}!video\+Window\+Handle@{video\+Window\+Handle}}
+\index{video\+Window\+Handle@{video\+Window\+Handle}!Recorder\+Player@{Recorder\+Player}}
+\subsubsection{\texorpdfstring{video\+Window\+Handle}{videoWindowHandle}}
+{\footnotesize\ttfamily guintptr Recorder\+Player\+::video\+Window\+Handle = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+/home/jetson/controlroom/\+Studio/\+Recorder/include/\hyperlink{_recorder_2include_2player_8h}{player.\+h}\item 
+/home/jetson/controlroom/\+Studio/\+Recorder/src/\hyperlink{_recorder_2src_2player_8cpp}{player.\+cpp}\end{DoxyCompactItemize}

@@ -1,0 +1,92 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="namespacegpio">
+<title>gpio</title>
+        <section>
+            <title>Переменные</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>int <link linkend="namespacegpio_1a00bc49404c7d994457664d6352bb2779">stop</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>int <link linkend="namespacegpio_1ac4b0388fe69e716c5162432e3cdb535e">rec</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>int <link linkend="namespacegpio_1a6f3cdec53dcabbe77f454382ef596f33">menu</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>string <link linkend="namespacegpio_1acdd7abc8e2ded2f119524bc5e42af82e">key_r</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>string <link linkend="namespacegpio_1aab8c27a0b381c11af8ed5c638d612456">key_s</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>string <link linkend="namespacegpio_1af7fb6ee836b3b623fee0a157b4084380">key_m</link></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title>Функции</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="namespacegpio_1a163967890b998f0910bb0cefc45939ab">keypress</link> (
+key )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="namespacegpio_1a3d6472f268230baafcc5895596b07a6a">stop_cb</link> (
+channel )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="namespacegpio_1a29bb86ae5be5d1d6f4f2e8783480a8cd">rec_cb</link> (
+channel )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="namespacegpio_1a67087cfb10312de7d9b64c388777585f">menu_cb</link> (
+channel )</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>def <link linkend="namespacegpio_1ae76663bf79b1124596595094a9a95e5a">main</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+</section>

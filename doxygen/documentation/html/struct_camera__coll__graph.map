@@ -1,0 +1,4 @@
+<map id="Camera" name="Camera">
+<area shape="rect" id="node2" href="$class_player.html" title="The Player class. " alt="" coords="10,95,69,121"/>
+<area shape="rect" id="node3" href="$class_config.html" title="The Config class. " alt="" coords="9,5,69,32"/>
+</map>

@@ -1,0 +1,84 @@
+\hypertarget{network__monitor_8py}{}\section{Файл /home/jetson/controlroom/\+Studio/\+Network/src/network\+\_\+monitor.py}
+\label{network__monitor_8py}\index{/home/jetson/controlroom/\+Studio/\+Network/src/network\+\_\+monitor.\+py@{/home/jetson/controlroom/\+Studio/\+Network/src/network\+\_\+monitor.\+py}}
+\subsection*{Классы}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classnetwork__monitor_1_1_u_i_menu}{network\+\_\+monitor.\+U\+I\+Menu}
+\item 
+class \hyperlink{classnetwork__monitor_1_1_u_i_graph}{network\+\_\+monitor.\+U\+I\+Graph}
+\item 
+class \hyperlink{classnetwork__monitor_1_1_pinger}{network\+\_\+monitor.\+Pinger}
+\begin{DoxyCompactList}\small\item\em Пингует камеры \end{DoxyCompactList}\item 
+class \hyperlink{classnetwork__monitor_1_1_grapher}{network\+\_\+monitor.\+Grapher}
+\item 
+class \hyperlink{classnetwork__monitor_1_1_camera}{network\+\_\+monitor.\+Camera}
+\end{DoxyCompactItemize}
+\subsection*{Пространства имен}
+\begin{DoxyCompactItemize}
+\item 
+ \hyperlink{namespacenetwork__monitor}{network\+\_\+monitor}
+\end{DoxyCompactItemize}
+\subsection*{Функции}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespacenetwork__monitor_aa615228bd6f33e03eb168421f8980368}{network\+\_\+monitor.\+run\+Ping} ()
+\end{DoxyCompactItemize}
+\subsection*{Переменные}
+\begin{DoxyCompactItemize}
+\item 
+dictionary \hyperlink{namespacenetwork__monitor_a58f207986e588fcaab74394ee1cf1bcb}{network\+\_\+monitor.\+adresses}
+\item 
+\hyperlink{namespacenetwork__monitor_adbe4adbd468aaae0ca471744f30fa1f6}{network\+\_\+monitor.\+app} = Qt\+Widgets.\+Q\+Application(\mbox{[}$\,$\mbox{]})
+\item 
+\hyperlink{namespacenetwork__monitor_ab8b736e67d7a9e580ef5b8ee4fe938f3}{network\+\_\+monitor.\+menu} = U\+I\+Menu()
+\item 
+\hyperlink{namespacenetwork__monitor_aecaa32d63f4a4b3e0716b8fd40b8fb18}{network\+\_\+monitor.\+stylesheet} = open(\char`\"{}../ui/stylesheet.\+css\char`\"{}, \char`\"{}r\char`\"{})
+\item 
+\hyperlink{namespacenetwork__monitor_aab66b1b4dd31ec48a9682731a2c7bff0}{network\+\_\+monitor.\+display0} = Qt\+Widgets.\+Q\+Desktop\+Widget().screen\+Geometry(0)
+\item 
+\hyperlink{namespacenetwork__monitor_a699d5e9a412cebae671b9cd40b722391}{network\+\_\+monitor.\+graph} = U\+I\+Graph()
+\item 
+\hyperlink{namespacenetwork__monitor_a37cbe75c4a7a0a69b30c0137312e181d}{network\+\_\+monitor.\+display1} = Qt\+Widgets.\+Q\+Desktop\+Widget().screen\+Geometry(1)
+\item 
+\hyperlink{namespacenetwork__monitor_af816a5bcf89d9423a24881c39b602f90}{network\+\_\+monitor.\+widget} = graph.\+find\+Child(pg.\+Plot\+Widget, \char`\"{}plotwidget\char`\"{})
+\item 
+\hyperlink{namespacenetwork__monitor_a26e25ec561afa4ed83eebb64d67c1b14}{network\+\_\+monitor.\+plot} = widget.\+get\+Plot\+Item()
+\item 
+\hyperlink{namespacenetwork__monitor_a335a52bfad31ee0a6d975d8cb9e6db82}{network\+\_\+monitor.\+right\+Axis} = plot.\+get\+Axis(\textquotesingle{}right\textquotesingle{})
+\item 
+\hyperlink{namespacenetwork__monitor_ad712067b9115dc6d60b0ad48899312d0}{network\+\_\+monitor.\+left\+Axis} = plot.\+get\+Axis(\textquotesingle{}left\textquotesingle{})
+\item 
+dictionary \hyperlink{namespacenetwork__monitor_a7a1dfe61bcb6dea8bb5e51d87cfa6674}{network\+\_\+monitor.\+label\+Style} = \{\textquotesingle{}color\textquotesingle{}\+: \textquotesingle{}\#F\+FF\textquotesingle{}, \textquotesingle{}font-\/size\textquotesingle{}\+: \textquotesingle{}20pt\textquotesingle{}\}
+\item 
+\hyperlink{namespacenetwork__monitor_a093c6a470ae8f02c3ab41f344841d7b4}{network\+\_\+monitor.\+units}
+\item 
+\hyperlink{namespacenetwork__monitor_a3a49c4c8811caddc06b48cb72517bf6a}{network\+\_\+monitor.\+font} = Q\+Font()
+\item 
+\hyperlink{namespacenetwork__monitor_ab5dc49bb32143d840b5617593019b6cc}{network\+\_\+monitor.\+tick\+Font}
+\item 
+\hyperlink{namespacenetwork__monitor_aa6307605f5261f2cc1985c18b1d6b525}{network\+\_\+monitor.\+x}
+\item 
+\hyperlink{namespacenetwork__monitor_a21b2d9df8eef39c146e4d33a4d3ac153}{network\+\_\+monitor.\+True}
+\item 
+\hyperlink{namespacenetwork__monitor_a3d4b2bbe9932d5f533511dd894a99987}{network\+\_\+monitor.\+y}
+\item 
+\hyperlink{namespacenetwork__monitor_a0217c896f3b1258aa8de32cf83f58221}{network\+\_\+monitor.\+alpha}
+\item 
+\hyperlink{namespacenetwork__monitor_a6caf9d5fe8492a62de30cc09eb3d6ee0}{network\+\_\+monitor.\+grapher} = Grapher(plot)
+\item 
+list \hyperlink{namespacenetwork__monitor_a7033c08f9dae3f4784ace432524d7c3d}{network\+\_\+monitor.\+cams} = \mbox{[}$\,$\mbox{]}
+\item 
+int \hyperlink{namespacenetwork__monitor_acbaeef9dd38caeac7bfb4ce5cc555a68}{network\+\_\+monitor.\+i} = 0
+\item 
+\hyperlink{namespacenetwork__monitor_a068b20f337cc6bb4d8f773203ba1eb72}{network\+\_\+monitor.\+button} = menu.\+find\+Child(Qt\+Widgets.\+Q\+Push\+Button, \char`\"{}b\char`\"{} + str(i))
+\item 
+\hyperlink{namespacenetwork__monitor_a581e75b195d137edaf37a10c8f54f10b}{network\+\_\+monitor.\+label} = menu.\+find\+Child(Qt\+Widgets.\+Q\+Label, \char`\"{}l\char`\"{} + str(i))
+\item 
+\hyperlink{namespacenetwork__monitor_a1642786c603ba143d757e407619d4a18}{network\+\_\+monitor.\+camera} = \hyperlink{struct_camera}{Camera}(adresses\mbox{[}c\mbox{]}, button, label, grapher)
+\item 
+\hyperlink{namespacenetwork__monitor_af27fb18157e68ae57798c807d9a7ee63}{network\+\_\+monitor.\+threadpool} = Q\+Thread\+Pool()
+\item 
+\hyperlink{namespacenetwork__monitor_a6b419aa619e07e27f109ac81f356fbeb}{network\+\_\+monitor.\+ping\+Timer} = Q\+Timer()
+\item 
+\hyperlink{namespacenetwork__monitor_ad064e389b1b0120cadea8ef9d463f2da}{network\+\_\+monitor.\+pinger} = Pinger(cams)
+\end{DoxyCompactItemize}

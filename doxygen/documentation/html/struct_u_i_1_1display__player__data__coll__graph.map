@@ -1,0 +1,5 @@
+<map id="UI::display_player_data" name="UI::display_player_data">
+<area shape="rect" id="node2" href="$struct_camera.html" title="Camera" alt="" coords="128,184,196,211"/>
+<area shape="rect" id="node3" href="$class_player.html" title="The Player class. " alt="" coords="55,95,114,121"/>
+<area shape="rect" id="node4" href="$class_config.html" title="The Config class. " alt="" coords="55,5,115,32"/>
+</map>

@@ -1,0 +1,375 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="class_player">
+<title>Player class Reference</title>
+<para>
+    <programlisting>#include <link linkend="_operator_2_grid_2include_2player_8h">&lt;player.h&gt;</link></programlisting>
+</para>
+<para>Inheritance diagram for Player</para>
+<para>
+    <figure>
+        <title>Inheritance graph</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="class_player__inherit__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+<para>Collaboration diagram for Player</para>
+<para>
+    <figure>
+        <title>Collaboration graph</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="class_player__coll__graph.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+        <section>
+            <title>Открытые атрибуты</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>GstElement * pipeline</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>GstElement * src</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>GstElement * depay</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>GstElement * parse</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>GstElement * dec</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>GstElement * scale</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>GstElement * sink</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>Config * config</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title>Закрытые данные</title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>bool playing</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>string uri</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>string camName</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>GtkWidget * videoWindow</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>GstBus * bus</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>string platform</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>guintptr videoWindowHandle</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title></title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="class_player_1a0e17f3ec3397aa056d2ee88a060a7d36">Player</link> (
+GtkWidget * videoWindow, string platform, string uri, string camName)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="class_player_1a749d2c00e1fe0f5c2746f7505a58c062">~Player</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>void <link linkend="class_player_1a082180138fe92098aa9a1f51fd9ad40d">playStream</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>void <link linkend="class_player_1aa8396672dd38d93e1000b7b0f55e9c24">stopStream</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>bool <link linkend="class_player_1a370339dfdf9eb61905637283a72f9e22">isPlaying</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="class_player_1a4b179b1c59f780f59e215fa5642acb99">Player</link> (
+GtkWidget * videoWindow, <link linkend="class_config">Config</link> * config)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para> <link linkend="class_player_1a749d2c00e1fe0f5c2746f7505a58c062">~Player</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>void <link linkend="class_player_1a75c7257813c5f96bb2d8585dfc0c3025">playStream</link> (
+string uri)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title></title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>void <link linkend="class_player_1aca2616201a97a901612fd9df7a900ca1">buildPipeline</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>void <link linkend="class_player_1aca2616201a97a901612fd9df7a900ca1">buildPipeline</link> (
+)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+        <section>
+            <title></title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>static void <link linkend="class_player_1aeb024ba54089ecaf90753a6f6b8d07bc">videoWidgetRealize_cb</link> (
+GtkWidget * widget, <link linkend="class_player">Player</link> * player)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>static gboolean <link linkend="class_player_1a31a79db48e8ebebddacd1bd76bf16f3d">videoWidgetDraw_cb</link> (
+GtkWidget * widget, cairo_t * cr, gpointer user_data)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>static GstBusSyncReply <link linkend="class_player_1a987a5a6f6bf24f530536090e9a832ef6">busSyncHandler</link> (
+GstBus * bus, GstMessage * message, <link linkend="class_player">Player</link> * player)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>static void <link linkend="class_player_1a43527d455f9de17468deb13fef887854">pad_added_handler</link> (
+GstElement * src, GstPad * new_pad, <link linkend="class_player">Player</link> * player)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>static void <link linkend="class_player_1a6a18c90131b03493e506d50d16925436">videoWidgetRealize_cb</link> (
+GtkWidget * widget, <link linkend="class_player">Player</link> * player)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>static gboolean <link linkend="class_player_1a3e6f827b42b56e7685a66e739d643ecc">videoWidgetDraw_cb</link> (
+GtkWidget * widget, cairo_t * cr, gpointer user_data)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>static GstBusSyncReply <link linkend="class_player_1a4f4e39756894a693bc45515f9eeded97">busSyncHandler</link> (
+GstBus * bus, GstMessage * message, <link linkend="class_player">Player</link> * player)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>static void <link linkend="class_player_1a3e74802e5bf9b62f5a0908637ace1913">pad_added_handler</link> (
+GstElement * src, GstPad * new_pad, <link linkend="class_player">Player</link> * player)</para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+    <simplesect>
+
+<para>The <link linkend="class_player">Player</link> class. </para>
+    </simplesect>
+        <section>
+            <title>Данные класса</title>
+        </section>
+        <section>
+            <title>Данные класса</title>
+        </section>
+            <section xml:id="class_player_1a0e17f3ec3397aa056d2ee88a060a7d36">
+                <title>Player::Player (GtkWidget *videoWindow, string platform, string uri, string camName)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_player_1a749d2c00e1fe0f5c2746f7505a58c062">
+                <title>Player::~Player ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_player_1a082180138fe92098aa9a1f51fd9ad40d">
+                <title>void Player::playStream ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_player_1aa8396672dd38d93e1000b7b0f55e9c24">
+                <title>void Player::stopStream ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_player_1a370339dfdf9eb61905637283a72f9e22">
+                <title>bool Player::isPlaying ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_player_1a4b179b1c59f780f59e215fa5642acb99">
+                <title>Player::Player (GtkWidget *videoWindow, Config *config)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_player_1a749d2c00e1fe0f5c2746f7505a58c062">
+                <title>Player::~Player ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_player_1a75c7257813c5f96bb2d8585dfc0c3025">
+                <title>void Player::playStream (string uri)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_player_1aca2616201a97a901612fd9df7a900ca1">
+                <title>void Player::buildPipeline ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_player_1aca2616201a97a901612fd9df7a900ca1">
+                <title>void Player::buildPipeline ()</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_player_1aeb024ba54089ecaf90753a6f6b8d07bc">
+                <title>void Player::videoWidgetRealize_cb (GtkWidget *widget, Player *player)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_player_1a31a79db48e8ebebddacd1bd76bf16f3d">
+                <title>gboolean Player::videoWidgetDraw_cb (GtkWidget *widget, cairo_t *cr, gpointer user_data)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_player_1a987a5a6f6bf24f530536090e9a832ef6">
+                <title>GstBusSyncReply Player::busSyncHandler (GstBus *bus, GstMessage *message, Player *player)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_player_1a43527d455f9de17468deb13fef887854">
+                <title>void Player::pad_added_handler (GstElement *src, GstPad *new_pad, Player *player)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_player_1a6a18c90131b03493e506d50d16925436">
+                <title>static void Player::videoWidgetRealize_cb (GtkWidget *widget, Player *player)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_player_1a3e6f827b42b56e7685a66e739d643ecc">
+                <title>static gboolean Player::videoWidgetDraw_cb (GtkWidget *widget, cairo_t *cr, gpointer user_data)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_player_1a4f4e39756894a693bc45515f9eeded97">
+                <title>static GstBusSyncReply Player::busSyncHandler (GstBus *bus, GstMessage *message, Player *player)</title> <emphasis></emphasis>
+                
+            </section>
+            <section xml:id="class_player_1a3e74802e5bf9b62f5a0908637ace1913">
+                <title>static void Player::pad_added_handler (GstElement *src, GstPad *new_pad, Player *player)</title> <emphasis></emphasis>
+                
+            </section>
+</section>

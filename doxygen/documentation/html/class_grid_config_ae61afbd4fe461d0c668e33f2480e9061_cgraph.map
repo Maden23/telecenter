@@ -1,0 +1,5 @@
+<map id="GridConfig::GridConfig" name="GridConfig::GridConfig">
+<area shape="rect" id="node2" href="$class_grid_config.html#a33834786b69a7473552cfb025937c253" title="GridConfig::getCustomRooms" alt="" coords="208,5,407,32"/>
+<area shape="rect" id="node4" href="$class_grid_config.html#af0f79f5721c69162bebeeac5e3bdcf03" title="GridConfig::getGSuiteRooms" alt="" coords="211,56,403,83"/>
+<area shape="rect" id="node3" href="$class_grid_config.html#a7772860b1d46afff422f8208fcd45291" title="GridConfig::readRoomsFromFile" alt="" coords="455,31,665,57"/>
+</map>

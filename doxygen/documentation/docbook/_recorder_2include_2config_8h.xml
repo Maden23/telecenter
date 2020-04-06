@@ -1,0 +1,76 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<section xmlns="http://docbook.org/ns/docbook" version="5.0" xmlns:xlink="http://www.w3.org/1999/xlink" xml:id="_recorder_2include_2config_8h">
+    <title>config.h File Reference</title>
+    <programlisting>#include &quot;rapidjson/document.h&quot;</programlisting>
+    <programlisting>#include &quot;/home/jetson/controlroom/Studio/Recorder/include/rapidjson/reader.h&quot;</programlisting>
+    <programlisting>#include &quot;/home/jetson/controlroom/Studio/Recorder/include/rapidjson/allocators.h&quot;</programlisting>
+    <programlisting>#include &quot;/home/jetson/controlroom/Studio/Recorder/include/rapidjson/rapidjson.h&quot;</programlisting>
+    <programlisting>#include &lt;cstdlib&gt;</programlisting>
+    <programlisting>#include &lt;cstring&gt;</programlisting>
+    <programlisting>#include &lt;cassert&gt;</programlisting>
+    <programlisting>#include &quot;/home/jetson/controlroom/Studio/Recorder/include/rapidjson/stream.h&quot;</programlisting>
+    <programlisting>#include &quot;/home/jetson/controlroom/Studio/Recorder/include/rapidjson/encodings.h&quot;</programlisting>
+    <programlisting>#include &quot;/home/jetson/controlroom/Studio/Recorder/include/rapidjson/encodedstream.h&quot;</programlisting>
+    <programlisting>#include &quot;/home/jetson/controlroom/Studio/Recorder/include/rapidjson/memorystream.h&quot;</programlisting>
+    <programlisting>#include &quot;/home/jetson/controlroom/Studio/Recorder/include/rapidjson/internal/clzll.h&quot;</programlisting>
+    <programlisting>#include &quot;/home/jetson/controlroom/Studio/Recorder/include/rapidjson/internal/meta.h&quot;</programlisting>
+    <programlisting>#include &quot;/home/jetson/controlroom/Studio/Recorder/include/rapidjson/internal/stack.h&quot;</programlisting>
+    <programlisting>#include &quot;/home/jetson/controlroom/Studio/Recorder/include/rapidjson/internal/swap.h&quot;</programlisting>
+    <programlisting>#include &lt;cstddef&gt;</programlisting>
+    <programlisting>#include &quot;/home/jetson/controlroom/Studio/Recorder/include/rapidjson/internal/strtod.h&quot;</programlisting>
+    <programlisting>#include &quot;/home/jetson/controlroom/Studio/Recorder/include/rapidjson/internal/ieee754.h&quot;</programlisting>
+    <programlisting>#include &quot;/home/jetson/controlroom/Studio/Recorder/include/rapidjson/internal/biginteger.h&quot;</programlisting>
+    <programlisting>#include &quot;/home/jetson/controlroom/Studio/Recorder/include/rapidjson/internal/diyfp.h&quot;</programlisting>
+    <programlisting>#include &lt;limits&gt;</programlisting>
+    <programlisting>#include &quot;/home/jetson/controlroom/Studio/Recorder/include/rapidjson/internal/pow10.h&quot;</programlisting>
+    <programlisting>#include &lt;climits&gt;</programlisting>
+    <programlisting>#include &quot;/home/jetson/controlroom/Studio/Recorder/include/rapidjson/error/error.h&quot;</programlisting>
+    <programlisting>#include &quot;/home/jetson/controlroom/Studio/Recorder/include/rapidjson/internal/strfunc.h&quot;</programlisting>
+    <programlisting>#include &lt;cwchar&gt;</programlisting>
+    <programlisting>#include &lt;new&gt;</programlisting>
+    <programlisting>#include &lt;iterator&gt;</programlisting>
+    <programlisting>#include &quot;room.h&quot;</programlisting>
+    <programlisting>#include &lt;vector&gt;</programlisting>
+    <programlisting>#include &lt;map&gt;</programlisting>
+    <programlisting>#include &lt;string&gt;</programlisting>
+    <programlisting>#include &lt;algorithm&gt;</programlisting>
+    <programlisting>#include &lt;fstream&gt;</programlisting>
+    <programlisting>#include &lt;iostream&gt;</programlisting>
+<para>Include dependency diagram for config.h</para>
+<para>
+    <figure>
+        <title>Dependency diagram</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="_recorder_2include_2config_8h__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+<para>Included by dependency diagram for config.h</para>
+<para>
+    <figure>
+        <title>Dependency diagram</title>
+        <mediaobject>
+            <imageobject>
+                <imagedata width="50%" align="center" valign="middle" scalefit="1" fileref="_recorder_2include_2config_8h__dep__incl.png"></imagedata>
+            </imageobject>
+        </mediaobject>
+    </figure>
+</para>
+        <section>
+            <title> Классы </title>
+            <para>
+                <itemizedlist>
+                    <listitem>
+                        <para>struct <link linkend="class_config">Config</link></para>
+<para><emphasis>Класс для хранения конфигурации</emphasis></para>
+                    </listitem>
+                </itemizedlist>
+            </para>
+        </section>
+    <simplesect>
+        <title>Подробное описание</title>
+    <para>Definition in file /home/jetson/controlroom/Studio/Recorder/include/config.h</para>
+    </simplesect>
+</section>

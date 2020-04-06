@@ -1,0 +1,230 @@
+\hypertarget{class_grid_u_i}{}\section{Класс Grid\+UI}
+\label{class_grid_u_i}\index{Grid\+UI@{Grid\+UI}}
+
+
+The \hyperlink{class_u_i}{UI} class.  
+
+
+
+
+{\ttfamily \#include $<$ui.\+h$>$}
+
+
+
+Граф связей класса Grid\+UI\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=143pt]{class_grid_u_i__coll__graph}
+\end{center}
+\end{figure}
+\subsection*{Классы}
+\begin{DoxyCompactItemize}
+\item 
+struct \hyperlink{struct_grid_u_i_1_1display__player__data}{display\+\_\+player\+\_\+data}
+\end{DoxyCompactItemize}
+\subsection*{Открытые члены}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_grid_u_i_a3fb2c00058a899778812018dea387e24}{Grid\+UI} (\hyperlink{class_grid_config}{Grid\+Config} $\ast$\hyperlink{class_grid_u_i_aa25b4477bce884bea5e53a1d8df61bd6}{config})
+\item 
+\hyperlink{class_grid_u_i_acc680397d82028287a7ba8e89598679f}{$\sim$\+Grid\+UI} ()
+\end{DoxyCompactItemize}
+\subsection*{Открытые атрибуты}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_grid_config}{Grid\+Config} $\ast$ \hyperlink{class_grid_u_i_aa25b4477bce884bea5e53a1d8df61bd6}{config}
+\item 
+string \hyperlink{class_grid_u_i_a2b04f88f8f2b63c60907a90a397fb4bb}{playing\+Cam\+Name} = \char`\"{}\char`\"{}
+\end{DoxyCompactItemize}
+\subsection*{Закрытые члены}
+\begin{DoxyCompactItemize}
+\item 
+int \hyperlink{class_grid_u_i_a14fa8dea460f6fe6fed54e8f267ecd4e}{init\+Styles} ()
+\item 
+Gtk\+Widget $\ast$ \hyperlink{class_grid_u_i_a343652c0de7cd608a047ebad38c7a46c}{window\+Init} (Gtk\+Builder $\ast$$\ast$builder, string glade\+File, string window\+Name)
+\item 
+void \hyperlink{class_grid_u_i_ae8dc93dea42ac08339f9e5b774ca9af4}{init\+Menu\+Widgets} ()
+\item 
+void \hyperlink{class_grid_u_i_a2bbb2ec1b28ee7bce2c59e2315576803}{init\+Cam\+Widgets} (int room\+\_\+n, vector$<$ \hyperlink{struct_camera}{Camera} $>$ $\ast$cams)
+\item 
+void \hyperlink{class_grid_u_i_aff8b9292dc0c25bd03ae543738859a26}{init\+Room\+Tab} (int room\+\_\+n, string room\+\_\+name)
+\item 
+string \hyperlink{class_grid_u_i_a73a5b4a63e6e6dd0b58b962295b8fa0f}{find\+IP} ()
+\end{DoxyCompactItemize}
+\subsection*{Закрытые статические члены}
+\begin{DoxyCompactItemize}
+\item 
+static int \hyperlink{class_grid_u_i_aacb45638d1ac54877cbc516ce220b361}{on\+\_\+show} (gpointer ui\+\_\+ptr)
+\item 
+static void \hyperlink{class_grid_u_i_a6d9d6f5fe5e1b00460f25d394920f977}{page\+Switched} (Gtk\+Widget $\ast$widget, G\+Param\+Spec $\ast$property, vector$<$ \hyperlink{class_room}{Room} $\ast$$>$ $\ast$\hyperlink{class_grid_u_i_ad23d09850beb8360fbeaaa434a38abb6}{rooms})
+\item 
+static void \hyperlink{class_grid_u_i_a11288c74a4c369aabb0ca17da1495a5d}{display\+Player} (Gtk\+Widget $\ast$widget, gpointer data)
+\item 
+static gboolean \hyperlink{class_grid_u_i_acb700da4a4b35b9a142eff7537a67d6e}{key\+Press} (Gtk\+Widget $\ast$widget, Gdk\+Event\+Key $\ast$event, \hyperlink{class_grid_u_i}{Grid\+UI} $\ast$ui)
+\end{DoxyCompactItemize}
+\subsection*{Закрытые данные}
+\begin{DoxyCompactItemize}
+\item 
+vector$<$ \hyperlink{class_room}{Room} $\ast$ $>$ $\ast$ \hyperlink{class_grid_u_i_ad23d09850beb8360fbeaaa434a38abb6}{rooms}
+\item 
+map$<$ \hyperlink{struct_camera}{Camera} $\ast$, \hyperlink{class_grid_player}{Grid\+Player} $\ast$ $>$ \hyperlink{class_grid_u_i_ad3e2be4552ccd81a5343687c10eae3f2}{players}
+\item 
+Gtk\+Builder $\ast$ \hyperlink{class_grid_u_i_a1bea8d64764771e939fd8732648e111b}{menu\+Builder}
+\item 
+Gtk\+Widget $\ast$ \hyperlink{class_grid_u_i_a26d32f32c581df9a247a730780a7ea73}{menu\+Window}
+\end{DoxyCompactItemize}
+
+
+\subsection{Подробное описание}
+The \hyperlink{class_u_i}{UI} class. 
+
+\subsection{Конструктор(ы)}
+\mbox{\Hypertarget{class_grid_u_i_a3fb2c00058a899778812018dea387e24}\label{class_grid_u_i_a3fb2c00058a899778812018dea387e24}} 
+\index{Grid\+UI@{Grid\+UI}!Grid\+UI@{Grid\+UI}}
+\index{Grid\+UI@{Grid\+UI}!Grid\+UI@{Grid\+UI}}
+\subsubsection{\texorpdfstring{Grid\+U\+I()}{GridUI()}}
+{\footnotesize\ttfamily Grid\+U\+I\+::\+Grid\+UI (\begin{DoxyParamCaption}\item[{\hyperlink{class_grid_config}{Grid\+Config} $\ast$}]{config }\end{DoxyParamCaption})}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_grid_u_i_a3fb2c00058a899778812018dea387e24_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_grid_u_i_acc680397d82028287a7ba8e89598679f}\label{class_grid_u_i_acc680397d82028287a7ba8e89598679f}} 
+\index{Grid\+UI@{Grid\+UI}!````~Grid\+UI@{$\sim$\+Grid\+UI}}
+\index{````~Grid\+UI@{$\sim$\+Grid\+UI}!Grid\+UI@{Grid\+UI}}
+\subsubsection{\texorpdfstring{$\sim$\+Grid\+U\+I()}{~GridUI()}}
+{\footnotesize\ttfamily Grid\+U\+I\+::$\sim$\+Grid\+UI (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\subsection{Методы}
+\mbox{\Hypertarget{class_grid_u_i_a11288c74a4c369aabb0ca17da1495a5d}\label{class_grid_u_i_a11288c74a4c369aabb0ca17da1495a5d}} 
+\index{Grid\+UI@{Grid\+UI}!display\+Player@{display\+Player}}
+\index{display\+Player@{display\+Player}!Grid\+UI@{Grid\+UI}}
+\subsubsection{\texorpdfstring{display\+Player()}{displayPlayer()}}
+{\footnotesize\ttfamily void Grid\+U\+I\+::display\+Player (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{gpointer}]{data }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_grid_u_i_a73a5b4a63e6e6dd0b58b962295b8fa0f}\label{class_grid_u_i_a73a5b4a63e6e6dd0b58b962295b8fa0f}} 
+\index{Grid\+UI@{Grid\+UI}!find\+IP@{find\+IP}}
+\index{find\+IP@{find\+IP}!Grid\+UI@{Grid\+UI}}
+\subsubsection{\texorpdfstring{find\+I\+P()}{findIP()}}
+{\footnotesize\ttfamily string Grid\+U\+I\+::find\+IP (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_grid_u_i_a2bbb2ec1b28ee7bce2c59e2315576803}\label{class_grid_u_i_a2bbb2ec1b28ee7bce2c59e2315576803}} 
+\index{Grid\+UI@{Grid\+UI}!init\+Cam\+Widgets@{init\+Cam\+Widgets}}
+\index{init\+Cam\+Widgets@{init\+Cam\+Widgets}!Grid\+UI@{Grid\+UI}}
+\subsubsection{\texorpdfstring{init\+Cam\+Widgets()}{initCamWidgets()}}
+{\footnotesize\ttfamily void Grid\+U\+I\+::init\+Cam\+Widgets (\begin{DoxyParamCaption}\item[{int}]{room\+\_\+n,  }\item[{vector$<$ \hyperlink{struct_camera}{Camera} $>$ $\ast$}]{cams }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=348pt]{class_grid_u_i_a2bbb2ec1b28ee7bce2c59e2315576803_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_grid_u_i_ae8dc93dea42ac08339f9e5b774ca9af4}\label{class_grid_u_i_ae8dc93dea42ac08339f9e5b774ca9af4}} 
+\index{Grid\+UI@{Grid\+UI}!init\+Menu\+Widgets@{init\+Menu\+Widgets}}
+\index{init\+Menu\+Widgets@{init\+Menu\+Widgets}!Grid\+UI@{Grid\+UI}}
+\subsubsection{\texorpdfstring{init\+Menu\+Widgets()}{initMenuWidgets()}}
+{\footnotesize\ttfamily void Grid\+U\+I\+::init\+Menu\+Widgets (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_grid_u_i_ae8dc93dea42ac08339f9e5b774ca9af4_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_grid_u_i_aff8b9292dc0c25bd03ae543738859a26}\label{class_grid_u_i_aff8b9292dc0c25bd03ae543738859a26}} 
+\index{Grid\+UI@{Grid\+UI}!init\+Room\+Tab@{init\+Room\+Tab}}
+\index{init\+Room\+Tab@{init\+Room\+Tab}!Grid\+UI@{Grid\+UI}}
+\subsubsection{\texorpdfstring{init\+Room\+Tab()}{initRoomTab()}}
+{\footnotesize\ttfamily void Grid\+U\+I\+::init\+Room\+Tab (\begin{DoxyParamCaption}\item[{int}]{room\+\_\+n,  }\item[{string}]{room\+\_\+name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_grid_u_i_a14fa8dea460f6fe6fed54e8f267ecd4e}\label{class_grid_u_i_a14fa8dea460f6fe6fed54e8f267ecd4e}} 
+\index{Grid\+UI@{Grid\+UI}!init\+Styles@{init\+Styles}}
+\index{init\+Styles@{init\+Styles}!Grid\+UI@{Grid\+UI}}
+\subsubsection{\texorpdfstring{init\+Styles()}{initStyles()}}
+{\footnotesize\ttfamily int Grid\+U\+I\+::init\+Styles (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_grid_u_i_acb700da4a4b35b9a142eff7537a67d6e}\label{class_grid_u_i_acb700da4a4b35b9a142eff7537a67d6e}} 
+\index{Grid\+UI@{Grid\+UI}!key\+Press@{key\+Press}}
+\index{key\+Press@{key\+Press}!Grid\+UI@{Grid\+UI}}
+\subsubsection{\texorpdfstring{key\+Press()}{keyPress()}}
+{\footnotesize\ttfamily gboolean Grid\+U\+I\+::key\+Press (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{Gdk\+Event\+Key $\ast$}]{event,  }\item[{\hyperlink{class_grid_u_i}{Grid\+UI} $\ast$}]{ui }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_grid_u_i_aacb45638d1ac54877cbc516ce220b361}\label{class_grid_u_i_aacb45638d1ac54877cbc516ce220b361}} 
+\index{Grid\+UI@{Grid\+UI}!on\+\_\+show@{on\+\_\+show}}
+\index{on\+\_\+show@{on\+\_\+show}!Grid\+UI@{Grid\+UI}}
+\subsubsection{\texorpdfstring{on\+\_\+show()}{on\_show()}}
+{\footnotesize\ttfamily int Grid\+U\+I\+::on\+\_\+show (\begin{DoxyParamCaption}\item[{gpointer}]{ui\+\_\+ptr }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+Граф вызовов\+:\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{class_grid_u_i_aacb45638d1ac54877cbc516ce220b361_cgraph}
+\end{center}
+\end{figure}
+\mbox{\Hypertarget{class_grid_u_i_a6d9d6f5fe5e1b00460f25d394920f977}\label{class_grid_u_i_a6d9d6f5fe5e1b00460f25d394920f977}} 
+\index{Grid\+UI@{Grid\+UI}!page\+Switched@{page\+Switched}}
+\index{page\+Switched@{page\+Switched}!Grid\+UI@{Grid\+UI}}
+\subsubsection{\texorpdfstring{page\+Switched()}{pageSwitched()}}
+{\footnotesize\ttfamily void Grid\+U\+I\+::page\+Switched (\begin{DoxyParamCaption}\item[{Gtk\+Widget $\ast$}]{widget,  }\item[{G\+Param\+Spec $\ast$}]{property,  }\item[{vector$<$ \hyperlink{class_room}{Room} $\ast$$>$ $\ast$}]{rooms }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_grid_u_i_a343652c0de7cd608a047ebad38c7a46c}\label{class_grid_u_i_a343652c0de7cd608a047ebad38c7a46c}} 
+\index{Grid\+UI@{Grid\+UI}!window\+Init@{window\+Init}}
+\index{window\+Init@{window\+Init}!Grid\+UI@{Grid\+UI}}
+\subsubsection{\texorpdfstring{window\+Init()}{windowInit()}}
+{\footnotesize\ttfamily Gtk\+Widget $\ast$ Grid\+U\+I\+::window\+Init (\begin{DoxyParamCaption}\item[{Gtk\+Builder $\ast$$\ast$}]{builder,  }\item[{string}]{glade\+File,  }\item[{string}]{window\+Name }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\subsection{Данные класса}
+\mbox{\Hypertarget{class_grid_u_i_aa25b4477bce884bea5e53a1d8df61bd6}\label{class_grid_u_i_aa25b4477bce884bea5e53a1d8df61bd6}} 
+\index{Grid\+UI@{Grid\+UI}!config@{config}}
+\index{config@{config}!Grid\+UI@{Grid\+UI}}
+\subsubsection{\texorpdfstring{config}{config}}
+{\footnotesize\ttfamily \hyperlink{class_grid_config}{Grid\+Config}$\ast$ Grid\+U\+I\+::config}
+
+\mbox{\Hypertarget{class_grid_u_i_a1bea8d64764771e939fd8732648e111b}\label{class_grid_u_i_a1bea8d64764771e939fd8732648e111b}} 
+\index{Grid\+UI@{Grid\+UI}!menu\+Builder@{menu\+Builder}}
+\index{menu\+Builder@{menu\+Builder}!Grid\+UI@{Grid\+UI}}
+\subsubsection{\texorpdfstring{menu\+Builder}{menuBuilder}}
+{\footnotesize\ttfamily Gtk\+Builder$\ast$ Grid\+U\+I\+::menu\+Builder\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_grid_u_i_a26d32f32c581df9a247a730780a7ea73}\label{class_grid_u_i_a26d32f32c581df9a247a730780a7ea73}} 
+\index{Grid\+UI@{Grid\+UI}!menu\+Window@{menu\+Window}}
+\index{menu\+Window@{menu\+Window}!Grid\+UI@{Grid\+UI}}
+\subsubsection{\texorpdfstring{menu\+Window}{menuWindow}}
+{\footnotesize\ttfamily Gtk\+Widget$\ast$ Grid\+U\+I\+::menu\+Window\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_grid_u_i_ad3e2be4552ccd81a5343687c10eae3f2}\label{class_grid_u_i_ad3e2be4552ccd81a5343687c10eae3f2}} 
+\index{Grid\+UI@{Grid\+UI}!players@{players}}
+\index{players@{players}!Grid\+UI@{Grid\+UI}}
+\subsubsection{\texorpdfstring{players}{players}}
+{\footnotesize\ttfamily map$<$\hyperlink{struct_camera}{Camera}$\ast$, \hyperlink{class_grid_player}{Grid\+Player}$\ast$$>$ Grid\+U\+I\+::players\hspace{0.3cm}{\ttfamily [private]}}
+
+\mbox{\Hypertarget{class_grid_u_i_a2b04f88f8f2b63c60907a90a397fb4bb}\label{class_grid_u_i_a2b04f88f8f2b63c60907a90a397fb4bb}} 
+\index{Grid\+UI@{Grid\+UI}!playing\+Cam\+Name@{playing\+Cam\+Name}}
+\index{playing\+Cam\+Name@{playing\+Cam\+Name}!Grid\+UI@{Grid\+UI}}
+\subsubsection{\texorpdfstring{playing\+Cam\+Name}{playingCamName}}
+{\footnotesize\ttfamily string Grid\+U\+I\+::playing\+Cam\+Name = \char`\"{}\char`\"{}}
+
+\mbox{\Hypertarget{class_grid_u_i_ad23d09850beb8360fbeaaa434a38abb6}\label{class_grid_u_i_ad23d09850beb8360fbeaaa434a38abb6}} 
+\index{Grid\+UI@{Grid\+UI}!rooms@{rooms}}
+\index{rooms@{rooms}!Grid\+UI@{Grid\+UI}}
+\subsubsection{\texorpdfstring{rooms}{rooms}}
+{\footnotesize\ttfamily vector$<$\hyperlink{class_room}{Room}$\ast$$>$$\ast$ Grid\+U\+I\+::rooms\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Объявления и описания членов классов находятся в файлах\+:\begin{DoxyCompactItemize}
+\item 
+/home/jetson/controlroom/\+Studio/\+Operator/\+Grid/include/\hyperlink{_operator_2_grid_2include_2ui_8h}{ui.\+h}\item 
+/home/jetson/controlroom/\+Studio/\+Operator/\+Grid/src/\hyperlink{_operator_2_grid_2src_2ui_8cpp}{ui.\+cpp}\end{DoxyCompactItemize}

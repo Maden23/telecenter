@@ -1,0 +1,164 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.13"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Телецентр МИЭМ: Файл /home/jetson/controlroom/Studio/Recorder/include/recording.h</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript">
+  $(document).ready(initResizable);
+</script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Телецентр МИЭМ
+   </div>
+   <div id="projectbrief">19102</div>
+  </td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Создано системой Doxygen 1.8.13 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search",false,'Поиск');
+</script>
+<script type="text/javascript" src="menudata.js"></script>
+<script type="text/javascript" src="menu.js"></script>
+<script type="text/javascript">
+$(function() {
+  initMenu('',true,false,'search.php','Поиск');
+  $(document).ready(function() { init_search(); });
+});
+</script>
+<div id="main-nav"></div>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(document).ready(function(){initNavTree('recording_8h.html','');});
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="header">
+  <div class="summary">
+<a href="#nested-classes">Классы</a> &#124;
+<a href="#enum-members">Перечисления</a>  </div>
+  <div class="headertitle">
+<div class="title">Файл recording.h</div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><code>#include &lt;string&gt;</code><br />
+<code>#include &lt;gst/gst.h&gt;</code><br />
+<code>#include &lt;iostream&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Граф включаемых заголовочных файлов для recording.h:</div>
+<div class="dyncontent">
+<div class="center"><img src="recording_8h__incl.png" border="0" usemap="#_2home_2jetson_2controlroom_2_studio_2_recorder_2include_2recording_8h" alt=""/></div>
+</div>
+</div><div class="textblock"><div class="dynheader">
+Граф файлов, в которые включается этот файл:</div>
+<div class="dyncontent">
+<div class="center"><img src="recording_8h__dep__incl.png" border="0" usemap="#_2home_2jetson_2controlroom_2_studio_2_recorder_2include_2recording_8hdep" alt=""/></div>
+<map name="_2home_2jetson_2controlroom_2_studio_2_recorder_2include_2recording_8hdep" id="_2home_2jetson_2controlroom_2_studio_2_recorder_2include_2recording_8hdep">
+<area shape="rect" id="node2" href="recorder_8h.html" title="/home/jetson/controlroom\l/Studio/Recorder/include\l/recorder.h" alt="" coords="445,109,615,165"/>
+<area shape="rect" id="node9" href="recording_8cpp.html" title="/home/jetson/controlroom\l/Studio/Recorder/src/recording.cpp" alt="" coords="639,117,863,158"/>
+<area shape="rect" id="node3" href="_recorder_2include_2ui_8h.html" title="/home/jetson/controlroom\l/Studio/Recorder/include/ui.h" alt="" coords="320,213,511,255"/>
+<area shape="rect" id="node8" href="recorder_8cpp.html" title="/home/jetson/controlroom\l/Studio/Recorder/src/recorder.cpp" alt="" coords="535,213,754,255"/>
+<area shape="rect" id="node4" href="_operator_2_grid_2src_2main_8cpp.html" title="/home/jetson/controlroom\l/Studio/Operator/Grid/src\l/main.cpp" alt="" coords="5,303,175,359"/>
+<area shape="rect" id="node5" href="_operator_2_grid_2src_2ui_8cpp.html" title="/home/jetson/controlroom\l/Studio/Operator/Grid/src/ui.cpp" alt="" coords="199,310,405,351"/>
+<area shape="rect" id="node6" href="_recorder_2src_2main_8cpp.html" title="/home/jetson/controlroom\l/Studio/Recorder/src/main.cpp" alt="" coords="429,310,628,351"/>
+<area shape="rect" id="node7" href="_recorder_2src_2ui_8cpp.html" title="/home/jetson/controlroom\l/Studio/Recorder/src/ui.cpp" alt="" coords="653,310,834,351"/>
+</map>
+</div>
+</div>
+<p><a href="recording_8h_source.html">См. исходные тексты.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
+Классы</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_recording.html">Recording</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">The <a class="el" href="class_recording.html" title="The Recording class. ">Recording</a> class.  <a href="class_recording.html#details">Подробнее...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="enum-members"></a>
+Перечисления</h2></td></tr>
+<tr class="memitem:af9bff8ff1154a04a899276af806b8586"><td class="memItemLeft" align="right" valign="top">enum &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="recording_8h.html#af9bff8ff1154a04a899276af806b8586">status_t</a> { <a class="el" href="recording_8h.html#af9bff8ff1154a04a899276af806b8586a1061be6c3fb88d32829cba6f6b2be304">RUNNING</a>, 
+<a class="el" href="recording_8h.html#af9bff8ff1154a04a899276af806b8586a32fb07b4772ca4ee2861321344034f33">RELINKING</a>, 
+<a class="el" href="recording_8h.html#af9bff8ff1154a04a899276af806b8586a898cbaf2e64179c5cfdff4d10b3728c1">STOPPING</a>, 
+<a class="el" href="recording_8h.html#af9bff8ff1154a04a899276af806b8586a948b2aee15f52b421fa4770c47bcfe8c">STOPPED</a>
+ }</td></tr>
+<tr class="separator:af9bff8ff1154a04a899276af806b8586"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Перечисления</h2>
+<a id="af9bff8ff1154a04a899276af806b8586"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9bff8ff1154a04a899276af806b8586">&#9670;&nbsp;</a></span>status_t</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">enum <a class="el" href="recording_8h.html#af9bff8ff1154a04a899276af806b8586">status_t</a></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<table class="fieldtable">
+<tr><th colspan="2">Элементы перечислений</th></tr><tr><td class="fieldname"><a id="af9bff8ff1154a04a899276af806b8586a1061be6c3fb88d32829cba6f6b2be304"></a>RUNNING&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af9bff8ff1154a04a899276af806b8586a32fb07b4772ca4ee2861321344034f33"></a>RELINKING&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af9bff8ff1154a04a899276af806b8586a898cbaf2e64179c5cfdff4d10b3728c1"></a>STOPPING&#160;</td><td class="fielddoc"></td></tr>
+<tr><td class="fieldname"><a id="af9bff8ff1154a04a899276af806b8586a948b2aee15f52b421fa4770c47bcfe8c"></a>STOPPED&#160;</td><td class="fielddoc"></td></tr>
+</table>
+
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a class="el" href="dir_b2df46b3e07438c2f7bb907cd4fd47eb.html">Recorder</a></li><li class="navelem"><a class="el" href="dir_98a11d44d116def9db2ce41c2601f96b.html">include</a></li><li class="navelem"><a class="el" href="recording_8h.html">recording.h</a></li>
+    <li class="footer">Создано системой
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.13 </li>
+  </ul>
+</div>
+</body>
+</html>

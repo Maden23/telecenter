@@ -1,0 +1,273 @@
+\hypertarget{namespaceui}{}\section{Пространство имен ui}
+\label{namespaceui}\index{ui@{ui}}
+\subsection*{Классы}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{classui_1_1_camera}{Camera}
+\item 
+class \hyperlink{classui_1_1_grapher}{Grapher}
+\item 
+class \hyperlink{classui_1_1_pinger}{Pinger}
+\begin{DoxyCompactList}\small\item\em Пингует камеры \end{DoxyCompactList}\item 
+class \hyperlink{classui_1_1_u_i_graph}{U\+I\+Graph}
+\item 
+class \hyperlink{classui_1_1_u_i_menu}{U\+I\+Menu}
+\end{DoxyCompactItemize}
+\subsection*{Функции}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespaceui_ad062c21e9583db1aef2026bda2bfd294}{run\+Ping} ()
+\end{DoxyCompactItemize}
+\subsection*{Переменные}
+\begin{DoxyCompactItemize}
+\item 
+dictionary \hyperlink{namespaceui_aad45a9db615017fdd003dcd9e271a9b9}{adresses}
+\item 
+\hyperlink{namespaceui_aa319e24d35c85648c0d34ea8d6c77912}{app} = Qt\+Widgets.\+Q\+Application(\mbox{[}$\,$\mbox{]})
+\item 
+\hyperlink{namespaceui_a4852f8d0ec72ef9b0220e692e9c1d362}{menu} = \hyperlink{classui_1_1_u_i_menu}{U\+I\+Menu}()
+\item 
+\hyperlink{namespaceui_a622dff979fe009d0b7a0b5065a48eeb4}{stylesheet} = open(\char`\"{}../ui/stylesheet.\+css\char`\"{}, \char`\"{}r\char`\"{})
+\item 
+\hyperlink{namespaceui_a67d6f2ec81b00e7991565662f9e946f7}{display0} = Qt\+Widgets.\+Q\+Desktop\+Widget().screen\+Geometry(0)
+\item 
+\hyperlink{namespaceui_a0b8ac4e4d4aa6108a23039c53766f6f1}{graph} = \hyperlink{classui_1_1_u_i_graph}{U\+I\+Graph}()
+\item 
+\hyperlink{namespaceui_afb5a8d9a573e872a43b870282effe261}{display1} = Qt\+Widgets.\+Q\+Desktop\+Widget().screen\+Geometry(1)
+\item 
+\hyperlink{namespaceui_a7ddac767c5071a1d37d729710165cdd4}{widget} = graph.\+find\+Child(pg.\+Plot\+Widget, \char`\"{}plotwidget\char`\"{})
+\item 
+\hyperlink{namespaceui_a45f8c2fae5eb64cd2de3091bd3fc3ca8}{plot} = widget.\+get\+Plot\+Item()
+\item 
+\hyperlink{namespaceui_a0f719593f62467929abfbb1db46530a9}{right\+Axis} = plot.\+get\+Axis(\textquotesingle{}right\textquotesingle{})
+\item 
+\hyperlink{namespaceui_a253eda5cb3ca4d465c03c0efdcd850cd}{left\+Axis} = plot.\+get\+Axis(\textquotesingle{}left\textquotesingle{})
+\item 
+dictionary \hyperlink{namespaceui_abb44f579230c8104a085647cbfd74b4e}{label\+Style} = \{\textquotesingle{}color\textquotesingle{}\+: \textquotesingle{}\#F\+FF\textquotesingle{}, \textquotesingle{}\hyperlink{namespaceui_a30ed37eb10260adbcf97ae9f39bc5f8e}{font}-\/size\textquotesingle{}\+: \textquotesingle{}20pt\textquotesingle{}\}
+\item 
+\hyperlink{namespaceui_ae4eb85d01779e3357581532c19e8f6c9}{units}
+\item 
+\hyperlink{namespaceui_a30ed37eb10260adbcf97ae9f39bc5f8e}{font} = Q\+Font()
+\item 
+\hyperlink{namespaceui_a7a1d55977d90414ac9a33a4b2042ef52}{tick\+Font}
+\item 
+\hyperlink{namespaceui_a0031c57aa0841c20af5e52dc5634d026}{x}
+\item 
+\hyperlink{namespaceui_af8762a8410b6abe7b673bc2c8ef05784}{True}
+\item 
+\hyperlink{namespaceui_a21b97caebd553671413aa6d515e9a6dd}{y}
+\item 
+\hyperlink{namespaceui_adc51f403edb0c2ba24343024b93644b0}{alpha}
+\item 
+\hyperlink{namespaceui_a93ae6b16cc6a8252e4bf5a5d2ed94aa6}{grapher} = \hyperlink{classui_1_1_grapher}{Grapher}(\hyperlink{namespaceui_a45f8c2fae5eb64cd2de3091bd3fc3ca8}{plot})
+\item 
+list \hyperlink{namespaceui_a8e2392b67718029c7ae06c8e4f79b9dc}{cams} = \mbox{[}$\,$\mbox{]}
+\item 
+int \hyperlink{namespaceui_a864c62b3f0bd6745e0d18d87e70defe6}{i} = 0
+\item 
+\hyperlink{namespaceui_af6332480b18dc17e84cc4045f3330aac}{button} = menu.\+find\+Child(Qt\+Widgets.\+Q\+Push\+Button, \char`\"{}b\char`\"{} + str(\hyperlink{namespaceui_a864c62b3f0bd6745e0d18d87e70defe6}{i}))
+\item 
+\hyperlink{namespaceui_affd9697385ba4bf6c290a661c5a9b6cd}{label} = menu.\+find\+Child(Qt\+Widgets.\+Q\+Label, \char`\"{}l\char`\"{} + str(\hyperlink{namespaceui_a864c62b3f0bd6745e0d18d87e70defe6}{i}))
+\item 
+\hyperlink{namespaceui_afb37972e0352b1558875ce89d7fdc0ad}{camera} = \hyperlink{classui_1_1_camera}{Camera}(\hyperlink{namespaceui_aad45a9db615017fdd003dcd9e271a9b9}{adresses}\mbox{[}c\mbox{]}, \hyperlink{namespaceui_af6332480b18dc17e84cc4045f3330aac}{button}, \hyperlink{namespaceui_affd9697385ba4bf6c290a661c5a9b6cd}{label}, \hyperlink{namespaceui_a93ae6b16cc6a8252e4bf5a5d2ed94aa6}{grapher})
+\item 
+\hyperlink{namespaceui_af1457bf15aa8152a54da34956fe19382}{threadpool} = Q\+Thread\+Pool()
+\item 
+\hyperlink{namespaceui_a413340b69ea8a36f526ef691e1287f2c}{ping\+Timer} = Q\+Timer()
+\item 
+\hyperlink{namespaceui_ad6a1f0cb59203283f1891267696aaf6e}{pinger} = \hyperlink{classui_1_1_pinger}{Pinger}(\hyperlink{namespaceui_a8e2392b67718029c7ae06c8e4f79b9dc}{cams})
+\end{DoxyCompactItemize}
+
+
+\subsection{Функции}
+\mbox{\Hypertarget{namespaceui_ad062c21e9583db1aef2026bda2bfd294}\label{namespaceui_ad062c21e9583db1aef2026bda2bfd294}} 
+\index{ui@{ui}!run\+Ping@{run\+Ping}}
+\index{run\+Ping@{run\+Ping}!ui@{ui}}
+\subsubsection{\texorpdfstring{run\+Ping()}{runPing()}}
+{\footnotesize\ttfamily def ui.\+run\+Ping (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+\subsection{Переменные}
+\mbox{\Hypertarget{namespaceui_aad45a9db615017fdd003dcd9e271a9b9}\label{namespaceui_aad45a9db615017fdd003dcd9e271a9b9}} 
+\index{ui@{ui}!adresses@{adresses}}
+\index{adresses@{adresses}!ui@{ui}}
+\subsubsection{\texorpdfstring{adresses}{adresses}}
+{\footnotesize\ttfamily dictionary ui.\+adresses}
+
+{\bfseries Инициализатор}
+\begin{DoxyCode}
+1 =  \{
+2     \textcolor{stringliteral}{'51'}: \textcolor{stringliteral}{'172.18.200.51'},
+3     \textcolor{stringliteral}{'52'}: \textcolor{stringliteral}{'172.18.200.52'},
+4     \textcolor{stringliteral}{'53'}: \textcolor{stringliteral}{'172.18.200.53'},
+5     \textcolor{stringliteral}{'54'}: \textcolor{stringliteral}{'172.18.200.54'},
+6     \textcolor{stringliteral}{'55'}: \textcolor{stringliteral}{'172.18.200.55'},
+7     \textcolor{stringliteral}{'56'}: \textcolor{stringliteral}{'172.18.200.56'},
+8     \textcolor{stringliteral}{'30'}: \textcolor{stringliteral}{'172.18.199.30'},
+9     \textcolor{stringliteral}{'32'}: \textcolor{stringliteral}{'172.18.199.32'},
+10     \textcolor{stringliteral}{'42'}: \textcolor{stringliteral}{'192.168.15.42'},   
+11 \}
+\end{DoxyCode}
+\mbox{\Hypertarget{namespaceui_adc51f403edb0c2ba24343024b93644b0}\label{namespaceui_adc51f403edb0c2ba24343024b93644b0}} 
+\index{ui@{ui}!alpha@{alpha}}
+\index{alpha@{alpha}!ui@{ui}}
+\subsubsection{\texorpdfstring{alpha}{alpha}}
+{\footnotesize\ttfamily ui.\+alpha}
+
+\mbox{\Hypertarget{namespaceui_aa319e24d35c85648c0d34ea8d6c77912}\label{namespaceui_aa319e24d35c85648c0d34ea8d6c77912}} 
+\index{ui@{ui}!app@{app}}
+\index{app@{app}!ui@{ui}}
+\subsubsection{\texorpdfstring{app}{app}}
+{\footnotesize\ttfamily ui.\+app = Qt\+Widgets.\+Q\+Application(\mbox{[}$\,$\mbox{]})}
+
+\mbox{\Hypertarget{namespaceui_af6332480b18dc17e84cc4045f3330aac}\label{namespaceui_af6332480b18dc17e84cc4045f3330aac}} 
+\index{ui@{ui}!button@{button}}
+\index{button@{button}!ui@{ui}}
+\subsubsection{\texorpdfstring{button}{button}}
+{\footnotesize\ttfamily ui.\+button = menu.\+find\+Child(Qt\+Widgets.\+Q\+Push\+Button, \char`\"{}b\char`\"{} + str(\hyperlink{namespaceui_a864c62b3f0bd6745e0d18d87e70defe6}{i}))}
+
+\mbox{\Hypertarget{namespaceui_afb37972e0352b1558875ce89d7fdc0ad}\label{namespaceui_afb37972e0352b1558875ce89d7fdc0ad}} 
+\index{ui@{ui}!camera@{camera}}
+\index{camera@{camera}!ui@{ui}}
+\subsubsection{\texorpdfstring{camera}{camera}}
+{\footnotesize\ttfamily ui.\+camera = \hyperlink{classui_1_1_camera}{Camera}(\hyperlink{namespaceui_aad45a9db615017fdd003dcd9e271a9b9}{adresses}\mbox{[}c\mbox{]}, \hyperlink{namespaceui_af6332480b18dc17e84cc4045f3330aac}{button}, \hyperlink{namespaceui_affd9697385ba4bf6c290a661c5a9b6cd}{label}, \hyperlink{namespaceui_a93ae6b16cc6a8252e4bf5a5d2ed94aa6}{grapher})}
+
+\mbox{\Hypertarget{namespaceui_a8e2392b67718029c7ae06c8e4f79b9dc}\label{namespaceui_a8e2392b67718029c7ae06c8e4f79b9dc}} 
+\index{ui@{ui}!cams@{cams}}
+\index{cams@{cams}!ui@{ui}}
+\subsubsection{\texorpdfstring{cams}{cams}}
+{\footnotesize\ttfamily list ui.\+cams = \mbox{[}$\,$\mbox{]}}
+
+\mbox{\Hypertarget{namespaceui_a67d6f2ec81b00e7991565662f9e946f7}\label{namespaceui_a67d6f2ec81b00e7991565662f9e946f7}} 
+\index{ui@{ui}!display0@{display0}}
+\index{display0@{display0}!ui@{ui}}
+\subsubsection{\texorpdfstring{display0}{display0}}
+{\footnotesize\ttfamily ui.\+display0 = Qt\+Widgets.\+Q\+Desktop\+Widget().screen\+Geometry(0)}
+
+\mbox{\Hypertarget{namespaceui_afb5a8d9a573e872a43b870282effe261}\label{namespaceui_afb5a8d9a573e872a43b870282effe261}} 
+\index{ui@{ui}!display1@{display1}}
+\index{display1@{display1}!ui@{ui}}
+\subsubsection{\texorpdfstring{display1}{display1}}
+{\footnotesize\ttfamily ui.\+display1 = Qt\+Widgets.\+Q\+Desktop\+Widget().screen\+Geometry(1)}
+
+\mbox{\Hypertarget{namespaceui_a30ed37eb10260adbcf97ae9f39bc5f8e}\label{namespaceui_a30ed37eb10260adbcf97ae9f39bc5f8e}} 
+\index{ui@{ui}!font@{font}}
+\index{font@{font}!ui@{ui}}
+\subsubsection{\texorpdfstring{font}{font}}
+{\footnotesize\ttfamily ui.\+font = Q\+Font()}
+
+\mbox{\Hypertarget{namespaceui_a0b8ac4e4d4aa6108a23039c53766f6f1}\label{namespaceui_a0b8ac4e4d4aa6108a23039c53766f6f1}} 
+\index{ui@{ui}!graph@{graph}}
+\index{graph@{graph}!ui@{ui}}
+\subsubsection{\texorpdfstring{graph}{graph}}
+{\footnotesize\ttfamily ui.\+graph = \hyperlink{classui_1_1_u_i_graph}{U\+I\+Graph}()}
+
+\mbox{\Hypertarget{namespaceui_a93ae6b16cc6a8252e4bf5a5d2ed94aa6}\label{namespaceui_a93ae6b16cc6a8252e4bf5a5d2ed94aa6}} 
+\index{ui@{ui}!grapher@{grapher}}
+\index{grapher@{grapher}!ui@{ui}}
+\subsubsection{\texorpdfstring{grapher}{grapher}}
+{\footnotesize\ttfamily ui.\+grapher = \hyperlink{classui_1_1_grapher}{Grapher}(\hyperlink{namespaceui_a45f8c2fae5eb64cd2de3091bd3fc3ca8}{plot})}
+
+\mbox{\Hypertarget{namespaceui_a864c62b3f0bd6745e0d18d87e70defe6}\label{namespaceui_a864c62b3f0bd6745e0d18d87e70defe6}} 
+\index{ui@{ui}!i@{i}}
+\index{i@{i}!ui@{ui}}
+\subsubsection{\texorpdfstring{i}{i}}
+{\footnotesize\ttfamily int ui.\+i = 0}
+
+\mbox{\Hypertarget{namespaceui_affd9697385ba4bf6c290a661c5a9b6cd}\label{namespaceui_affd9697385ba4bf6c290a661c5a9b6cd}} 
+\index{ui@{ui}!label@{label}}
+\index{label@{label}!ui@{ui}}
+\subsubsection{\texorpdfstring{label}{label}}
+{\footnotesize\ttfamily ui.\+label = menu.\+find\+Child(Qt\+Widgets.\+Q\+Label, \char`\"{}l\char`\"{} + str(\hyperlink{namespaceui_a864c62b3f0bd6745e0d18d87e70defe6}{i}))}
+
+\mbox{\Hypertarget{namespaceui_abb44f579230c8104a085647cbfd74b4e}\label{namespaceui_abb44f579230c8104a085647cbfd74b4e}} 
+\index{ui@{ui}!label\+Style@{label\+Style}}
+\index{label\+Style@{label\+Style}!ui@{ui}}
+\subsubsection{\texorpdfstring{label\+Style}{labelStyle}}
+{\footnotesize\ttfamily dictionary ui.\+label\+Style = \{\textquotesingle{}color\textquotesingle{}\+: \textquotesingle{}\#F\+FF\textquotesingle{}, \textquotesingle{}\hyperlink{namespaceui_a30ed37eb10260adbcf97ae9f39bc5f8e}{font}-\/size\textquotesingle{}\+: \textquotesingle{}20pt\textquotesingle{}\}}
+
+\mbox{\Hypertarget{namespaceui_a253eda5cb3ca4d465c03c0efdcd850cd}\label{namespaceui_a253eda5cb3ca4d465c03c0efdcd850cd}} 
+\index{ui@{ui}!left\+Axis@{left\+Axis}}
+\index{left\+Axis@{left\+Axis}!ui@{ui}}
+\subsubsection{\texorpdfstring{left\+Axis}{leftAxis}}
+{\footnotesize\ttfamily ui.\+left\+Axis = plot.\+get\+Axis(\textquotesingle{}left\textquotesingle{})}
+
+\mbox{\Hypertarget{namespaceui_a4852f8d0ec72ef9b0220e692e9c1d362}\label{namespaceui_a4852f8d0ec72ef9b0220e692e9c1d362}} 
+\index{ui@{ui}!menu@{menu}}
+\index{menu@{menu}!ui@{ui}}
+\subsubsection{\texorpdfstring{menu}{menu}}
+{\footnotesize\ttfamily ui.\+menu = \hyperlink{classui_1_1_u_i_menu}{U\+I\+Menu}()}
+
+\mbox{\Hypertarget{namespaceui_ad6a1f0cb59203283f1891267696aaf6e}\label{namespaceui_ad6a1f0cb59203283f1891267696aaf6e}} 
+\index{ui@{ui}!pinger@{pinger}}
+\index{pinger@{pinger}!ui@{ui}}
+\subsubsection{\texorpdfstring{pinger}{pinger}}
+{\footnotesize\ttfamily ui.\+pinger = \hyperlink{classui_1_1_pinger}{Pinger}(\hyperlink{namespaceui_a8e2392b67718029c7ae06c8e4f79b9dc}{cams})}
+
+\mbox{\Hypertarget{namespaceui_a413340b69ea8a36f526ef691e1287f2c}\label{namespaceui_a413340b69ea8a36f526ef691e1287f2c}} 
+\index{ui@{ui}!ping\+Timer@{ping\+Timer}}
+\index{ping\+Timer@{ping\+Timer}!ui@{ui}}
+\subsubsection{\texorpdfstring{ping\+Timer}{pingTimer}}
+{\footnotesize\ttfamily ui.\+ping\+Timer = Q\+Timer()}
+
+\mbox{\Hypertarget{namespaceui_a45f8c2fae5eb64cd2de3091bd3fc3ca8}\label{namespaceui_a45f8c2fae5eb64cd2de3091bd3fc3ca8}} 
+\index{ui@{ui}!plot@{plot}}
+\index{plot@{plot}!ui@{ui}}
+\subsubsection{\texorpdfstring{plot}{plot}}
+{\footnotesize\ttfamily ui.\+plot = widget.\+get\+Plot\+Item()}
+
+\mbox{\Hypertarget{namespaceui_a0f719593f62467929abfbb1db46530a9}\label{namespaceui_a0f719593f62467929abfbb1db46530a9}} 
+\index{ui@{ui}!right\+Axis@{right\+Axis}}
+\index{right\+Axis@{right\+Axis}!ui@{ui}}
+\subsubsection{\texorpdfstring{right\+Axis}{rightAxis}}
+{\footnotesize\ttfamily ui.\+right\+Axis = plot.\+get\+Axis(\textquotesingle{}right\textquotesingle{})}
+
+\mbox{\Hypertarget{namespaceui_a622dff979fe009d0b7a0b5065a48eeb4}\label{namespaceui_a622dff979fe009d0b7a0b5065a48eeb4}} 
+\index{ui@{ui}!stylesheet@{stylesheet}}
+\index{stylesheet@{stylesheet}!ui@{ui}}
+\subsubsection{\texorpdfstring{stylesheet}{stylesheet}}
+{\footnotesize\ttfamily ui.\+stylesheet = open(\char`\"{}../ui/stylesheet.\+css\char`\"{}, \char`\"{}r\char`\"{})}
+
+\mbox{\Hypertarget{namespaceui_af1457bf15aa8152a54da34956fe19382}\label{namespaceui_af1457bf15aa8152a54da34956fe19382}} 
+\index{ui@{ui}!threadpool@{threadpool}}
+\index{threadpool@{threadpool}!ui@{ui}}
+\subsubsection{\texorpdfstring{threadpool}{threadpool}}
+{\footnotesize\ttfamily ui.\+threadpool = Q\+Thread\+Pool()}
+
+\mbox{\Hypertarget{namespaceui_a7a1d55977d90414ac9a33a4b2042ef52}\label{namespaceui_a7a1d55977d90414ac9a33a4b2042ef52}} 
+\index{ui@{ui}!tick\+Font@{tick\+Font}}
+\index{tick\+Font@{tick\+Font}!ui@{ui}}
+\subsubsection{\texorpdfstring{tick\+Font}{tickFont}}
+{\footnotesize\ttfamily ui.\+tick\+Font}
+
+\mbox{\Hypertarget{namespaceui_af8762a8410b6abe7b673bc2c8ef05784}\label{namespaceui_af8762a8410b6abe7b673bc2c8ef05784}} 
+\index{ui@{ui}!True@{True}}
+\index{True@{True}!ui@{ui}}
+\subsubsection{\texorpdfstring{True}{True}}
+{\footnotesize\ttfamily ui.\+True}
+
+\mbox{\Hypertarget{namespaceui_ae4eb85d01779e3357581532c19e8f6c9}\label{namespaceui_ae4eb85d01779e3357581532c19e8f6c9}} 
+\index{ui@{ui}!units@{units}}
+\index{units@{units}!ui@{ui}}
+\subsubsection{\texorpdfstring{units}{units}}
+{\footnotesize\ttfamily ui.\+units}
+
+\mbox{\Hypertarget{namespaceui_a7ddac767c5071a1d37d729710165cdd4}\label{namespaceui_a7ddac767c5071a1d37d729710165cdd4}} 
+\index{ui@{ui}!widget@{widget}}
+\index{widget@{widget}!ui@{ui}}
+\subsubsection{\texorpdfstring{widget}{widget}}
+{\footnotesize\ttfamily ui.\+widget = graph.\+find\+Child(pg.\+Plot\+Widget, \char`\"{}plotwidget\char`\"{})}
+
+\mbox{\Hypertarget{namespaceui_a0031c57aa0841c20af5e52dc5634d026}\label{namespaceui_a0031c57aa0841c20af5e52dc5634d026}} 
+\index{ui@{ui}!x@{x}}
+\index{x@{x}!ui@{ui}}
+\subsubsection{\texorpdfstring{x}{x}}
+{\footnotesize\ttfamily ui.\+x}
+
+\mbox{\Hypertarget{namespaceui_a21b97caebd553671413aa6d515e9a6dd}\label{namespaceui_a21b97caebd553671413aa6d515e9a6dd}} 
+\index{ui@{ui}!y@{y}}
+\index{y@{y}!ui@{ui}}
+\subsubsection{\texorpdfstring{y}{y}}
+{\footnotesize\ttfamily ui.\+y}
+
