@@ -11,7 +11,7 @@
 [[_TOC_]]
 
 # Документация
-
+[Документация исходного кода (Doxygen)](https://maden23.gitlab.io/telecenter)
 
 # Зависимости
 ### Зависимости для Recorder и Grid
