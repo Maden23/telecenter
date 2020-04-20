@@ -1,15 +1,17 @@
 #ifndef UI_H
 #define UI_H
 
+#include "config.h"
+#include "room.h"
+#include "player.h"
+#include "recorder.h"
+
 #include <iostream>
 #include <string>
 #include <unistd.h>
 #include <gtk/gtk.h>
 #include <gdk/gdk.h>
-#include "room.h"
-#include "config.h"
-#include "player.h"
-#include "recorder.h"zzz
+
 
 /* For finding IP */
 #include <cstdlib>
@@ -25,10 +27,15 @@
 
 using namespace std;
 
+/*!
+ * \brief The UI class
+ *
+ * @ingroup recorder
+ */
 class UI
 {
 public:
-	UI(Config *config);
+    UI(Config *config);
 	~UI();
     void displayRecordingStatus(string cam_id, bool status);
     Config *config;

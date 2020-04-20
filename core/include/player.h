@@ -21,11 +21,19 @@ struct PadData
 	GstElement *depay;
 };
 
+/*!
+ * \brief The Player class
+ *
+ * @ingroup grid
+ */
 class Player
 {
 public:
+    Player(GtkWidget* videoWindow, string platform);
     Player(GtkWidget* videoWindow, string platform, string uri, string camName);
-	~Player();
+    ~Player();
+
+    void setCam(string camName, string uri);
 
     void playStream();
     void stopStream();
@@ -40,19 +48,21 @@ private:
 	GtkWidget *videoWindow;
 	GstBus *bus;
     string platform;
+
+    void init();
 	void buildPipeline();
 
 	// Video rendering using GTK
 	guintptr videoWindowHandle = 0;
-	static void videoWidgetRealize_cb (GtkWidget *widget, Player *player);
+    static void videoWidgetRealize_cb (GtkWidget *widget, Player *player);
 	static gboolean videoWidgetDraw_cb (GtkWidget *widget, cairo_t *cr, gpointer user_data);
 
 
 	// Handelling bus messages (incuding 'prepare-window-handle' for rendering video)
-	static GstBusSyncReply busSyncHandler (GstBus *bus, GstMessage *message, Player *player);
+    static GstBusSyncReply busSyncHandler (GstBus *bus, GstMessage *message, Player *player);
 
 	// Dynamic source linking
-	static void pad_added_handler (GstElement * src, GstPad * new_pad, Player *player);
+    static void pad_added_handler (GstElement * src, GstPad * new_pad, Player *player);
 };
 
 

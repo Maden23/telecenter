@@ -32,7 +32,7 @@ UI::UI(Config *config)
 
     /* Find player and window elements to control*/
     initPlayerWidgets();
-    player = new Player(playerWidget, config);
+    player = new Player(playerWidget, config->getParam("platform"));
     initMenuWidgets();
 
     /* Add information to status bar */
@@ -333,7 +333,8 @@ void UI::displayPlayer(GtkWidget* widget, gpointer data)
     auto *context = (display_player_data*) data;
     // gtk_widget_show(context->playerWidget);
     // gtk_widget_show(context->playerLabel);
-    context->player->playStream(context->cam.uri);
+    context->player->setCam(context->cam.fullName, context->cam.uri);
+    context->player->playStream();
     *context->playingCamName = context->cam.fullName;
     gtk_label_set_text(GTK_LABEL(context->playerLabel), context->cam.fullName.c_str());
 

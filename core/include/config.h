@@ -2,7 +2,9 @@
 #define CONFIG_H
 
 #include "rapidjson/document.h"
-#include "room.h"
+#include "rapidjson/filereadstream.h"
+
+#include <room.h>
 #include <vector>
 #include <map>
 #include <string>
@@ -11,7 +13,7 @@
 #include <iostream>
 #include <algorithm>
 #include <cstdlib>
-
+#include <cstdio>
 
 using namespace std;
 
@@ -22,6 +24,10 @@ using namespace std;
 *       config->parseCamsFile("cams.conf") 
 *       config->getRooms() */
 
+/*!
+ * \brief The Config class
+ * @ingroup grid
+ */
 class Config
 {
 public:
@@ -42,7 +48,7 @@ public:
 private:
     Config();
     Config(const Config&);
-    Config& operator=(const Config&);   
+    Config& operator=(const Config&);
 
     void getGSuiteRooms();
     void getCustomRooms();

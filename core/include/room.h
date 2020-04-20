@@ -1,10 +1,10 @@
 #ifndef ROOM_H
 #define ROOM_H
 
+#include <player.h>
 #include <string>
 #include <vector>
 #include <gtk/gtk.h>
-#include <player.h>
 
 using namespace std;
 
@@ -18,7 +18,11 @@ struct Camera
     string uri;
     Player *player;
     GtkWidget *button;
+    //Grid
     GtkWidget *drawingArea;
+    //Recorder
+    GtkWidget *recImage;
+    bool record = false;
 };
 
 struct AudioSource
@@ -27,6 +31,10 @@ struct AudioSource
     string uri;
 };
 
+/*!
+ * \brief The Room class
+ * @ingroup grid
+ */
 class Room
 {
 public:

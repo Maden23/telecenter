@@ -19,10 +19,14 @@
 
 using namespace std; 
 
-/* Forks gstreamer pipelines for each recording
+/*! \brief Управляет процессом записи
+ *
+ * Forks gstreamer pipelines for each recording
  * Needs a stream id to start a recording 
  * Stores pids of running recorder processes
  * Stops recordings by stream id
+ *
+ * @ingroup recorder
  * */
 class Recorder
 {

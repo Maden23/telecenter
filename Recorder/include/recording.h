@@ -9,6 +9,10 @@ enum status_t
     RUNNING, RELINKING, STOPPING, STOPPED
 };
 
+/*!
+ * \brief The Recording class
+ * @ingroup recorder
+ */
 class Recording
 {
 public:

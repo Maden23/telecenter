@@ -20,5 +20,3 @@ __pycache__
 *.creator*
 *.includes
 *.pro
-
-rapidjson/

@@ -21,12 +21,16 @@
 
 using namespace std;
 
+/*!
+ * \brief The UI class
+ * @ingroup grid
+ */
 class UI
 {
 public:
-	UI(Config *config);
-	~UI();
-	Config *config;
+    UI(Config *config);
+    ~UI();
+    Config *config;
 	string playingCamName = ""; // empty if none playing
 	
 private:
