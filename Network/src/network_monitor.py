@@ -21,8 +21,12 @@ class UIGraph(QtWidgets.QWidget):
         uic.loadUi('../ui/graph.ui', self) # Load the .ui file
         self.show() # Show the GUI
 
+## @class Pinger
+# @brief Пингует камеры
+# @ingroup network_monitor
 class Pinger(QRunnable):
     """ Updates ping information """
+
     def __init__(self, camList):
         super(Pinger, self).__init__()
         self.camList = camList
