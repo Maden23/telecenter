@@ -29,7 +29,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="..">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-university"></i>
         </div>
@@ -38,12 +38,20 @@
 
       <!-- Divider -->
       <hr class="sidebar-divider my-0">
+      <div>
+        <h5 class="text-center mx-3 mt-2" style="color: white;">Recorder</h5>
+      </div>
 
       <!-- Nav Item - Dashboard -->
+      <li class="nav-item active">
+        <a class="nav-link" href="#">
+          <i class="fas fa-list"></i>
+          <span>Camera List</span></a>
+      </li>
       <li class="nav-item">
-        <a class="nav-link" href="/recorder">
-          <i class="fas fa-video"></i>
-          <span>Recorder</span></a>
+        <a class="nav-link disabled" href="#">
+          <i class="fas fa-wrench"></i>
+          <span>Recorder Settings</span></a>
       </li>
 
       <!-- Sidebar Toggler (Sidebar) -->
@@ -106,7 +114,7 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Welcome to MieMedia</h1>
+            <h1 class="h3 mb-0 text-gray-800">Camera List</h1>
           </div>
 
           <!-- Content Row -->
@@ -114,15 +122,129 @@
 
           </div>
 
-          <p class="mb-4">Thank you for choosing us!</p>
-          <div class="list-group">
-            <button type="button" class="list-group-item list-group-item-action active">
-              Available Services
-            </button>
-            <a href="/recorder" class="list-group-item list-group-item-action">
-              Recorder
-            </a>
+          <p class="mb-4">Here you can find a list of available cameras for recording.</p>
+
+
+          <!-- POST form messages -->
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+          <!-- End of POST form messages -->
+
+
+          <!-- Camera List Table -->
+          <div class="card shadow mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Available Cameras</h6>
+            </div>
+            <div class="card-body">
+              <div class="table-responsive">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr>
+                      <th>Camera name</th>
+                      <th>RTSP address</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>Camera name</th>
+                      <th>RTSP address</th>
+                      <th></th>
+                    </tr>
+                  </tfoot>
+                  <tbody>
+                    <!-- table buttons -->
+                    <a href="#ModalForm" class="btn btn-success mb-2" data-toggle="modal">
+                      <b>+</b> Add new camera
+                    </a>
+                    <a href="#ModalForm" class="btn btn-danger mb-2 ml-1" data-toggle="modal">
+                      <b>-</b> Delete all
+                    </a>
+                    {% for name, address in cams.items() %}
+                    <tr>
+                      <td> {{ name }} </td>
+                      <td> {{ address }} </td>
+                      <td> <a href="#ModalForm" class="btn btn-info" data-toggle="modal">
+                          Edit
+                        </a>
+                        <a href="#ModalForm" class="btn btn-danger" data-toggle="modal">
+                          Delete
+                        </a>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              </div>
+            </div>
           </div>
+          <!-- End of Camera List Table -->
+
+
+          <!-- Modal window to Add new camera -->
+          <div id="ModalForm" class="modal fade">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">New camera</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                  <div class="content-section">
+                    <form method="POST" action="">
+                      {{ form.hidden_tag() }} <!-- secret key protection -->
+                      <fieldset class="form-group">
+                        <div class="form-group">
+                          {{ form.cameraName.label(class="form-control-label") }}
+        
+                          {% if form.cameraName.errors %}
+                            {{ form.cameraName(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                              {% for error in form.cameraName.errors %}
+                                <span>{{ error }}</span>
+                              {% endfor %}
+                            </div>
+                          {% else %}
+                            {{ form.cameraName(class="form-control form-control-lg") }}
+                          {% endif %}
+                        </div>
+                        <div class="form-group">
+                          {{ form.rtspName.label(class="form-control-label") }}
+                                                
+                          {% if form.rtspName.errors %}
+                            {{ form.rtspName(class="form-control form-control-lg is-invalid") }}
+                            <div class="invalid-feedback">
+                              {% for error in form.rtspName.errors %}
+                                <span>{{ error }}</span>
+                              {% endfor %}
+                            </div>
+                          {% else %}
+                            {{ form.rtspName(class="form-control form-control-lg") }}
+                          {% endif %}
+
+                          <small id="rtspHelp" class="form-text text-muted">
+                            starts with rtsp://
+                          </small>
+                        </div>
+                      </fieldset>
+                      <div class="form-group">
+                        {{ form.submit(class="btn btn-outline-success") }}
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End of Modal window to Add new camera -->
 
         </div> <!-- /.container-fluid -->
 
