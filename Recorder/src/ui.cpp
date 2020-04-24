@@ -365,9 +365,10 @@ gboolean UI::keyPress(GtkWidget* widget, GdkEventKey *event, UI *ui)
         if (!picked) return false;
 
         // Record all cameras that were picked
-        for (auto room : *ui->rooms)
+        // !important: iterate with & if you want to pass cam pointer somewhere
+        for (auto &room : *ui->rooms)
         {
-            for (auto cam : *room->getCameras())
+            for (auto &cam : *room->getCameras())
             {
                 if(cam.record)
                 {

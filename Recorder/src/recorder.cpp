@@ -3,7 +3,7 @@
 Recorder::Recorder(Config *config)
 {
     this->config = config;
-    g_timeout_add(500, checkIfRecStopped, &runningRecordings);
+    g_timeout_add(500, checkIfRecStopped, this);
 }
 
 Recorder::~Recorder()
@@ -12,63 +12,12 @@ Recorder::~Recorder()
     for (auto &rec : runningRecordings)
     {
         cerr << "Stopping recording of " << rec.first << endl;
-        // kill(rec.second, SIGINT);
-        // waitpid(rec.second, nullptr, 0);
+
         rec.second->stop();
         delete rec.second;
     }
 }
 
-// pid_t Recorder::startRecording(string uri, string fileName)
-// {
-//     if (runningRecorders.find(uri) != runningRecorders.end())
-//     {
-//         cout << uri << " is already recording. PID: " << runningRecorders[uri] << endl << endl;;
-//         return false;
-//     }
-//     pid_t pid = fork();
-    
-//     if (pid == -1) {
-//         cerr << "Couldn't fork" << endl;
-//         perror("fork");
-//     }
-
-//     /* Create file name if not specified */
-//     if (fileName == "")
-//         {
-//             string stream = uri.substr(uri.find("@") + 1);
-//             char datetime[18];
-//             time_t t = time(nullptr);
-//             strftime(datetime, sizeof(datetime), "%d-%m-%Y_%H:%M", localtime(&t));
-//             fileName = stream + "_" + string(datetime) + ".mp4"; 
-//         }
-//     fileNames[uri] = fileName;
-
-//     if (pid == 0) {
-//         // string logsFile = config->getParam("saveToFolder") + "logs/" + to_string(getpid()) + ".logs";
-
-//         // int fd = open(logsFile.c_str(), O_RDWR | O_CREAT, S_IRUSR | S_IWUSR);
-
-//         // if(fd == -1) {
-//         //     perror("logs");
-//         // }
-
-//         // dup2(fd, 1);
-//         // dup2(fd, 2);
-
-//         execlp("gst-launch-1.0", "-e", "--quiet", "rtspsrc", ("location=" + uri).c_str(),
-//        "protocols=tcp", "!", "rtph264depay", "name=vdepay", "!", "mpegtsmux", "name=mux", 
-//        "!", "filesink", ("location=" + config->getParam("saveToFolder") + fileName).c_str(), nullptr);
-
-//     }
-//     else
-//     {
-//         runningRecorders[uri] = pid;
-//         cout << "Recording of " << uri << " started. Proccess id: " << pid << endl << endl;
-//     }
-
-//     return pid;
-// }
 
 bool Recorder::startRecording(Camera *cam)
 {
@@ -142,38 +91,43 @@ void Recorder::uploadVideo(string uri, string fileName)
 
 gboolean Recorder::checkIfRecStopped(gpointer data)  
 {
-    auto *runningRecordings = (map<Camera*, Recording*>*) data;
-    for (auto it = runningRecordings->cbegin(); it != runningRecordings->end();)
+    auto *recorder = (Recorder*) data;
+    for (auto it = recorder->runningRecordings.cbegin(); it != recorder->runningRecordings.end();)
     {
         /* If any recording has this status, it needs to be deleted, and it's video -- uploaded*/
         if (it->second->getStatus() == STOPPED)
         {
             cerr << "Recording of " << it->second->uri << " stopped." << endl;
-            string fileName = it->second->getFileName();
-            cerr << "File name: " << fileName << endl << endl;
-
+            vector<string> files = it->second->getFiles();
+            for (auto file : files)
+            {
+                cerr << "File name: " << file << endl << endl;
+            }
             // Turn off recImage widget
             gtk_widget_hide(it->first->recImage);
 
             delete it->second;
-            it = runningRecordings->erase(it);
+            it = recorder->runningRecordings.erase(it);
 
-            // pid_t pid = fork();
-            // if (pid == -1)   
-            // {
-            //     cerr << "Failed to fork" << endl;
-            //     cout << "Failed to start" << endl;
-            //     return false;
-            // }
-            // if (pid == 0)
-            // {
-            //     // Child process
-            //     uploadVideo(uri, fileName);
-            // }   
-            // else
-            // {
-            //     cout << "Called a python script" << endl;
-            // } 
+            for (auto file : files)
+            {
+                 pid_t pid = fork();
+                 if (pid == -1)
+                 {
+                     cerr << "Failed to fork" << endl;
+                     cout << "Failed to start" << endl;
+                     return false;
+                 }
+                 if (pid == 0)
+                 {
+                     // Child process
+                     recorder->uploadVideo(it->first->uri, file);
+                 }
+                 else
+                 {
+                     cout << "Called an upload script for " << file << endl;
+                 }
+             }
         }
         else
         { 
