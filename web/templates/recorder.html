@@ -12,11 +12,11 @@
   <title>Recorder - Camera List</title>
 
   <!-- Custom fonts for this template-->
-  <link href="static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+  <link href="/static/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
   <!-- Custom styles for this template-->
-  <link href="static/css/sb-admin-2.min.css" rel="stylesheet">
+  <link href="/static/css/sb-admin-2.min.css" rel="stylesheet">
 
 </head>
 
@@ -29,7 +29,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="..">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-university"></i>
         </div>
@@ -44,7 +44,7 @@
 
       <!-- Nav Item - Dashboard -->
       <li class="nav-item active">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="/recorder">
           <i class="fas fa-list"></i>
           <span>Camera List</span></a>
       </li>
@@ -78,8 +78,6 @@
             <i class="fa fa-bars"></i>
           </button>
 
-          </form>
-
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
 
@@ -89,7 +87,7 @@
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ name }}@miem.hse.ru</span>
-                <img class="img-profile rounded-circle" src="static/images/recorder.jpg">
+                <img class="img-profile rounded-circle" src="/static/images/recorder.jpg">
               </a>
               <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -168,16 +166,21 @@
                     <a href="#DeleteAllForm" class="btn btn-danger mb-2 ml-1" data-toggle="modal">
                       <b>-</b> Delete all
                     </a>
-                    {% for name, address in cams.items() %}
+                    {% for cameraID, name, address in cams %}
                     <tr>
+                      <!-- {{ loop.index0 }}  -->
                       <td> {{ name }} </td>
                       <td> {{ address }} </td>
-                      <td> <a href="#" class="btn btn-info disabled" data-toggle="modal">
+                      <td> 
+                        <a href="/recorder/edit/{{ cameraID }}" class="btn btn-info">
+                          Edit / Delete
+                        </a>
+                        <!-- <a href="#" class="btn btn-info disabled" data-toggle="modal">
                           Edit
                         </a>
-                        <a href="#" class="btn btn-danger disabled" data-toggle="modal">
+                        <a href="#DeleteCameraForm" class="btn btn-danger" data-toggle="modal">
                           Delete
-                        </a>
+                        </a> -->
                       </td>
                     </tr>
                     {% endfor %}
@@ -236,7 +239,7 @@
                         </div>
                       </fieldset>
                       <div class="form-group">
-                        {{ addForm.submit(class="btn btn-outline-success") }}
+                        {{ addForm.addSubmit(class="btn btn-outline-success") }}
                         <button type="button" class="btn btn-outline-danger ml-1" data-dismiss="modal">Cancel</button>
                       </div>
                     </form>
@@ -259,10 +262,10 @@
                 <div class="modal-body">
                   <div class="content-section">
                     <form method="POST" action="">
-                      {{ deleteForm.hidden_tag() }} <!-- secret key protection -->
+                      {{ deleteAllForm.hidden_tag() }} <!-- secret key protection -->
                       <h6>Do you wish to REMOVE <b>ALL</b> camera data from the table?</h6>
                       <div class="form-group mt-3">
-                        {{ deleteForm.submit(class="btn btn-outline-success") }}
+                        {{ deleteAllForm.deleteAllSubmit(class="btn btn-outline-success") }}
                         <button type="button" class="btn btn-outline-danger ml-1" data-dismiss="modal">Cancel</button>
                       </div>
                     </form>
@@ -272,6 +275,34 @@
             </div>
           </div>
           <!-- End of Modal window to Delete all cameras -->
+
+
+          <!-- Modal window to Delete specified camera -->
+          <div id="DeleteCameraForm" class="modal fade">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Delete camera</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                </div>
+                <div class="modal-body">
+                  <div class="content-section">
+                    <form method="POST" action="">
+                      {{ deleteCameraForm.csrf_token() }} <!-- secret key protection -->
+                      <h6>Do you wish to REMOVE camera data from the table?</h6>
+                      <!-- value = camID -->
+                      {{ deleteCameraForm.cameraID() }}
+                      <div class="form-group mt-3">
+                        {{ deleteCameraForm.deleteCameraSubmit(class="btn btn-outline-success") }}
+                        <button type="button" class="btn btn-outline-danger ml-1" data-dismiss="modal">Cancel</button>
+                      </div>
+                    </form>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- End of Modal window to Delete specified camera -->
 
 
         </div> <!-- /.container-fluid -->
@@ -324,26 +355,26 @@
   </div>
 
   <!-- Bootstrap core JavaScript-->
-  <script src="static/vendor/jquery/jquery.min.js"></script>
-  <script src="static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="/static/vendor/jquery/jquery.min.js"></script>
+  <script src="/static/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
   <!-- Core plugin JavaScript-->
-  <script src="static/vendor/jquery-easing/jquery.easing.min.js"></script>
+  <script src="/static/vendor/jquery-easing/jquery.easing.min.js"></script>
 
   <!-- Custom scripts for all pages-->
-  <script src="static/js/sb-admin-2.min.js"></script>
+  <script src="/static/js/sb-admin-2.min.js"></script>
 
   <!-- Page level plugins -->
-  <script src="static/vendor/chart.js/Chart.min.js"></script>
-  <script src="static/vendor/datatables/jquery.dataTables.min.js"></script>
-  <script src="static/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+  <script src="/static/vendor/chart.js/Chart.min.js"></script>
+  <script src="/static/vendor/datatables/jquery.dataTables.min.js"></script>
+  <script src="/static/vendor/datatables/dataTables.bootstrap4.min.js"></script>
 
   <!-- Page level custom scripts -->
-  <script src="static/demo/chart-area-demo.js"></script>
-  <script src="static/demo/chart-pie-demo.js"></script>
+  <script src="/static/demo/chart-area-demo.js"></script>
+  <script src="/static/demo/chart-pie-demo.js"></script>
 
   <!-- Table script -->
-  <script src="static/js/demo/datatables-demo.js"></script>
+  <script src="/static/js/demo/datatables-demo.js"></script>
 
 </body>
 

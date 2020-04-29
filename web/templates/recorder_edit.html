@@ -29,7 +29,7 @@
     <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
       <!-- Sidebar - Brand -->
-      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <a class="sidebar-brand d-flex align-items-center justify-content-center" href="/">
         <div class="sidebar-brand-icon rotate-n-15">
           <i class="fas fa-university"></i>
         </div>
@@ -38,12 +38,20 @@
 
       <!-- Divider -->
       <hr class="sidebar-divider my-0">
+      <div>
+        <h5 class="text-center mx-3 mt-2" style="color: white;">Recorder</h5>
+      </div>
 
       <!-- Nav Item - Dashboard -->
-      <li class="nav-item">
+      <li class="nav-item active">
         <a class="nav-link" href="/recorder">
-          <i class="fas fa-video"></i>
-          <span>Recorder</span></a>
+          <i class="fas fa-list"></i>
+          <span>Camera List</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" href="#">
+          <i class="fas fa-wrench"></i>
+          <span>Recorder Settings</span></a>
       </li>
 
       <!-- Sidebar Toggler (Sidebar) -->
@@ -69,8 +77,6 @@
           <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
             <i class="fa fa-bars"></i>
           </button>
-
-          </form>
 
           <!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
@@ -106,7 +112,7 @@
 
           <!-- Page Heading -->
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
-            <h1 class="h3 mb-0 text-gray-800">Welcome to MieMedia</h1>
+            <h1 class="h3 mb-0 text-gray-800">Edit Camera "{{ camera['name'] }}"</h1>
           </div>
 
           <!-- Content Row -->
@@ -114,15 +120,43 @@
 
           </div>
 
-          <p class="mb-4">Thank you for choosing us!</p>
-          <div class="list-group">
-            <button type="button" class="list-group-item list-group-item-action active">
-              Available Services
-            </button>
-            <a href="/recorder" class="list-group-item list-group-item-action">
-              Recorder
-            </a>
+          <!-- <p class="mb-4">Here you can find a list of available cameras for recording.</p> -->
+
+
+          <!-- POST form messages -->
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                  {{ message }}
+                </div>
+              {% endfor %}
+            {% endif %}
+          {% endwith %}
+          <!-- End of POST form messages -->
+
+
+          <div class="content-section">
+            <form method="POST" action="">
+              {{ editForm.hidden_tag() }} <!-- secret key protection -->
+              <fieldset class="form-group">
+                <div class="form-group">
+                  {{ editForm.cameraName.label(class="form-control-label") }}
+                  {{ editForm.cameraName(class="form-control form-control-lg", value=camera['name']) }}
+                </div>
+                <div class="form-group">
+                  {{ editForm.rtspName.label(class="form-control-label") }}
+                  {{ editForm.rtspName(class="form-control form-control-lg", value=camera['address']) }}
+                </div>
+              </fieldset>
+              <div class="form-group">
+                {{ editForm.editSubmit(class="btn btn-success") }}
+                {{ editForm.deleteSubmit(class="btn btn-danger ml-1") }}
+                <a href="/recorder"><button type="button" class="btn btn-info ml-1">Back</button></a>
+              </div>
+            </form>
           </div>
+
 
         </div> <!-- /.container-fluid -->
 
