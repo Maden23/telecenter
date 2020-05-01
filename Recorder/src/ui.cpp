@@ -57,7 +57,7 @@ UI::UI(Config *config)
     data.recorder = recorder;
     GtkWidget* GDriveIcon = (GtkWidget*) gtk_builder_get_object(menuBuilder, "GDriveIcon");
     data.GDriveIcon = GDriveIcon;
-    g_timeout_add_seconds(5, updateGDriveStatus, &data);
+    g_timeout_add(500, updateGDriveStatus, &data);
 
 	/* Init styles */
     int res = initStyles();

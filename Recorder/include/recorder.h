@@ -34,9 +34,6 @@ public:
     Recorder(Config *config);
     ~Recorder();
 
-    // map<string, pid_t> getRunningRecorders() { return runningRecorders; }
-
-    // pid_t startRecording(string uri, string fileName = "");
     map<Camera*, Recording*> getRunningRecordings() { return runningRecordings; }
     bool startRecording(Camera* cam);
     bool stopRecording(Camera* cam);
@@ -44,12 +41,14 @@ public:
     bool isGDriveUploadActive() { return runningGDriveUploads > 0; }
    
 private:
-    // map<string, pid_t> runningRecorders; //stream uri, pid
-    // map<string, string> fileNames; //stream uri, filename
     map<Camera*, Recording*> runningRecordings;
     Config *config;
 
     int runningGDriveUploads = 0;
-    void uploadVideo(string uri, string fileName);
-    static gboolean checkIfRecStopped(gpointer data);
+    struct uploadVideoAsyncData_t {
+        int *runningGDriveUploads;
+        vector<string> files;
+    };
+    static void *uploadVideoAsync(gpointer uploadVideoAsyncData);
+    static gboolean checkIfRecStopped(gpointer recorder_ptr);
 };

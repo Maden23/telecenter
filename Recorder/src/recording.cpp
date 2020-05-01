@@ -8,13 +8,13 @@ Recording::Recording(string uri, string folder, string camName, long timeout, lo
 	this->timeout = timeout;
     this->videoTimeLimit = videoTimeLimit;
     /* Create file name */
-    if (fileName == "")
+    if (fileNamePattern == "")
     {
 //        string stream = cam->uri.substr(cam->uri.find("@") + 1);
         char datetime[18];
         time_t t = time(nullptr);
         strftime(datetime, sizeof(datetime), "%d-%m-%Y_%H:%M", localtime(&t));
-        fileName = camName + "_" + string(datetime)+ "_%02d.mp4";
+        fileNamePattern = camName + "_" + string(datetime)+ "_%02d.mp4";
 //        fileName = stream + "_" + string(datetime) + ".mp4";
     }
 
@@ -146,7 +146,7 @@ bool Recording::buildPipeline()
             NULL);
     // Set properties for streaming time limit
     g_object_set(sink,
-                 "location", (folder+fileName).c_str(),
+                 "location", (folder+fileNamePattern).c_str(),
                  "max-size-time", videoTimeLimit,
                  "muxer-factory", "mpegtsmux",
                  NULL);
@@ -211,7 +211,7 @@ void Recording::pad_added_handler (GstElement * src, GstPad * new_pad, Recording
 	{       
         cerr << recording->camName << ": Linked source pad" << endl << endl;
 		// Add data probe to remember the last received video buffer time
-         gst_pad_add_probe(new_pad, GST_PAD_PROBE_TYPE_BUFFER, data_probe, recording, NULL);
+//         gst_pad_add_probe(new_pad, GST_PAD_PROBE_TYPE_BUFFER, data_probe, recording, NULL);
 	}
 
 }
@@ -423,7 +423,14 @@ GstBusSyncReply Recording::busSyncHandler (GstBus *bus, GstMessage *message, Rec
 		{
 			const GstStructure *s = gst_message_get_structure (message);
 			const gchar *name = gst_structure_get_name (s);
-			cout << name << endl << endl;
+            // Information from splitmuxsink that file is closed
+            // https://lists.freedesktop.org/archives/gstreamer-commits/2015-October/089738.html
+            if (0 == strcmp(name, "splitmuxsink-fragment-closed"))
+            {
+                const gchar *filename = gst_structure_get_string(s, "location");
+                cout << "New file: " << filename << endl << endl;
+                recording->files.push_back(filename);
+            }
 			break;
 		}
 		case GST_MESSAGE_EOS:

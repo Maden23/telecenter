@@ -44,7 +44,7 @@ bool Recorder::startRecording(Camera *cam)
     }
     long videolimit_ns = videolimit_s * 1000000000;
 
-    Recording *recording = new Recording(cam->uri, config->getParam("saveToFolder"), cam->name, timeout_ns, videolimit_ns);
+    Recording *recording = new Recording(cam->uri, config->getParam("saveToFolder"), cam->fullName, timeout_ns, videolimit_ns);
     if (!recording->start())
     {
         cerr << "Failed to start recording of " << cam->uri << endl << endl;
@@ -66,32 +66,33 @@ bool Recorder::stopRecording(Camera *cam)
         return false;
     }
 
-    // runningRecorders.erase(uri);
-
-    // uploadVideo(uri);
     runningRecordings[cam]->stop();
 
     return true;
 }
 
-void Recorder::uploadVideo(string uri, string fileName)
+void* Recorder::uploadVideoAsync(gpointer uploadVideoAsyncData)
 {
-    runningGDriveUploads++;
-    string command = "python3 src/video-upload.py";
-    command += " " + fileName;
-    command += " " + config->getParam("saveToFolder"); 
-    command += " &";
+    auto data = (uploadVideoAsyncData_t*) uploadVideoAsyncData;
+    for (auto fileName : data->files)
+    {
+        cerr << "Trying to upload " << fileName << endl << endl;
+        *(data->runningGDriveUploads) = *data->runningGDriveUploads + 1;
+        string command = "python3 src/video-upload.py";
+        command += " \"" + fileName + "\"";
 
-    // fileNames.erase(uri);
+        // fileNames.erase(uri);
 
-    cerr << "Running " << command << endl << endl;
-    system(command.c_str());
-    runningGDriveUploads--;
+        system(command.c_str());
+        cerr << "Completed upload of " << fileName << endl << endl;
+        *(data->runningGDriveUploads) = *data->runningGDriveUploads - 1;
+    }
 }
 
-gboolean Recorder::checkIfRecStopped(gpointer data)  
+gboolean Recorder::checkIfRecStopped(gpointer recorder_ptr)
 {
-    auto *recorder = (Recorder*) data;
+    auto *recorder = (Recorder*) recorder_ptr;
+    // Using iterators to be able to delete items
     for (auto it = recorder->runningRecordings.cbegin(); it != recorder->runningRecordings.end();)
     {
         /* If any recording has this status, it needs to be deleted, and it's video -- uploaded*/
@@ -106,28 +107,16 @@ gboolean Recorder::checkIfRecStopped(gpointer data)
             // Turn off recImage widget
             gtk_widget_hide(it->first->recImage);
 
+            // Upload files in new thread
+            uploadVideoAsyncData_t *data = new uploadVideoAsyncData_t();
+            *data = {.runningGDriveUploads = &(recorder->runningGDriveUploads),
+                     .files = files};
+            g_thread_new(it->first->name.c_str(), uploadVideoAsync, data);
+
+            // Delete Recording
             delete it->second;
             it = recorder->runningRecordings.erase(it);
 
-            for (auto file : files)
-            {
-                 pid_t pid = fork();
-                 if (pid == -1)
-                 {
-                     cerr << "Failed to fork" << endl;
-                     cout << "Failed to start" << endl;
-                     return false;
-                 }
-                 if (pid == 0)
-                 {
-                     // Child process
-                     recorder->uploadVideo(it->first->uri, file);
-                 }
-                 else
-                 {
-                     cout << "Called an upload script for " << file << endl;
-                 }
-             }
         }
         else
         { 

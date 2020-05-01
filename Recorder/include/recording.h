@@ -1,6 +1,7 @@
 #include <string>
 #include <gst/gst.h>
 #include <iostream>
+#include <vector>
 
 using namespace std;
 
@@ -19,7 +20,8 @@ public:
     Recording(string uri, string folder, string camName, long timeout, long videoTimeLimit);
 	~Recording();
 
-	string getFileName() { return fileName; }
+    string getFileNamePattern() { return fileNamePattern; }
+    vector<string> getFiles() { return files; }
 	status_t getStatus() { return status; }
 
 	bool start();
@@ -27,8 +29,9 @@ public:
 
 	status_t status;
 	
-    string uri, camName, fileName, folder;
+    string uri, camName, fileNamePattern, folder;
 private:
+    vector<string> files;
     long timeout, videoTimeLimit;
 	int freeze_check_id;
 	bool streamLinked;
