@@ -10,5 +10,6 @@ int main()
 {
 	freopen("single_stream.log","w", stdout);
 	freopen("single_stream_err.log","w", stderr);
-    SingleStreamUI ui();
+    SingleStreamUI *ui = new SingleStreamUI();
+    delete ui; //after gtk_main_quit
 }

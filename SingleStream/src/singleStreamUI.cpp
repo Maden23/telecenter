@@ -2,7 +2,6 @@
 
 SingleStreamUI::SingleStreamUI()
 {
-    cout << "HIII" << endl;
     gtk_init (nullptr, nullptr);
 
     /* Init windows */
@@ -32,7 +31,6 @@ SingleStreamUI::SingleStreamUI()
 
     g_signal_connect(playerWindow, "destroy", G_CALLBACK (gtk_main_quit), NULL);
     gtk_window_present(GTK_WINDOW(playerWindow));
-    cout << "START" << endl;
     
     gtk_main();
 
@@ -40,6 +38,7 @@ SingleStreamUI::SingleStreamUI()
 
 SingleStreamUI::~SingleStreamUI()
 {
+    delete player;
 }
 
 int SingleStreamUI::initStyles() {

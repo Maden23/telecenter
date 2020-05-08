@@ -18,7 +18,7 @@
 ##### GStreamer
 Фреймворк для работы с видео
 ````
-apt-get install libgstreamer1.0-0 gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav gstreamer1.0-doc gstreamer1.0-tools gstreamer1.0-x gstreamer1.0-alsa gstreamer1.0-gl gstreamer1.0-gtk3 gstreamer1.0-qt5 gstreamer1.0-pulseaudio
+apt-get install libgstreamer1.0-0 gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly libgstreamer-plugins-base1.0-dev gstreamer1.0-libav gstreamer1.0-doc gstreamer1.0-tools gstreamer1.0-x gstreamer1.0-alsa gstreamer1.0-gl gstreamer1.0-gtk3 gstreamer1.0-qt5 gstreamer1.0-pulseaudio
 ````
 
 ##### GTK+
@@ -52,9 +52,7 @@ pip3 install fping
 
     git clone https://git.miem.hse.ru/19102/telecenter.git
 
-####  3. Получить токены для сервисов Google
-
-####  4. Выполнить компиляцию (для Recorder и Grid)
+####  3. Выполнить компиляцию (для Recorder и Grid)
 ###### Перейти в директорию с нужной программой
 Для Recorder:
     
@@ -68,13 +66,15 @@ pip3 install fping
     make clean
     make
 
-####  5. Настроить платформу (только для Recorder)
+####  4. Настроить конфигурацию (только для Recorder)
 В файле Recorder/recorder.conf изменить параметр `platform`, в зависимости от аппаратной платформы, на которой планируется запускать программу:
 
 | Платформа | Значение |
 | ------    | ------ |
 | Nvidia Jetson Nano | `platform = jetson` |
 | Любая другая | `platform = other` |
+
+Также, необходимо изменить параметр `saveToFolder`, он задает директорию для сохранения видео.
 
 # Запуск
 ##### Запуск Recorder после [компиляции](#4-выполнить-компиляцию-для-recorder-и-grid)

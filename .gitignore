@@ -2,6 +2,7 @@
 obj/
 recorder
 grid
+singlestream
 __pycache__
 
 # Temp files

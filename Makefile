@@ -1,10 +1,6 @@
-CC = g++
+.PHONY: all clean core grid recorder singlestream
 
-OBJ = Recorder/obj Grid/obj
-
-.PHONY: all clean core grid recorder
-
-all: grid recorder
+all: grid recorder singlestream
 
 grid: 
 	$(MAKE) -C Grid
@@ -12,8 +8,11 @@ grid:
 recorder: 
 	$(MAKE) -C Recorder
 
+singlestream:
+	$(MAKE) -C SingleStream
 
 clean:
 	$(MAKE) -C Grid clean 
 	$(MAKE) -C Recorder clean 
+	$(MAKE) -C SingleStream clean
 
