@@ -39,7 +39,6 @@ $(TARGET): $(OBJS)
 # Функция для создания правил компиляции для заданной директории
 define generateRules
 $(1)/$(BUILDDIR)/%.o: $(1)/$(SOURCEDIR)/%.cpp
-	echo $(1)
 	$(CXX) $(INCLUDES) $(CFLAGS) -c $$< -g -o $$@
 endef
 

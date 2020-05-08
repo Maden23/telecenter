@@ -1,6 +1,6 @@
-#include "ui.h"
+#include "gridUI.h"
 
-UI::UI(Config *config)
+GridUI::GridUI(Config *config)
 {
     this->config = config;
     this->rooms = config->getRooms();
@@ -65,13 +65,13 @@ UI::UI(Config *config)
     gtk_main();
 }
 
-UI::~UI()
+GridUI::~GridUI()
 {
 }
 
-int UI::on_show(gpointer ui_ptr)
+int GridUI::on_show(gpointer ui_ptr)
 {
-    UI *ui = (UI*)ui_ptr;
+    GridUI *ui = (GridUI*)ui_ptr;
         /* Find window elements to control*/
         ui->initMenuWidgets();
 
@@ -89,7 +89,7 @@ int UI::on_show(gpointer ui_ptr)
     return 0;
 }
 
-int UI::initStyles() {
+int GridUI::initStyles() {
     GFile* css = g_file_new_for_path("ui/styles.css");
     if(css == nullptr) {
       std::cout << "File not found" << std::endl;
@@ -108,7 +108,7 @@ int UI::initStyles() {
     return 0;
 }
 
-GtkWidget* UI::windowInit(GtkBuilder** builder, string gladeFile, string windowName) {
+GtkWidget* GridUI::windowInit(GtkBuilder** builder, string gladeFile, string windowName) {
     ifstream f(gladeFile.c_str());
     if (!f.good())
     {
@@ -145,7 +145,7 @@ GtkWidget* UI::windowInit(GtkBuilder** builder, string gladeFile, string windowN
 }
 
 
-void UI::initMenuWidgets()
+void GridUI::initMenuWidgets()
 {
    /* Make custom cameras the tab #0 */
     for (auto room : *rooms)
@@ -184,7 +184,7 @@ void UI::initMenuWidgets()
     pageSwitched(GTK_WIDGET(stack), nullptr, rooms);
 }
 
-void UI::pageSwitched(GtkWidget *widget, GParamSpec *property, vector<Room*>* rooms)
+void GridUI::pageSwitched(GtkWidget *widget, GParamSpec *property, vector<Room*>* rooms)
 {
 //    auto rooms = (vector<Room*>*) data;
     string page = gtk_stack_get_visible_child_name (GTK_STACK(widget));
@@ -215,7 +215,7 @@ void UI::pageSwitched(GtkWidget *widget, GParamSpec *property, vector<Room*>* ro
     cerr << "Switched to " << rooms->at(pageNum - 1)->getName() << endl << endl;
 }
 
-void UI::initCamWidgets(int room_n, vector<Camera> *cams)
+void GridUI::initCamWidgets(int room_n, vector<Camera> *cams)
 {
 
     /* Find out how many cameras are known */
@@ -276,7 +276,7 @@ void UI::initCamWidgets(int room_n, vector<Camera> *cams)
     }   // for cams
 }
 
-void UI::initRoomTab(int room_n, string room_name)
+void GridUI::initRoomTab(int room_n, string room_name)
 {
     /* Show page */
     string name = "page" + to_string(room_n);
@@ -305,13 +305,13 @@ void UI::initRoomTab(int room_n, string room_name)
 
 }
 
-void UI::displayPlayer(GtkWidget* widget, gpointer data)
+void GridUI::displayPlayer(GtkWidget* widget, gpointer data)
 {
     auto *context = (display_player_data*) data;
     cout << "Pressed on " << context->cam.fullName << endl << endl;
 }
 
-gboolean UI::keyPress(GtkWidget* widget, GdkEventKey *event, UI *ui)
+gboolean GridUI::keyPress(GtkWidget* widget, GdkEventKey *event, GridUI *ui)
 {
     if (!ui->rooms) return false;
 
@@ -327,7 +327,7 @@ gboolean UI::keyPress(GtkWidget* widget, GdkEventKey *event, UI *ui)
     return true;
 }
 
-string UI::findIP()
+string GridUI::findIP()
 {
     char host[256];
     char *IP;

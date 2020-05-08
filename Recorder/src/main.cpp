@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <cstdio>
-#include "ui.h"
+#include "recorderUI.h"
 #include "config.h"
 
 using namespace std;
@@ -14,7 +14,7 @@ int main()
 	Config *config = &Config::get();
 	config->setFile("recorder.conf");
 
-	UI ui(config);
+    RecorderUI ui(config);
 
 
 	// Recorder recorder(config);

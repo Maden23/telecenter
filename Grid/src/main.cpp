@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 #include <cstdio>
-#include "ui.h"
+#include "gridUI.h"
 
 using namespace std;
 
@@ -14,5 +14,5 @@ int main()
 	Config *config = &Config::get();
     config->setFile("grid.conf");
 
-	UI ui(config);
+	GridUI ui(config);
 }

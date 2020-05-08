@@ -32,11 +32,11 @@ using namespace std;
  *
  * @ingroup recorder
  */
-class UI
+class RecorderUI
 {
 public:
-    UI(Config *config);
-	~UI();
+    RecorderUI(Config *config);
+    ~RecorderUI();
     void displayRecordingStatus(string cam_id, bool status);
     Config *config;
     Recorder *recorder;
@@ -83,7 +83,7 @@ private:
 //        vector<Room*>* rooms;
 //        Recorder *recorder;
 //    };
-    static gboolean keyPress(GtkWidget* widget, GdkEventKey *event, UI *ui);
+    static gboolean keyPress(GtkWidget* widget, GdkEventKey *event, RecorderUI *ui);
 
     struct switch_state_changed_data
     {

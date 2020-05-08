@@ -25,11 +25,11 @@ using namespace std;
  * \brief The UI class
  * @ingroup grid
  */
-class UI
+class GridUI
 {
 public:
-    UI(Config *config);
-    ~UI();
+    GridUI(Config *config);
+    ~GridUI();
     Config *config;
 	string playingCamName = ""; // empty if none playing
 	
@@ -62,7 +62,7 @@ private:
 //        vector<Room*>* rooms;
 //        Recorder *recorder;
 //    };
-    static gboolean keyPress(GtkWidget* widget, GdkEventKey *event, UI *ui);
+    static gboolean keyPress(GtkWidget* widget, GdkEventKey *event, GridUI *ui);
 
 };
 

@@ -1,6 +1,6 @@
-#include "ui.h"
+#include "recorderUI.h"
 
-UI::UI(Config *config)
+RecorderUI::RecorderUI(Config *config)
 {
     this->config = config;
     this->rooms = config->getRooms();
@@ -91,14 +91,14 @@ UI::UI(Config *config)
     gtk_main();
 }
 
-UI::~UI()
+RecorderUI::~RecorderUI()
 {
     delete player;
     delete recorder;
 }
 
 
-int UI::initStyles() {
+int RecorderUI::initStyles() {
     GFile* css = g_file_new_for_path("ui/styles.css");
     if(css == nullptr) {
       std::cout << "File not found" << std::endl;
@@ -117,7 +117,7 @@ int UI::initStyles() {
     return 0;
 }
 
-GtkWidget* UI::windowInit(GtkBuilder** builder, string gladeFile, string windowName) {
+GtkWidget* RecorderUI::windowInit(GtkBuilder** builder, string gladeFile, string windowName) {
     ifstream f(gladeFile.c_str());
     if (!f.good())
     {
@@ -153,7 +153,7 @@ GtkWidget* UI::windowInit(GtkBuilder** builder, string gladeFile, string windowN
     return window;
 }
 
-void UI::initPlayerWidgets()
+void RecorderUI::initPlayerWidgets()
 {
     /* Find drawing area*/
     playerWidget = (GtkWidget*)gtk_builder_get_object(playerBuilder, "playerWidget");
@@ -170,7 +170,7 @@ void UI::initPlayerWidgets()
     }
 }
 
-void UI::initMenuWidgets()
+void RecorderUI::initMenuWidgets()
 {
     /* Make custom cameras the tab #0 */
     for (auto room : *rooms)
@@ -210,7 +210,7 @@ void UI::initMenuWidgets()
     }
 }
 
-void UI::initCamWidgets(int room_n, vector<Camera> *cams)
+void RecorderUI::initCamWidgets(int room_n, vector<Camera> *cams)
 {
 
     /* Find out how many cameras are known */
@@ -285,7 +285,7 @@ void UI::initCamWidgets(int room_n, vector<Camera> *cams)
     }   // for cams
 }
 
-void UI::initRoomTab(int room_n, string room_name)
+void RecorderUI::initRoomTab(int room_n, string room_name)
 {
     /* Show page */
     string name = "page" + to_string(room_n);
@@ -328,7 +328,7 @@ void UI::initRoomTab(int room_n, string room_name)
 
 }
 
-void UI::displayPlayer(GtkWidget* widget, gpointer data)
+void RecorderUI::displayPlayer(GtkWidget* widget, gpointer data)
 {
     auto *context = (display_player_data*) data;
     // gtk_widget_show(context->playerWidget);
@@ -340,7 +340,7 @@ void UI::displayPlayer(GtkWidget* widget, gpointer data)
 
 }
 
-gboolean UI::keyPress(GtkWidget* widget, GdkEventKey *event, UI *ui)
+gboolean RecorderUI::keyPress(GtkWidget* widget, GdkEventKey *event, RecorderUI *ui)
 {
     if (!ui->rooms) return false;
 
@@ -393,7 +393,7 @@ gboolean UI::keyPress(GtkWidget* widget, GdkEventKey *event, UI *ui)
     return true;
 }
 
-void UI::editButtonClicked(GtkWidget* widget, vector<GtkWidget*> *switchGridV)
+void RecorderUI::editButtonClicked(GtkWidget* widget, vector<GtkWidget*> *switchGridV)
 {
     /* Turns on or off switches when edit button is clicked */
     for (auto switchGrid : *switchGridV)
@@ -402,7 +402,7 @@ void UI::editButtonClicked(GtkWidget* widget, vector<GtkWidget*> *switchGridV)
     }
 }
 
-string UI::findIP()
+string RecorderUI::findIP()
 {
     char host[256];
     char *IP;
@@ -417,7 +417,7 @@ string UI::findIP()
 }
 
 
-gboolean UI::updateGDriveStatus(gpointer user_data)
+gboolean RecorderUI::updateGDriveStatus(gpointer user_data)
 {
     gdrive_status_data *data = (gdrive_status_data*)user_data;
 
@@ -432,7 +432,7 @@ gboolean UI::updateGDriveStatus(gpointer user_data)
     return true;
 }
 
-void UI::switchStateChanged(GtkWidget* widget, gboolean state, gpointer user_data)
+void RecorderUI::switchStateChanged(GtkWidget* widget, gboolean state, gpointer user_data)
 {
     auto *data = (switch_state_changed_data*)user_data;
     /* If we are in recording state add this camera to recordings or stop, depending on the switch state */
