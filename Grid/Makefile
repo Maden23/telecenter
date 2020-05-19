@@ -14,7 +14,7 @@ BUILDDIR = obj
 # Создание списка директорий для исходного кода 
 SOURCEDIRS = $(foreach dir, $(DIRS), $(addsuffix /$(SOURCEDIR), $(dir)))
 INCLUDEDIRS = $(foreach dir, $(DIRS), $(addsuffix /$(INCLUDEDIR), $(dir)))
-TARGETDIRS = $(foreach dir, $(DIRS), $(addsuffix /$(BUILDDIR), $(dir))))
+TARGETDIRS = $(foreach dir, $(DIRS), $(addsuffix /$(BUILDDIR), $(dir)))
 # Дабавляем в VPATH, чтобы файлы искались во всех директориях
 VPATH = $(SOURCEDIRS)
 
