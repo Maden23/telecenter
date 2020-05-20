@@ -22,6 +22,8 @@ public:
     void subscribe(string topic);
     void unsubscribe (string topic);
 
+    void publish(string topic, string message);
+
     void passMessagesToQueue(GAsyncQueue *q);
 private:
     mqtt::client *client;

@@ -6,7 +6,10 @@ GridUI::GridUI(Config *config)
     this->rooms = config->getRooms();
 
     gtk_init (nullptr, nullptr);
-    
+
+    // MQTT
+    mqtt = new MqttClient("tcp://localhost:1883", "grid", {});
+
     /* Init windows */
     menuBuilder = nullptr;
     menuWindow = windowInit(&menuBuilder, "ui/menu.glade", "menu");
@@ -59,8 +62,6 @@ GridUI::GridUI(Config *config)
     g_signal_connect(menuWindow, "destroy", G_CALLBACK (gtk_main_quit), NULL);
 
 //    g_idle_add(on_show, this);
-
-    
 
     gtk_main();
 }
@@ -247,9 +248,9 @@ void GridUI::initCamWidgets(int room_n, vector<Camera> *cams)
 //        gtk_button_set_label(GTK_BUTTON(button), cam.name.c_str());
 
         /* Pass player and camName to click handler */
-        struct display_player_data *data = new struct display_player_data;
-        *data = {cam, &playingCamName};
-        g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(displayPlayer), data);
+        struct on_player_click_data *data = new struct on_player_click_data;
+        *data = {cam, mqtt};
+        g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(onPlayerClick), data);
 
         /* Add button to Camera struct */
         cam.button = button;
@@ -305,10 +306,11 @@ void GridUI::initRoomTab(int room_n, string room_name)
 
 }
 
-void GridUI::displayPlayer(GtkWidget* widget, gpointer data)
+void GridUI::onPlayerClick(GtkWidget* widget, gpointer data)
 {
-    auto *context = (display_player_data*) data;
+    auto *context = (on_player_click_data*) data;
     cout << "Pressed on " << context->cam.fullName << endl << endl;
+    context->mqtt->publish("operator/active_cam", context->cam.fullName + "," + context->cam.uri);
 }
 
 gboolean GridUI::keyPress(GtkWidget* widget, GdkEventKey *event, GridUI *ui)

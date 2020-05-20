@@ -9,6 +9,7 @@
 #include <gdk/gdk.h>
 #include "room.h"
 #include "player.h"
+#include "mqtt_client.h"
 
 /* For finding IP */
 #include <cstdlib>
@@ -31,7 +32,6 @@ public:
     GridUI(Config *config);
     ~GridUI();
     Config *config;
-	string playingCamName = ""; // empty if none playing
 	
 private:
     vector<Room*> *rooms;
@@ -50,12 +50,15 @@ private:
 	/* For status bar information */
 	string findIP();
 
-	struct display_player_data
+    /* Sending an MQTT message on player click */
+    struct on_player_click_data
 	{
         Camera cam;
-		string *playingCamName;
+        MqttClient *mqtt;
 	};
-	static void displayPlayer(GtkWidget* widget, gpointer data);
+    static void onPlayerClick(GtkWidget* widget, gpointer data);
+    MqttClient *mqtt;
+
 
 //    struct key_press_data
 //    {

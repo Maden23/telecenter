@@ -44,6 +44,30 @@ MqttClient::~MqttClient()
 
 }
 
+void MqttClient::publish(string topic, string message)
+{
+    if (!client->is_connected())
+    {
+        cout << "Lost MQTT connection. Attempting reconnect" << endl;
+        if (tryReconnect(client))
+        {
+            for (auto t : topics)
+            {
+                client->subscribe(t, 1); //topic, qos
+            }
+            cout << "Reconnected MQTT" << endl;
+        }
+        else
+        {
+             cout << "MQTT Reconnect failed." << endl;
+             return;
+        }
+    }
+    cout << "Sending MQTT message to " << topic << ":" << endl
+         << message << endl << endl;
+    client->publish(mqtt::message(topic.c_str(), message.c_str(), message.length()+1));
+}
+
 bool MqttClient::tryReconnect(mqtt::client* cli)
 {
     constexpr int N_ATTEMPT = 30;
@@ -71,11 +95,32 @@ void MqttClient::passMessagesToQueue(GAsyncQueue *q)
 
     // Receive messages
     while (true)
-    {
+    {/*
+        // Reconnecting if client disconnected
+        if (!client->is_connected())
+        {
+            cout << "Lost MQTT connection. Attempting reconnect" << endl;
+            if (tryReconnect(client))
+            {
+                for (auto t : topics)
+                {
+                    client->subscribe(t, 1); //topic, qos
+                }
+                cout << "Reconnected MQTT" << endl;
+                continue;
+            }
+            else
+            {
+                 cout << "MQTT Reconnect failed." << endl;
+            }
+        }*/
+
+        // Wait till message received
         auto msg = client->consume_message();
-        // If message is empty reconnecting
         if (!msg)
         {
+
+            // Reconnecting if client disconnected
             if (!client->is_connected())
             {
                 cout << "Lost MQTT connection. Attempting reconnect" << endl;
