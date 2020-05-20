@@ -119,8 +119,9 @@ void Player::buildPipeline()
 
 void Player::setCam(string camName, string uri)
 {
-	this->camName = camName;
-	this->uri = uri;
+    this->camName = camName;
+    this->uri = uri;
+    playStream();
 }
 
 

@@ -7,21 +7,26 @@ MqttClient::MqttClient(string broker, string client_id, vector<string> topics)
 	mqtt::connect_options connOpts;
 	connOpts.set_keep_alive_interval(20);
 	connOpts.set_clean_session(true);
+        client = new mqtt::client(broker, "");
 
-	client = new mqtt::async_client(broker, client_id);
-	callback cb(*client, connOpts, topics);
-	client->set_callback(cb);
 
 	// Start the connection.
 	// When completed, the callback will subscribe to topics.
 	try {
-		std::cout << "Connecting to the MQTT server..." << std::flush;
-		client->connect(connOpts, nullptr, cb);
+                cout << "Connecting to the MQTT server..." << flush;
+                client->connect(connOpts);
+                cout << "OK" << endl;
 	}
 	catch (const mqtt::exception&) {
-		std::cerr << "\nERROR: Unable to connect to MQTT server: '"
-			<< broker << "'" << std::endl;
+                cerr << "\nERROR: Unable to connect to MQTT server: '"
+                        << broker << "'" << endl;
 	}
+
+        for (auto t : topics)
+        {
+            client->subscribe(t);
+            cout << "Subscribed to topic: " << t << endl;
+        }
 
 }
 
@@ -29,13 +34,76 @@ MqttClient::~MqttClient()
 {
 	// Disconnect
 	try {
-		std::cout << "\nDisconnecting from the MQTT server..." << std::flush;
-		client->disconnect()->wait();
-		std::cout << "OK" << std::endl;
+                cout << "\nDisconnecting from the MQTT server..." << flush;
+                client->disconnect();
+                cout << "OK" << endl;
 	}
 	catch (const mqtt::exception& exc) {
-		std::cerr << exc.what() << std::endl;
+                cerr << exc.what() << endl;
 	}
 
-	delete client;
+}
+
+bool MqttClient::tryReconnect(mqtt::client* cli)
+{
+    constexpr int N_ATTEMPT = 30;
+
+    for (int i=0; i<N_ATTEMPT && !cli->is_connected(); ++i) {
+        try {
+            cli->reconnect();
+            return true;
+        }
+        catch (const mqtt::exception&) {
+            this_thread::sleep_for(chrono::seconds(1));
+        }
+    }
+    return false;
+}
+
+
+void MqttClient::passMessagesToQueue(GAsyncQueue *q)
+{
+    if (!q)
+    {
+        cerr << "Queue not provided for MQTT messages" << endl << endl;
+        return;
+    }
+
+    // Receive messages
+    while (true)
+    {
+        auto msg = client->consume_message();
+        // If message is empty reconnecting
+        if (!msg)
+        {
+            if (!client->is_connected())
+            {
+                cout << "Lost MQTT connection. Attempting reconnect" << endl;
+                if (tryReconnect(client))
+                {
+                    for (auto t : topics)
+                    {
+                        client->subscribe(t, 1); //topic, qos
+                    }
+                    cout << "Reconnected MQTT" << endl;
+                    continue;
+                }
+                else
+                {
+                     cout << "MQTT Reconnect failed." << endl;
+                }
+            }
+            else
+            {
+               cout << "An error occurred retrieving messages." << endl;
+            }
+            break;
+        }
+
+        // post message to queue
+        auto msg_data = new QueueMQTTMessage;
+        msg_data->topic = msg->get_topic(), // topic
+        msg_data->message = msg->to_string();  // message
+        g_async_queue_push(q, msg_data);
+    }
 }
