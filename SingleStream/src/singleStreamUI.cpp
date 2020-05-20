@@ -85,7 +85,7 @@ gpointer SingleStreamUI::parseQueue(gpointer data)
             // message format: camName,uri
             int split = msg->message.find(',');
             string camName = msg->message.substr(0, split);
-            string uri = msg->message.substr(split+1, msg->message.length() - split);
+            string uri = msg->message.substr(split, msg->message.length() - split);
             obj->player->setCam(camName, uri);
         }
     }
