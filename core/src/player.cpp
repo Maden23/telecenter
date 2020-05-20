@@ -128,10 +128,10 @@ void Player::setCam(string camName, string uri)
 void Player::playStream()
 {
 //    this->uri = uri;
-	gst_element_set_state (pipeline, GST_STATE_NULL);
+    gst_element_set_state (pipeline, GST_STATE_NULL);
     gst_element_unlink(src, depay);
 
-	cout << "Playing " << uri << endl << endl;
+    cout << "Playing " << uri << endl << endl;
     g_object_set (src, "location", (uri+"?width=640&height=480").c_str(), NULL);
 
     gst_element_set_state (pipeline, GST_STATE_PLAYING);

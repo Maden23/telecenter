@@ -27,18 +27,68 @@ SingleStreamUI::SingleStreamUI()
     initPlayerWidgets();
     player = new Player(playerWidget, "other");
     player->setCam("520 cam", "rtsp://172.18.212.17:554/Streaming/Channels/101?transportmode=unicast&profile=Profile_1");
-    player->playStream();
 
     g_signal_connect(playerWindow, "destroy", G_CALLBACK (gtk_main_quit), NULL);
     gtk_window_present(GTK_WINDOW(playerWindow));
     
+    /* MQTT */
+    // create queue for communicating between threads (redirecting mqtt messages)
+    mqttQueue = g_async_queue_new();
+    g_thread_new("run_mqtt", runMqtt, this); // thread for mqtt-client
+    g_thread_new("mqtt_queue", parseQueue, this); // thread for parsing messages
+
+    // Pass control to GTK
     gtk_main();
+
+    // Close app (all threads) after gtk_main_quit
+    exit(0);
 
 }
 
 SingleStreamUI::~SingleStreamUI()
 {
     delete player;
+
+    // MQTT
+    delete mqtt;
+    g_async_queue_unref(mqttQueue);
+
+}
+
+gpointer SingleStreamUI::runMqtt(gpointer data)
+{
+    auto obj = (SingleStreamUI*)data; //SingleStreamUI object
+
+    auto mqtt = new MqttClient("tcp://localhost:1883", "singlestream", {"operator/active_cam"});
+    obj->mqtt = mqtt;
+
+    // start receiving messages to queue
+    mqtt->passMessagesToQueue(obj->mqttQueue);
+
+}
+
+
+gpointer SingleStreamUI::parseQueue(gpointer data)
+{
+    auto obj = (SingleStreamUI*)data; //SingleStreamUI object
+    // Extract message from the queue and take actions
+    while (auto pop = g_async_queue_pop(obj->mqttQueue))
+    {
+        auto *msg = (QueueMQTTMessage*) pop;
+        cout << "Message in " << msg->topic << ": "
+             << msg->message << endl << endl;
+
+        // React to messages
+        if (msg->topic == "operator/active_cam")
+        {
+            // Operator picked another camera, changing playing stream
+            // message format: camName,uri
+            int split = msg->message.find(',');
+            string camName = msg->message.substr(0, split);
+            string uri = msg->message.substr(split+1, msg->message.length() - split);
+            obj->player->setCam(camName, uri);
+        }
+    }
 }
 
 int SingleStreamUI::initStyles() {
