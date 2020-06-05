@@ -39,7 +39,6 @@ private:
     GtkBuilder *menuBuilder;
     GtkWidget *menuWindow;
 
-    static int on_show(gpointer ui_ptr);
 	int initStyles();
 	GtkWidget* windowInit(GtkBuilder** builder, string gladeFile, string windowName);
 	void initMenuWidgets();
@@ -59,13 +58,6 @@ private:
     static void onPlayerClick(GtkWidget* widget, gpointer data);
     MqttClient *mqtt;
 
-
-//    struct key_press_data
-//    {
-//        vector<Room*>* rooms;
-//        Recorder *recorder;
-//    };
-    static gboolean keyPress(GtkWidget* widget, GdkEventKey *event, GridUI *ui);
 
 };
 

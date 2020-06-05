@@ -23,11 +23,6 @@ GridUI::GridUI(Config *config)
     gtk_widget_set_size_request(menuWindow, stoi(config->getParam("windowWidth")),
             stoi(config->getParam("windowHeight")));
 
-
-    /* Start/stop recording on key press */
-    gtk_widget_add_events(menuWindow, GDK_KEY_PRESS_MASK);
-    g_signal_connect(G_OBJECT(menuWindow), "key_press_event", G_CALLBACK(keyPress), this);
-
     /* Find player and window elements to control*/
     initMenuWidgets();
 
@@ -61,8 +56,6 @@ GridUI::GridUI(Config *config)
 
     g_signal_connect(menuWindow, "destroy", G_CALLBACK (gtk_main_quit), NULL);
 
-//    g_idle_add(on_show, this);
-
     gtk_main();
 }
 
@@ -70,25 +63,6 @@ GridUI::~GridUI()
 {
 }
 
-int GridUI::on_show(gpointer ui_ptr)
-{
-    GridUI *ui = (GridUI*)ui_ptr;
-        /* Find window elements to control*/
-        ui->initMenuWidgets();
-
-        /* Add information to status bar */
-        // IP address
-        string ip = ui->findIP();
-        GtkWidget* ipLabel = GTK_WIDGET (gtk_builder_get_object(ui->menuBuilder, "ipLabel"));
-        gtk_label_set_text(GTK_LABEL(ipLabel), ip.c_str());
-
-        /* Init styles */
-        int res = ui->initStyles();
-        if(res == -1) {
-            cerr << "Failed to get styles" << endl << endl;
-        }
-    return 0;
-}
 
 int GridUI::initStyles() {
     GFile* css = g_file_new_for_path("ui/styles.css");
@@ -159,7 +133,7 @@ void GridUI::initMenuWidgets()
         }
     }
 
-    /* Stip tab with custom cameras if there isn't any */
+    /* Skip tab with custom cameras if there isn't any */
     int room_n = 1;
 
     for (auto room : *rooms)
@@ -245,9 +219,9 @@ void GridUI::initCamWidgets(int room_n, vector<Camera> *cams)
 
         /* Show button and assign cam label */
         gtk_widget_show(button);
-//        gtk_button_set_label(GTK_BUTTON(button), cam.name.c_str());
+        gtk_button_set_label(GTK_BUTTON(button), cam.name.c_str());
 
-        /* Pass player and camName to click handler */
+        /* Pass data to click handler */
         struct on_player_click_data *data = new struct on_player_click_data;
         *data = {cam, mqtt};
         g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(onPlayerClick), data);
@@ -267,10 +241,10 @@ void GridUI::initCamWidgets(int room_n, vector<Camera> *cams)
 
         /* Add drawingArea to Camera struct */
         cam.drawingArea = drawingArea;
-        gtk_widget_show(drawingArea);
         /* Create player for camera and assign drawing area and stream url */
         Player *player = new Player(drawingArea, config->getParam("platform"), cam.uri, cam.name);
         cam.player = player;
+        gtk_widget_show(drawingArea);
 
         n++;
 
@@ -313,21 +287,6 @@ void GridUI::onPlayerClick(GtkWidget* widget, gpointer data)
     context->mqtt->publish("operator/active_cam", context->cam.fullName + "," + context->cam.uri);
 }
 
-gboolean GridUI::keyPress(GtkWidget* widget, GdkEventKey *event, GridUI *ui)
-{
-    if (!ui->rooms) return false;
-
-    if (event->keyval == GDK_KEY_R || event->keyval == GDK_KEY_r)
-    {
-        cerr << "Start key pressed" << endl << endl;
-    }
-
-    if (event->keyval == GDK_KEY_S || event->keyval == GDK_KEY_s)
-    {
-        cerr << "Stop key pressed" << endl << endl;
-    }
-    return true;
-}
 
 string GridUI::findIP()
 {
