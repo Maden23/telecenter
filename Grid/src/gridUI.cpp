@@ -61,6 +61,13 @@ GridUI::GridUI(Config *config)
 
 GridUI::~GridUI()
 {
+    for (auto room : *rooms)
+    {
+        for (auto cam : *room->getCameras())
+        {
+            delete cam.player;
+        }
+    }
 }
 
 

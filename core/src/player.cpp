@@ -23,7 +23,9 @@ Player::Player(GtkWidget* videoWindow, string platform)
 
 Player::~Player() 
 {
-
+    stopStream();
+    g_timer_stop(timer);
+    g_free(timer);
 }
 
 void Player::init()
@@ -55,6 +57,8 @@ void Player::init()
     gst_bus_set_sync_handler (bus, (GstBusSyncHandler) busSyncHandler, this, NULL);
     gst_object_unref (bus);
 
+    /* Init timer */
+    timer = g_timer_new();
 }
 
 void Player::buildPipeline()
@@ -143,7 +147,36 @@ void Player::stopStream()
 {
     gst_element_set_state (pipeline, GST_STATE_NULL);
     playing = false;
+    g_source_remove(restartID);
 }
+
+gboolean Player::restart(gpointer user_data)
+{
+    auto player = (Player*)user_data;
+
+    /* If pipeline was just restarted, quitting function */
+    gdouble now = g_timer_elapsed(player->timer, NULL);
+    if (player->lastRestartTime != -1)
+    {
+        gdouble diff = now - player->lastRestartTime;
+        if (diff < 2) // min pause between restarts (in seconds)
+            return TRUE; // repeat call
+
+        if (diff > 20) // no restart for a long time
+            player->restartCounter = 0;
+
+        if (player->restartCounter > 5) // too many restarts in a row
+            return TRUE;
+    }
+    player->lastRestartTime = now;
+    player->restartCounter++;
+
+    cout << "Restarting player " << player->camName << endl << endl;
+    player->playStream();
+
+    return FALSE; // do not repeat call
+}
+
 
 GstBusSyncReply Player::busSyncHandler (GstBus *bus, GstMessage *message, Player *player)
 {
@@ -159,6 +192,9 @@ GstBusSyncReply Player::busSyncHandler (GstBus *bus, GstMessage *message, Player
             cerr << "Player "  << player->camName << endl;
             cerr << err->message << endl;
             cerr << debug << endl << endl;
+            
+            // Restarting pipeline
+            player->restartID = g_idle_add(restart, player);
             break;
         }
         case GST_MESSAGE_ELEMENT:

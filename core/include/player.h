@@ -49,6 +49,8 @@ private:
 	GstBus *bus;
     string platform;
 
+    GTimer *timer;
+
     void init();
 	void buildPipeline();
 
@@ -57,10 +59,25 @@ private:
     static void videoWidgetRealize_cb (GtkWidget *widget, Player *player);
 	static gboolean videoWidgetDraw_cb (GtkWidget *widget, cairo_t *cr, gpointer user_data);
 
-
 	// Handelling bus messages (incuding 'prepare-window-handle' for rendering video)
     static GstBusSyncReply busSyncHandler (GstBus *bus, GstMessage *message, Player *player);
 
+    // For restarting pipeline with g_idle_add
+    static gboolean restart(gpointer user_data);
+    guint restartID = -1;
+
+    /**
+     * @brief Для сохранения времени последнего перезапуска пайплайна с помощью g_timer_elapsed(timer, NULL)
+     * 
+     */
+    gdouble lastRestartTime = -1;
+
+    /**
+     * @brief Количество недавних перезапусков пайплайна (следует обнулять при длительной паузе между перезапусками)
+     * 
+     */
+    int restartCounter = 0;
+    
 	// Dynamic source linking
     static void pad_added_handler (GstElement * src, GstPad * new_pad, Player *player);
 };
