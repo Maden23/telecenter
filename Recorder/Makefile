@@ -30,7 +30,6 @@ CFLAGS += `pkg-config --cflags gstreamer-video-1.0 gstreamer-1.0 gtk+-3.0`
 LDFLAGS = `pkg-config --libs gstreamer-video-1.0 gstreamer-1.0 gtk+-3.0`
 LDFLAGS += -lpaho-mqtt3a -lpaho-mqttpp3
 
-
 .PHONY: all clean
 
 all: $(TARGET)
