@@ -64,7 +64,7 @@ private:
 
     // For restarting pipeline with g_idle_add
     static gboolean restart(gpointer user_data);
-    guint restartID = -1;
+    guint restartID = 0;
 
     /**
      * @brief Для сохранения времени последнего перезапуска пайплайна с помощью g_timer_elapsed(timer, NULL)

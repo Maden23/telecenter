@@ -104,9 +104,9 @@ void Player::buildPipeline()
         cout << "Platform not specified" << endl << endl;
 
     /* Set latency */
-    g_object_set (src, "latency", 0, NULL);
-    g_object_set (src, "tcp-timeout", 200000, NULL);
-    g_object_set (src, "timeout", 200000 , NULL);
+    // g_object_set (src, "latency", 0, NULL);
+    // g_object_set (src, "tcp-timeout", 200000, NULL);
+    // g_object_set (src, "timeout", 200000 , NULL);
 
 
 
@@ -126,6 +126,7 @@ void Player::setCam(string camName, string uri)
 {
     this->camName = camName;
     this->uri = uri;
+    stopStream();
     playStream();
 }
 
@@ -133,7 +134,7 @@ void Player::setCam(string camName, string uri)
 void Player::playStream()
 {
 //    this->uri = uri;
-    gst_element_set_state (pipeline, GST_STATE_NULL);
+    gst_element_set_state (pipeline, GST_STATE_READY);
     gst_element_unlink(src, depay);
 
     cout << "Playing " << uri << endl << endl;
@@ -147,7 +148,11 @@ void Player::stopStream()
 {
     gst_element_set_state (pipeline, GST_STATE_NULL);
     playing = false;
-    g_source_remove(restartID);
+    if (restartID != 0)
+    {
+        g_source_remove(restartID);
+        restartID = 0;
+    }
 }
 
 gboolean Player::restart(gpointer user_data)
@@ -174,6 +179,7 @@ gboolean Player::restart(gpointer user_data)
     cout << "Restarting player " << player->camName << endl << endl;
     player->playStream();
 
+    player->restartID = -1;
     return FALSE; // do not repeat call
 }
 
