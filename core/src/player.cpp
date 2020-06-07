@@ -213,6 +213,8 @@ GstBusSyncReply Player::busSyncHandler (GstBus *bus, GstMessage *message, Player
         {
 
             cerr << "Player bus: EOS" << endl << endl;
+             // Restarting pipeline
+            player->restartID = g_idle_add(restart, player);
             break;
         }
         default:
