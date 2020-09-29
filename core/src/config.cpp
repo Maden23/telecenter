@@ -72,7 +72,7 @@ vector<Room *>* Config::getRooms()
 void Config::getGSuiteRooms()
 {
     /* Run script for fetching info from GSuite*/
-    int res = system("python3 src/from-gsuite.py");
+    int res = system("python3 ../core/src/from-gsuite.py");
     if (res == -1) 
     {
         cerr << "Failed to get rooms from GSuite" << endl << endl;

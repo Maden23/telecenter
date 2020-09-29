@@ -15,8 +15,8 @@ def main():
     # The file token.pickle stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
     # time.
-    if os.path.exists('token.pickle'):
-        with open('token.pickle', 'rb') as token:
+    if os.path.exists('../auth/token.pickle'):
+        with open('../auth/token.pickle', 'rb') as token:
             creds = pickle.load(token)
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
@@ -24,10 +24,10 @@ def main():
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                'gsuite_secret.json', SCOPES)
+                '../auth/gsuite_secret.json', SCOPES)
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
-        with open('token.pickle', 'wb') as token:
+        with open('../auth/token.pickle', 'wb') as token:
             pickle.dump(creds, token)
 
     try:
@@ -39,18 +39,21 @@ def main():
     # Call the Admin SDK Directory API
     results = service.resources().calendars().list(customer='my_customer').execute()
     items = results.get('items', [])
-
     # Distribute ONVIF-cameras (names and adresses) to rooms
     rooms = {} # {"room1" : { "cameras" :[("cam1", "cam1 full", "rtsp://123"), ("cam2", "cam2 full", "rtsp://1234")], "audio": [("source1", "rtsp://..."), ("sourse2", "rtsp://")], "room2" : {...}}
     if not items:
         print('No cameras in the domain.')
         exit(-1)
+
     for item in items:
-        # print (item, '\n\n')
         if 'resourceType' in item and item['resourceType'] in ["ONVIF-camera", "Encoder"]:
             if not item['floorSection'] in rooms:
                 rooms[item['floorSection']] = {"cameras" : [], "audio" : []}
-            name = item['userVisibleDescription'] if item['userVisibleDescription'] != "" else item['resourceName']
+            
+            if 'userVisibleDescription' in item.keys() and item['userVisibleDescription'] != "":
+                name = item['userVisibleDescription'] 
+            else: name = item['resourceName']
+
             fullname = item['resourceName']
             # Make RTSP address
             info = json.loads(item['resourceDescription'])
