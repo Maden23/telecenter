@@ -12,6 +12,7 @@ __pycache__
 *.log
 
 # Credentials
+*.json
 *.pickle
 
 # Qt files
@@ -23,7 +24,3 @@ __pycache__
 
 # VS Code files
 .vscode
-
-# Data
-custom_cams.json
-gsuite_rooms.json
