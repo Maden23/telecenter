@@ -8,6 +8,8 @@
 | [Grid](https://git.miem.hse.ru/19102/telecenter/-/tree/master/Grid)          | Отображает сетку изображений с камер  | 
 | [SingleStream](https://git.miem.hse.ru/19102/telecenter/-/tree/master/SingleStream)    | Отображает поток с одной камеры на полный экран | 
 | [core](https://git.miem.hse.ru/19102/telecenter/-/tree/master/core)          | Содержит классы, которые используются в нескольких программах  | 
+| [auth](https://git.miem.hse.ru/19102/auth)                                   | Это submodule (ссылка на репозиторий внутри репозитория). Содержит данные для Google-авторизации приложений. Доступен только членам команды. |
+
 ### Дополнительно
 Назначение других файлов в репозитории:
 
@@ -36,7 +38,7 @@
 ##### GStreamer
 Фреймворк для работы с видео
 ````
-sudo apt-get install libgstreamer1.0-0 gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav gstreamer1.0-doc gstreamer1.0-tools gstreamer1.0-x gstreamer1.0-alsa gstreamer1.0-gl gstreamer1.0-gtk3 gstreamer1.0-qt5 gstreamer1.0-pulseaudio
+sudo apt-get install libgstreamer1.0-0 libgstreamer-plugins-base1.0-dev gstreamer1.0-plugins-base gstreamer1.0-plugins-good gstreamer1.0-plugins-bad gstreamer1.0-plugins-ugly gstreamer1.0-libav gstreamer1.0-doc gstreamer1.0-tools gstreamer1.0-x gstreamer1.0-alsa gstreamer1.0-gl gstreamer1.0-gtk3 gstreamer1.0-qt5 gstreamer1.0-pulseaudio
 ````
 
 ##### GTK+
@@ -48,6 +50,7 @@ sudo apt-get install libgtk-3-dev
 ##### Google API
 Библиотека python для доступа к GSuite и Google Drive
 ```
+sudo apt-get install python3-pip
 pip3 install google-api-python-client google-auth-httplib2 google-auth-oauthlib
 ```
 
@@ -55,6 +58,7 @@ pip3 install google-api-python-client google-auth-httplib2 google-auth-oauthlib
 ##### [Eclipse Paho MQTT](https://github.com/eclipse/paho.mqtt.cpp)
 Библиотека для обмена данными по протоколу MQTT для C++
 ```bash
+cd
 git clone https://github.com/eclipse/paho.mqtt.c.git
 cd paho.mqtt.c
 git checkout v1.3.1
@@ -62,13 +66,16 @@ git checkout v1.3.1
 cmake -Bbuild -H. -DPAHO_WITH_SSL=OFF -DPAHO_ENABLE_TESTING=OFF
 sudo cmake --build build/ --target install
 sudo ldconfig
+cd ..
+sudo rm -r paho.mqtt.c
 
 git clone https://github.com/eclipse/paho.mqtt.cpp
 cd paho.mqtt.cpp
 cmake -Bbuild -H. -DPAHO_BUILD_DOCUMENTATION=FALSE -DPAHO_BUILD_SAMPLES=FALSE -DPAHO_WITH_SSL=OFF
 sudo cmake --build build/ --target install
 sudo ldconfig
-
+cd ..
+sudo rm -r paho.mqtt.cpp 
 ```
 
 ### Зависимости для Network
@@ -86,23 +93,30 @@ pip3 install fping
 
 # Порядок установки
 ####  1. [Установить зависимости](#зависимости)
-####  2. Клонировать этот репозиторий
+####  2. Клонировать этот репозиторий и получить файлы для авторизации
 
     git clone https://git.miem.hse.ru/19102/telecenter.git
-
+    cd telecenter/auth
+    git submodule init
+    git submodule update
+    cd ..
 ####  3. Выполнить компиляцию (кроме NetworkMonitor)
+###### Создать директории для бинарных файлов
+``` bash
+mkdir core/obj Recorder/obj Grid/obj SingleStream/obj
+```
 ###### Перейти в директорию с нужной программой
 Для Recorder:
     
-    cd telecenter/Recorder
+    cd Recorder
 
 Для Grid:
 
-    cd telecenter/Grid
+    cd Grid
 
 Для SingleStream:
 
-    cd telecenter/SingleStream
+    cd SingleStream
 
 ###### Компиляция
     make clean
@@ -118,17 +132,12 @@ pip3 install fping
 
 # Запуск
 ##### Запуск Recorder после [компиляции](#3-выполнить-компиляцию-кроме-network)
-    cd Recorder
     ./recorder
 ##### Запуск Grid после [компиляции](#3-выполнить-компиляцию-кроме-network)
-    cd Grid
     ./grid
 ##### Запуск SingleStream после [компиляции](#3-выполнить-компиляцию-кроме-network)
-    cd SingleStream 
     ./singlestream 
 ##### Запуск Network
-    cd Network/src
+    cd ~/telecenter/Network/src
     python3 network_monitor.py
 
-# Авторизация
-При первом запуске приложения откроется браузер, где необходимо будет войти в аккаунт Google в домене miem.hse.ru для [доступа в GSuite](Хранение-данных-в-GSuite.md). Может использоваться только аккаунт с доступом к [панели администратора](https://admin.google.com/).)
