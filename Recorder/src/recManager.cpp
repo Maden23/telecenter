@@ -1,15 +1,14 @@
-#include "recorder.h"
+#include "recManager.h"
 
-Recorder::Recorder(Config *config)
+RecManager::RecManager(Config *config)
 {
     this->config = config;
     // Start regular check on recordings 
     g_timeout_add(500, handleStoppedRecordings, this);
 }
 
-Recorder::~Recorder()
+RecManager::~RecManager()
 {
-    // for (auto &rec : runningRecorders)
     for (auto &rec : runningRecordings)
     {
         cerr << "Stopping recording of " << rec.first << endl;
@@ -20,7 +19,7 @@ Recorder::~Recorder()
 }
 
 
-bool Recorder::startRecording(Camera *cam)
+bool RecManager::startRecording(Camera *cam)
 {
     /* Check if recording is already running */
     if (runningRecordings.find(cam) != runningRecordings.end())
@@ -49,7 +48,7 @@ bool Recorder::startRecording(Camera *cam)
     return true;
 }
 
-bool Recorder::stopRecording(Camera *cam)
+bool RecManager::stopRecording(Camera *cam)
 {
     cerr << "Trying to stop recording of " << cam->uri << "." << endl << endl;
 
@@ -65,7 +64,7 @@ bool Recorder::stopRecording(Camera *cam)
     return true;
 }
 
-void* Recorder::uploadVideoAsync(gpointer uploadVideoAsyncData)
+void* RecManager::uploadVideoAsync(gpointer uploadVideoAsyncData)
 {
     auto data = (uploadVideoAsyncData_t*) uploadVideoAsyncData;
     for (auto fileName : data->files)
@@ -83,11 +82,11 @@ void* Recorder::uploadVideoAsync(gpointer uploadVideoAsyncData)
     }
 }
 
-gboolean Recorder::handleStoppedRecordings(gpointer recorder_ptr)
+gboolean RecManager::handleStoppedRecordings(gpointer recManager_ptr)
 {
-    auto *recorder = (Recorder*) recorder_ptr;
+    auto *recManager = (RecManager*) recManager_ptr;
     // Using iterators to be able to delete items
-    for (auto it = recorder->runningRecordings.cbegin(); it != recorder->runningRecordings.end();)
+    for (auto it = recManager->runningRecordings.cbegin(); it != recManager->runningRecordings.end();)
     {
         /* If any recording has this status, it needs to be deleted, and it's video -- uploaded*/
         if (it->second->getStatus() == STOPPED)
@@ -103,13 +102,13 @@ gboolean Recorder::handleStoppedRecordings(gpointer recorder_ptr)
 
             // Upload files in new thread
             uploadVideoAsyncData_t *data = new uploadVideoAsyncData_t();
-            *data = {.runningGDriveUploads = &(recorder->runningGDriveUploads),
+            *data = {.runningGDriveUploads = &(recManager->runningGDriveUploads),
                      .files = files};
             g_thread_new(it->first->name.c_str(), uploadVideoAsync, data);
 
             // Delete Recording
             delete it->second;
-            it = recorder->runningRecordings.erase(it);
+            it = recManager->runningRecordings.erase(it);
 
         }
         else

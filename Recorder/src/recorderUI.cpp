@@ -25,7 +25,7 @@ RecorderUI::RecorderUI(Config *config)
             stoi(config->getParam("windowHeight")));
 
     /* Start/stop recording on key press */
-    recorder = new Recorder(config);
+    recManager = new RecManager(config);
     gtk_widget_add_events(menuWindow, GDK_KEY_PRESS_MASK);
     g_signal_connect(G_OBJECT(menuWindow), "key_press_event", G_CALLBACK(keyPressHandle), this);
 
@@ -54,7 +54,7 @@ RecorderUI::RecorderUI(Config *config)
     }
     // GDrive upload status
     struct gdrive_status_data data;
-    data.recorder = recorder;
+    data.recManager = recManager;
     GtkWidget* GDriveIcon = (GtkWidget*) gtk_builder_get_object(menuBuilder, "GDriveIcon");
     data.GDriveIcon = GDriveIcon;
     g_timeout_add(500, updateGDriveStatus, &data);
@@ -94,7 +94,7 @@ RecorderUI::RecorderUI(Config *config)
 RecorderUI::~RecorderUI()
 {
     delete player;
-    delete recorder;
+    delete recManager;
 }
 
 
@@ -267,7 +267,7 @@ void RecorderUI::initCamWidgets(int room_n, vector<Camera> *cams)
         name = "s" + to_string(n) + "_" + to_string(room_n);
         GtkWidget *sw = (GtkWidget*) gtk_builder_get_object(menuBuilder, name.c_str());
         switch_state_changed_data *sw_data = new switch_state_changed_data;
-        *sw_data = {&cam, recorder};
+        *sw_data = {&cam, recManager};
         if (!sw)
         {
             cerr << "Cannot get switch " << name << endl << endl;
@@ -372,7 +372,7 @@ gboolean RecorderUI::keyPressHandle(GtkWidget* widget, GdkEventKey *event, Recor
             {
                 if(cam.record)
                 {
-                    ui->recorder->startRecording(&cam);
+                    ui->recManager->startRecording(&cam);
                     gtk_widget_show(cam.recImage);
                 }
             } // for cams
@@ -383,9 +383,9 @@ gboolean RecorderUI::keyPressHandle(GtkWidget* widget, GdkEventKey *event, Recor
     {
         /* If no stream is playing, stop recording all */
         cerr << "Stop key pressed" << endl << endl;
-        for (auto rec : ui->recorder->getRunningRecordings())
+        for (auto rec : ui->recManager->getRunningRecordings())
         {
-            ui->recorder->stopRecording(rec.first);
+            ui->recManager->stopRecording(rec.first);
 //                gtk_widget_hide(cam->recImage);
             // TODO: turn off physical button here
         }
@@ -421,7 +421,7 @@ gboolean RecorderUI::updateGDriveStatus(gpointer user_data)
 {
     gdrive_status_data *data = (gdrive_status_data*)user_data;
 
-    if (data->recorder->isGDriveUploadActive())
+    if (data->recManager->isGDriveUploadActive())
     {
         gtk_image_set_from_icon_name(GTK_IMAGE(data->GDriveIcon), "gnome-netstatus-tx", (GtkIconSize)35);
     }
@@ -436,16 +436,16 @@ void RecorderUI::switchStateChanged(GtkWidget* widget, gboolean state, gpointer 
 {
     auto *data = (switch_state_changed_data*)user_data;
     /* If we are in recording state add this camera to recordings or stop, depending on the switch state */
-    if (!data->recorder->getRunningRecordings().empty())
+    if (!data->recManager->getRunningRecordings().empty())
     {
         if (state)
         {
             gtk_widget_show(GTK_WIDGET(data->cam->recImage));
-            data->recorder->startRecording(data->cam);
+            data->recManager->startRecording(data->cam);
         }
         else
         {
-            data->recorder->stopRecording(data->cam);
+            data->recManager->stopRecording(data->cam);
         }
     }
     data->cam->record = state;

@@ -23,16 +23,16 @@ using namespace std;
  *
  * Forks gstreamer pipelines for each recording
  * Needs a stream id to start a recording 
- * Stores pids of running recorder processes
+ * Stores pids of running recording processes
  * Stops recordings by stream id
  *
  * @ingroup recorder
  * */
-class Recorder
+class RecManager
 {
 public:
-    Recorder(Config *config);
-    ~Recorder();
+    RecManager(Config *config);
+    ~RecManager();
 
     map<Camera*, Recording*> getRunningRecordings() { return runningRecordings; }
     bool startRecording(Camera* cam);
@@ -50,5 +50,6 @@ private:
         vector<string> files;
     };
     static void *uploadVideoAsync(gpointer uploadVideoAsyncData);
-    static gboolean handleStoppedRecordings(gpointer recorder_ptr);
+    static gboolean handleStoppedRecordings(gpointer 
+    );
 };

@@ -4,7 +4,7 @@
 #include "config.h"
 #include "room.h"
 #include "player.h"
-#include "recorder.h"
+#include "recManager.h"
 
 #include <iostream>
 #include <string>
@@ -39,7 +39,7 @@ public:
     ~RecorderUI();
     void displayRecordingStatus(string cam_id, bool status);
     Config *config;
-    Recorder *recorder;
+    RecManager *recManager;
     string playingCamName = ""; // empty if none playing
     // map<string, GtkWidget*> recImages;
 //	vector<struct Camera*> camDataV; // stores data and ui objects assigned to cameras
@@ -64,7 +64,7 @@ private:
 	string findIP();
     struct gdrive_status_data
     {
-        Recorder *recorder;
+        RecManager *recManager;
         GtkWidget *GDriveIcon;
     };
     static gboolean updateGDriveStatus(gpointer user_data);
@@ -83,7 +83,7 @@ private:
     struct switch_state_changed_data
     {
         Camera *cam;
-        Recorder *recorder;
+        RecManager *recManager;
     };
     static void switchStateChanged(GtkWidget* widget, gboolean state, gpointer user_data);
 
