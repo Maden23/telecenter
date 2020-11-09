@@ -50,5 +50,5 @@ private:
         vector<string> files;
     };
     static void *uploadVideoAsync(gpointer uploadVideoAsyncData);
-    static gboolean checkIfRecStopped(gpointer recorder_ptr);
+    static gboolean handleStoppedRecordings(gpointer recorder_ptr);
 };

@@ -78,12 +78,7 @@ private:
 	};
 	static void displayPlayer(GtkWidget* widget, gpointer data);
 
-//    struct key_press_data
-//    {
-//        vector<Room*>* rooms;
-//        Recorder *recorder;
-//    };
-    static gboolean keyPress(GtkWidget* widget, GdkEventKey *event, RecorderUI *ui);
+    static gboolean keyPressHandle(GtkWidget* widget, GdkEventKey *event, RecorderUI *ui);
 
     struct switch_state_changed_data
     {

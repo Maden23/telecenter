@@ -27,7 +27,7 @@ RecorderUI::RecorderUI(Config *config)
     /* Start/stop recording on key press */
     recorder = new Recorder(config);
     gtk_widget_add_events(menuWindow, GDK_KEY_PRESS_MASK);
-    g_signal_connect(G_OBJECT(menuWindow), "key_press_event", G_CALLBACK(keyPress), this);
+    g_signal_connect(G_OBJECT(menuWindow), "key_press_event", G_CALLBACK(keyPressHandle), this);
 
 
     /* Find player and window elements to control*/
@@ -340,7 +340,7 @@ void RecorderUI::displayPlayer(GtkWidget* widget, gpointer data)
 
 }
 
-gboolean RecorderUI::keyPress(GtkWidget* widget, GdkEventKey *event, RecorderUI *ui)
+gboolean RecorderUI::keyPressHandle(GtkWidget* widget, GdkEventKey *event, RecorderUI *ui)
 {
     if (!ui->rooms) return false;
 

@@ -3,7 +3,8 @@
 Recorder::Recorder(Config *config)
 {
     this->config = config;
-    g_timeout_add(500, checkIfRecStopped, this);
+    // Start regular check on recordings 
+    g_timeout_add(500, handleStoppedRecordings, this);
 }
 
 Recorder::~Recorder()
@@ -26,16 +27,8 @@ bool Recorder::startRecording(Camera *cam)
     {
         return true;
     }
-    /* Get timeout for test showing */
-    long timeout_ms = config->getParamInt("videoTimeout");
-    if (timeout_ms == -1)
-    {
-        cerr << "Timeout not found" << endl << endl;
-        return false;
-    }
-    long timeout_ns = timeout_ms * 1000000;
-
-    /* Get video time limit */
+   
+    /* Get video files time limit from config file */
     long videolimit_s = config->getParamInt("videoTimeLimitSeconds");
     if (videolimit_s == -1)
     {
@@ -44,7 +37,8 @@ bool Recorder::startRecording(Camera *cam)
     }
     long videolimit_ns = videolimit_s * 1000000000;
 
-    Recording *recording = new Recording(cam->uri, config->getParam("saveToFolder"), cam->fullName, timeout_ns, videolimit_ns);
+    /* Attempt to start recording */ 
+    Recording *recording = new Recording(cam->uri, config->getParam("saveToFolder"), cam->fullName, videolimit_ns);
     if (!recording->start())
     {
         cerr << "Failed to start recording of " << cam->uri << endl << endl;
@@ -89,7 +83,7 @@ void* Recorder::uploadVideoAsync(gpointer uploadVideoAsyncData)
     }
 }
 
-gboolean Recorder::checkIfRecStopped(gpointer recorder_ptr)
+gboolean Recorder::handleStoppedRecordings(gpointer recorder_ptr)
 {
     auto *recorder = (Recorder*) recorder_ptr;
     // Using iterators to be able to delete items
