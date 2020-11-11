@@ -46,7 +46,7 @@ def main():
         exit(-1)
 
     for item in items:
-        if 'resourceType' in item and item['resourceType'] in ["ONVIF-camera", "Encoder"]:
+        if 'resourceType' in item and item['resourceType'] in ["ONVIF-camera", "Encoder", "Enc/Dec"]:
             if not item['floorSection'] in rooms:
                 rooms[item['floorSection']] = {"cameras" : [], "audio" : []}
             
@@ -68,7 +68,8 @@ def main():
                 rtsp += info['ip']
 
             # If item has audio, place it in "audio" section
-            if 'audio' in info and info["audio"] == "main":
+            # Checking for custom rtsp mics only
+            if 'audio' in info and info["audio"] == "rtsp_mic":
                 rooms[item['floorSection']]["audio"].append({'name' : name, 'full_name' : fullname, 'address' : rtsp})
 
 
