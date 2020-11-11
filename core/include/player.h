@@ -39,7 +39,7 @@ public:
     void stopStream();
 
     bool isPlaying() {return playing;}
-	GstElement *pipeline, *src, *depay, *parse, *dec, *scale, *sink;
+	GstElement *pipeline, *src, *depay, *parse, *dec, *scale, *sink, *queue;
 
 
 private:
