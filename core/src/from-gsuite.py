@@ -5,6 +5,9 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
+TOKEN_STORAGE = '../auth/gsuite_token.pickle'
+CLIENT_SECRET = '../auth/gsuite_secret.json'
+
 # If modifying these scopes, delete the file token.pickle.
 SCOPES = ['https://www.googleapis.com/auth/admin.directory.resource.calendar']
 
@@ -15,8 +18,8 @@ def main():
     # The file token.pickle stores the user's access and refresh tokens, and is
     # created automatically when the authorization flow completes for the first
     # time.
-    if os.path.exists('../auth/token.pickle'):
-        with open('../auth/token.pickle', 'rb') as token:
+    if os.path.exists(TOKEN_STORAGE):
+        with open(TOKEN_STORAGE, 'rb') as token:
             creds = pickle.load(token)
     # If there are no (valid) credentials available, let the user log in.
     if not creds or not creds.valid:
@@ -24,10 +27,10 @@ def main():
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(
-                '../auth/gsuite_secret.json', SCOPES)
+                CLIENT_SECRET, SCOPES)
             creds = flow.run_local_server(port=0)
         # Save the credentials for the next run
-        with open('../auth/token.pickle', 'wb') as token:
+        with open(TOKEN_STORAGE, 'wb') as token:
             pickle.dump(creds, token)
 
     try:
@@ -46,6 +49,7 @@ def main():
         exit(-1)
 
     for item in items:
+        print(item)
         if 'resourceType' in item and item['resourceType'] in ["ONVIF-camera", "Encoder", "Enc/Dec"]:
             if not item['floorSection'] in rooms:
                 rooms[item['floorSection']] = {"cameras" : [], "audio" : []}
