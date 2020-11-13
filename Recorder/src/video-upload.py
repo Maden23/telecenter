@@ -7,6 +7,8 @@ from googleapiclient.discovery import build
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
+TOKEN_STORAGE = '../auth/gdrive.pickle'
+CLIENT_SECRET = '../auth/gdrive_secret.json'
 
 try:
     import argparse
@@ -30,8 +32,8 @@ creds = None
 # The file gdrive.pickle stores the user's access and refresh tokens, and is
 # created automatically when the authorization flow completes for the first
 # time.
-if os.path.exists('../auth/gdrive.pickle'):
-    with open('../auth/gdrive.pickle', 'rb') as token:
+if os.path.exists(TOKEN_STORAGE):
+    with open(TOKEN_STORAGE, 'rb') as token:
         creds = pickle.load(token)
 # If there are no (valid) credentials available, let the user log in.
 if not creds or not creds.valid:
@@ -39,10 +41,10 @@ if not creds or not creds.valid:
         creds.refresh(Request())
     else:
         flow = InstalledAppFlow.from_client_secrets_file(
-            '../auth/gdrive_secret.json', SCOPES)
+            CLIENT_SECRET, SCOPES)
         creds = flow.run_local_server(port=0)
     # Save the credentials for the next run
-    with open('../auth/gdrive.pickle', 'wb') as token:
+    with open(TOKEN_STORAGE, 'wb') as token:
         pickle.dump(creds, token)
 
 
