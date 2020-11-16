@@ -34,22 +34,25 @@ public:
     RecManager(Config *config);
     ~RecManager();
 
-    map<Camera*, Recording*> getRunningRecordings() { return runningRecordings; }
-    bool startRecording(Camera* cam);
-    bool stopRecording(Camera* cam);
+    map<Source*, Recording*> getRunningRecordings() { return runningRecordings; }
+
+    bool startRecording(Source* source);
+    bool stopRecording(Source* source);
+
+    bool stopAll();
 
     bool isGDriveUploadActive() { return runningGDriveUploads > 0; }
    
 private:
-    map<Camera*, Recording*> runningRecordings;
+    map<Source*, Recording*> runningRecordings;
     Config *config;
 
     int runningGDriveUploads = 0;
-    struct uploadVideoAsyncData_t {
+    struct uploadFileAsyncData_t {
         int *runningGDriveUploads;
         vector<string> files;
     };
-    static void *uploadVideoAsync(gpointer uploadVideoAsyncData);
+    static void *uploadFileAsync(gpointer uploadFileAsyncData);
     static gboolean handleStoppedRecordings(gpointer 
     );
 };

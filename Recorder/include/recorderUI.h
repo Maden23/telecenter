@@ -57,7 +57,7 @@ private:
 	GtkWidget* windowInit(GtkBuilder** builder, string gladeFile, string windowName);
     void initPlayerWidgets();
     void initMenuWidgets();
-    void initCamWidgets(int room_n, vector<Camera> *cams);
+    void initCamWidgets(int room_n, vector<Camera*> *cams);
 	void initRoomTab(int room_n, string room_name);
 
 	/* For status bar information */
@@ -71,7 +71,7 @@ private:
 
 	struct display_player_data
 	{
-        Camera cam;
+        Camera *cam;
         GtkWidget *playerLabel;
         Player *player;
 		string *playingCamName;

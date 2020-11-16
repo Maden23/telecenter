@@ -2,6 +2,7 @@
 #include <gst/gst.h>
 #include <iostream>
 #include <vector>
+#include "room.h"
 
 using namespace std;
 
@@ -17,7 +18,7 @@ enum status_t
 class Recording
 {
 public:
-    Recording(string uri, string folder, string camName, long videoTimeLimit);
+    Recording(sourceType_t sourceType, string uri, string folder, string sourceName, long timeLimit);
 	~Recording();
 
     string getFileNamePattern() { return fileNamePattern; }
@@ -28,13 +29,14 @@ public:
 	bool stop();
 
 	status_t status;
+	sourceType_t sourceType; 
 	
-    string uri, camName, fileNamePattern, folder;
+    string uri, sourceName, fileNamePattern, folder;
 private:
     vector<string> files;
-    long videoTimeLimit;
+    long timeLimit;
 
-    GstElement *pipeline, *src, *depay, *parse, *sink;
+    GstElement *pipeline, *src, *depay, *parse, *muxsink;
 
 	bool buildPipeline();
 

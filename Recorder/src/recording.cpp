@@ -1,11 +1,12 @@
 #include "recording.h"
 
-Recording::Recording(string uri, string folder, string camName, long videoTimeLimit)
+Recording::Recording(sourceType_t sourceType, string uri, string folder, string sourceName, long timeLimit)
 {
+	this->sourceType = sourceType;
 	this->uri = uri;
 	this->folder = folder;
-    this->camName = camName;
-    this->videoTimeLimit = videoTimeLimit;
+    this->sourceName = sourceName;
+    this->timeLimit = timeLimit;
 
     /* Create file name */
     if (fileNamePattern == "")
@@ -13,9 +14,11 @@ Recording::Recording(string uri, string folder, string camName, long videoTimeLi
         char datetime[18];
         time_t t = time(nullptr);
         strftime(datetime, sizeof(datetime), "%d-%m-%Y_%H:%M", localtime(&t));
-        fileNamePattern = camName + "_" + string(datetime)+ "_%02d.mp4";
+		if (sourceType == VIDEO)
+        	fileNamePattern = sourceName + "_" + string(datetime)+ "_%02d.mp4";
+		if (sourceType == AUDIO)
+			fileNamePattern = sourceName + "_" + string(datetime)+ "_%02d.aac";
     }
-
 }
 
 Recording::~Recording()
@@ -54,7 +57,7 @@ bool Recording::stop()
 	// send EOS
 	status = STOPPING;
 	gst_element_send_event(src, gst_event_new_eos());
-    cerr << camName << ": Sent EOS to stream" << endl;
+    cerr << sourceName << ": Sent EOS to stream" << endl;
 
 	gst_element_send_event(src, gst_event_new_eos());
 
@@ -64,37 +67,56 @@ bool Recording::stop()
 
 bool Recording::buildPipeline()
 {
-    /* Creating elements */
-    src = gst_element_factory_make("rtspsrc", ("src " + camName).c_str());
-    depay = gst_element_factory_make("rtph264depay", ("depay " + camName).c_str());
-    parse = gst_element_factory_make("h264parse", ("parse " + camName).c_str());
-    sink = gst_element_factory_make("splitmuxsink", ("sink " + camName).c_str());
-
-    pipeline = gst_pipeline_new(("pipeline " + camName).c_str());
-
-    if (!pipeline || !src || !depay || !parse ||  !sink )
+	/* Creating elements */
+	src = gst_element_factory_make("rtspsrc", ("src " + sourceName).c_str());
+	if (sourceType == VIDEO)
     {
-        cerr << camName << "Not all pipeline elements could be created" << endl << endl;
+		depay = gst_element_factory_make("rtph264depay", ("depay " + sourceName).c_str());
+		parse = gst_element_factory_make("h264parse", ("parse " + sourceName).c_str());
+	}
+	if (sourceType == AUDIO)
+	{
+		depay = gst_element_factory_make("rtpmp4adepay", ("audiodepay " + sourceName).c_str());
+		parse = gst_element_factory_make("aacparse", ("audioparse " + sourceName).c_str());
+	}
+    muxsink = gst_element_factory_make("splitmuxsink", ("muxsink " + sourceName).c_str());
+
+    pipeline = gst_pipeline_new(("pipeline " + sourceName).c_str());
+
+    if (!pipeline || !src || !depay || !parse || !muxsink )
+    {
+        cerr << sourceName << " Not all pipeline elements could be created" << endl << endl;
         return false;
     } 
 
-    gst_bin_add_many(GST_BIN(pipeline), src, depay, parse, sink, NULL);
+    gst_bin_add_many(GST_BIN(pipeline), src, depay, parse, muxsink, NULL);
 
-    /* Link pipeline without source */
-    if (!gst_element_link_many(depay, parse, sink, NULL))
+	/* Linking */
+    if (!gst_element_link(depay, parse))
     {
-        cerr << "Stream linking error" << endl << endl;
+        cerr << sourceName << "  Error linking depay to parse" << endl << endl;
+		return false;
     }
+	// Looking for compatable pad to sink
+	GstPad *parse_pad = gst_element_get_static_pad(parse, "src");
+	GstPad *muxsink_pad = nullptr;
+	if (sourceType == VIDEO)
+		muxsink_pad = gst_element_get_request_pad(muxsink, "video");
+	if (sourceType == AUDIO)
+		muxsink_pad = gst_element_get_request_pad(muxsink, "audio_0");
+
+	if (muxsink_pad)
+		gst_pad_link(parse_pad, muxsink_pad);
+
     // Set properties for stream source
     g_object_set (src,
             "location", uri.c_str(),
             "protocols", (1 << 2), // TCP,
             NULL);
     // Set properties for streaming time limit
-    g_object_set(sink,
+    g_object_set(muxsink,
                  "location", (folder+fileNamePattern).c_str(),
-                 "max-size-time", videoTimeLimit,
-                 "muxer-factory", "mpegtsmux",
+                 "max-size-time", timeLimit,
                  NULL);
 
     // Signal to handle new source pad (for delayed source linking)
@@ -122,18 +144,18 @@ void Recording::pad_added_handler (GstElement * src, GstPad * new_pad, Recording
 	new_pad_type = gst_structure_get_name (new_pad_struct);
 	if (!g_str_has_prefix (new_pad_type, "application/x-rtp"))
 	{
-        cerr << recording->camName << ": Wrong stream prefix" << endl << endl;;
+        cerr << recording->sourceName << ": Wrong stream prefix" << endl << endl;;
 		return;
 	}
 
 	/* Attempt the link */
 	ret = gst_pad_link (new_pad, sink_pad);
 	if (GST_PAD_LINK_FAILED (ret)) {
-        cerr << recording->camName << ": Source pad link failed" << endl << endl;
+        cerr << recording->sourceName << ": Source pad link failed" << endl << endl;
 	}
 	else 
 	{       
-        cerr << recording->camName << ": Linked source pad" << endl << endl;
+        cerr << recording->sourceName << ": Linked source pad" << endl << endl;
 	}
 
 }
@@ -150,7 +172,7 @@ GstBusSyncReply Recording::busSyncHandler (GstBus *bus, GstMessage *message, Rec
 			gchar *debug;
 
 			gst_message_parse_error (message, &err, &debug);
-            cerr << "Recording " << recording->camName << endl
+            cerr << "Recording " << recording->sourceName << endl
 				 << "Bus: " << err->message  << endl 
 				 << debug << endl << endl;
             recording->status = STOPPED;
@@ -177,7 +199,7 @@ GstBusSyncReply Recording::busSyncHandler (GstBus *bus, GstMessage *message, Rec
 		}
 		case GST_MESSAGE_EOS:
 		{
-            cerr << recording->camName << ": EOS in bus" << endl << endl;
+            cerr << recording->sourceName << ": EOS in bus" << endl << endl;
             // This recording is finished if stop was initiated by user (= status was set to STOPPING), not by splitmuxsink
             if (recording->status == STOPPING)
                 recording->status = STOPPED;

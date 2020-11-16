@@ -11,7 +11,7 @@ RecManager::~RecManager()
 {
     for (auto &rec : runningRecordings)
     {
-        cerr << "Stopping recording of " << rec.first << endl;
+        cerr << "Stopping recording of " << rec.first->fullName << endl;
 
         rec.second->stop();
         delete rec.second;
@@ -19,54 +19,63 @@ RecManager::~RecManager()
 }
 
 
-bool RecManager::startRecording(Camera *cam)
+bool RecManager::startRecording(Source *source)
 {
     /* Check if recording is already running */
-    if (runningRecordings.find(cam) != runningRecordings.end())
+    if (runningRecordings.find(source) != runningRecordings.end())
     {
         return true;
     }
    
     /* Get video files time limit from config file */
-    long videolimit_s = config->getParamInt("videoTimeLimitSeconds");
-    if (videolimit_s == -1)
+    long limit_s = config->getParamInt("timeLimitSeconds");
+    if (limit_s == -1)
     {
-        cerr << "videoTimeLimitSeconds not found. Default = 0" << endl << endl;
-        videolimit_s = 0;
+        cerr << "timeLimitSeconds not found. Default = 0" << endl << endl;
+        limit_s = 0;
     }
-    long videolimit_ns = videolimit_s * 1000000000;
+    long limit_ns = limit_s * 1000000000;
 
     /* Attempt to start recording */ 
-    Recording *recording = new Recording(cam->uri, config->getParam("saveToFolder"), cam->fullName, videolimit_ns);
+    Recording *recording = new Recording(source->getType(), source->uri, config->getParam("saveToFolder"), source->fullName, limit_ns);
     if (!recording->start())
     {
-        cerr << "Failed to start recording of " << cam->uri << endl << endl;
+        cerr << "Failed to start recording of " << source->uri << endl << endl;
         return false;
     }
-    runningRecordings[cam] = recording;
-    cerr << "Started recording of " << cam->uri << endl << endl;
+    runningRecordings[source] = recording;
+    cerr << "Started recording of " << source->uri << endl << endl;
     return true;
 }
 
-bool RecManager::stopRecording(Camera *cam)
+bool RecManager::stopRecording(Source *source)
 {
-    cerr << "Trying to stop recording of " << cam->uri << "." << endl << endl;
+    cerr << "Trying to stop recording of " << source->uri << "." << endl << endl;
 
-    if (runningRecordings.find(cam) == runningRecordings.end())
+    if (runningRecordings.find(source) == runningRecordings.end())
     {
         cerr << "failed" << endl;
         cerr << "No recording found" << endl << endl;
         return false;
     }
 
-    runningRecordings[cam]->stop();
+    runningRecordings[source]->stop();
 
     return true;
 }
 
-void* RecManager::uploadVideoAsync(gpointer uploadVideoAsyncData)
+
+bool RecManager::stopAll()
 {
-    auto data = (uploadVideoAsyncData_t*) uploadVideoAsyncData;
+    for (auto rec : runningRecordings)
+    {
+        stopRecording(rec.first);
+    }
+}
+
+void* RecManager::uploadFileAsync(gpointer uploadFileAsyncData)
+{
+    auto data = (uploadFileAsyncData_t*) uploadFileAsyncData;
     for (auto fileName : data->files)
     {
         cerr << "Trying to upload " << fileName << endl << endl;
@@ -88,7 +97,7 @@ gboolean RecManager::handleStoppedRecordings(gpointer recManager_ptr)
     // Using iterators to be able to delete items
     for (auto it = recManager->runningRecordings.cbegin(); it != recManager->runningRecordings.end();)
     {
-        /* If any recording has this status, it needs to be deleted, and it's video -- uploaded*/
+        /* If any recording has this status, it needs to be deleted, and it's file -- uploaded*/
         if (it->second->getStatus() == STOPPED)
         {
             cerr << "Recording of " << it->second->uri << " stopped." << endl;
@@ -97,14 +106,18 @@ gboolean RecManager::handleStoppedRecordings(gpointer recManager_ptr)
             {
                 cerr << "File name: " << file << endl << endl;
             }
-            // Turn off recImage widget
-            gtk_widget_hide(it->first->recImage);
+            // Turn off recImage widget for video sources
+            if (it->first->getType() == VIDEO)
+            {
+                Camera* cam = static_cast<Camera*>(it->first);
+                gtk_widget_hide(cam->recImage);
+            }
 
             // Upload files in new thread
-            uploadVideoAsyncData_t *data = new uploadVideoAsyncData_t();
+            uploadFileAsyncData_t *data = new uploadFileAsyncData_t();
             *data = {.runningGDriveUploads = &(recManager->runningGDriveUploads),
                      .files = files};
-            g_thread_new(it->first->name.c_str(), uploadVideoAsync, data);
+            g_thread_new(it->first->name.c_str(), uploadFileAsync, data);
 
             // Delete Recording
             delete it->second;

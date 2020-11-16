@@ -210,7 +210,7 @@ void RecorderUI::initMenuWidgets()
     }
 }
 
-void RecorderUI::initCamWidgets(int room_n, vector<Camera> *cams)
+void RecorderUI::initCamWidgets(int room_n, vector<Camera*> *cams)
 {
 
     /* Find out how many cameras are known */
@@ -221,11 +221,11 @@ void RecorderUI::initCamWidgets(int room_n, vector<Camera> *cams)
 
     /*  Setting buttons for each camera. Remember not to run out of 9 buttons */
     int n = 0;  
-    for (auto &cam : *cams)
+    for (auto cam : *cams)
     {   
         if (n == 9) break;
         /* Create struct object for storing data and ui objects for the camera */
-        cam.record = false;
+        cam->record = false;
 
         /* Find the camera button object */
         string name = "b" + to_string(n) + "_" + to_string(room_n);
@@ -240,7 +240,7 @@ void RecorderUI::initCamWidgets(int room_n, vector<Camera> *cams)
 
         /* Show button and assign cam label */
         gtk_widget_show(button);
-        gtk_button_set_label(GTK_BUTTON(button), cam.name.c_str());
+        gtk_button_set_label(GTK_BUTTON(button), cam->name.c_str());
 
         /* Pass player and camName to click handler */
         struct display_player_data *data = new struct display_player_data;
@@ -248,7 +248,7 @@ void RecorderUI::initCamWidgets(int room_n, vector<Camera> *cams)
         g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(displayPlayer), data);
 
         /* Add button to Camera struct */
-        cam.button = button;
+        cam->button = button;
 
         /* Find the rec image object */
         name = "i" + to_string(n) + "_" + to_string(room_n);
@@ -261,13 +261,13 @@ void RecorderUI::initCamWidgets(int room_n, vector<Camera> *cams)
         }
 
         /* Add image to Camera struct */
-        cam.recImage = recImage;
+        cam->recImage = recImage;
 
         /* Find a switch for this camera */
         name = "s" + to_string(n) + "_" + to_string(room_n);
         GtkWidget *sw = (GtkWidget*) gtk_builder_get_object(menuBuilder, name.c_str());
         switch_state_changed_data *sw_data = new switch_state_changed_data;
-        *sw_data = {&cam, recManager};
+        *sw_data = {cam, recManager};
         if (!sw)
         {
             cerr << "Cannot get switch " << name << endl << endl;
@@ -333,10 +333,10 @@ void RecorderUI::displayPlayer(GtkWidget* widget, gpointer data)
     auto *context = (display_player_data*) data;
     // gtk_widget_show(context->playerWidget);
     // gtk_widget_show(context->playerLabel);
-    context->player->setCam(context->cam.fullName, context->cam.uri);
+    context->player->setCam(context->cam->fullName, context->cam->uri);
     context->player->playStream();
-    *context->playingCamName = context->cam.fullName;
-    gtk_label_set_text(GTK_LABEL(context->playerLabel), context->cam.fullName.c_str());
+    *context->playingCamName = context->cam->fullName;
+    gtk_label_set_text(GTK_LABEL(context->playerLabel), context->cam->fullName.c_str());
 
 }
 
@@ -349,11 +349,11 @@ gboolean RecorderUI::keyPressHandle(GtkWidget* widget, GdkEventKey *event, Recor
         cerr << "Start key pressed" << endl << endl;
         // Check if any cameras are picked for recording
         bool picked;
-        for (auto room : *ui->rooms)
+        for (auto room : *(ui->rooms))
         {
-            for (auto cam : *room->getCameras())
+            for (auto cam : *(room->getCameras()))
             {
-                if (cam.record)
+                if (cam->record)
                 {
                     picked = true;
                     break;
@@ -366,14 +366,17 @@ gboolean RecorderUI::keyPressHandle(GtkWidget* widget, GdkEventKey *event, Recor
 
         // Record all cameras that were picked
         // !important: iterate with & if you want to pass cam pointer somewhere
-        for (auto &room : *ui->rooms)
+        for (auto &room : *(ui->rooms))
         {
-            for (auto &cam : *room->getCameras())
+            for (auto &cam : *(room->getCameras()))
             {
-                if(cam.record)
+                if(cam->record)
                 {
-                    ui->recManager->startRecording(&cam);
-                    gtk_widget_show(cam.recImage);
+                    ui->recManager->startRecording(cam);
+                    auto audio = room->getAudioSource();
+                    if (audio->uri != "")
+                        ui->recManager->startRecording(audio);
+                    gtk_widget_show(cam->recImage);
                 }
             } // for cams
         } // for rooms
@@ -381,14 +384,8 @@ gboolean RecorderUI::keyPressHandle(GtkWidget* widget, GdkEventKey *event, Recor
 
     if (event->keyval == GDK_KEY_S || event->keyval == GDK_KEY_s)
     {
-        /* If no stream is playing, stop recording all */
         cerr << "Stop key pressed" << endl << endl;
-        for (auto rec : ui->recManager->getRunningRecordings())
-        {
-            ui->recManager->stopRecording(rec.first);
-//                gtk_widget_hide(cam->recImage);
-            // TODO: turn off physical button here
-        }
+        ui->recManager->stopAll();
     }
     return true;
 }
