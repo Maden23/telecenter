@@ -41,17 +41,8 @@ RecorderUI::RecorderUI(Config *config)
     GtkWidget* ipLabel = GTK_WIDGET (gtk_builder_get_object(menuBuilder, "ipLabel"));
     gtk_label_set_text(GTK_LABEL(ipLabel), ip.c_str());
     // Disk space
-    const unsigned int GB = (1024 * 1024) * 1024;
-    struct statvfs buffer;
-    int ret = statvfs(config->getParam("saveToFolder").c_str(), &buffer);   
-    if (!ret) {
-        double available = (double)(buffer.f_bfree * buffer.f_frsize) / GB;
-        ostringstream streamObj;
-        streamObj << fixed << setprecision(2) << available;
-        string space = streamObj.str() + " Gb";
-        GtkWidget* spaceLabel = GTK_WIDGET (gtk_builder_get_object(menuBuilder, "spaceLabel"));
-        gtk_label_set_text(GTK_LABEL(spaceLabel), space.c_str());
-    }
+    updateAvailableSpace(this);
+    g_timeout_add(500, updateAvailableSpace, this);
     // GDrive upload status
     struct gdrive_status_data data;
     data.recManager = recManager;
@@ -413,6 +404,22 @@ string RecorderUI::findIP()
     return string(IP);
 }
 
+gboolean RecorderUI::updateAvailableSpace(gpointer recorderUI_ptr)
+{
+    RecorderUI *data = (RecorderUI*)recorderUI_ptr;
+
+    const unsigned int GB = (1024 * 1024) * 1024;
+    struct statvfs buffer;
+    int ret = statvfs(data->config->getParam("saveToFolder").c_str(), &buffer);   
+    if (!ret) {
+        double available = (double)(buffer.f_bfree * buffer.f_frsize) / GB;
+        ostringstream streamObj;
+        streamObj << fixed << setprecision(2) << available;
+        string space = streamObj.str() + " Gb";
+        GtkWidget* spaceLabel = GTK_WIDGET (gtk_builder_get_object(data->menuBuilder, "spaceLabel"));
+        gtk_label_set_text(GTK_LABEL(spaceLabel), space.c_str());
+    }
+}
 
 gboolean RecorderUI::updateGDriveStatus(gpointer user_data)
 {

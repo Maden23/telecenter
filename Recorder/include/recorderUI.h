@@ -41,8 +41,6 @@ public:
     Config *config;
     RecManager *recManager;
     string playingCamName = ""; // empty if none playing
-    // map<string, GtkWidget*> recImages;
-//	vector<struct Camera*> camDataV; // stores data and ui objects assigned to cameras
     vector<GtkWidget*> switchGridV;  // stores grid objects with switches for edit mode on them
 
 private:
@@ -62,6 +60,8 @@ private:
 
 	/* For status bar information */
 	string findIP();
+    static gboolean updateAvailableSpace(gpointer recorderUI_ptr);
+
     struct gdrive_status_data
     {
         RecManager *recManager;
