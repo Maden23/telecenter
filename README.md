@@ -61,7 +61,7 @@ pip3 install google-api-python-client google-auth-httplib2 google-auth-oauthlib
 cd
 git clone https://github.com/eclipse/paho.mqtt.c.git
 cd paho.mqtt.c
-git checkout v1.3.1
+git checkout v1.3.6
 
 cmake -Bbuild -H. -DPAHO_WITH_SSL=OFF -DPAHO_ENABLE_TESTING=OFF
 sudo cmake --build build/ --target install
