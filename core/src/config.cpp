@@ -8,13 +8,13 @@ Config::Config()
     for (auto room : rooms)
     {
         cout << "\t" << room->getName() << endl;
-        for (auto &cam : *room->getCameras())
+        for (auto cam : *room->getCameras())
         {
-            cout << cam.fullName << " (" << cam.name << ") " << " : " << cam.uri << endl;
+            cout << cam->fullName << " (" << cam->name << ") " << " : " << cam->uri << endl;
         }
         cout << "Sound: " << endl
-             << room->getAudioSource().name << " : "
-             << room->getAudioSource().uri << endl;
+             << room->getAudioSource()->name << " : "
+             << room->getAudioSource()->uri << endl;
     }
     cout << endl;
 } 
@@ -118,18 +118,18 @@ vector<Room*> Config::readRoomsFromFile(string fileName)
     for (auto &room : d.GetObject())
     {
         string roomName = room.name.GetString();
-        vector<Camera> roomCams;
+        vector<Camera*> roomCams;
 
         // Iterate through array of camera Objects in the room
         for (auto &camItem : room.value["cameras"].GetArray())
         {
             // for (auto &mem : camItem.GetObject())
             //     cout << mem.name.GetString() << endl;
-            Camera cam;
+            Camera *cam = new Camera();
             // Add name and rtsp-address of the camera
-            cam.name = camItem["name"].GetString();
-            cam.fullName = camItem["full_name"].GetString();
-            cam.uri = camItem["address"].GetString();
+            cam->name = camItem["name"].GetString();
+            cam->fullName = camItem["full_name"].GetString();
+            cam->uri = camItem["address"].GetString();
             roomCams.push_back(cam);
         }
 
@@ -140,6 +140,7 @@ vector<Room*> Config::readRoomsFromFile(string fileName)
         {
             roomAudio.name = audio[0]["full_name"].GetString();
             roomAudio.uri = audio[0]["address"].GetString();
+            roomAudio.fullName = "audio "+roomAudio.name;
         }
 
         // Create new room and add it to vector

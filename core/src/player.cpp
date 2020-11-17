@@ -72,16 +72,19 @@ void Player::buildPipeline()
     if (platform == "jetson")
     {
         dec = gst_element_factory_make("omxh264dec", ("dec_" + camName).c_str());
+        // dec = gst_element_factory_make("nvv4l2decoder", ("dec_" + camName).c_str());
+        queue = gst_element_factory_make("queue", ("queue_" + camName).c_str());
         sink = gst_element_factory_make("nveglglessink", ("sink_" + camName).c_str());
+        // sink = gst_element_factory_make("nv3dsink", ("sink_" + camName).c_str());
 
-        if (!pipeline ||  !src || !depay || !parse || !dec || !sink)
+        if (!pipeline ||  !src || !depay || !parse || !dec || !queue || !sink)
         {
             cerr << "Not all pipeline elements could be created" << endl << endl;
         }
 
-        gst_bin_add_many(GST_BIN(pipeline), src, depay, parse, dec, sink, NULL);
+        gst_bin_add_many(GST_BIN(pipeline), src, depay, parse, dec, queue, sink, NULL);
 
-        if (!gst_element_link_many(depay, parse, dec, sink, NULL))
+        if (!gst_element_link_many(depay, parse, dec, queue, sink, NULL))
              cerr << "Pipeline linking error" << endl << endl;
     }
 
@@ -104,18 +107,8 @@ void Player::buildPipeline()
         cout << "Platform not specified" << endl << endl;
 
     /* Set latency */
-    // g_object_set (src, "latency", 0, NULL);
-    // g_object_set (src, "tcp-timeout", 200000, NULL);
-    // g_object_set (src, "timeout", 200000 , NULL);
-
-
-
-//    int width = gtk_widget_get_allocated_width (videoWindow);
-//    int height = gtk_widget_get_allocated_height (videoWindow);
-//    g_object_set(scale,
-//                 "width", width,
-//                 "height", height,
-//                 NULL);
+    g_object_set (src, "latency", 0, NULL);
+    g_object_set (dec, "enable-low-outbuffer", 1, NULL);
 
     /* Signal to handle new source pad*/
     g_signal_connect(src, "pad-added", G_CALLBACK(pad_added_handler), this);
@@ -134,6 +127,7 @@ void Player::setCam(string camName, string uri)
 void Player::playStream()
 {
 //    this->uri = uri;
+    // gst_element_set_state (pipeline, GST_STATE_READY);
     gst_element_set_state (pipeline, GST_STATE_READY);
     gst_element_unlink(src, depay);
 

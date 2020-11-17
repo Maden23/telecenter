@@ -71,7 +71,8 @@ def main():
                 rtsp += info['ip']
 
             # If item has audio, place it in "audio" section
-            if 'audio' in info and info["audio"] == "main":
+            # Checking for custom rtsp mics only
+            if 'audio' in info and info["audio"] == "rtsp_mic":
                 rooms[item['floorSection']]["audio"].append({'name' : name, 'full_name' : fullname, 'address' : rtsp})
 
 
