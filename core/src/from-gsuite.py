@@ -49,7 +49,6 @@ def main():
         exit(-1)
 
     for item in items:
-        print(item)
         if 'resourceType' in item and item['resourceType'] in ["ONVIF-camera", "Encoder", "Enc/Dec"]:
             if not item['floorSection'] in rooms:
                 rooms[item['floorSection']] = {"cameras" : [], "audio" : []}
