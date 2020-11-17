@@ -4,7 +4,7 @@
 #include "config.h"
 #include "room.h"
 #include "player.h"
-#include "recorder.h"
+#include "recManager.h"
 
 #include <iostream>
 #include <string>
@@ -39,7 +39,7 @@ public:
     ~RecorderUI();
     void displayRecordingStatus(string cam_id, bool status);
     Config *config;
-    Recorder *recorder;
+    RecManager *recManager;
     string playingCamName = ""; // empty if none playing
     // map<string, GtkWidget*> recImages;
 //	vector<struct Camera*> camDataV; // stores data and ui objects assigned to cameras
@@ -57,38 +57,33 @@ private:
 	GtkWidget* windowInit(GtkBuilder** builder, string gladeFile, string windowName);
     void initPlayerWidgets();
     void initMenuWidgets();
-    void initCamWidgets(int room_n, vector<Camera> *cams);
+    void initCamWidgets(int room_n, vector<Camera*> *cams);
 	void initRoomTab(int room_n, string room_name);
 
 	/* For status bar information */
 	string findIP();
     struct gdrive_status_data
     {
-        Recorder *recorder;
+        RecManager *recManager;
         GtkWidget *GDriveIcon;
     };
     static gboolean updateGDriveStatus(gpointer user_data);
 
 	struct display_player_data
 	{
-        Camera cam;
+        Camera *cam;
         GtkWidget *playerLabel;
         Player *player;
 		string *playingCamName;
 	};
 	static void displayPlayer(GtkWidget* widget, gpointer data);
 
-//    struct key_press_data
-//    {
-//        vector<Room*>* rooms;
-//        Recorder *recorder;
-//    };
-    static gboolean keyPress(GtkWidget* widget, GdkEventKey *event, RecorderUI *ui);
+    static gboolean keyPressHandle(GtkWidget* widget, GdkEventKey *event, RecorderUI *ui);
 
     struct switch_state_changed_data
     {
         Camera *cam;
-        Recorder *recorder;
+        RecManager *recManager;
     };
     static void switchStateChanged(GtkWidget* widget, gboolean state, gpointer user_data);
 

@@ -4,6 +4,7 @@ import sys  # for arguments
 import pickle
 import os.path
 from googleapiclient.discovery import build
+from googleapiclient.http import  MediaFileUpload
 from google_auth_oauthlib.flow import InstalledAppFlow
 from google.auth.transport.requests import Request
 
@@ -12,15 +13,11 @@ CLIENT_SECRET = '../auth/gdrive_secret.json'
 
 try:
     import argparse
-    # parser = argparse.ArgumentParser("Videofile name and location")
-    # parser.add_argument("filename", help = "The name of a videofile.", type = str)  # videofile name argument
-    # parser.add_argument("location", help = "The location of a videofile", type = str)  # videofile location argument
     parser = argparse.ArgumentParser("Path to file")
-    parser.add_argument("filename", help = "Path to a videofile.", type = str)  # videofile name argument
+    parser.add_argument("pathToFile", help = "Path to a videofile.", type = str)  # videofile name argument
 
     args = parser.parse_args()
-    # print("Trying to open", args.filename, "from", args.location, "...")
-    print("Trying to open", args.filename, "...")
+    print("Trying to open", args.pathToFile, "...")
 except:
     print("Failed to parse arguments")
 
@@ -54,19 +51,26 @@ try:
 except:
     print("HTTP error occured")
 
-# filename = args.location + args.filename
-filename = args.filename
+
 print("Uploading file to Google Drive ...")
 
-metadata = {'name': args.filename.split('/')[-1]}
-metadata['mimeType'] = None
+fileName = args.pathToFile.split('/')[-1]
+metadata = {'name': fileName}
+
+ext = fileName.split('.')[-1]
+if ext == "mp4":
+    mimetype = 'video/mp4'
+if ext == "aac":
+    mimetype = 'audio/aac'
+
 
 try:
-    res = DRIVE.files().create(body = metadata, media_body = filename).execute()
+    media = MediaFileUpload(args.pathToFile, mimetype=mimetype)
+    res = DRIVE.files().create(body = metadata, media_body = media).execute()
     if res:
         print('File upload success')
     else:
         print('File upload failed')
-except:
-    print("Upload failed. Please check filename and location to the file.")
+except Exception as e:
+    print("Upload failed.", e.__class__)
 

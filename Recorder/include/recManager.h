@@ -23,32 +23,36 @@ using namespace std;
  *
  * Forks gstreamer pipelines for each recording
  * Needs a stream id to start a recording 
- * Stores pids of running recorder processes
+ * Stores pids of running recording processes
  * Stops recordings by stream id
  *
  * @ingroup recorder
  * */
-class Recorder
+class RecManager
 {
 public:
-    Recorder(Config *config);
-    ~Recorder();
+    RecManager(Config *config);
+    ~RecManager();
 
-    map<Camera*, Recording*> getRunningRecordings() { return runningRecordings; }
-    bool startRecording(Camera* cam);
-    bool stopRecording(Camera* cam);
+    map<Source*, Recording*> getRunningRecordings() { return runningRecordings; }
+
+    bool startRecording(Source* source);
+    bool stopRecording(Source* source);
+
+    bool stopAll();
 
     bool isGDriveUploadActive() { return runningGDriveUploads > 0; }
    
 private:
-    map<Camera*, Recording*> runningRecordings;
+    map<Source*, Recording*> runningRecordings;
     Config *config;
 
     int runningGDriveUploads = 0;
-    struct uploadVideoAsyncData_t {
+    struct uploadFileAsyncData_t {
         int *runningGDriveUploads;
         vector<string> files;
     };
-    static void *uploadVideoAsync(gpointer uploadVideoAsyncData);
-    static gboolean checkIfRecStopped(gpointer recorder_ptr);
+    static void *uploadFileAsync(gpointer uploadFileAsyncData);
+    static gboolean handleStoppedRecordings(gpointer 
+    );
 };

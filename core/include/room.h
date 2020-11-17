@@ -10,12 +10,24 @@ using namespace std;
 
 enum room_t {CUSTOM, GSUITE};
 
-
-struct Camera
+enum sourceType_t
 {
+	VIDEO, AUDIO
+};
+
+class Source
+{
+public:
     string name;
     string fullName;
     string uri;
+    virtual sourceType_t getType() = 0;
+};
+
+class Camera : public Source
+{
+public:
+    Camera() {}
     Player *player;
     GtkWidget *button;
     //Grid
@@ -23,13 +35,16 @@ struct Camera
     //Recorder
     GtkWidget *recImage;
     bool record = false;
+    sourceType_t getType() { return VIDEO; }
 };
 
-struct AudioSource
+class AudioSource : public Source
 {
-    string name;
-    string uri;
+public:
+    AudioSource() {}
+    sourceType_t getType() { return AUDIO; }
 };
+
 
 /*!
  * \brief The Room class
@@ -38,7 +53,7 @@ struct AudioSource
 class Room
 {
 public:
-    Room(string name, vector<Camera> cameras, AudioSource audio)
+    Room(string name, vector<Camera*> cameras, AudioSource audio)
     {
         this->name = name;
         this->cameras = cameras;
@@ -51,16 +66,16 @@ public:
     string getName() { return name; }
     void setName(string name) { this->name = name; }
 
-    vector<Camera>* getCameras() { return &cameras; }
-    void setCameras(vector <Camera> cams) { cameras = cams; }
+    vector<Camera*>* getCameras() { return &cameras; }
+    void setCameras(vector <Camera*> cams) { cameras = cams; }
 
-    AudioSource getAudioSource() { return audio; }
+    AudioSource* getAudioSource() { return &audio; }
     void setAudioSource(AudioSource audio) { this->audio = audio; }
 
 private:
    string name;
    AudioSource audio;
-   vector<Camera> cameras;
+   vector<Camera*> cameras;
 };
 
 
