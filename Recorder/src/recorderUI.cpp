@@ -43,7 +43,7 @@ RecorderUI::RecorderUI(Config *config)
     // Disk space
     const unsigned int GB = (1024 * 1024) * 1024;
     struct statvfs buffer;
-    int ret = statvfs("/", &buffer);
+    int ret = statvfs(config->getParam("saveToFolder").c_str(), &buffer);   
     if (!ret) {
         double available = (double)(buffer.f_bfree * buffer.f_frsize) / GB;
         ostringstream streamObj;
