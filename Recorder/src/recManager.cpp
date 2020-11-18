@@ -3,6 +3,19 @@
 RecManager::RecManager(Config *config)
 {
     this->config = config;
+    // Verify path
+    savePath = config->getParam("saveToFolder");
+    if (savePath[savePath.length() - 1] != '/') 
+    {
+        savePath.append("/");
+    }
+    struct stat info;
+    if(stat(savePath.c_str(), &info) != 0 )
+    {
+        cerr << "Cannot access " << savePath << endl;
+        exit(1);
+    }
+
     // Start regular check on recordings 
     g_timeout_add(500, handleStoppedRecordings, this);
 }
@@ -37,7 +50,7 @@ bool RecManager::startRecording(Source *source)
     long limit_ns = limit_s * 1000000000;
 
     /* Attempt to start recording */ 
-    Recording *recording = new Recording(source->getType(), source->uri, config->getParam("saveToFolder"), source->fullName, limit_ns);
+    Recording *recording = new Recording(source->getType(), source->uri, savePath, source->fullName, limit_ns);
     if (!recording->start())
     {
         cerr << "Failed to start recording of " << source->uri << endl << endl;

@@ -8,6 +8,8 @@
 #include "config.h"
 #include <ctime>
 
+#include <sys/stat.h> //checking if directory exist
+
 #include <cstring>
 #include <stdlib.h>
 #include <stdio.h>
@@ -46,6 +48,7 @@ public:
 private:
     map<Source*, Recording*> runningRecordings;
     Config *config;
+    string savePath;
 
     int runningGDriveUploads = 0;
     struct uploadFileAsyncData_t {

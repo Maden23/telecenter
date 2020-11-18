@@ -2,7 +2,7 @@ import os
 import sys  # for arguments
 
 import pickle
-import os.path
+from os import path, remove
 from googleapiclient.discovery import build
 from googleapiclient.http import  MediaFileUpload
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -29,7 +29,7 @@ creds = None
 # The file gdrive.pickle stores the user's access and refresh tokens, and is
 # created automatically when the authorization flow completes for the first
 # time.
-if os.path.exists(TOKEN_STORAGE):
+if path.exists(TOKEN_STORAGE):
     with open(TOKEN_STORAGE, 'rb') as token:
         creds = pickle.load(token)
 # If there are no (valid) credentials available, let the user log in.
@@ -63,14 +63,13 @@ if ext == "mp4":
 if ext == "aac":
     mimetype = 'audio/aac'
 
-
 try:
     media = MediaFileUpload(args.pathToFile, mimetype=mimetype)
     res = DRIVE.files().create(body = metadata, media_body = media).execute()
-    if res:
-        print('File upload success')
-    else:
-        print('File upload failed')
 except Exception as e:
     print("Upload failed.", e.__class__)
+    exit(1)
+
+# Upload was successfull, removing files
+os.remove(args.pathToFile)
 
