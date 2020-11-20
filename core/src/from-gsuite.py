@@ -40,14 +40,20 @@ def main():
         exit(1)
 
     # Call the Admin SDK Directory API
-    results = service.resources().calendars().list(customer='my_customer').execute()
-    items = results.get('items', [])
+    items = []
+    nextPageToken = None
+    while True:
+        results = service.resources().calendars().list(customer='my_customer', pageToken=nextPageToken).execute()
+        items.extend(results.get('items'))
+        nextPageToken = results.get('nextPageToken')
+        if not nextPageToken:
+            break
+
     # Distribute ONVIF-cameras (names and adresses) to rooms
     rooms = {} # {"room1" : { "cameras" :[("cam1", "cam1 full", "rtsp://123"), ("cam2", "cam2 full", "rtsp://1234")], "audio": [("source1", "rtsp://..."), ("sourse2", "rtsp://")], "room2" : {...}}
     if not items:
         print('No cameras in the domain.')
         exit(-1)
-
     for item in items:
         if 'resourceType' in item and item['resourceType'] in ["ONVIF-camera", "Encoder", "Enc/Dec"]:
             if not item['floorSection'] in rooms:
