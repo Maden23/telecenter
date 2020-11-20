@@ -27,10 +27,12 @@ SingleStreamUI::SingleStreamUI()
     initPlayerWidgets();
     player = new Player(playerWidget, "other");
     player->setCam("520 cam", "rtsp://172.18.212.17:554/Streaming/Channels/101?transportmode=unicast&profile=Profile_1");
+    initOverlayWidgets();
 
     g_signal_connect(playerWindow, "destroy", G_CALLBACK (gtk_main_quit), NULL);
-    gtk_window_present(GTK_WINDOW(playerWindow));
-    
+    gtk_window_fullscreen(GTK_WINDOW(playerWindow));
+    gtk_widget_show(playerWindow);
+
     /* MQTT */
     // create queue for communicating between threads (redirecting mqtt messages)
     mqttQueue = g_async_queue_new();
@@ -43,6 +45,13 @@ SingleStreamUI::SingleStreamUI()
     // Close app (all threads) after gtk_main_quit
     exit(0);
 
+}
+
+gboolean SingleStreamUI::widgetClicked( GtkWidget *widget, GdkEventButton *event )
+{
+  cout << "CLICKED " << gtk_buildable_get_name(GTK_BUILDABLE(widget)) << endl;
+
+  return TRUE;
 }
 
 SingleStreamUI::~SingleStreamUI()
@@ -161,4 +170,23 @@ void SingleStreamUI::initPlayerWidgets()
     {
         cerr << "Player label not found." << endl;
     }
+}
+
+void SingleStreamUI::initOverlayWidgets()
+{
+    vector<string> names = {"b_up", "b_down", "b_right", "b_left"};
+
+    for (auto name : names)
+    {
+        GtkWidget* widget = (GtkWidget*)gtk_builder_get_object(playerBuilder, name.c_str());
+        if (!widget)
+        {
+            cerr << name << " not found." << endl;
+            exit(1);
+        }
+        g_signal_connect(widget, "clicked", G_CALLBACK (widgetClicked), NULL);
+        hidableOverlayWidgets.push_back(widget);
+    }    
+
+    
 }

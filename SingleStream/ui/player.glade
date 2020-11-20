@@ -1,7 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.22.0 -->
+<!-- Generated with glade 3.36.0 -->
 <interface>
   <requires lib="gtk+" version="3.20"/>
+  <object class="GtkImage" id="im_down">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="pixel_size">60</property>
+    <property name="icon_name">gtk-go-down</property>
+  </object>
+  <object class="GtkImage" id="im_left">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="pixel_size">60</property>
+    <property name="icon_name">gtk-go-back</property>
+  </object>
+  <object class="GtkImage" id="im_right">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="pixel_size">60</property>
+    <property name="icon_name">gtk-go-forward</property>
+  </object>
+  <object class="GtkImage" id="im_up">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="pixel_size">60</property>
+    <property name="icon_name">gtk-go-up</property>
+  </object>
   <object class="GtkWindow" id="player">
     <property name="can_focus">False</property>
     <child>
@@ -9,6 +33,8 @@
         <property name="name">playerOverlay</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
+        <property name="hexpand">True</property>
+        <property name="vexpand">True</property>
         <child>
           <object class="GtkDrawingArea" id="playerWidget">
             <property name="visible">True</property>
@@ -38,6 +64,60 @@
               </object>
             </child>
           </object>
+        </child>
+        <child type="overlay">
+          <object class="GtkButton" id="b_left">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="halign">start</property>
+            <property name="valign">center</property>
+            <property name="image">im_left</property>
+            <property name="always_show_image">True</property>
+          </object>
+          <packing>
+            <property name="index">1</property>
+          </packing>
+        </child>
+        <child type="overlay">
+          <object class="GtkButton" id="b_right">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="halign">end</property>
+            <property name="valign">center</property>
+            <property name="image">im_right</property>
+            <property name="always_show_image">True</property>
+          </object>
+          <packing>
+            <property name="index">2</property>
+          </packing>
+        </child>
+        <child type="overlay">
+          <object class="GtkButton" id="b_up">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="halign">center</property>
+            <property name="valign">start</property>
+            <property name="image">im_up</property>
+          </object>
+          <packing>
+            <property name="index">3</property>
+          </packing>
+        </child>
+        <child type="overlay">
+          <object class="GtkButton" id="b_down">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="halign">center</property>
+            <property name="valign">end</property>
+            <property name="image">im_down</property>
+          </object>
+          <packing>
+            <property name="index">4</property>
+          </packing>
         </child>
       </object>
     </child>
