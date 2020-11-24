@@ -26,7 +26,8 @@ SingleStreamUI::SingleStreamUI()
     /* Find player and window elements to control*/
     initPlayerWidgets();
     player = new Player(playerWidget, "other");
-    player->setCam("520 cam", "rtsp://172.18.212.17:554/Streaming/Channels/101?transportmode=unicast&profile=Profile_1");
+    player->setCam("Studio 102", "rtsp://172.18.191.102:554/Streaming/Channels/1");
+    player->onClick = {.func_to_call = eventHandleFunction(playerClicked), .params = this};
     initOverlayWidgets();
 
     g_signal_connect(playerWindow, "destroy", G_CALLBACK (gtk_main_quit), NULL);
@@ -45,13 +46,6 @@ SingleStreamUI::SingleStreamUI()
     // Close app (all threads) after gtk_main_quit
     exit(0);
 
-}
-
-gboolean SingleStreamUI::widgetClicked( GtkWidget *widget, GdkEventButton *event )
-{
-  cout << "CLICKED " << gtk_buildable_get_name(GTK_BUILDABLE(widget)) << endl;
-
-  return TRUE;
 }
 
 SingleStreamUI::~SingleStreamUI()
@@ -146,8 +140,6 @@ GtkWidget* SingleStreamUI::windowInit(GtkBuilder** builder, string gladeFile, st
         return nullptr;
     }
 
-    gtk_widget_set_size_request (GTK_WIDGET(window), 1920, 550);
-
     gtk_builder_connect_signals(*builder,nullptr);
 
     g_signal_connect (G_OBJECT (window), "destroy", gtk_main_quit, nullptr);
@@ -163,6 +155,11 @@ void SingleStreamUI::initPlayerWidgets()
     {
         cerr << "Player widget not found." << endl;
     }
+    // gtk_widget_add_events(playerWidget, GDK_BUTTON_PRESS_MASK); 
+    // g_signal_connect(playerWindow, "button-press-event", G_CALLBACK(playerClicked), NULL);
+
+
+    
 
     /* Find cam label */
     playerLabel = (GtkWidget*)gtk_builder_get_object(playerBuilder, "playerLabel");
@@ -170,6 +167,26 @@ void SingleStreamUI::initPlayerWidgets()
     {
         cerr << "Player label not found." << endl;
     }
+}
+
+gboolean SingleStreamUI::showOverlayWidgets(gpointer ui_ptr)
+{
+    SingleStreamUI* ui = (SingleStreamUI*)ui_ptr;
+    for (auto widget : ui->hidableOverlayWidgets)
+    {
+        gtk_widget_show(widget);
+    }
+    return false;
+}
+
+gboolean SingleStreamUI::hideOverlayWidgets(gpointer ui_ptr)
+{
+    SingleStreamUI* ui = (SingleStreamUI*)ui_ptr;
+    for (auto widget : ui->hidableOverlayWidgets)
+    {
+        gtk_widget_hide(widget);
+    }
+    return false;
 }
 
 void SingleStreamUI::initOverlayWidgets()
@@ -184,9 +201,41 @@ void SingleStreamUI::initOverlayWidgets()
             cerr << name << " not found." << endl;
             exit(1);
         }
-        g_signal_connect(widget, "clicked", G_CALLBACK (widgetClicked), NULL);
+        g_signal_connect(widget, "clicked", G_CALLBACK (overlayWidgetClicked), this);
         hidableOverlayWidgets.push_back(widget);
+        hideOverlayWidgets(this);
     }    
+}
 
+
+gboolean SingleStreamUI::overlayWidgetClicked( GtkWidget *widget, GdkEventButton *event, gpointer ui_ptr)
+{
+    SingleStreamUI* ui = (SingleStreamUI*)ui_ptr;
+    cout << "CLICKED " << gtk_buildable_get_name(GTK_BUILDABLE(widget)) << endl;
+
+    // Reschedule hiding widgets
+    g_assert(ui->hideWidgetsGSource != 0);
+    g_source_remove(ui->hideWidgetsGSource);
+    ui->hideWidgetsGSource = g_timeout_add_seconds(3, hideOverlayWidgets, ui);
+    return TRUE;
+}
+
+void SingleStreamUI::playerClicked(SingleStreamUI *ui)
+{
+    if (ui->hidableOverlayWidgets.empty())
+        return;
     
+    // Checking for visible widgets. If any one is visible, hide all of them. 
+    if (gtk_widget_get_visible(ui->hidableOverlayWidgets[0]))
+    {
+        ui->hideOverlayWidgets(ui);
+    }
+    // Otherwise show all widgets and start job to hide them after some time 
+    else
+    {
+        ui->showOverlayWidgets(ui);
+        ui->hideWidgetsGSource = g_timeout_add_seconds(3, hideOverlayWidgets, ui);
+    }
+    
+
 }

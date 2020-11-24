@@ -113,6 +113,10 @@ void Player::buildPipeline()
     /* Signal to handle new source pad*/
     g_signal_connect(src, "pad-added", G_CALLBACK(pad_added_handler), this);
 
+    // Catch naviagtion event
+    GstPad* sink_pad = gst_element_get_static_pad(scale, "src");
+    gst_pad_set_event_function(sink_pad, GstPadEventFunction(filterGstNavigationEvents));
+
 }
 
 void Player::setCam(string camName, string uri)
@@ -177,6 +181,30 @@ gboolean Player::restart(gpointer user_data)
     return FALSE; // do not repeat call
 }
 
+gboolean Player::filterGstNavigationEvents (GstPad *pad, GstObject *parent, GstEvent *event)
+{
+    gboolean ret;
+    switch (GST_EVENT_TYPE (event)) {
+        case GST_EVENT_NAVIGATION:
+        {
+            const GstStructure *s = gst_event_get_structure (event);
+            auto type = gst_structure_get_string (s, "event");
+            if (g_str_equal (type, "mouse-button-press")) {
+                GstStructure *structure = gst_structure_new("NavigationEvent", "event", G_TYPE_STRING, "mouse-button-press", NULL);
+                gst_element_post_message(GST_ELEMENT(parent), gst_message_new_application(parent, structure));
+            }
+            break;
+        }
+        default:
+        {
+            /* just call the default handler */
+            ret = gst_pad_event_default (pad, parent, event);
+            break;
+        }
+    }
+    return ret;
+}
+
 
 GstBusSyncReply Player::busSyncHandler (GstBus *bus, GstMessage *message, Player *player)
 {
@@ -211,8 +239,26 @@ GstBusSyncReply Player::busSyncHandler (GstBus *bus, GstMessage *message, Player
             player->restartID = g_idle_add(restart, player);
             break;
         }
+        case GST_MESSAGE_APPLICATION:
+        {
+            const GstStructure *s = gst_message_get_structure (message);
+            const gchar *name = gst_structure_get_name (s);
+
+            if (0 == g_ascii_strncasecmp(name, "NavigationEvent", sizeof("NavigationEvent")))
+            {
+                if (0 == g_ascii_strncasecmp(gst_structure_get_string(s, "event"), "mouse-button-press", sizeof("mouse-button-press"))
+                    || player->onClick.func_to_call != nullptr)
+                {
+                    player->onClick.func_to_call(player->onClick.params);
+                }
+            }
+            
+        }
         default:
-            break;
+        {
+             break;
+
+        }
     }
 
     // ignore anything but 'prepare-window-handle' element messages
@@ -224,6 +270,7 @@ GstBusSyncReply Player::busSyncHandler (GstBus *bus, GstMessage *message, Player
       // GST_MESSAGE_SRC (message) will be the video sink element
       overlay = GST_VIDEO_OVERLAY (GST_MESSAGE_SRC (message));
       gst_video_overlay_set_window_handle (overlay, player->videoWindowHandle);
+      gst_video_overlay_handle_events (overlay, true);
       // cout << "Set video handle" << endl;
     }
     else

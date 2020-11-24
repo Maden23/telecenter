@@ -21,6 +21,13 @@ struct PadData
 	GstElement *depay;
 };
 
+typedef void (*eventHandleFunction)(void*);
+struct eventHandleFunctionData_t
+{
+    eventHandleFunction func_to_call;
+    void* params;
+};
+
 /*!
  * \brief The Player class
  *
@@ -34,6 +41,11 @@ public:
     ~Player();
 
     void setCam(string camName, string uri);
+
+
+    // void setOnClickFunction(onClickFunctionData_t *func_data);
+    eventHandleFunctionData_t onClick;
+
 
     void playStream();
     void stopStream();
@@ -58,6 +70,9 @@ private:
 	guintptr videoWindowHandle = 0;
     static void videoWidgetRealize_cb (GtkWidget *widget, Player *player);
 	static gboolean videoWidgetDraw_cb (GtkWidget *widget, cairo_t *cr, gpointer user_data);
+
+    // Handelling Navigation events
+    static gboolean filterGstNavigationEvents (GstPad *pad, GstObject *parent, GstEvent *event);
 
 	// Handelling bus messages (incuding 'prepare-window-handle' for rendering video)
     static GstBusSyncReply busSyncHandler (GstBus *bus, GstMessage *message, Player *player);
