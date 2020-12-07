@@ -86,9 +86,13 @@ gpointer SingleStreamUI::parseQueue(gpointer data)
         {
             // Operator picked another camera, changing playing stream
             // message format: camName,uri
+            string camName, uri;
             int split = msg->message.find(',');
-            string camName = msg->message.substr(0, split);
-            string uri = msg->message.substr(split, msg->message.length() - split);
+            if (split == -1)
+                camName = "Unknown";
+            else
+                camName= msg->message.substr(0, split);
+            uri = msg->message.substr(split, msg->message.length() - split);
             obj->player->setCam(camName, uri);
         }
     }
