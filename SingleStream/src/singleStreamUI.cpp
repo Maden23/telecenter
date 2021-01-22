@@ -26,7 +26,7 @@ SingleStreamUI::SingleStreamUI()
     /* Find player and window elements to control*/
     initPlayerWidgets();
     player = new Player(playerWidget, "other");
-    player->setCam("Studio 102", "rtsp://172.18.191.102:554/Streaming/Channels/1");
+    player->setCam("307", "rtsp://172.18.191.74:554/Streaming/Channels/1");
     player->onClick = {.func_to_call = eventHandleFunction(playerClicked), .params = this};
     initOverlayWidgets();
 
@@ -39,6 +39,13 @@ SingleStreamUI::SingleStreamUI()
     mqttQueue = g_async_queue_new();
     g_thread_new("run_mqtt", runMqtt, this); // thread for mqtt-client
     g_thread_new("mqtt_queue", parseQueue, this); // thread for parsing messages
+
+    /* Conecting to camera controlling server */
+    cameraClient = new CameraClient("127.0.0.1", 5555);
+    if (!cameraClient->connectToCamera("172.18.191.74", 80, "admin", "Supervisor"))
+    {
+        cerr << "Could not connect to camera" << endl << endl;
+    }
 
     // Pass control to GTK
     gtk_main();
@@ -94,6 +101,9 @@ gpointer SingleStreamUI::parseQueue(gpointer data)
                 camName= msg->message.substr(0, split);
             uri = msg->message.substr(split, msg->message.length() - split);
             obj->player->setCam(camName, uri);
+
+            // TODO: Changing camera to be controlled
+
         }
     }
 }
@@ -162,9 +172,6 @@ void SingleStreamUI::initPlayerWidgets()
     // gtk_widget_add_events(playerWidget, GDK_BUTTON_PRESS_MASK); 
     // g_signal_connect(playerWindow, "button-press-event", G_CALLBACK(playerClicked), NULL);
 
-
-    
-
     /* Find cam label */
     playerLabel = (GtkWidget*)gtk_builder_get_object(playerBuilder, "playerLabel");
     if (!playerLabel)
@@ -215,8 +222,16 @@ void SingleStreamUI::initOverlayWidgets()
 gboolean SingleStreamUI::overlayWidgetClicked( GtkWidget *widget, GdkEventButton *event, gpointer ui_ptr)
 {
     SingleStreamUI* ui = (SingleStreamUI*)ui_ptr;
-    cout << "CLICKED " << gtk_buildable_get_name(GTK_BUILDABLE(widget)) << endl;
+    string buttonName = gtk_buildable_get_name(GTK_BUILDABLE(widget));
+    cout << "CLICKED " << buttonName << endl;
+    cameraCommand_t command;
+    if (buttonName == "b_up") command = UP;
+    if (buttonName == "b_down") command = DOWN;
+    if (buttonName == "b_left") command = LEFT;
+    if (buttonName == "b_right") command = RIGHT;
 
+    ui->cameraClient->commandToCamera(command);
+ 
     // Reschedule hiding widgets
     g_assert(ui->hideWidgetsGSource != 0);
     g_source_remove(ui->hideWidgetsGSource);

@@ -6,6 +6,7 @@
 
 #include <gtk/gtk.h>
 #include "mqtt_client.h"
+#include "cameraClient.h"
 
 using namespace std;
 
@@ -42,6 +43,8 @@ private:
     MqttClient *mqtt;
     GAsyncQueue *mqttQueue;
     static gpointer parseQueue(gpointer data);
+
+    CameraClient *cameraClient; 
 
 };
 
