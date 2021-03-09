@@ -108,6 +108,7 @@ void Player::buildPipeline()
 
     /* Set latency */
     g_object_set (src, "latency", 0, NULL);
+    g_object_set(src, "protocols", 4, NULL); // stream data over TCP https://gstreamer.freedesktop.org/documentation/rtsplib/gstrtsptransport.html?gi-language=c#GstRTSPLowerTrans
     g_object_set (dec, "enable-low-outbuffer", 1, NULL);
 
     /* Signal to handle new source pad*/
@@ -132,7 +133,7 @@ void Player::playStream()
     gst_element_unlink(src, depay);
 
     cout << "Playing " << uri << endl << endl;
-    g_object_set (src, "location", (uri+"?width=640&height=480").c_str(), NULL);
+    g_object_set (src, "location", uri.c_str(), NULL);
 
     gst_element_set_state (pipeline, GST_STATE_PLAYING);
     playing = true;
@@ -190,6 +191,7 @@ GstBusSyncReply Player::busSyncHandler (GstBus *bus, GstMessage *message, Player
             gst_message_parse_error (message, &err, &debug);
 
             cerr << "Player "  << player->camName << endl;
+            cerr << "Stream: " << player->uri << endl;
             cerr << err->message << endl;
             cerr << debug << endl << endl;
             
