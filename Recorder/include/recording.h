@@ -8,7 +8,7 @@ using namespace std;
 
 enum status_t
 {
-    RUNNING, STOPPING, STOPPED
+    NEW, STARTING, RUNNING, STOPPING_MANUALLY, STOPPED_ERROR, STOPPED_MANUALLY, 
 };
 
 /*!
@@ -27,6 +27,8 @@ public:
 
 	bool start();
 	bool stop();
+	// Restart recording. It will not restart if it was just restarted resently.
+	void requestRestart();
 
 	status_t status;
 	sourceType_t sourceType; 
@@ -35,6 +37,11 @@ public:
 private:
     vector<string> files;
     long timeLimit;
+
+	gint fileIndex = 0; 	    
+	
+	GTimer *timer;
+	gdouble lastRestartTime = -1;
 
     GstElement *pipeline, *src, *depay, *parse, *muxsink;
 

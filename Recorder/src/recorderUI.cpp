@@ -367,7 +367,6 @@ gboolean RecorderUI::keyPressHandle(GtkWidget* widget, GdkEventKey *event, Recor
                     auto audio = room->getAudioSource();
                     if (audio->uri != "")
                         ui->recManager->startRecording(audio);
-                    gtk_widget_show(cam->recImage);
                 }
             } // for cams
         } // for rooms
@@ -471,7 +470,6 @@ void RecorderUI::switchStateChanged(GtkWidget* widget, gboolean state, gpointer 
     {
         if (state)
         {
-            gtk_widget_show(GTK_WIDGET(data->cam->recImage));
             data->recManager->startRecording(data->cam);
         }
         else

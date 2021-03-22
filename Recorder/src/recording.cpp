@@ -8,7 +8,23 @@ Recording::Recording(sourceType_t sourceType, string uri, string folder, string 
     this->sourceName = sourceName;
     this->timeLimit = timeLimit;
 
-    /* Create file name */
+	timer = g_timer_new();
+	status = NEW;
+
+}
+
+Recording::~Recording()
+{
+    gst_object_unref(pipeline);
+}
+
+bool Recording::start()
+{
+	status = STARTING;
+	/* Initiallizing Gstreamer*/
+	gst_init(nullptr, nullptr);
+
+	/* Create file name */
     if (fileNamePattern == "")
     {
         char datetime[18];
@@ -19,20 +35,6 @@ Recording::Recording(sourceType_t sourceType, string uri, string folder, string 
 		if (sourceType == AUDIO)
 			fileNamePattern = sourceName + "_" + string(datetime)+ "_%02d.aac";
     }
-}
-
-Recording::~Recording()
-{
-    gst_object_unref(pipeline);
-}
-
-bool Recording::start()
-{
-
-	status = RUNNING;
-
-	/* Initiallizing Gstreamer*/
-	gst_init(nullptr, nullptr);
 
 	if (!buildPipeline())
 	{
@@ -52,10 +54,10 @@ bool Recording::start()
 
 bool Recording::stop()
 {
-    if (status == STOPPING) return false;
+    if (status == STOPPING_MANUALLY) return false;
 
 	// send EOS
-	status = STOPPING;
+	status = STOPPING_MANUALLY;
 	gst_element_send_event(src, gst_event_new_eos());
     cerr << sourceName << ": Sent EOS to stream" << endl;
 
@@ -64,6 +66,24 @@ bool Recording::stop()
 	return true;
 }
 
+void Recording::requestRestart()
+{
+    gdouble now = g_timer_elapsed(timer, NULL);
+    if (lastRestartTime != -1)
+    {
+        gdouble diff = now - lastRestartTime;
+		/* If pipeline was just restarted, quitting function */
+		if (diff < 0.2)
+		{
+			return;
+		}
+	}
+	cerr << "Recording of " << uri << " stopped with error. Restarting." << endl;
+
+	start();
+
+	lastRestartTime = now;
+}
 
 bool Recording::buildPipeline()
 {
@@ -156,6 +176,7 @@ void Recording::pad_added_handler (GstElement * src, GstPad * new_pad, Recording
 	else 
 	{       
         cerr << recording->sourceName << ": Linked source pad" << endl << endl;
+		recording->status = RUNNING;
 	}
 
 }
@@ -168,6 +189,8 @@ GstBusSyncReply Recording::busSyncHandler (GstBus *bus, GstMessage *message, Rec
 	{
 		case GST_MESSAGE_ERROR:
 		{
+			recording->status = STOPPED_ERROR;
+
 			GError *err;
 			gchar *debug;
 
@@ -175,7 +198,6 @@ GstBusSyncReply Recording::busSyncHandler (GstBus *bus, GstMessage *message, Rec
             cerr << "Recording " << recording->sourceName << endl
 				 << "Bus: " << err->message  << endl 
 				 << debug << endl << endl;
-            recording->status = STOPPED;
 
 			g_error_free (err);
      		g_free (debug);
@@ -194,15 +216,20 @@ GstBusSyncReply Recording::busSyncHandler (GstBus *bus, GstMessage *message, Rec
                 const gchar *filename = gst_structure_get_string(s, "location");
                 cout << "New file: " << filename << endl << endl;
                 recording->files.push_back(filename);
+				// TODO: Update current file index
+				g_object_get(G_OBJECT(recording->muxsink), "start-index", &recording->fileIndex, NULL);
+				cerr << "FILE INDEX: " << recording->fileIndex << endl << endl;
             }
 			break;
 		}
 		case GST_MESSAGE_EOS:
 		{
+			// This recording is finished if stop was initiated by user (= status was set to STOPPING_MANUALLY), not by splitmuxsink
+			if (recording->status == STOPPING_MANUALLY)
+                recording->status = STOPPED_MANUALLY;
+
             cerr << recording->sourceName << ": EOS in bus" << endl << endl;
-            // This recording is finished if stop was initiated by user (= status was set to STOPPING), not by splitmuxsink
-            if (recording->status == STOPPING)
-                recording->status = STOPPED;
+            
 			break;
 		}
 		default:
