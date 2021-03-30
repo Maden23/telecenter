@@ -64,7 +64,7 @@ if ext == "aac":
     mimetype = 'audio/aac'
 
 try:
-    media = MediaFileUpload(args.pathToFile, mimetype=mimetype)
+    media = MediaFileUpload(args.pathToFile, mimetype=mimetype, resumable=True)
     res = DRIVE.files().create(body = metadata, media_body = media).execute()
 except Exception as e:
     print("Upload failed.", e.__class__)
