@@ -31,8 +31,7 @@ SingleStreamUI::SingleStreamUI()
     initOverlayWidgets();
 
     g_signal_connect(playerWindow, "destroy", G_CALLBACK (gtk_main_quit), NULL);
-    gtk_window_fullscreen(GTK_WINDOW(playerWindow));
-    gtk_widget_show(playerWindow);
+    gtk_window_present(GTK_WINDOW(playerWindow));
 
     /* MQTT */
     // create queue for communicating between threads (redirecting mqtt messages)

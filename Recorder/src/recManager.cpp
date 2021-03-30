@@ -17,7 +17,7 @@ RecManager::RecManager(Config *config)
     }
 
     // Start regular check on recordings 
-    g_timeout_add(500, handleStoppedRecordings, this);
+    g_timeout_add(500, handleRecordingStatus, this);
 }
 
 RecManager::~RecManager()
@@ -104,14 +104,16 @@ void* RecManager::uploadFileAsync(gpointer uploadFileAsyncData)
     }
 }
 
-gboolean RecManager::handleStoppedRecordings(gpointer recManager_ptr)
+gboolean RecManager::handleRecordingStatus(gpointer recManager_ptr)
 {
     auto *recManager = (RecManager*) recManager_ptr;
     // Using iterators to be able to delete items
+    bool deleted_something;
     for (auto it = recManager->runningRecordings.cbegin(); it != recManager->runningRecordings.end();)
     {
+        deleted_something = false;
         /* If any recording has this status, it needs to be deleted, and it's file -- uploaded*/
-        if (it->second->getStatus() == STOPPED)
+        if (it->second->getStatus() == STOPPED_MANUALLY)
         {
             cerr << "Recording of " << it->second->uri << " stopped." << endl;
             vector<string> files = it->second->getFiles();
@@ -135,9 +137,43 @@ gboolean RecManager::handleStoppedRecordings(gpointer recManager_ptr)
             // Delete Recording
             delete it->second;
             it = recManager->runningRecordings.erase(it);
+            deleted_something = true;
 
         }
-        else
+        else if (it->second->getStatus() == STOPPED_ERROR)
+        {
+            // Change recImage widget for video sources
+            if (it->first->getType() == VIDEO)
+            {
+                Camera* cam = static_cast<Camera*>(it->first);
+                gtk_image_set_from_icon_name(GTK_IMAGE(cam->recImage), "face-sad", GTK_ICON_SIZE_DIALOG);
+                
+            }
+            it->second->requestRestart();               
+        }
+        else if (it->second->getStatus() == STARTING)
+        {
+            // Change recImage widget for video sources
+            if (it->first->getType() == VIDEO)
+            {
+                Camera* cam = static_cast<Camera*>(it->first);
+                gtk_image_set_from_icon_name(GTK_IMAGE(cam->recImage), "widget-gtk-spinner", GTK_ICON_SIZE_DIALOG);
+                
+                gtk_widget_show(cam->recImage);
+
+            }
+        }
+        else if (it->second->getStatus() == RUNNING)
+        {
+            // Change recImage widget for video sources
+            if (it->first->getType() == VIDEO)
+            {
+                Camera* cam = static_cast<Camera*>(it->first);
+                gtk_image_set_from_icon_name(GTK_IMAGE(cam->recImage), "gtk-media-record", GTK_ICON_SIZE_DIALOG);
+                
+            }
+        }
+        if (!deleted_something)
         { 
             it++;
         }

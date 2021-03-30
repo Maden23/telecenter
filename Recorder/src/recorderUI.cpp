@@ -367,7 +367,6 @@ gboolean RecorderUI::keyPressHandle(GtkWidget* widget, GdkEventKey *event, Recor
                     auto audio = room->getAudioSource();
                     if (audio->uri != "")
                         ui->recManager->startRecording(audio);
-                    gtk_widget_show(cam->recImage);
                 }
             } // for cams
         } // for rooms
@@ -392,16 +391,43 @@ void RecorderUI::editButtonClicked(GtkWidget* widget, vector<GtkWidget*> *switch
 
 string RecorderUI::findIP()
 {
-    char host[256];
-    char *IP;
-    struct hostent *host_entry;
-    int hostname;
-    hostname = gethostname(host, sizeof(host)); //find the host name
-    if (hostname == -1) return "";
-    host_entry = gethostbyname(host); //find host information
-    if (!host_entry) return "";
-    IP = inet_ntoa(*((struct in_addr*) host_entry->h_addr_list[0])); //Convert into IP string
-    return string(IP);
+    int sock = socket(PF_INET, SOCK_DGRAM, 0);
+    sockaddr_in loopback;
+
+    if (sock == -1) {
+        cerr << "Could not socket for ip detection" << endl << endl;
+        return "";
+    }
+
+    memset(&loopback, 0, sizeof(loopback));
+    loopback.sin_family = AF_INET;
+    loopback.sin_addr.s_addr = INADDR_LOOPBACK;   // using loopback ip address
+    loopback.sin_port = htons(9);                 // using debug port
+
+    if (connect(sock, reinterpret_cast<sockaddr*>(&loopback), sizeof(loopback)) == -1) {
+        close(sock);
+        cerr << "Could not connect to socket for ip detection" << endl << endl;
+        return "";
+    }
+
+    socklen_t addrlen = sizeof(loopback);
+    if (getsockname(sock, reinterpret_cast<sockaddr*>(&loopback), &addrlen) == -1) {
+        close(sock);
+        cerr << "Could not getsockname for ip detection" << endl << endl;
+        return "";
+    }
+
+    close(sock);
+
+    char buf[INET_ADDRSTRLEN];
+    if (inet_ntop(AF_INET, &loopback.sin_addr, buf, INET_ADDRSTRLEN) == 0x0) {
+        cerr << "Could not inet_ntop for ip detection" << endl << endl;
+        return "";
+    } else {
+        cout << "Local ip address: " << buf << endl << endl;
+    }
+    
+    return string(buf);
 }
 
 gboolean RecorderUI::updateAvailableSpace(gpointer recorderUI_ptr)
@@ -444,7 +470,6 @@ void RecorderUI::switchStateChanged(GtkWidget* widget, gboolean state, gpointer 
     {
         if (state)
         {
-            gtk_widget_show(GTK_WIDGET(data->cam->recImage));
             data->recManager->startRecording(data->cam);
         }
         else
