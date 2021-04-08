@@ -31,8 +31,7 @@ SingleStreamUI::SingleStreamUI()
     initOverlayWidgets();
 
     g_signal_connect(playerWindow, "destroy", G_CALLBACK (gtk_main_quit), NULL);
-    gtk_window_fullscreen(GTK_WINDOW(playerWindow));
-    gtk_widget_show(playerWindow);
+    gtk_window_present(GTK_WINDOW(playerWindow));
 
     /* MQTT */
     // create queue for communicating between threads (redirecting mqtt messages)
@@ -95,11 +94,8 @@ gpointer SingleStreamUI::parseQueue(gpointer data)
             // message format: camName,uri
             string camName, uri;
             int split = msg->message.find(',');
-            if (split == -1)
-                camName = "Unknown";
-            else
-                camName= msg->message.substr(0, split);
-            uri = msg->message.substr(split, msg->message.length() - split);
+            string camName = msg->message.substr(0, split);
+            string uri = msg->message.substr(split+1, msg->message.length() - split);
             obj->player->setCam(camName, uri);
 
             // TODO: Changing camera to be controlled
