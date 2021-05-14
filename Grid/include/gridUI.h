@@ -43,7 +43,7 @@ private:
 	GtkWidget* windowInit(GtkBuilder** builder, string gladeFile, string windowName);
 	void initMenuWidgets();
     static void pageSwitched(GtkWidget* widget, GParamSpec* property, vector<Room *> *rooms);
-    void initCamWidgets(int room_n, vector<Camera> *cams);
+    void initCamWidgets(int room_n, vector<Camera*> *cams);
 	void initRoomTab(int room_n, string room_name);
 
 	/* For status bar information */
@@ -52,7 +52,7 @@ private:
     /* Sending an MQTT message on player click */
     struct on_player_click_data
 	{
-        Camera cam;
+        Camera *cam;
         MqttClient *mqtt;
 	};
     static void onPlayerClick(GtkWidget* widget, gpointer data);

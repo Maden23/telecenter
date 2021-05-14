@@ -65,7 +65,7 @@ GridUI::~GridUI()
     {
         for (auto cam : *room->getCameras())
         {
-            delete cam.player;
+            delete cam->player;
         }
     }
 }
@@ -180,9 +180,9 @@ void GridUI::pageSwitched(GtkWidget *widget, GParamSpec *property, vector<Room*>
     {
         for (auto cam : *(room->getCameras()))
         {
-            if (cam.player->isPlaying())
+            if (cam->player->isPlaying())
             {
-                cam.player->stopStream();
+                cam->player->stopStream();
                 foundPlayingPage = true;
             }
         }
@@ -190,14 +190,14 @@ void GridUI::pageSwitched(GtkWidget *widget, GParamSpec *property, vector<Room*>
     }
 
     /* Starting players on active page */
-    for (Camera cam : *(rooms->at(pageNum - 1)->getCameras()))
+    for (Camera *cam : *(rooms->at(pageNum - 1)->getCameras()))
     {
-        cam.player->playStream();
+        cam->player->playStream();
     }
     cerr << "Switched to " << rooms->at(pageNum - 1)->getName() << endl << endl;
 }
 
-void GridUI::initCamWidgets(int room_n, vector<Camera> *cams)
+void GridUI::initCamWidgets(int room_n, vector<Camera*> *cams)
 {
 
     /* Find out how many cameras are known */
@@ -208,7 +208,7 @@ void GridUI::initCamWidgets(int room_n, vector<Camera> *cams)
 
     /*  Setting buttons for each camera. Remember not to run out of 9 buttons */
     int n = 0;  
-    for (Camera &cam : *cams)
+    for (Camera* cam : *cams)
     {   
         if (n == 9) break;
         /* Create struct object for storing data and ui objects for the camera */
@@ -226,7 +226,7 @@ void GridUI::initCamWidgets(int room_n, vector<Camera> *cams)
 
         /* Show button and assign cam label */
         gtk_widget_show(button);
-        gtk_button_set_label(GTK_BUTTON(button), cam.name.c_str());
+        gtk_button_set_label(GTK_BUTTON(button), cam->name.c_str());
 
         /* Pass data to click handler */
         struct on_player_click_data *data = new struct on_player_click_data;
@@ -234,7 +234,7 @@ void GridUI::initCamWidgets(int room_n, vector<Camera> *cams)
         g_signal_connect(G_OBJECT(button), "clicked", G_CALLBACK(onPlayerClick), data);
 
         /* Add button to Camera struct */
-        cam.button = button;
+        cam->button = button;
 
         /* Find the drawing area object */
         name = "da" + to_string(n) + "_" + to_string(room_n);
@@ -247,10 +247,10 @@ void GridUI::initCamWidgets(int room_n, vector<Camera> *cams)
         }
 
         /* Add drawingArea to Camera struct */
-        cam.drawingArea = drawingArea;
+        cam->drawingArea = drawingArea;
         /* Create player for camera and assign drawing area and stream url */
-        Player *player = new Player(drawingArea, config->getParam("platform"), cam.uri, cam.name);
-        cam.player = player;
+        Player *player = new Player(drawingArea, config->getParam("platform"), cam->uri, cam->name);
+        cam->player = player;
         gtk_widget_show(drawingArea);
 
         n++;
@@ -290,8 +290,8 @@ void GridUI::initRoomTab(int room_n, string room_name)
 void GridUI::onPlayerClick(GtkWidget* widget, gpointer data)
 {
     auto *context = (on_player_click_data*) data;
-    cout << "Pressed on " << context->cam.fullName << endl << endl;
-    context->mqtt->publish("operator/active_cam", context->cam.fullName + "," + context->cam.uri);
+    cout << "Pressed on " << context->cam->fullName << endl << endl;
+    context->mqtt->publish("operator/active_cam", context->cam->fullName + "," + context->cam->uri);
 }
 
 
