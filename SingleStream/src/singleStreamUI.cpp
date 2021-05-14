@@ -94,11 +94,16 @@ gpointer SingleStreamUI::parseQueue(gpointer data)
             // message format: camName,uri
             string camName, uri;
             int split = msg->message.find(',');
+<<<<<<< HEAD
             if (split == -1)
                 camName = "Unknown";
             else
                 camName= msg->message.substr(0, split);
             uri = msg->message.substr(split, msg->message.length() - split);
+=======
+            string camName = msg->message.substr(0, split);
+            string uri = msg->message.substr(split+1, msg->message.length() - split);
+>>>>>>> b545c7358b245f84273cf0920683413db53bd851
             obj->player->setCam(camName, uri);
 
             // TODO: Changing camera to be controlled
