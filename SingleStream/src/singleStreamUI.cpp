@@ -25,11 +25,12 @@ SingleStreamUI::SingleStreamUI()
 
     /* Find player and window elements to control*/
     initPlayerWidgets();
-    player = new Player(playerWidget, "other");
+    player = new Player(playerWidget, "jetson");
     player->setCam("520 cam", "rtsp://172.18.212.17:554/Streaming/Channels/101?transportmode=unicast&profile=Profile_1");
 
     g_signal_connect(playerWindow, "destroy", G_CALLBACK (gtk_main_quit), NULL);
     gtk_window_present(GTK_WINDOW(playerWindow));
+    gtk_window_fullscreen(GTK_WINDOW(playerWindow));
 
     /* MQTT */
     // create queue for communicating between threads (redirecting mqtt messages)
@@ -59,7 +60,7 @@ gpointer SingleStreamUI::runMqtt(gpointer data)
 {
     auto obj = (SingleStreamUI*)data; //SingleStreamUI object
 
-    auto mqtt = new MqttClient("tcp://localhost:1883", "singlestream", {"operator/active_cam"});
+    auto mqtt = new MqttClient("tcp://172.18.191.107:1883", "singlestream", {"operator/active_cam"});
     obj->mqtt = mqtt;
 
     // start receiving messages to queue
@@ -83,10 +84,13 @@ gpointer SingleStreamUI::parseQueue(gpointer data)
         {
             // Operator picked another camera, changing playing stream
             // message format: camName,uri
-            int split = msg->message.find(',');
-            string camName = msg->message.substr(0, split);
-            string uri = msg->message.substr(split+1, msg->message.length() - split);
-            obj->player->setCam(camName, uri);
+            // int split = msg->message.find(',');
+            // string camName = msg->message.substr(0, split);
+            // string uri = msg->message.substr(split+1, msg->message.length() - split);
+            // obj->player->setCam(camName, uri);
+
+            cam_data_t camData = parseJSONCamData(msg->message);
+            obj->player->setCam(camData.ip, camData.rtsp_main);
         }
     }
 }
@@ -161,4 +165,30 @@ void SingleStreamUI::initPlayerWidgets()
     {
         cerr << "Player label not found." << endl;
     }
+}
+
+cam_data_t parseJSONCamData(string JSONString)
+{
+    cam_data_t data;
+
+    rapidjson::Document document;
+    document.Parse(JSONString.c_str());
+
+    if (document.HasMember("rtsp_main") && document["rtsp_main"].IsString())
+    {
+        data.rtsp_main = document["rtsp_main"].GetString();
+    }
+    if (document.HasMember("name") && document["name"].IsString())
+    {
+        data.name = document["name"].GetString();
+    }
+    if (document.HasMember("ip") && document["ip"].IsString())
+    {
+        data.ip = document["ip"].GetString();
+    }
+    if (document.HasMember("port") && document["port"].IsNumber())
+    {
+        data.port = document["port"].GetInt();
+    }
+    return data;
 }

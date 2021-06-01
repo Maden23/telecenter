@@ -107,8 +107,8 @@ void Player::buildPipeline()
         cout << "Platform not specified" << endl << endl;
 
     /* Set latency */
-    g_object_set (src, "latency", 0, NULL);
-    g_object_set(src, "protocols", 4, NULL); // stream data over TCP https://gstreamer.freedesktop.org/documentation/rtsplib/gstrtsptransport.html?gi-language=c#GstRTSPLowerTrans
+    g_object_set (src, "latency", 200, NULL);
+    // g_object_set(src, "protocols", 4, NULL); // stream data over TCP https://gstreamer.freedesktop.org/documentation/rtsplib/gstrtsptransport.html?gi-language=c#GstRTSPLowerTrans
     g_object_set (dec, "enable-low-outbuffer", 1, NULL);
 
     /* Signal to handle new source pad*/

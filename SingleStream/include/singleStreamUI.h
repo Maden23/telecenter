@@ -1,3 +1,5 @@
+#include "rapidjson/document.h"
+
 #include "player.h"
 
 #include <string>
@@ -6,7 +8,16 @@
 #include <gtk/gtk.h>
 #include "mqtt_client.h"
 
+
 using namespace std;
+
+struct cam_data_t {
+    string name;
+    string ip;
+    int port;
+    string rtsp_main;
+};
+cam_data_t parseJSONCamData(string JSONString);
 
 class SingleStreamUI
 {
