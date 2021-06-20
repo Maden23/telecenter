@@ -9,7 +9,9 @@ Player::Player (GtkWidget* videoWindow, string platform, string uri, string camN
     this->uri = uri;
     this->camName = camName;
     this->playing = false;
+    this->restarting = false;
     init();
+    playStream();
 }
 
 Player::Player(GtkWidget* videoWindow, string platform)
@@ -17,15 +19,14 @@ Player::Player(GtkWidget* videoWindow, string platform)
     this->videoWindow = videoWindow;
     this->platform = platform;
     this->playing = false;
+    this->restarting = false;
 
     init();
 }
 
 Player::~Player() 
 {
-    stopStream();
-    g_timer_stop(timer);
-    g_free(timer);
+    gst_bus_remove_signal_watch(bus);
 }
 
 void Player::init()
@@ -57,13 +58,34 @@ void Player::init()
     gst_bus_set_sync_handler (bus, (GstBusSyncHandler) busSyncHandler, this, NULL);
     gst_object_unref (bus);
 
-    /* Init timer */
-    timer = g_timer_new();
+}
+
+GstElement* Player::createSource()
+{
+    GstElement *newSource = gst_element_factory_make("rtspsrc", ("src_" + camName).c_str());
+    /* Set latency */
+    g_object_set (newSource, "latency", 200, NULL);
+
+    if (uri != "")
+        g_object_set (src, "location", uri.c_str(), NULL);
+
+    // stream data over TCP https://gstreamer.freedesktop.org/documentation/rtsplib/gstrtsptransport.html?gi-language=c#GstRTSPLowerTrans
+    // g_object_set(newSource, "protocols", 4, NULL); 
+
+    /* Signal to handle new source pad*/
+    g_signal_connect(newSource, "pad-added", G_CALLBACK(pad_added_handler), this);
+
+
+    return newSource;
 }
 
 void Player::buildPipeline()
 {
-    src = gst_element_factory_make("rtspsrc", ("src_" + camName).c_str());
+    // Create source only if we have stream info
+    if (uri != "")
+        src = createSource();
+    else 
+        src = nullptr;
     depay = gst_element_factory_make("rtph264depay", ("depay_" + camName).c_str());
     parse = gst_element_factory_make("h264parse", ("parse_" + camName).c_str());
 
@@ -106,78 +128,80 @@ void Player::buildPipeline()
     else
         cout << "Platform not specified" << endl << endl;
 
-    /* Set latency */
-    g_object_set (src, "latency", 200, NULL);
-    // g_object_set(src, "protocols", 4, NULL); // stream data over TCP https://gstreamer.freedesktop.org/documentation/rtsplib/gstrtsptransport.html?gi-language=c#GstRTSPLowerTrans
-    g_object_set (dec, "enable-low-outbuffer", 1, NULL);
-
-    /* Signal to handle new source pad*/
-    g_signal_connect(src, "pad-added", G_CALLBACK(pad_added_handler), this);
-
 }
 
-void Player::setCam(string camName, string uri)
+
+void Player::changeStream(string camName, string uri)
 {
     this->camName = camName;
     this->uri = uri;
-    stopStream();
-    playStream();
+    sendCustomMessage("init-restart");
 }
 
-
-void Player::playStream()
+GstPadProbeReturn Player::src_block_probe(GstPad * pad, GstPadProbeInfo * info, gpointer user_data)
 {
-//    this->uri = uri;
-    // gst_element_set_state (pipeline, GST_STATE_READY);
-    gst_element_set_state (pipeline, GST_STATE_READY);
-    gst_element_unlink(src, depay);
+    return GST_PAD_PROBE_DROP;
+}
 
-    cout << "Playing " << uri << endl << endl;
-    g_object_set (src, "location", uri.c_str(), NULL);
+void Player::initRestart()
+{
+    if (!restarting)
+    {
+        restarting = true;
+    }
+    // Block dataflow on source element, if it exists
+    if (src)
+    {
+        GstPad *srcpad = gst_element_get_static_pad(src, "src");
+        gst_pad_add_probe(srcpad, GST_PAD_PROBE_TYPE_BLOCK, src_block_probe, NULL,  NULL);
+        gst_object_unref(srcpad);
+    }
 
-    gst_element_set_state (pipeline, GST_STATE_PLAYING);
-    playing = true;
+    sendCustomMessage("do-restart");
+}
+
+void Player::doRestart()
+{
+    stopStream();
+    playStream();
+    
+    restarting = false;
 }
 
 void Player::stopStream()
 {
-    gst_element_set_state (pipeline, GST_STATE_NULL);
+    // Get ready to add/remove elements
+    gst_element_set_state(pipeline, GST_STATE_READY);
+
+    // Remove old source.
+    if (src)
+    {
+        gst_element_set_state(src, GST_STATE_NULL);
+        // remove unlinks automatically
+        gst_bin_remove(GST_BIN(pipeline), src);
+    }
+    
     playing = false;
-    if (restartID != 0)
-    {
-        g_source_remove(restartID);
-        restartID = 0;
-    }
+    
 }
 
-gboolean Player::restart(gpointer user_data)
+void Player::playStream()
 {
-    auto player = (Player*)user_data;
-
-    /* If pipeline was just restarted, quitting function */
-    gdouble now = g_timer_elapsed(player->timer, NULL);
-    if (player->lastRestartTime != -1)
+    if (!playing)
     {
-        gdouble diff = now - player->lastRestartTime;
-        if (diff < 2) // min pause between restarts (in seconds)
-            return TRUE; // repeat call
-
-        if (diff > 20) // no restart for a long time
-            player->restartCounter = 0;
-
-        if (player->restartCounter > 5) // too many restarts in a row
-            return TRUE;
+        // Create new source
+        src = createSource();
+        gst_bin_add(GST_BIN(pipeline), src);
     }
-    player->lastRestartTime = now;
-    player->restartCounter++;
-
-    cout << "Restarting player " << player->camName << endl << endl;
-    player->playStream();
-
-    player->restartID = -1;
-    return FALSE; // do not repeat call
+    playing = true;
 }
 
+void Player::sendCustomMessage(gchar *name)
+{
+    GstStructure *s = gst_structure_new_empty(name);
+    GstMessage *message = gst_message_new_application(NULL, s);
+    gst_bus_post(bus, message);
+}
 
 GstBusSyncReply Player::busSyncHandler (GstBus *bus, GstMessage *message, Player *player)
 {
@@ -185,6 +209,8 @@ GstBusSyncReply Player::busSyncHandler (GstBus *bus, GstMessage *message, Player
     {
         case GST_MESSAGE_ERROR:
         {
+            
+            player->playing = false;
             GError *err;
             gchar *debug;
 
@@ -196,7 +222,10 @@ GstBusSyncReply Player::busSyncHandler (GstBus *bus, GstMessage *message, Player
             cerr << debug << endl << endl;
             
             // Restarting pipeline
-            player->restartID = g_idle_add(restart, player);
+            player->sendCustomMessage("init-restart");
+
+            g_error_free(err);
+            g_free(debug);
             break;
         }
         case GST_MESSAGE_ELEMENT:
@@ -207,11 +236,26 @@ GstBusSyncReply Player::busSyncHandler (GstBus *bus, GstMessage *message, Player
         }
         case GST_MESSAGE_EOS:
         {
-
-            cerr << "Player bus: EOS" << endl << endl;
-             // Restarting pipeline
-            player->restartID = g_idle_add(restart, player);
+            player->playing = false;
+            cerr << "Player "  << player->camName << endl;
+            cerr << "Stream: " << player->uri << endl;
+            cerr << "EOS" << endl << endl;
+            // Restarting pipeline
+            player->sendCustomMessage("init-restart");
             break;
+        }
+        case GST_MESSAGE_APPLICATION:
+        {
+            const GstStructure *s = gst_message_get_structure (message);
+            const gchar *name = gst_structure_get_name (s);
+            if (0 == g_strcmp0(name, "init-restart"))
+            {
+                player->initRestart();
+            }
+            else if (0 == g_strcmp0(name, "do-restart") && !player->restarting)
+            {
+                player->doRestart();
+            }
         }
         default:
             break;
@@ -289,8 +333,9 @@ void Player::pad_added_handler (GstElement * src, GstPad * new_pad, Player *play
     /* If our converter is already linked, we have nothing to do here */
     if (gst_pad_is_linked (sink_pad))
     {
-    cerr << player->camName << ": Pad is already linked" << endl << endl;
-            return;
+        cerr << player->camName << ": Pad is already linked" << endl << endl;
+        gst_object_unref(sink_pad);
+        return;
     }
     /* Check the new pad's type */
     new_pad_caps = gst_pad_get_current_caps (new_pad);
@@ -298,8 +343,10 @@ void Player::pad_added_handler (GstElement * src, GstPad * new_pad, Player *play
     new_pad_type = gst_structure_get_name (new_pad_struct);
     if (!g_str_has_prefix (new_pad_type, "application/x-rtp"))
     {
-    cerr << player->camName << ": Wrong stream prefix" << endl;
-            return;
+        cerr << player->camName << ": Wrong stream prefix" << endl;
+        gst_caps_unref(new_pad_caps);
+        gst_object_unref(sink_pad);
+        return;
     }
 
     /* Attempt the link */
@@ -311,6 +358,7 @@ void Player::pad_added_handler (GstElement * src, GstPad * new_pad, Player *play
     {
         cerr << player->camName << ": Source linked" << endl << endl;
     }
-
+    gst_caps_unref(new_pad_caps);
+    gst_object_unref(sink_pad);
 }
 

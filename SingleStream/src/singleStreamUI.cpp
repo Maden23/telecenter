@@ -25,7 +25,7 @@ SingleStreamUI::SingleStreamUI()
 
     /* Find player and window elements to control*/
     initPlayerWidgets();
-    player = new Player(playerWidget, "jetson");
+    player = new Player(playerWidget, "other");
     player->setCam("520 cam", "rtsp://172.18.212.17:554/Streaming/Channels/101?transportmode=unicast&profile=Profile_1");
 
     g_signal_connect(playerWindow, "destroy", G_CALLBACK (gtk_main_quit), NULL);

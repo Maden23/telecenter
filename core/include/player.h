@@ -33,8 +33,7 @@ public:
     Player(GtkWidget* videoWindow, string platform, string uri, string camName);
     ~Player();
 
-    void setCam(string camName, string uri);
-
+    void changeStream(string camName, string uri);
     void playStream();
     void stopStream();
 
@@ -44,14 +43,15 @@ public:
 
 private:
     bool playing;
+    bool restarting;
     string uri, camName;
 	GtkWidget *videoWindow;
 	GstBus *bus;
     string platform;
 
-    GTimer *timer;
 
     void init();
+    GstElement* createSource();
 	void buildPipeline();
 
 	// Video rendering using GTK
@@ -60,24 +60,15 @@ private:
 	static gboolean videoWidgetDraw_cb (GtkWidget *widget, cairo_t *cr, gpointer user_data);
 
 	// Handelling bus messages (incuding 'prepare-window-handle' for rendering video)
+    void sendCustomMessage(gchar *name);
+
     static GstBusSyncReply busSyncHandler (GstBus *bus, GstMessage *message, Player *player);
 
-    // For restarting pipeline with g_idle_add
-    static gboolean restart(gpointer user_data);
-    guint restartID = 0;
-
-    /**
-     * @brief Для сохранения времени последнего перезапуска пайплайна с помощью g_timer_elapsed(timer, NULL)
-     * 
-     */
-    gdouble lastRestartTime = -1;
-
-    /**
-     * @brief Количество недавних перезапусков пайплайна (следует обнулять при длительной паузе между перезапусками)
-     * 
-     */
-    int restartCounter = 0;
-    
+    // For restarting pipeline on error
+    void initRestart();
+    void doRestart();
+    static GstPadProbeReturn src_block_probe(GstPad * pad, GstPadProbeInfo * info, gpointer user_data);
+       
 	// Dynamic source linking
     static void pad_added_handler (GstElement * src, GstPad * new_pad, Player *player);
 };
